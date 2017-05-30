@@ -11,6 +11,10 @@
 #include <string.h>
 #include <stddef.h>
 
+//# include <complex.h>
+//# undef I
+#define J _Complex_I
+
 #cmakedefine USE_BLAS
 #cmakedefine USE_LAPACK
 #cmakedefine BLAS_F2C

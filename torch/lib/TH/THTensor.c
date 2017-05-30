@@ -8,27 +8,33 @@
 #include "THRandom.h"
 #include "THTensorDimApply.h"
 #include "THMath.h"
-
+// #pragma message "NOW DOING THTensor.c"
 #include "generic/THTensor.c"
 #include "THGenerateAllTypes.h"
 
 #include "generic/THTensor.c"
 #include "THGenerateHalfType.h"
-
+// #pragma message "NOW DOING THTensorCopy.c"
 #include "generic/THTensorCopy.c"
 #include "THGenerateAllTypes.h"
 
 #include "generic/THTensorCopy.c"
 #include "THGenerateHalfType.h"
-
+// #pragma message "NOW DOING THTensorRandom.c"
 #include "generic/THTensorRandom.c"
 #include "THGenerateAllTypes.h"
-
+// #pragma message "NOW DOING THTensorMath.c"
 #include "generic/THTensorMath.c"
 #include "THGenerateAllTypes.h"
-
+// #pragma message "NOW DOING THTensorConv.c"
 #include "generic/THTensorConv.c"
 #include "THGenerateAllTypes.h"
 
+// #pragma message "NOW DOING THTensorLapack.c"
 #include "generic/THTensorLapack.c"
 #include "THGenerateFloatTypes.h"
+
+// #pragma message "NOW DOING THTensorLapack.c complex"
+// #include "generic/THTensorLapack.c"
+// #pragma message "NOW DOING THTensorLapack.c complex 2"
+// #include "THGenerateComplexTypes.h"

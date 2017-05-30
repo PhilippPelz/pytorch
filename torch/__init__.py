@@ -18,7 +18,7 @@ __all__ = [
     'save', 'load', 'set_printoptions', 'chunk', 'split', 'stack',
     'DoubleStorage', 'FloatStorage', 'LongStorage', 'IntStorage',
     'ShortStorage', 'CharStorage', 'ByteStorage',
-    'DoubleTensor', 'FloatTensor', 'LongTensor', 'IntTensor',
+    'DoubleTensor', 'FloatTensor','CTensor', 'ZTensor','ZDoubleTensor', 'ZFloatTensor', 'LongTensor', 'IntTensor',
     'ShortTensor', 'CharTensor', 'ByteTensor',
 ]
 
@@ -55,6 +55,7 @@ from torch._C import *
 __all__ += [name for name in dir(_C)
             if name[0] != '_' and
             not name.endswith('Base')]
+print(__all__)
 
 sys.setdlopenflags(old_flags)
 del _dl_flags
@@ -157,6 +158,11 @@ class DoubleStorage(_C.DoubleStorageBase, _StorageBase):
 class FloatStorage(_C.FloatStorageBase, _StorageBase):
     pass
 
+class ZDoubleStorage(_C.DoubleStorageBase, _StorageBase):
+    pass
+    
+class ZFloatStorage(_C.FloatStorageBase, _StorageBase):
+    pass
 
 class HalfStorage(_C.HalfStorageBase, _StorageBase):
     pass
@@ -201,6 +207,42 @@ class FloatTensor(_C.FloatTensorBase, _TensorBase):
     def storage_type(cls):
         return FloatStorage
 
+class ZTensor(_C.ZDoubleTensorBase, _TensorBase):
+
+    def is_signed(self):
+        return True
+
+    @classmethod
+    def storage_type(cls):
+        return ZDoubleStorage
+
+
+class CTensor(_C.ZFloatTensorBase, _TensorBase):
+
+    def is_signed(self):
+        return True
+
+    @classmethod
+    def storage_type(cls):
+        return ZFloatStorage
+
+class ZDoubleTensor(_C.ZDoubleTensorBase, _TensorBase):
+
+    def is_signed(self):
+        return True
+
+    @classmethod
+    def storage_type(cls):
+        return ZDoubleStorage
+
+class ZFloatTensor(_C.ZFloatTensorBase, _TensorBase):
+
+    def is_signed(self):
+        return True
+
+    @classmethod
+    def storage_type(cls):
+        return ZFloatStorage
 
 class HalfTensor(_C.HalfTensorBase, _TensorBase):
 
@@ -312,6 +354,8 @@ del CharStorageBase
 del ByteStorageBase
 del DoubleTensorBase
 del FloatTensorBase
+del ZDoubleTensorBase
+del ZFloatTensorBase
 del LongTensorBase
 del IntTensorBase
 del ShortTensorBase
@@ -320,6 +364,8 @@ del ByteTensorBase
 
 del SparseDoubleTensorBase
 del SparseFloatTensorBase
+del SparseZDoubleTensorBase
+del SparseZFloatTensorBase
 del SparseLongTensorBase
 del SparseIntTensorBase
 del SparseShortTensorBase

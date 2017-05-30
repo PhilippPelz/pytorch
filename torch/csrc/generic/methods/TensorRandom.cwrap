@@ -56,7 +56,7 @@ static void THTensor_(random1__)(THTensor *self, THGenerator *gen, long b)
 
 [[
   name: multinomial
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
   with_stateless: True
   return: argument 0
   arguments:
@@ -73,7 +73,7 @@ static void THTensor_(random1__)(THTensor *self, THGenerator *gen, long b)
 
 [[
   name: uniform_
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
   cname: uniform
   return: self
   arguments:
@@ -114,7 +114,7 @@ static void THTensor_(normal_means_stddevs)(THTensor *self, THGenerator *gen, TH
 
 [[
   name: normal
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
   return: argument 0
   only_stateless: True
   options:
@@ -151,7 +151,7 @@ static void THTensor_(normal_means_stddevs)(THTensor *self, THGenerator *gen, TH
 
 [[
   name: normal_
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
   cname: normal
   return: self
   arguments:

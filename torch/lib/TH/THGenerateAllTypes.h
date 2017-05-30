@@ -6,6 +6,7 @@
 
 #include "THGenerateFloatTypes.h"
 #include "THGenerateIntTypes.h"
+#include "THGenerateComplexTypes.h"
 
 #undef THGenerateAllTypes
 #undef TH_GENERIC_FILE

@@ -4,7 +4,7 @@
 #define BUILD_REAL_FMT "L"
 #endif
 
-#if !IS_CUDA
+#if !IS_CUDA && !(defined(TH_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_ZFLOAT))
 [[
   name: THPTensor_(apply)
   python_name: apply_

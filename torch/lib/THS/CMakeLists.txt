@@ -75,6 +75,7 @@ INSTALL(FILES
   THS.h
   THSGenerateAllTypes.h
   THSGenerateFloatTypes.h
+  THSGenerateComplexTypes.h
   THSGenerateIntTypes.h
   THSTensor.h
   DESTINATION "${THS_INSTALL_INCLUDE_SUBDIR}/THS")

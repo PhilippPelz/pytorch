@@ -13,6 +13,8 @@ enum class Type : char {
   UCHAR = 'B',
   FLOAT = 'f',
   DOUBLE = 'd',
+  ZFLOAT = 'e',
+  ZDOUBLE = 'z',
   HALF = 'a',
   SHORT = 'h',
   USHORT = 'H',
@@ -26,6 +28,10 @@ enum class Type : char {
   TENSOR = 'T',
   STORAGE = 'S',
 };
+
+inline bool isComplex(Type t) {
+  return (t == Type::ZFLOAT || t == Type::ZDOUBLE);
+}
 
 inline bool isFloat(Type t) {
   return (t == Type::FLOAT || t == Type::DOUBLE || t == Type::HALF);
@@ -49,6 +55,8 @@ inline const char* toString(Type t) {
     case Type::UCHAR: return "Byte";
     case Type::FLOAT: return "Float";
     case Type::DOUBLE: return "Double";
+    case Type::ZFLOAT: return "ZFloat";
+    case Type::ZDOUBLE: return "ZDouble";
     case Type::HALF: return "Half";
     case Type::SHORT: return "Short";
     case Type::USHORT: return "UShort";

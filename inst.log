@@ -1,0 +1,1415 @@
+running install
+running build_deps
+/home/philipp/projects/pytorch/torch/_thnn/utils.py:1: RuntimeWarning: Parent module 'torch._thnn' not found while handling absolute import
+  import os
+/home/philipp/projects/pytorch/torch/_thnn/utils.py:2: RuntimeWarning: Parent module 'torch._thnn' not found while handling absolute import
+  import itertools
+/home/philipp/projects/pytorch/torch/_thnn/utils.py:3: RuntimeWarning: Parent module 'torch._thnn' not found while handling absolute import
+  import importlib
+cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by cmake)
+-- Compiling with OpenMP support
+-- Could not find hardware support for NEON on this machine.
+-- No OMAP3 processor on this machine.
+-- No OMAP4 processor on this machine.
+-- SSE2 Found
+-- SSE3 Found
+-- AVX Found
+-- TH_SO_VERSION: 1
+-- Atomics: using GCC intrinsics
+-- Checking for [mkl_gf_lp64 - mkl_gnu_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_gf_lp64: not found
+-- Checking for [mkl_gf_lp64 - mkl_intel_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_gf_lp64: not found
+-- Checking for [mkl_gf - mkl_gnu_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_gf: not found
+-- Checking for [mkl_gf - mkl_intel_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_gf: not found
+-- Checking for [mkl_intel_lp64 - mkl_gnu_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_intel_lp64: /home/philipp/software/anaconda/lib/libmkl_intel_lp64.so
+--   Library mkl_gnu_thread: not found
+-- Checking for [mkl_intel_lp64 - mkl_intel_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_intel_lp64: /home/philipp/software/anaconda/lib/libmkl_intel_lp64.so
+--   Library mkl_intel_thread: /home/philipp/software/anaconda/lib/libmkl_intel_thread.so
+--   Library mkl_core: /home/philipp/software/anaconda/lib/libmkl_core.so
+--   Library iomp5: /home/philipp/software/anaconda/lib/libiomp5.so
+--   Library pthread: /usr/lib/x86_64-linux-gnu/libpthread.so
+--   Library m: /usr/lib/x86_64-linux-gnu/libm.so
+-- MKL library found
+-- Found a library with BLAS API (mkl).
+-- Found a library with LAPACK API. (mkl)
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/TH
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+[100%] Built target TH
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+Install the project...
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so
+-- Set runtime path of "/home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1" to ""
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/TH.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THAllocator.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THMath.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THBlas.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THDiskFile.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THFile.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THFilePrivate.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGeneral.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateAllTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateHalfType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateFloatTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateComplexTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateIntTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THLapack.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THLogAdd.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THMemoryFile.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THRandom.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THStorage.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THTensorApply.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THTensorDimApply.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THTensorMacros.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THVector.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THAtomic.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THHalf.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/vector/AVX.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/vector/AVX2.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THBlas.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THBlas.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THLapack.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THLapack.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THStorage.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THStorage.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THStorageCopy.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THStorageCopy.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensor.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorConv.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorConv.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorCopy.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorCopy.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorLapack.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorLapack.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorMath.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorMath.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorRandom.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorRandom.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THVectorDispatch.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THVector.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/share/cmake/TH/THConfig.cmake
+cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by cmake)
+-- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- THS_SO_VERSION: 1
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THS
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+[100%] Built target THS
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+Install the project...
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHS.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHS.so
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/THS.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/THSGenerateAllTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/THSGenerateFloatTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/THSGenerateComplexTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/THSGenerateIntTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/THSTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/generic/THSTensor.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/generic/THSTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/generic/THSTensorMath.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/generic/THSTensorMath.h
+cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by cmake)
+-- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- Compiling with OpenMP support
+CMake Warning (dev) at CMakeLists.txt:61 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- THNN_SO_VERSION: 1
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THNN
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+[100%] Built target THNN
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+Install the project...
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHNN.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHNN.so
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN/THNN.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN/generic/THNN.h
+cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by cmake)
+-- Removing -DNDEBUG from compile flags
+-- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- Compiling with MAGMA support
+-- MAGMA INCLUDE DIRECTORIES: /home/philipp/software/anaconda/include
+-- MAGMA LIBRARIES: /home/philipp/software/anaconda/lib/libmagma.a
+-- MAGMA V2 check: 1
+-- Autodetected CUDA architecture(s): 5.2
+-- got cuda version 8.0
+-- Found CUDA with FP16 support, compiling with torch.CudaHalfTensor
+-- CUDA_NVCC_FLAGS:  -DTH_INDEX_BASE=0 -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP;-gencode;arch=compute_52,code=sm_52;-DCUDA_HAS_FP16=1
+-- THC_SO_VERSION: 1
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THC
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+[100%] Built target THC
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+Install the project...
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so
+-- Set runtime path of "/home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so.1" to ""
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THC.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGeneral.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCBlas.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCSleep.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCStorage.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCStorageCopy.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCStream.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCThreadLocal.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorCopy.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorRandom.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorMath.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorConv.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorTopK.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCApply.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCReduce.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCReduceAll.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCReduceApplyUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCAsmUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCAtomics.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCScanUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCSortUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCAllocator.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCCachingAllocator.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCCachingHostAllocator.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCDeviceUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCDeviceTensor.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCDeviceTensor-inl.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCDeviceTensorUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCDeviceTensorUtils-inl.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateAllTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateByteType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateCharType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateShortType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateIntType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateLongType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateHalfType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateFloatType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateFloatTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateDoubleType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCHalf.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCNumerics.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorSort.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorInfo.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorTypeUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorRandom.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorMathMagma.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCThrustAllocator.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorMode.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCStorage.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCStorage.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCStorage.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensor.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensor.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCStorageCopy.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCStorageCopy.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCStorageCopy.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorCopy.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorCopy.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorCopy.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMasked.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMasked.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMath.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMath.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathBlas.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathBlas.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathCompare.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathCompare.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathCompareT.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathCompareT.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathMagma.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathMagma.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathPairwise.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathPairwise.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathPointwise.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathPointwise.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathReduce.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathReduce.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathScan.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathScan.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorScatterGather.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorScatterGather.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorIndex.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorIndex.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorSort.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorSort.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCDeviceTensorUtils.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorRandom.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorRandom.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMode.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMode.cu
+cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by cmake)
+-- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- THC_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so.1
+-- THS_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHS.so.1
+-- Autodetected CUDA architecture(s): 5.2
+-- got cuda version 8.0
+-- Found CUDA with FP16 support, compiling with torch.CudaHalfTensor
+-- CUDA_NVCC_FLAGS:  -DTH_INDEX_BASE=0 -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP;-gencode;arch=compute_52,code=sm_52;-DCUDA_HAS_FP16=1
+-- THCS_SO_VERSION: 1
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THCS
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+[100%] Built target THCS
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+Install the project...
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCS.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCS.so
+-- Set runtime path of "/home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCS.so.1" to ""
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCS.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateAllTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateByteType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateCharType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateShortType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateIntType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateLongType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateHalfType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateFloatType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateFloatTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateDoubleType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/generic/THCSTensor.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/generic/THCSTensor.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/generic/THCSTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/generic/THCSTensorMath.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/generic/THCSTensorMath.cu
+cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by cmake)
+-- Removing -DNDEBUG from compile flags
+-- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- THC_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so.1
+-- Autodetected CUDA architecture(s): 5.2
+-- THCUNN_SO_VERSION: 1
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THCUNN
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+[100%] Built target THCUNN
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+Install the project...
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCUNN.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCUNN.so
+-- Set runtime path of "/home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCUNN.so.1" to ""
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN/THCUNN.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN/generic/THCUNN.h
+cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by cmake)
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/nccl
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+[100%] Built target nccl
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+Install the project...
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+-- Install configuration: "Release"
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/nccl.h
+cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by cmake)
+-- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- THC_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so.1
+-- THCS_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCS.so.1
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THTensor.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THSTensor.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCSTensor.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THStorage.cpp from the build
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THPP
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+[100%] Built target THPP
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+Install the project...
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHPP.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHPP.so
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/THPP.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/THCTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/generic/THCTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/generic/THTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/generic/THCSTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/generic/THSTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/THTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/THCSTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/THSTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/Type.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/Storage.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/Tensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/TraitsCuda.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/Traits.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/storages/generic/THCStorage.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/storages/generic/THStorage.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/storages/THCStorage.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/storages/THStorage.hpp
+cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by cmake)
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/libshm
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+[100%] Built target torch_shm_manager
+[100%] Built target shm
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+Install the project...
+/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libshm.so
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/libshm.h
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/bin/torch_shm_manager
+running build
+running build_py
+-- Building version 0.1.10+dc7695a
+copying torch/version.py -> build/lib.linux-x86_64-2.7/torch
+copying torch/__init__.py -> build/lib.linux-x86_64-2.7/torch
+copying torch/lib/libTH.so.1 -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/libTHS.so.1 -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/libnccl.so.1 -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/libTHCS.so.1 -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/libTHPP.so.1 -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/libTHNN.so.1 -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/libshm.so -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/libTHCUNN.so.1 -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/libTHC.so.1 -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/torch_shm_manager -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/THNN.h -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/THCUNN.h -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/include/TH/TH.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THAllocator.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THFilePrivate.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THRandom.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THDiskFile.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THGenerateHalfType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THLapack.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THGeneral.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THHalf.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THFile.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THTensorDimApply.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THGenerateFloatTypes.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THLogAdd.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THGenerateIntTypes.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THTensorApply.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THVector.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THStorage.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THGenerateAllTypes.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THMemoryFile.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THAtomic.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THGenerateComplexTypes.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THBlas.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THTensorMacros.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THMath.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THTensor.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/generic/THTensorRandom.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THTensorMath.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THTensorCopy.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THLapack.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THTensorConv.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THTensorLapack.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THStorageCopy.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THVector.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THStorage.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THBlas.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THTensor.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/THC/THCCachingAllocator.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateShortType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCTensorMath.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCTensorTopK.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateByteType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCStorageCopy.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCStream.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCTensorConv.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCAllocator.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCBlas.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCTensorRandom.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateFloatType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCStorage.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCSleep.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateAllTypes.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGeneral.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCCachingHostAllocator.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateHalfType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCTensorCopy.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateCharType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCHalf.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateDoubleType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THC.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCTensor.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateIntType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateLongType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCThreadLocal.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateFloatTypes.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/generic/THCTensorMathReduce.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMathScan.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMath.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCStorageCopy.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMasked.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorRandom.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMathBlas.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorIndex.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorScatterGather.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCStorage.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMathCompare.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorCopy.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMode.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMathMagma.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMathCompareT.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensor.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMathPointwise.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorSort.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMathPairwise.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+running build_ext
+-- Building with NumPy bindings
+-- Not using cuDNN
+-- Detected CUDA at /usr/local/cuda
+-- Building NCCL library
+building 'torch._C' extension
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/PtrWrapper.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/PtrWrapper.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/Size.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/Size.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/Storage.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/Storage.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/utils.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/utils.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/Module.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/Module.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from torch/csrc/THP.h:32:0,
+                 from torch/csrc/Size.cpp:4:
+torch/csrc/utils.h:40:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+torch/csrc/utils.h:46:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+torch/csrc/utils.h:52:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+torch/csrc/utils.h:55:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/Exceptions.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/Exceptions.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from torch/csrc/THP.h:32:0,
+                 from torch/csrc/Exceptions.cpp:3:
+torch/csrc/utils.h:40:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+torch/csrc/utils.h:46:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+torch/csrc/utils.h:52:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+torch/csrc/utils.h:55:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/Tensor.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/Tensor.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from torch/csrc/THP.h:32:0,
+                 from torch/csrc/Module.cpp:15:
+torch/csrc/utils.h:40:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+torch/csrc/utils.h:46:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+torch/csrc/utils.h:52:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+torch/csrc/utils.h:55:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/Generator.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/Generator.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from torch/csrc/THP.h:32:0,
+                 from torch/csrc/Generator.cpp:6:
+torch/csrc/utils.h:40:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+torch/csrc/utils.h:46:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+torch/csrc/utils.h:52:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+torch/csrc/utils.h:55:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/allocators.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/allocators.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from torch/csrc/THP.h:32:0,
+                 from torch/csrc/utils.cpp:8:
+torch/csrc/utils.h:40:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+torch/csrc/utils.h:46:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+torch/csrc/utils.h:52:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+torch/csrc/utils.h:55:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/utils/object_ptr.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/utils/object_ptr.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/utils/tuple_parser.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/utils/tuple_parser.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from torch/csrc/THP.h:32:0,
+                 from torch/csrc/allocators.cpp:3:
+torch/csrc/utils.h:40:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+torch/csrc/utils.h:46:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+torch/csrc/utils.h:52:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+torch/csrc/utils.h:55:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/serialization.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/serialization.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/autograd/engine.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/engine.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /home/philipp/software/anaconda/include/python2.7/Python.h:8:0,
+                 from /home/philipp/projects/pytorch/torch/csrc/Types.h:4,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/variable.h:9,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/grad_buffer.h:12,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/engine.h:13,
+                 from torch/csrc/autograd/engine.cpp:1:
+/home/philipp/software/anaconda/include/python2.7/pyconfig.h:1190:0: warning: "_POSIX_C_SOURCE" redefined
+ #define _POSIX_C_SOURCE 200112L
+ ^
+In file included from /usr/include/x86_64-linux-gnu/c++/5/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/5/bits/c++config.h:482,
+                 from /usr/include/c++/5/bits/stl_algobase.h:59,
+                 from /usr/include/c++/5/deque:60,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/engine.h:6,
+                 from torch/csrc/autograd/engine.cpp:1:
+/usr/include/features.h:228:0: note: this is the location of the previous definition
+ # define _POSIX_C_SOURCE 200809L
+ ^
+In file included from /home/philipp/software/anaconda/include/python2.7/Python.h:8:0,
+                 from /home/philipp/projects/pytorch/torch/csrc/Types.h:4,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/variable.h:9,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/grad_buffer.h:12,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/engine.h:13,
+                 from torch/csrc/autograd/engine.cpp:1:
+/home/philipp/software/anaconda/include/python2.7/pyconfig.h:1212:0: warning: "_XOPEN_SOURCE" redefined
+ #define _XOPEN_SOURCE 600
+ ^
+In file included from /usr/include/x86_64-linux-gnu/c++/5/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/5/bits/c++config.h:482,
+                 from /usr/include/c++/5/bits/stl_algobase.h:59,
+                 from /usr/include/c++/5/deque:60,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/engine.h:6,
+                 from torch/csrc/autograd/engine.cpp:1:
+/usr/include/features.h:169:0: note: this is the location of the previous definition
+ # define _XOPEN_SOURCE 700
+ ^
+In file included from torch/csrc/THP.h:32:0,
+                 from torch/csrc/serialization.cpp:4:
+torch/csrc/utils.h:40:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+torch/csrc/utils.h:46:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+torch/csrc/utils.h:52:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+torch/csrc/utils.h:55:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/autograd/init.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/init.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /home/philipp/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from torch/csrc/autograd/init.cpp:3:
+/home/philipp/projects/pytorch/torch/csrc/utils.h:40:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/home/philipp/projects/pytorch/torch/csrc/utils.h:46:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/home/philipp/projects/pytorch/torch/csrc/utils.h:52:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/home/philipp/projects/pytorch/torch/csrc/utils.h:55:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/autograd/grad_buffer.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/grad_buffer.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /home/philipp/projects/pytorch/torch/csrc/generic/Tensor.cpp:739:0,
+                 from generic/Tensor.cpp:1,
+                 from /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateAllTypes.h:9,
+                 from torch/csrc/Tensor.cpp:17:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp: In function ‘PyObject* THPZFloatTensor_sigmoid_(PyObject*, PyObject*, PyObject*)’:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:4011:60: error: ‘THZFloatTensor_sigmoid’ was not declared in this scope
+         THTensor_(sigmoid)(LIBRARY_STATE arg_self, arg_self);
+                                                            ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp: In function ‘PyObject* THPZFloatTensor_sigmoid(PyObject*, PyObject*, PyObject*)’:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:4064:62: error: ‘THZFloatTensor_sigmoid’ was not declared in this scope
+         THTensor_(sigmoid)(LIBRARY_STATE arg_result, arg_self);
+                                                              ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:4093:62: error: ‘THZFloatTensor_sigmoid’ was not declared in this scope
+         THTensor_(sigmoid)(LIBRARY_STATE arg_result, arg_self);
+                                                              ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp: In function ‘PyObject* THPZFloatTensor_stateless_sigmoid(PyObject*, PyObject*, PyObject*)’:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:4146:62: error: ‘THZFloatTensor_sigmoid’ was not declared in this scope
+         THTensor_(sigmoid)(LIBRARY_STATE arg_result, arg_self);
+                                                              ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:4176:62: error: ‘THZFloatTensor_sigmoid’ was not declared in this scope
+         THTensor_(sigmoid)(LIBRARY_STATE arg_result, arg_self);
+                                                              ^
+In file included from /home/philipp/software/anaconda/include/python2.7/Python.h:8:0,
+                 from /home/philipp/projects/pytorch/torch/csrc/Types.h:4,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/variable.h:9,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/grad_buffer.h:12,
+                 from torch/csrc/autograd/grad_buffer.cpp:1:
+/home/philipp/software/anaconda/include/python2.7/pyconfig.h:1190:0: warning: "_POSIX_C_SOURCE" redefined
+ #define _POSIX_C_SOURCE 200112L
+ ^
+In file included from /usr/include/x86_64-linux-gnu/c++/5/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/5/bits/c++config.h:482,
+                 from /usr/include/c++/5/bits/stl_algobase.h:59,
+                 from /usr/include/c++/5/vector:60,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/grad_buffer.h:7,
+                 from torch/csrc/autograd/grad_buffer.cpp:1:
+/usr/include/features.h:228:0: note: this is the location of the previous definition
+ # define _POSIX_C_SOURCE 200809L
+ ^
+In file included from /home/philipp/software/anaconda/include/python2.7/Python.h:8:0,
+                 from /home/philipp/projects/pytorch/torch/csrc/Types.h:4,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/variable.h:9,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/grad_buffer.h:12,
+                 from torch/csrc/autograd/grad_buffer.cpp:1:
+/home/philipp/software/anaconda/include/python2.7/pyconfig.h:1212:0: warning: "_XOPEN_SOURCE" redefined
+ #define _XOPEN_SOURCE 600
+ ^
+In file included from /usr/include/x86_64-linux-gnu/c++/5/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/5/bits/c++config.h:482,
+                 from /usr/include/c++/5/bits/stl_algobase.h:59,
+                 from /usr/include/c++/5/vector:60,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/grad_buffer.h:7,
+                 from torch/csrc/autograd/grad_buffer.cpp:1:
+/usr/include/features.h:169:0: note: this is the location of the previous definition
+ # define _XOPEN_SOURCE 700
+ ^
+In file included from /home/philipp/projects/pytorch/torch/csrc/generic/Tensor.cpp:739:0,
+                 from generic/Tensor.cpp:1,
+                 from /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateAllTypes.h:9,
+                 from torch/csrc/Tensor.cpp:17:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp: In function ‘PyObject* THPZFloatTensor_multinomial(PyObject*, PyObject*, PyObject*)’:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37415:115: error: ‘THZFloatTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, arg_generator, arg_self, arg_num_samples, arg_replacement);
+                                                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37450:115: error: ‘THZFloatTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, arg_generator, arg_self, arg_num_samples, arg_replacement);
+                                                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37480:105: error: ‘THZFloatTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, arg_generator, arg_self, arg_num_samples, false);
+                                                                                                         ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37510:128: error: ‘THZFloatTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, THPDefaultGenerator->cdata, arg_self, arg_num_samples, arg_replacement);
+                                                                                                                                ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37543:105: error: ‘THZFloatTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, arg_generator, arg_self, arg_num_samples, false);
+                                                                                                         ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37576:128: error: ‘THZFloatTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, THPDefaultGenerator->cdata, arg_self, arg_num_samples, arg_replacement);
+                                                                                                                                ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37604:118: error: ‘THZFloatTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, THPDefaultGenerator->cdata, arg_self, arg_num_samples, false);
+                                                                                                                      ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37635:118: error: ‘THZFloatTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, THPDefaultGenerator->cdata, arg_self, arg_num_samples, false);
+                                                                                                                      ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp: In function ‘PyObject* THPZFloatTensor_stateless_multinomial(PyObject*, PyObject*, PyObject*)’:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37700:115: error: ‘THZFloatTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, arg_generator, arg_self, arg_num_samples, arg_replacement);
+                                                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37736:115: error: ‘THZFloatTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, arg_generator, arg_self, arg_num_samples, arg_replacement);
+                                                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37767:105: error: ‘THZFloatTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, arg_generator, arg_self, arg_num_samples, false);
+                                                                                                         ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37798:128: error: ‘THZFloatTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, THPDefaultGenerator->cdata, arg_self, arg_num_samples, arg_replacement);
+                                                                                                                                ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37832:105: error: ‘THZFloatTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, arg_generator, arg_self, arg_num_samples, false);
+                                                                                                         ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37866:128: error: ‘THZFloatTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, THPDefaultGenerator->cdata, arg_self, arg_num_samples, arg_replacement);
+                                                                                                                                ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37895:118: error: ‘THZFloatTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, THPDefaultGenerator->cdata, arg_self, arg_num_samples, false);
+                                                                                                                      ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37927:118: error: ‘THZFloatTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, THPDefaultGenerator->cdata, arg_self, arg_num_samples, false);
+                                                                                                                      ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp: In function ‘PyObject* THPZFloatTensor_uniform_(PyObject*, PyObject*, PyObject*)’:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37985:83: error: ‘THZFloatTensor_uniform’ was not declared in this scope
+         THTensor_(uniform)(LIBRARY_STATE arg_self, arg_generator, arg_from, arg_to);
+                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38012:78: error: ‘THZFloatTensor_uniform’ was not declared in this scope
+         THTensor_(uniform)(LIBRARY_STATE arg_self, arg_generator, arg_from, 1);
+                                                                              ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38039:76: error: ‘THZFloatTensor_uniform’ was not declared in this scope
+         THTensor_(uniform)(LIBRARY_STATE arg_self, arg_generator, 0, arg_to);
+                                                                            ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38066:96: error: ‘THZFloatTensor_uniform’ was not declared in this scope
+         THTensor_(uniform)(LIBRARY_STATE arg_self, THPDefaultGenerator->cdata, arg_from, arg_to);
+                                                                                                ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38091:71: error: ‘THZFloatTensor_uniform’ was not declared in this scope
+         THTensor_(uniform)(LIBRARY_STATE arg_self, arg_generator, 0, 1);
+                                                                       ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38116:91: error: ‘THZFloatTensor_uniform’ was not declared in this scope
+         THTensor_(uniform)(LIBRARY_STATE arg_self, THPDefaultGenerator->cdata, arg_from, 1);
+                                                                                           ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38141:89: error: ‘THZFloatTensor_uniform’ was not declared in this scope
+         THTensor_(uniform)(LIBRARY_STATE arg_self, THPDefaultGenerator->cdata, 0, arg_to);
+                                                                                         ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38164:84: error: ‘THZFloatTensor_uniform’ was not declared in this scope
+         THTensor_(uniform)(LIBRARY_STATE arg_self, THPDefaultGenerator->cdata, 0, 1);
+                                                                                    ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp: In function ‘PyObject* THPZFloatTensor_stateless_normal(PyObject*, PyObject*, PyObject*)’:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38253:92: error: ‘THZFloatTensor_normal_means’ was not declared in this scope
+         THTensor_(normal_means)(LIBRARY_STATE arg_output, arg_generator, arg_means, arg_std);
+                                                                                            ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38284:93: error: ‘THZFloatTensor_normal_stddevs’ was not declared in this scope
+         THTensor_(normal_stddevs)(LIBRARY_STATE arg_output, arg_generator, arg_mean, arg_std);
+                                                                                             ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38315:100: error: ‘THZFloatTensor_normal_means_stddevs’ was not declared in this scope
+         THTensor_(normal_means_stddevs)(LIBRARY_STATE arg_output, arg_generator, arg_means, arg_std);
+                                                                                                    ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38349:92: error: ‘THZFloatTensor_normal_means’ was not declared in this scope
+         THTensor_(normal_means)(LIBRARY_STATE arg_output, arg_generator, arg_means, arg_std);
+                                                                                            ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38378:86: error: ‘THZFloatTensor_normal_means’ was not declared in this scope
+         THTensor_(normal_means)(LIBRARY_STATE arg_output, arg_generator, arg_means, 1);
+                                                                                      ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38407:105: error: ‘THZFloatTensor_normal_means’ was not declared in this scope
+         THTensor_(normal_means)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, arg_means, arg_std);
+                                                                                                         ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38441:93: error: ‘THZFloatTensor_normal_stddevs’ was not declared in this scope
+         THTensor_(normal_stddevs)(LIBRARY_STATE arg_output, arg_generator, arg_mean, arg_std);
+                                                                                             ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38470:86: error: ‘THZFloatTensor_normal_stddevs’ was not declared in this scope
+         THTensor_(normal_stddevs)(LIBRARY_STATE arg_output, arg_generator, 0, arg_std);
+                                                                                      ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38499:106: error: ‘THZFloatTensor_normal_stddevs’ was not declared in this scope
+         THTensor_(normal_stddevs)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, arg_mean, arg_std);
+                                                                                                          ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38533:100: error: ‘THZFloatTensor_normal_means_stddevs’ was not declared in this scope
+         THTensor_(normal_means_stddevs)(LIBRARY_STATE arg_output, arg_generator, arg_means, arg_std);
+                                                                                                    ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38562:113: error: ‘THZFloatTensor_normal_means_stddevs’ was not declared in this scope
+         THTensor_(normal_means_stddevs)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, arg_means, arg_std);
+                                                                                                                 ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38594:86: error: ‘THZFloatTensor_normal_means’ was not declared in this scope
+         THTensor_(normal_means)(LIBRARY_STATE arg_output, arg_generator, arg_means, 1);
+                                                                                      ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38626:105: error: ‘THZFloatTensor_normal_means’ was not declared in this scope
+         THTensor_(normal_means)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, arg_means, arg_std);
+                                                                                                         ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38653:99: error: ‘THZFloatTensor_normal_means’ was not declared in this scope
+         THTensor_(normal_means)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, arg_means, 1);
+                                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38685:86: error: ‘THZFloatTensor_normal_stddevs’ was not declared in this scope
+         THTensor_(normal_stddevs)(LIBRARY_STATE arg_output, arg_generator, 0, arg_std);
+                                                                                      ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38717:106: error: ‘THZFloatTensor_normal_stddevs’ was not declared in this scope
+         THTensor_(normal_stddevs)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, arg_mean, arg_std);
+                                                                                                          ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38744:99: error: ‘THZFloatTensor_normal_stddevs’ was not declared in this scope
+         THTensor_(normal_stddevs)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, 0, arg_std);
+                                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38776:113: error: ‘THZFloatTensor_normal_means_stddevs’ was not declared in this scope
+         THTensor_(normal_means_stddevs)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, arg_means, arg_std);
+                                                                                                                 ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38806:99: error: ‘THZFloatTensor_normal_means’ was not declared in this scope
+         THTensor_(normal_means)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, arg_means, 1);
+                                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38836:99: error: ‘THZFloatTensor_normal_stddevs’ was not declared in this scope
+         THTensor_(normal_stddevs)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, 0, arg_std);
+                                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp: In function ‘PyObject* THPZFloatTensor_normal_(PyObject*, PyObject*, PyObject*)’:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38894:83: error: ‘THZFloatTensor_normal’ was not declared in this scope
+         THTensor_(normal)(LIBRARY_STATE arg_self, arg_generator, arg_mean, arg_std);
+                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38921:77: error: ‘THZFloatTensor_normal’ was not declared in this scope
+         THTensor_(normal)(LIBRARY_STATE arg_self, arg_generator, arg_mean, 1);
+                                                                             ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38948:76: error: ‘THZFloatTensor_normal’ was not declared in this scope
+         THTensor_(normal)(LIBRARY_STATE arg_self, arg_generator, 0, arg_std);
+                                                                            ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38975:96: error: ‘THZFloatTensor_normal’ was not declared in this scope
+         THTensor_(normal)(LIBRARY_STATE arg_self, THPDefaultGenerator->cdata, arg_mean, arg_std);
+                                                                                                ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:39000:70: error: ‘THZFloatTensor_normal’ was not declared in this scope
+         THTensor_(normal)(LIBRARY_STATE arg_self, arg_generator, 0, 1);
+                                                                      ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:39025:90: error: ‘THZFloatTensor_normal’ was not declared in this scope
+         THTensor_(normal)(LIBRARY_STATE arg_self, THPDefaultGenerator->cdata, arg_mean, 1);
+                                                                                          ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:39050:89: error: ‘THZFloatTensor_normal’ was not declared in this scope
+         THTensor_(normal)(LIBRARY_STATE arg_self, THPDefaultGenerator->cdata, 0, arg_std);
+                                                                                         ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:39073:83: error: ‘THZFloatTensor_normal’ was not declared in this scope
+         THTensor_(normal)(LIBRARY_STATE arg_self, THPDefaultGenerator->cdata, 0, 1);
+                                                                                   ^
+In file included from /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/TH.h:4:0,
+                 from torch/csrc/THP.h:5,
+                 from torch/csrc/Tensor.cpp:12:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp: At global scope:
+torch/csrc/Tensor.h:7:38: error: ‘THPZFloatTensor_apply’ was not declared in this scope
+ #define THPTensor_(NAME) TH_CONCAT_4(THP, Real, Tensor_, NAME)
+                                      ^
+/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGeneral.h:112:37: note: in definition of macro ‘TH_CONCAT_4_EXPAND’
+ #define TH_CONCAT_4_EXPAND(x,y,z,w) x ## y ## z ## w
+                                     ^
+torch/csrc/Tensor.h:7:26: note: in expansion of macro ‘TH_CONCAT_4’
+ #define THPTensor_(NAME) TH_CONCAT_4(THP, Real, Tensor_, NAME)
+                          ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:46129:27: note: in expansion of macro ‘THPTensor_’
+   {"apply_", (PyCFunction)THPTensor_(apply), METH_O, NULL},
+                           ^
+torch/csrc/Tensor.h:7:38: error: ‘THPZFloatTensor_map’ was not declared in this scope
+ #define THPTensor_(NAME) TH_CONCAT_4(THP, Real, Tensor_, NAME)
+                                      ^
+/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGeneral.h:112:37: note: in definition of macro ‘TH_CONCAT_4_EXPAND’
+ #define TH_CONCAT_4_EXPAND(x,y,z,w) x ## y ## z ## w
+                                     ^
+torch/csrc/Tensor.h:7:26: note: in expansion of macro ‘TH_CONCAT_4’
+ #define THPTensor_(NAME) TH_CONCAT_4(THP, Real, Tensor_, NAME)
+                          ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:46132:25: note: in expansion of macro ‘THPTensor_’
+   {"map_", (PyCFunction)THPTensor_(map), METH_VARARGS, NULL},
+                         ^
+torch/csrc/Tensor.h:7:38: error: ‘THPZFloatTensor_map2’ was not declared in this scope
+ #define THPTensor_(NAME) TH_CONCAT_4(THP, Real, Tensor_, NAME)
+                                      ^
+/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGeneral.h:112:37: note: in definition of macro ‘TH_CONCAT_4_EXPAND’
+ #define TH_CONCAT_4_EXPAND(x,y,z,w) x ## y ## z ## w
+                                     ^
+torch/csrc/Tensor.h:7:26: note: in expansion of macro ‘TH_CONCAT_4’
+ #define THPTensor_(NAME) TH_CONCAT_4(THP, Real, Tensor_, NAME)
+                          ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:46135:26: note: in expansion of macro ‘THPTensor_’
+   {"map2_", (PyCFunction)THPTensor_(map2), METH_VARARGS, NULL},
+                          ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/DynamicTypes.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/DynamicTypes.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /home/philipp/software/anaconda/include/python2.7/Python.h:8:0,
+                 from torch/csrc/DynamicTypes.h:6,
+                 from torch/csrc/DynamicTypes.cpp:1:
+/home/philipp/software/anaconda/include/python2.7/pyconfig.h:1190:0: warning: "_POSIX_C_SOURCE" redefined
+ #define _POSIX_C_SOURCE 200112L
+ ^
+In file included from /home/philipp/projects/pytorch/torch/csrc/generic/Tensor.cpp:739:0,
+                 from generic/Tensor.cpp:1,
+                 from /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateAllTypes.h:9,
+                 from torch/csrc/Tensor.cpp:17:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp: In function ‘PyObject* THPZDoubleTensor_sigmoid_(PyObject*, PyObject*, PyObject*)’:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:4011:60: error: ‘THZDoubleTensor_sigmoid’ was not declared in this scope
+         THTensor_(sigmoid)(LIBRARY_STATE arg_self, arg_self);
+                                                            ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp: In function ‘PyObject* THPZDoubleTensor_sigmoid(PyObject*, PyObject*, PyObject*)’:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:4064:62: error: ‘THZDoubleTensor_sigmoid’ was not declared in this scope
+         THTensor_(sigmoid)(LIBRARY_STATE arg_result, arg_self);
+                                                              ^
+In file included from /usr/include/x86_64-linux-gnu/c++/5/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/5/bits/c++config.h:482,
+                 from /usr/include/c++/5/bits/stl_algobase.h:59,
+                 from /usr/include/c++/5/memory:62,
+                 from torch/csrc/DynamicTypes.h:5,
+                 from torch/csrc/DynamicTypes.cpp:1:
+/usr/include/features.h:228:0: note: this is the location of the previous definition
+ # define _POSIX_C_SOURCE 200809L
+ ^
+In file included from /home/philipp/software/anaconda/include/python2.7/Python.h:8:0,
+                 from torch/csrc/DynamicTypes.h:6,
+                 from torch/csrc/DynamicTypes.cpp:1:
+/home/philipp/software/anaconda/include/python2.7/pyconfig.h:1212:0: warning: "_XOPEN_SOURCE" redefined
+ #define _XOPEN_SOURCE 600
+ ^
+In file included from /usr/include/x86_64-linux-gnu/c++/5/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/5/bits/c++config.h:482,
+                 from /usr/include/c++/5/bits/stl_algobase.h:59,
+                 from /usr/include/c++/5/memory:62,
+                 from torch/csrc/DynamicTypes.h:5,
+                 from torch/csrc/DynamicTypes.cpp:1:
+/usr/include/features.h:169:0: note: this is the location of the previous definition
+ # define _XOPEN_SOURCE 700
+ ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:4093:62: error: ‘THZDoubleTensor_sigmoid’ was not declared in this scope
+         THTensor_(sigmoid)(LIBRARY_STATE arg_result, arg_self);
+                                                              ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp: In function ‘PyObject* THPZDoubleTensor_stateless_sigmoid(PyObject*, PyObject*, PyObject*)’:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:4146:62: error: ‘THZDoubleTensor_sigmoid’ was not declared in this scope
+         THTensor_(sigmoid)(LIBRARY_STATE arg_result, arg_self);
+                                                              ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:4176:62: error: ‘THZDoubleTensor_sigmoid’ was not declared in this scope
+         THTensor_(sigmoid)(LIBRARY_STATE arg_result, arg_self);
+                                                              ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp: In function ‘PyObject* THPZDoubleTensor_multinomial(PyObject*, PyObject*, PyObject*)’:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37415:115: error: ‘THZDoubleTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, arg_generator, arg_self, arg_num_samples, arg_replacement);
+                                                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37450:115: error: ‘THZDoubleTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, arg_generator, arg_self, arg_num_samples, arg_replacement);
+                                                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37480:105: error: ‘THZDoubleTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, arg_generator, arg_self, arg_num_samples, false);
+                                                                                                         ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37510:0: error: ‘THZDoubleTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, THPDefaultGenerator->cdata, arg_self, arg_num_samples, arg_replacement);
+ ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37543:105: error: ‘THZDoubleTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, arg_generator, arg_self, arg_num_samples, false);
+                                                                                                         ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37576:0: error: ‘THZDoubleTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, THPDefaultGenerator->cdata, arg_self, arg_num_samples, arg_replacement);
+ ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37604:118: error: ‘THZDoubleTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, THPDefaultGenerator->cdata, arg_self, arg_num_samples, false);
+                                                                                                                      ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37635:118: error: ‘THZDoubleTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, THPDefaultGenerator->cdata, arg_self, arg_num_samples, false);
+                                                                                                                      ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp: In function ‘PyObject* THPZDoubleTensor_stateless_multinomial(PyObject*, PyObject*, PyObject*)’:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37700:115: error: ‘THZDoubleTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, arg_generator, arg_self, arg_num_samples, arg_replacement);
+                                                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37736:115: error: ‘THZDoubleTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, arg_generator, arg_self, arg_num_samples, arg_replacement);
+                                                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37767:105: error: ‘THZDoubleTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, arg_generator, arg_self, arg_num_samples, false);
+                                                                                                         ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37798:0: error: ‘THZDoubleTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, THPDefaultGenerator->cdata, arg_self, arg_num_samples, arg_replacement);
+ ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37832:105: error: ‘THZDoubleTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, arg_generator, arg_self, arg_num_samples, false);
+                                                                                                         ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37866:0: error: ‘THZDoubleTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, THPDefaultGenerator->cdata, arg_self, arg_num_samples, arg_replacement);
+ ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37895:118: error: ‘THZDoubleTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, THPDefaultGenerator->cdata, arg_self, arg_num_samples, false);
+                                                                                                                      ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37927:118: error: ‘THZDoubleTensor_multinomial’ was not declared in this scope
+         THTensor_(multinomial)(LIBRARY_STATE arg_result, THPDefaultGenerator->cdata, arg_self, arg_num_samples, false);
+                                                                                                                      ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp: In function ‘PyObject* THPZDoubleTensor_uniform_(PyObject*, PyObject*, PyObject*)’:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:37985:83: error: ‘THZDoubleTensor_uniform’ was not declared in this scope
+         THTensor_(uniform)(LIBRARY_STATE arg_self, arg_generator, arg_from, arg_to);
+                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38012:78: error: ‘THZDoubleTensor_uniform’ was not declared in this scope
+         THTensor_(uniform)(LIBRARY_STATE arg_self, arg_generator, arg_from, 1);
+                                                                              ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38039:76: error: ‘THZDoubleTensor_uniform’ was not declared in this scope
+         THTensor_(uniform)(LIBRARY_STATE arg_self, arg_generator, 0, arg_to);
+                                                                            ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38066:96: error: ‘THZDoubleTensor_uniform’ was not declared in this scope
+         THTensor_(uniform)(LIBRARY_STATE arg_self, THPDefaultGenerator->cdata, arg_from, arg_to);
+                                                                                                ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38091:71: error: ‘THZDoubleTensor_uniform’ was not declared in this scope
+         THTensor_(uniform)(LIBRARY_STATE arg_self, arg_generator, 0, 1);
+                                                                       ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38116:91: error: ‘THZDoubleTensor_uniform’ was not declared in this scope
+         THTensor_(uniform)(LIBRARY_STATE arg_self, THPDefaultGenerator->cdata, arg_from, 1);
+                                                                                           ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38141:89: error: ‘THZDoubleTensor_uniform’ was not declared in this scope
+         THTensor_(uniform)(LIBRARY_STATE arg_self, THPDefaultGenerator->cdata, 0, arg_to);
+                                                                                         ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38164:84: error: ‘THZDoubleTensor_uniform’ was not declared in this scope
+         THTensor_(uniform)(LIBRARY_STATE arg_self, THPDefaultGenerator->cdata, 0, 1);
+                                                                                    ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp: In function ‘PyObject* THPZDoubleTensor_stateless_normal(PyObject*, PyObject*, PyObject*)’:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38253:92: error: ‘THZDoubleTensor_normal_means’ was not declared in this scope
+         THTensor_(normal_means)(LIBRARY_STATE arg_output, arg_generator, arg_means, arg_std);
+                                                                                            ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38284:93: error: ‘THZDoubleTensor_normal_stddevs’ was not declared in this scope
+         THTensor_(normal_stddevs)(LIBRARY_STATE arg_output, arg_generator, arg_mean, arg_std);
+                                                                                             ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/autograd/python_function.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_function.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38315:100: error: ‘THZDoubleTensor_normal_means_stddevs’ was not declared in this scope
+         THTensor_(normal_means_stddevs)(LIBRARY_STATE arg_output, arg_generator, arg_means, arg_std);
+                                                                                                    ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38349:92: error: ‘THZDoubleTensor_normal_means’ was not declared in this scope
+         THTensor_(normal_means)(LIBRARY_STATE arg_output, arg_generator, arg_means, arg_std);
+                                                                                            ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38378:86: error: ‘THZDoubleTensor_normal_means’ was not declared in this scope
+         THTensor_(normal_means)(LIBRARY_STATE arg_output, arg_generator, arg_means, 1);
+                                                                                      ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38407:105: error: ‘THZDoubleTensor_normal_means’ was not declared in this scope
+         THTensor_(normal_means)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, arg_means, arg_std);
+                                                                                                         ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38441:93: error: ‘THZDoubleTensor_normal_stddevs’ was not declared in this scope
+         THTensor_(normal_stddevs)(LIBRARY_STATE arg_output, arg_generator, arg_mean, arg_std);
+                                                                                             ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38470:86: error: ‘THZDoubleTensor_normal_stddevs’ was not declared in this scope
+         THTensor_(normal_stddevs)(LIBRARY_STATE arg_output, arg_generator, 0, arg_std);
+                                                                                      ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38499:106: error: ‘THZDoubleTensor_normal_stddevs’ was not declared in this scope
+         THTensor_(normal_stddevs)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, arg_mean, arg_std);
+                                                                                                          ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38533:100: error: ‘THZDoubleTensor_normal_means_stddevs’ was not declared in this scope
+         THTensor_(normal_means_stddevs)(LIBRARY_STATE arg_output, arg_generator, arg_means, arg_std);
+                                                                                                    ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38562:113: error: ‘THZDoubleTensor_normal_means_stddevs’ was not declared in this scope
+         THTensor_(normal_means_stddevs)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, arg_means, arg_std);
+                                                                                                                 ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38594:86: error: ‘THZDoubleTensor_normal_means’ was not declared in this scope
+         THTensor_(normal_means)(LIBRARY_STATE arg_output, arg_generator, arg_means, 1);
+                                                                                      ^
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38626:105: error: ‘THZDoubleTensor_normal_means’ was not declared in this scope
+         THTensor_(normal_means)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, arg_means, arg_std);
+                                                                                                         ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38653:99: error: ‘THZDoubleTensor_normal_means’ was not declared in this scope
+         THTensor_(normal_means)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, arg_means, 1);
+                                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38685:86: error: ‘THZDoubleTensor_normal_stddevs’ was not declared in this scope
+         THTensor_(normal_stddevs)(LIBRARY_STATE arg_output, arg_generator, 0, arg_std);
+                                                                                      ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38717:106: error: ‘THZDoubleTensor_normal_stddevs’ was not declared in this scope
+         THTensor_(normal_stddevs)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, arg_mean, arg_std);
+                                                                                                          ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38744:99: error: ‘THZDoubleTensor_normal_stddevs’ was not declared in this scope
+         THTensor_(normal_stddevs)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, 0, arg_std);
+                                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38776:113: error: ‘THZDoubleTensor_normal_means_stddevs’ was not declared in this scope
+         THTensor_(normal_means_stddevs)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, arg_means, arg_std);
+                                                                                                                 ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38806:99: error: ‘THZDoubleTensor_normal_means’ was not declared in this scope
+         THTensor_(normal_means)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, arg_means, 1);
+                                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38836:99: error: ‘THZDoubleTensor_normal_stddevs’ was not declared in this scope
+         THTensor_(normal_stddevs)(LIBRARY_STATE arg_output, THPDefaultGenerator->cdata, 0, arg_std);
+                                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp: In function ‘PyObject* THPZDoubleTensor_normal_(PyObject*, PyObject*, PyObject*)’:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38894:83: error: ‘THZDoubleTensor_normal’ was not declared in this scope
+         THTensor_(normal)(LIBRARY_STATE arg_self, arg_generator, arg_mean, arg_std);
+                                                                                   ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38921:77: error: ‘THZDoubleTensor_normal’ was not declared in this scope
+         THTensor_(normal)(LIBRARY_STATE arg_self, arg_generator, arg_mean, 1);
+                                                                             ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38948:76: error: ‘THZDoubleTensor_normal’ was not declared in this scope
+         THTensor_(normal)(LIBRARY_STATE arg_self, arg_generator, 0, arg_std);
+                                                                            ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:38975:96: error: ‘THZDoubleTensor_normal’ was not declared in this scope
+         THTensor_(normal)(LIBRARY_STATE arg_self, THPDefaultGenerator->cdata, arg_mean, arg_std);
+                                                                                                ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:39000:70: error: ‘THZDoubleTensor_normal’ was not declared in this scope
+         THTensor_(normal)(LIBRARY_STATE arg_self, arg_generator, 0, 1);
+                                                                      ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:39025:90: error: ‘THZDoubleTensor_normal’ was not declared in this scope
+         THTensor_(normal)(LIBRARY_STATE arg_self, THPDefaultGenerator->cdata, arg_mean, 1);
+                                                                                          ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:39050:89: error: ‘THZDoubleTensor_normal’ was not declared in this scope
+         THTensor_(normal)(LIBRARY_STATE arg_self, THPDefaultGenerator->cdata, 0, arg_std);
+                                                                                         ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:39073:83: error: ‘THZDoubleTensor_normal’ was not declared in this scope
+         THTensor_(normal)(LIBRARY_STATE arg_self, THPDefaultGenerator->cdata, 0, 1);
+                                                                                   ^
+In file included from /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/TH.h:4:0,
+                 from torch/csrc/THP.h:5,
+                 from torch/csrc/Tensor.cpp:12:
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp: At global scope:
+torch/csrc/Tensor.h:7:38: error: ‘THPZDoubleTensor_apply’ was not declared in this scope
+ #define THPTensor_(NAME) TH_CONCAT_4(THP, Real, Tensor_, NAME)
+                                      ^
+/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGeneral.h:112:37: note: in definition of macro ‘TH_CONCAT_4_EXPAND’
+ #define TH_CONCAT_4_EXPAND(x,y,z,w) x ## y ## z ## w
+                                     ^
+torch/csrc/Tensor.h:7:26: note: in expansion of macro ‘TH_CONCAT_4’
+ #define THPTensor_(NAME) TH_CONCAT_4(THP, Real, Tensor_, NAME)
+                          ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:46129:27: note: in expansion of macro ‘THPTensor_’
+   {"apply_", (PyCFunction)THPTensor_(apply), METH_O, NULL},
+                           ^
+torch/csrc/Tensor.h:7:38: error: ‘THPZDoubleTensor_map’ was not declared in this scope
+ #define THPTensor_(NAME) TH_CONCAT_4(THP, Real, Tensor_, NAME)
+                                      ^
+/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGeneral.h:112:37: note: in definition of macro ‘TH_CONCAT_4_EXPAND’
+ #define TH_CONCAT_4_EXPAND(x,y,z,w) x ## y ## z ## w
+                                     ^
+torch/csrc/Tensor.h:7:26: note: in expansion of macro ‘TH_CONCAT_4’
+ #define THPTensor_(NAME) TH_CONCAT_4(THP, Real, Tensor_, NAME)
+                          ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:46132:25: note: in expansion of macro ‘THPTensor_’
+   {"map_", (PyCFunction)THPTensor_(map), METH_VARARGS, NULL},
+                         ^
+torch/csrc/Tensor.h:7:38: error: ‘THPZDoubleTensor_map2’ was not declared in this scope
+ #define THPTensor_(NAME) TH_CONCAT_4(THP, Real, Tensor_, NAME)
+                                      ^
+/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGeneral.h:112:37: note: in definition of macro ‘TH_CONCAT_4_EXPAND’
+ #define TH_CONCAT_4_EXPAND(x,y,z,w) x ## y ## z ## w
+                                     ^
+torch/csrc/Tensor.h:7:26: note: in expansion of macro ‘TH_CONCAT_4’
+ #define THPTensor_(NAME) TH_CONCAT_4(THP, Real, Tensor_, NAME)
+                          ^
+/home/philipp/projects/pytorch/torch/csrc/generic/TensorMethods.cpp:46135:26: note: in expansion of macro ‘THPTensor_’
+   {"map2_", (PyCFunction)THPTensor_(map2), METH_VARARGS, NULL},
+                          ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/autograd/function.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/function.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /home/philipp/software/anaconda/include/python2.7/Python.h:8:0,
+                 from /home/philipp/projects/pytorch/torch/csrc/Types.h:4,
+                 from torch/csrc/autograd/variable.h:9,
+                 from torch/csrc/autograd/function.cpp:6:
+/home/philipp/software/anaconda/include/python2.7/pyconfig.h:1190:0: warning: "_POSIX_C_SOURCE" redefined
+ #define _POSIX_C_SOURCE 200112L
+ ^
+In file included from /usr/include/x86_64-linux-gnu/c++/5/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/5/bits/c++config.h:482,
+                 from /usr/include/c++/5/bits/stl_algobase.h:59,
+                 from /usr/include/c++/5/memory:62,
+                 from torch/csrc/autograd/function.h:9,
+                 from torch/csrc/autograd/function.cpp:1:
+/usr/include/features.h:228:0: note: this is the location of the previous definition
+ # define _POSIX_C_SOURCE 200809L
+ ^
+In file included from /home/philipp/software/anaconda/include/python2.7/Python.h:8:0,
+                 from /home/philipp/projects/pytorch/torch/csrc/Types.h:4,
+                 from torch/csrc/autograd/variable.h:9,
+                 from torch/csrc/autograd/function.cpp:6:
+/home/philipp/software/anaconda/include/python2.7/pyconfig.h:1212:0: warning: "_XOPEN_SOURCE" redefined
+ #define _XOPEN_SOURCE 600
+ ^
+In file included from /usr/include/x86_64-linux-gnu/c++/5/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/5/bits/c++config.h:482,
+                 from /usr/include/c++/5/bits/stl_algobase.h:59,
+                 from /usr/include/c++/5/memory:62,
+                 from torch/csrc/autograd/function.h:9,
+                 from torch/csrc/autograd/function.cpp:1:
+/usr/include/features.h:169:0: note: this is the location of the previous definition
+ # define _XOPEN_SOURCE 700
+ ^
+In file included from torch/csrc/THP.h:32:0,
+                 from torch/csrc/DynamicTypes.cpp:3:
+torch/csrc/utils.h:40:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+torch/csrc/utils.h:46:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+torch/csrc/utils.h:52:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+torch/csrc/utils.h:55:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/byte_order.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/byte_order.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/autograd/variable.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/variable.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/autograd/python_variable.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_variable.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /home/philipp/software/anaconda/include/python2.7/Python.h:8:0,
+                 from /home/philipp/projects/pytorch/torch/csrc/Types.h:4,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/variable.h:9,
+                 from torch/csrc/autograd/variable.cpp:1:
+/home/philipp/software/anaconda/include/python2.7/pyconfig.h:1190:0: warning: "_POSIX_C_SOURCE" redefined
+ #define _POSIX_C_SOURCE 200112L
+ ^
+In file included from /usr/include/x86_64-linux-gnu/c++/5/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/5/bits/c++config.h:482,
+                 from /usr/include/c++/5/bits/stl_algobase.h:59,
+                 from /usr/include/c++/5/memory:62,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/variable.h:3,
+                 from torch/csrc/autograd/variable.cpp:1:
+/usr/include/features.h:228:0: note: this is the location of the previous definition
+ # define _POSIX_C_SOURCE 200809L
+ ^
+In file included from /home/philipp/software/anaconda/include/python2.7/Python.h:8:0,
+                 from /home/philipp/projects/pytorch/torch/csrc/Types.h:4,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/variable.h:9,
+                 from torch/csrc/autograd/variable.cpp:1:
+/home/philipp/software/anaconda/include/python2.7/pyconfig.h:1212:0: warning: "_XOPEN_SOURCE" redefined
+ #define _XOPEN_SOURCE 600
+ ^
+In file included from /usr/include/x86_64-linux-gnu/c++/5/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/5/bits/c++config.h:482,
+                 from /usr/include/c++/5/bits/stl_algobase.h:59,
+                 from /usr/include/c++/5/memory:62,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/variable.h:3,
+                 from torch/csrc/autograd/variable.cpp:1:
+/usr/include/features.h:169:0: note: this is the location of the previous definition
+ # define _XOPEN_SOURCE 700
+ ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/autograd/functions/batch_normalization.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/functions/batch_normalization.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /home/philipp/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from torch/csrc/autograd/python_function.cpp:10:
+/home/philipp/projects/pytorch/torch/csrc/utils.h:40:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/home/philipp/projects/pytorch/torch/csrc/utils.h:46:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/home/philipp/projects/pytorch/torch/csrc/utils.h:52:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/home/philipp/projects/pytorch/torch/csrc/utils.h:55:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+In file included from /home/philipp/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from torch/csrc/autograd/python_variable.cpp:5:
+/home/philipp/projects/pytorch/torch/csrc/utils.h:40:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/home/philipp/projects/pytorch/torch/csrc/utils.h:46:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/home/philipp/projects/pytorch/torch/csrc/utils.h:52:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/home/philipp/projects/pytorch/torch/csrc/utils.h:55:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+In file included from /home/philipp/software/anaconda/include/python2.7/Python.h:8:0,
+                 from /home/philipp/projects/pytorch/torch/csrc/Types.h:4,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/variable.h:9,
+                 from torch/csrc/autograd/functions/batch_normalization.h:7,
+                 from torch/csrc/autograd/functions/batch_normalization.cpp:1:
+/home/philipp/software/anaconda/include/python2.7/pyconfig.h:1190:0: warning: "_POSIX_C_SOURCE" redefined
+ #define _POSIX_C_SOURCE 200112L
+ ^
+In file included from /usr/include/x86_64-linux-gnu/c++/5/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/5/bits/c++config.h:482,
+                 from /usr/include/c++/5/bits/stl_algobase.h:59,
+                 from /usr/include/c++/5/memory:62,
+                 from torch/csrc/autograd/functions/batch_normalization.h:3,
+                 from torch/csrc/autograd/functions/batch_normalization.cpp:1:
+/usr/include/features.h:228:0: note: this is the location of the previous definition
+ # define _POSIX_C_SOURCE 200809L
+ ^
+In file included from /home/philipp/software/anaconda/include/python2.7/Python.h:8:0,
+                 from /home/philipp/projects/pytorch/torch/csrc/Types.h:4,
+                 from /home/philipp/projects/pytorch/torch/csrc/autograd/variable.h:9,
+                 from torch/csrc/autograd/functions/batch_normalization.h:7,
+                 from torch/csrc/autograd/functions/batch_normalization.cpp:1:
+/home/philipp/software/anaconda/include/python2.7/pyconfig.h:1212:0: warning: "_XOPEN_SOURCE" redefined
+ #define _XOPEN_SOURCE 600
+ ^
+In file included from /usr/include/x86_64-linux-gnu/c++/5/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/5/bits/c++config.h:482,
+                 from /usr/include/c++/5/bits/stl_algobase.h:59,
+                 from /usr/include/c++/5/memory:62,
+                 from torch/csrc/autograd/functions/batch_normalization.h:3,
+                 from torch/csrc/autograd/functions/batch_normalization.cpp:1:
+/usr/include/features.h:169:0: note: this is the location of the previous definition
+ # define _XOPEN_SOURCE 700
+ ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/autograd/python_engine.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_engine.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/autograd/python_cpp_function.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_cpp_function.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/philipp/projects/pytorch -I/home/philipp/projects/pytorch/torch/csrc -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/software/anaconda/lib/python2.7/site-packages/numpy/core/include -I/usr/local/cuda/include -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/software/anaconda/include/python2.7 -c torch/csrc/nn/THNN_generic.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/nn/THNN_generic.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/local/cuda/lib64 -DWITH_NCCL
+error: command 'gcc' failed with exit status 1
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /home/philipp/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from torch/csrc/autograd/python_engine.cpp:4:
+/home/philipp/projects/pytorch/torch/csrc/utils.h:40:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/home/philipp/projects/pytorch/torch/csrc/utils.h:46:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/home/philipp/projects/pytorch/torch/csrc/utils.h:52:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/home/philipp/projects/pytorch/torch/csrc/utils.h:55:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+Exception in thread Thread-1 (most likely raised during interpreter shutdown):
+Traceback (most recent call last):
+  File "/home/philipp/software/anaconda/lib/python2.7/threading.py", line 801, in __bootstrap_inner
+  File "/home/philipp/software/anaconda/lib/python2.7/threading.py", line 754, in run
+  File "/home/philipp/software/anaconda/lib/python2.7/multiprocessing/pool.py", line 113, in worker
+  File "/home/philipp/software/anaconda/lib/python2.7/multiprocessing/pool.py", line 65, in mapstar
+  File "setup.py", line 43, in _single_compile
+  File "/home/philipp/software/anaconda/lib/python2.7/distutils/unixccompiler.py", line 122, in _compile
+  File "/home/philipp/software/anaconda/lib/python2.7/distutils/ccompiler.py", line 876, in spawn
+  File "/home/philipp/software/anaconda/lib/python2.7/distutils/spawn.py", line 38, in spawn
+  File "/home/philipp/software/anaconda/lib/python2.7/distutils/spawn.py", line 176, in _spawn_posix
+<type 'exceptions.AttributeError'>: 'NoneType' object has no attribute 'WIFSIGNALED'

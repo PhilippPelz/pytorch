@@ -22,7 +22,7 @@ NVCC_GENCODE ?= -gencode=arch=compute_30,code=sm_30 \
                 -gencode=arch=compute_52,code=sm_52 \
                 -gencode=arch=compute_52,code=compute_52
 
-CXXFLAGS   := -I$(CUDA_INC) -fPIC -fvisibility=hidden 
+CXXFLAGS   := -I$(CUDA_INC) -fPIC -fvisibility=hidden
 NVCUFLAGS  := -ccbin $(CXX) $(NVCC_GENCODE) -lineinfo -std=c++11 -maxrregcount 96
 # Use addprefix so that we can specify more than one path
 LDFLAGS    := $(addprefix -L,${CUDA_LIB}) -lcudart -lrt
@@ -147,7 +147,7 @@ MPITESTBINS:= $(patsubst %, $(MPITSTDIR)/%, $(MPITESTS))
 
 test : $(TESTBINS)
 
-$(TSTDIR)/% : test/single/%.cu test/include/*.h $(TSTDEP) 
+$(TSTDIR)/% : test/single/%.cu test/include/*.h $(TSTDEP)
 	@printf "Building  %-25s > %-24s\n" $< $@
 	mkdir -p $(TSTDIR)
 	$(NVCC) $(TSTINC) $(NVCUFLAGS) --compiler-options "$(CXXFLAGS)" -o $@ $< $(TSTLIB) -lcuda -lcurand -lnvToolsExt
@@ -159,7 +159,7 @@ $(TSTDIR)/% : test/single/%.cu test/include/*.h $(TSTDEP)
 
 mpitest : $(MPITESTBINS)
 
-$(MPITSTDIR)/% : test/mpi/%.cu $(TSTDEP) 
+$(MPITSTDIR)/% : test/mpi/%.cu $(TSTDEP)
 	@printf "Building  %-25s > %-24s\n" $< $@
 	mkdir -p $(MPITSTDIR)
 	$(NVCC) $(MPIFLAGS) $(TSTINC) $(NVCUFLAGS) --compiler-options "$(CXXFLAGS)" -o $@ $< $(TSTLIB) -lcurand
@@ -209,4 +209,3 @@ $(DEBIANDIR)/% : debian/%
 	@printf "Grabbing  %-25s > %-25s\n" $< $@
 	mkdir -p $(DEBIANDIR)
 	cp -f $< $@
-

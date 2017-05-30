@@ -1,0 +1,215 @@
+-- Compiling with OpenMP support
+-- Could not find hardware support for NEON on this machine.
+-- No OMAP3 processor on this machine.
+-- No OMAP4 processor on this machine.
+-- SSE2 Found
+-- SSE3 Found
+-- AVX Found
+-- TH_SO_VERSION: 1
+-- Atomics: using GCC intrinsics
+-- Checking for [mkl_gf_lp64 - mkl_gnu_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_gf_lp64: not found
+-- Checking for [mkl_gf_lp64 - mkl_intel_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_gf_lp64: not found
+-- Checking for [mkl_gf - mkl_gnu_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_gf: not found
+-- Checking for [mkl_gf - mkl_intel_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_gf: not found
+-- Checking for [mkl_intel_lp64 - mkl_gnu_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_intel_lp64: /home/philipp/anaconda2/lib/libmkl_intel_lp64.so
+--   Library mkl_gnu_thread: not found
+-- Checking for [mkl_intel_lp64 - mkl_intel_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_intel_lp64: /home/philipp/anaconda2/lib/libmkl_intel_lp64.so
+--   Library mkl_intel_thread: /home/philipp/anaconda2/lib/libmkl_intel_thread.so
+--   Library mkl_core: /home/philipp/anaconda2/lib/libmkl_core.so
+--   Library iomp5: /home/philipp/anaconda2/lib/libiomp5.so
+--   Library pthread: /usr/lib/x86_64-linux-gnu/libpthread.so
+--   Library m: /usr/lib/x86_64-linux-gnu/libm.so
+-- MKL library found
+-- Found a library with BLAS API (mkl).
+-- Found a library with LAPACK API. (mkl)
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/TH
+Scanning dependencies of target TH
+[  5%] Building C object CMakeFiles/TH.dir/THTensor.c.o
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THStorage.h:18,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.h:4,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:2:
+generic/THStorage.h:105:9: note: #pragma message: NOW DOING COMPLEX FLOAT
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THStorage.h:18,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.h:4,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:2:
+generic/THStorage.h:110:9: note: #pragma message: NOW DOING COMPLEX double
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THStorage.h:24,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.h:4,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:2:
+generic/THStorageCopy.h:105:9: note: #pragma message: NOW DOING COMPLEX FLOAT
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THStorage.h:24,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.h:4,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:2:
+generic/THStorageCopy.h:110:9: note: #pragma message: NOW DOING COMPLEX double
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.h:12,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:2:
+generic/THTensor.h:105:9: note: #pragma message: NOW DOING COMPLEX FLOAT
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.h:12,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:2:
+generic/THTensor.h:110:9: note: #pragma message: NOW DOING COMPLEX double
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.h:18,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:2:
+generic/THTensorCopy.h:105:9: note: #pragma message: NOW DOING COMPLEX FLOAT
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.h:18,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:2:
+generic/THTensorCopy.h:110:9: note: #pragma message: NOW DOING COMPLEX double
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.h:28,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:2:
+generic/THTensorRandom.h:105:9: note: #pragma message: NOW DOING COMPLEX FLOAT
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.h:28,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:2:
+generic/THTensorRandom.h:110:9: note: #pragma message: NOW DOING COMPLEX double
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.h:32,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:2:
+generic/THTensorMath.h:105:9: note: #pragma message: NOW DOING COMPLEX FLOAT
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.h:32,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:2:
+generic/THTensorMath.h:110:9: note: #pragma message: NOW DOING COMPLEX double
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.h:36,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:2:
+generic/THTensorConv.h:105:9: note: #pragma message: NOW DOING COMPLEX FLOAT
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.h:36,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:2:
+generic/THTensorConv.h:110:9: note: #pragma message: NOW DOING COMPLEX double
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.h:40:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:2:
+generic/THTensorLapack.h:105:9: note: #pragma message: NOW DOING COMPLEX FLOAT
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.h:40:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:2:
+generic/THTensorLapack.h:110:9: note: #pragma message: NOW DOING COMPLEX double
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THVector.h:11,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:3:
+generic/THVector.h:105:9: note: #pragma message: NOW DOING COMPLEX FLOAT
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THVector.h:11,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:3:
+generic/THVector.h:110:9: note: #pragma message: NOW DOING COMPLEX double
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THBlas.h:9,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:6:
+generic/THBlas.h:105:9: note: #pragma message: NOW DOING COMPLEX FLOAT
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THBlas.h:9,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:6:
+generic/THBlas.h:110:9: note: #pragma message: NOW DOING COMPLEX double
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THLapack.h:25,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:7:
+generic/THLapack.h:105:9: note: #pragma message: NOW DOING COMPLEX FLOAT
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THLapack.h:25,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:7:
+generic/THLapack.h:110:9: note: #pragma message: NOW DOING COMPLEX double
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:13:
+generic/THTensor.c:105:9: note: #pragma message: NOW DOING COMPLEX FLOAT
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:13:
+generic/THTensor.c:110:9: note: #pragma message: NOW DOING COMPLEX double
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:19:
+generic/THTensorCopy.c:105:9: note: #pragma message: NOW DOING COMPLEX FLOAT
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:19:
+generic/THTensorCopy.c:110:9: note: #pragma message: NOW DOING COMPLEX double
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:25:
+generic/THTensorRandom.c:105:9: note: #pragma message: NOW DOING COMPLEX FLOAT
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:25:
+generic/THTensorRandom.c:110:9: note: #pragma message: NOW DOING COMPLEX double
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:28:
+generic/THTensorMath.c:105:9: note: #pragma message: NOW DOING COMPLEX FLOAT
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:28:
+generic/THTensorMath.c:110:9: note: #pragma message: NOW DOING COMPLEX double
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:31:
+generic/THTensorConv.c:105:9: note: #pragma message: NOW DOING COMPLEX FLOAT
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THGenerateAllTypes.h:7:0,
+                 from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:31:
+generic/THTensorConv.c:110:9: note: #pragma message: NOW DOING COMPLEX double
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:34:0:
+generic/THTensorLapack.c:105:9: note: #pragma message: NOW DOING COMPLEX FLOAT
+In file included from /home/philipp/projects/pytorch/torch/lib/TH/THTensor.c:34:0:
+generic/THTensorLapack.c:110:9: note: #pragma message: NOW DOING COMPLEX double
+[ 10%] Linking C shared library libTH.so
+[100%] Built target TH
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so
+-- Set runtime path of "/home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1" to ""
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/TH.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THAllocator.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THMath.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THBlas.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THDiskFile.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THFile.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THFilePrivate.h
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGeneral.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateAllTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateHalfType.h
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateFloatTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateIntTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THLapack.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THLogAdd.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THMemoryFile.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THRandom.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THStorage.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THTensorApply.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THTensorDimApply.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THTensorMacros.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THVector.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THAtomic.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THHalf.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/vector/AVX.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/vector/AVX2.h
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THBlas.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THBlas.h
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THLapack.c
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THLapack.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THStorage.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THStorage.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THStorageCopy.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THStorageCopy.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensor.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorConv.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorConv.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorCopy.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorCopy.h
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorLapack.c
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorLapack.h
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorMath.c
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorMath.h
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorRandom.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorRandom.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THVectorDispatch.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THVector.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/share/cmake/TH/THConfig.cmake

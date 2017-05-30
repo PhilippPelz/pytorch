@@ -10,6 +10,8 @@ class THPPlugin(CWrapPlugin):
     TYPE_UNPACK = {
         'THFloatTensor*': Template('((THPFloatTensor*)$arg)->cdata'),
         'THDoubleTensor*': Template('((THPDoubleTensor*)$arg)->cdata'),
+        'THZFloatTensor*': Template('((THPZFloatTensor*)$arg)->cdata'),
+        'THZDoubleTensor*': Template('((THPZDoubleTensor*)$arg)->cdata'),
         'THLongTensor*': Template('((THPLongTensor*)$arg)->cdata'),
         'THIntTensor*': Template('((THPIntTensor*)$arg)->cdata'),
         'THTensor*': Template('((THPTensor*)$arg)->cdata'),
@@ -23,6 +25,8 @@ class THPPlugin(CWrapPlugin):
 
         'THSFloatTensor*': Template('((THSPFloatTensor*)$arg)->cdata'),
         'THSDoubleTensor*': Template('((THSPDoubleTensor*)$arg)->cdata'),
+        'THSZFloatTensor*': Template('((THSPZFloatTensor*)$arg)->cdata'),
+        'THSZDoubleTensor*': Template('((THSPZDoubleTensor*)$arg)->cdata'),
         'THSLongTensor*': Template('((THSPLongTensor*)$arg)->cdata'),
         'THSIntTensor*': Template('((THSPIntTensor*)$arg)->cdata'),
         'THSTensor*': Template('((THSPTensor*)$arg)->cdata'),
@@ -47,6 +51,8 @@ class THPPlugin(CWrapPlugin):
     TYPE_CHECK = {
         'THDoubleTensor*': Template('(PyObject*)Py_TYPE($arg) == THPDoubleTensorClass'),
         'THFloatTensor*': Template('(PyObject*)Py_TYPE($arg) == THPFloatTensorClass'),
+        'THZDoubleTensor*': Template('(PyObject*)Py_TYPE($arg) == THPZDoubleTensorClass'),
+        'THZFloatTensor*': Template('(PyObject*)Py_TYPE($arg) == THPZFloatTensorClass'),
         'THLongTensor*': Template('(PyObject*)Py_TYPE($arg) == THPLongTensorClass'),
         'THIntTensor*': Template('(PyObject*)Py_TYPE($arg) == THPIntTensorClass'),
         'THTensor*': Template('(PyObject*)Py_TYPE($arg) == THPTensorClass'),
@@ -60,6 +66,8 @@ class THPPlugin(CWrapPlugin):
 
         'THSDoubleTensor*': Template('(PyObject*)Py_TYPE($arg) == THSPDoubleTensorClass'),
         'THSFloatTensor*': Template('(PyObject*)Py_TYPE($arg) == THSPFloatTensorClass'),
+        'THSZDoubleTensor*': Template('(PyObject*)Py_TYPE($arg) == THSPZDoubleTensorClass'),
+        'THSZFloatTensor*': Template('(PyObject*)Py_TYPE($arg) == THSPZFloatTensorClass'),
         'THSLongTensor*': Template('(PyObject*)Py_TYPE($arg) == THSPLongTensorClass'),
         'THSIntTensor*': Template('(PyObject*)Py_TYPE($arg) == THSPIntTensorClass'),
         'THSTensor*': Template('(PyObject*)Py_TYPE($arg) == THSPTensorClass'),
@@ -172,6 +180,8 @@ ${cpu}
         'THIntegerTensor*': '" THPModuleStr "IntTensor',
         'THFloatTensor*': '" THPModuleStr "FloatTensor',
         'THDoubleTensor*': '" THPModuleStr "DoubleTensor',
+        'THZFloatTensor*': '" THPModuleStr "ZFloatTensor',
+        'THZDoubleTensor*': '" THPModuleStr "ZDoubleTensor',
         'THCudaTensor*': 'torch.cuda.FloatTensor',
         'THCudaDoubleTensor*': 'torch.cuda.DoubleTensor',
         'THCudaLongTensor*': 'torch.cuda.LongTensor',

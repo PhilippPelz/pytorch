@@ -517,6 +517,7 @@
 
 [[
   name: sort
+  defined_if: "!(defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE))"
   with_stateless: True
   return: argument 0,1
   options:
@@ -549,7 +550,7 @@
 
 [[
   name: topk
-  defined_if: CUDA_FLOAT || !IS_CUDA
+  defined_if: "CUDA_FLOAT || (!IS_CUDA && !(defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)))"
   with_stateless: True
   return: argument 0,1
   options:
@@ -580,7 +581,7 @@
 
 [[
   name: all
-  defined_if: defined(TH_REAL_IS_BYTE) || defined(THC_REAL_IS_BYTE)
+  defined_if: "defined(TH_REAL_IS_BYTE) || defined(THC_REAL_IS_BYTE)"
   cname: logicalall
   return: bool
   arguments:

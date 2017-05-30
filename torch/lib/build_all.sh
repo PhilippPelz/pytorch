@@ -60,6 +60,7 @@ function build() {
               -DNO_CUDA=$((1-$WITH_CUDA)) \
               -DCMAKE_BUILD_TYPE=$([ $DEBUG ] && echo Debug || echo Release)
   make install -j$(getconf _NPROCESSORS_ONLN)
+  # make install
   cd ../..
 
   rm -rf $INSTALL_DIR/lib/lib$1$LD_POSTFIX_UNVERSIONED
@@ -100,7 +101,7 @@ if [[ $WITH_NCCL -eq 1 ]]; then
 fi
 
 build THPP
-CPP_FLAGS=" -std=c++11 "
+CPP_FLAGS=" -std=c++11"
 build libshm
 
 if [[ $WITH_DISTRIBUTED -eq 1 ]]; then

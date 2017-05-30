@@ -1,0 +1,246 @@
+-- Compiling with OpenMP support
+-- Could not find hardware support for NEON on this machine.
+-- No OMAP3 processor on this machine.
+-- No OMAP4 processor on this machine.
+-- SSE2 Found
+-- SSE3 Found
+-- AVX Found
+-- TH_SO_VERSION: 1
+-- Atomics: using GCC intrinsics
+-- Checking for [mkl_gf_lp64 - mkl_gnu_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_gf_lp64: not found
+-- Checking for [mkl_gf_lp64 - mkl_intel_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_gf_lp64: not found
+-- Checking for [mkl_gf - mkl_gnu_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_gf: not found
+-- Checking for [mkl_gf - mkl_intel_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_gf: not found
+-- Checking for [mkl_intel_lp64 - mkl_gnu_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_intel_lp64: /home/philipp/software/anaconda/lib/libmkl_intel_lp64.so
+--   Library mkl_gnu_thread: not found
+-- Checking for [mkl_intel_lp64 - mkl_intel_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_intel_lp64: /home/philipp/software/anaconda/lib/libmkl_intel_lp64.so
+--   Library mkl_intel_thread: /home/philipp/software/anaconda/lib/libmkl_intel_thread.so
+--   Library mkl_core: /home/philipp/software/anaconda/lib/libmkl_core.so
+--   Library iomp5: /home/philipp/software/anaconda/lib/libiomp5.so
+--   Library pthread: /usr/lib/x86_64-linux-gnu/libpthread.so
+--   Library m: /usr/lib/x86_64-linux-gnu/libm.so
+-- MKL library found
+-- Found a library with BLAS API (mkl).
+-- Found a library with LAPACK API. (mkl)
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    NO_CUDA
+
+
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/TH
+[100%] Built target TH
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so
+-- Set runtime path of "/home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1" to ""
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/TH.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THAllocator.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THMath.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THBlas.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THDiskFile.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THFile.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THFilePrivate.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGeneral.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateAllTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateHalfType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateFloatTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateComplexTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateIntTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THLapack.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THLogAdd.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THMemoryFile.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THRandom.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THStorage.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THTensorApply.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THTensorDimApply.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THTensorMacros.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THVector.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THAtomic.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THHalf.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/vector/AVX.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/vector/AVX2.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THBlas.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THBlas.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THLapack.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THLapack.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THStorage.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THStorage.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THStorageCopy.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THStorageCopy.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensor.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorConv.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorConv.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorCopy.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorCopy.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorLapack.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorLapack.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorMath.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorMath.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorRandom.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorRandom.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THVectorDispatch.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THVector.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/share/cmake/TH/THConfig.cmake
+-- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- THS_SO_VERSION: 1
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    NO_CUDA
+
+
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THS
+[100%] Built target THS
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHS.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHS.so
+-- Set runtime path of "/home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHS.so.1" to ""
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/THS.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/THSGenerateAllTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/THSGenerateFloatTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/THSGenerateIntTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/THSTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/generic/THSTensor.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/generic/THSTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/generic/THSTensorMath.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/generic/THSTensorMath.h
+-- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- Compiling with OpenMP support
+CMake Warning (dev) at CMakeLists.txt:61 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- THNN_SO_VERSION: 1
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    NO_CUDA
+
+
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THNN
+[100%] Built target THNN
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHNN.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHNN.so
+-- Set runtime path of "/home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHNN.so.1" to ""
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN/THNN.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN/generic/THNN.h
+-- Removing -DNDEBUG from compile flags
+-- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- Compiling with MAGMA support
+-- MAGMA INCLUDE DIRECTORIES: /home/philipp/software/anaconda/include
+-- MAGMA LIBRARIES: /home/philipp/software/anaconda/lib/libmagma.a
+-- MAGMA V2 check: 1
+-- Autodetected CUDA architecture(s): 5.2
+-- got cuda version 8.0
+-- Found CUDA with FP16 support, compiling with torch.CudaHalfTensor
+-- CUDA_NVCC_FLAGS:  -DTH_INDEX_BASE=0 -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP;-gencode;arch=compute_52,code=sm_52;-DCUDA_HAS_FP16=1
+-- THC_SO_VERSION: 1
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THC
+[  1%] Building NVCC (Device) object CMakeFiles/THC.dir/THC_generated_THCTensorMathBlas.cu.o
+[  2%] Building NVCC (Device) object CMakeFiles/THC.dir/THC_generated_THCTensorMath.cu.o
+[  3%] Building NVCC (Device) object CMakeFiles/THC.dir/THC_generated_THCTensorMathPairwise.cu.o
+[  4%] Building NVCC (Device) object CMakeFiles/THC.dir/THC_generated_THCTensorMathMagma.cu.o
+/home/philipp/software/anaconda/include/magma_vbatched.h(43): error: _Complex can only be used with floating-point types
+
+/home/philipp/software/anaconda/include/magma_vbatched.h(58): error: _Complex can only be used with floating-point types
+
+2 errors detected in the compilation of "/tmp/tmpxft_00003e0e_00000000-7_THCTensorMathMagma.cpp1.ii".
+CMake Error at THC_generated_THCTensorMathMagma.cu.o.cmake:267 (message):
+  Error generating file
+  /home/philipp/projects/pytorch/torch/lib/build/THC/CMakeFiles/THC.dir//./THC_generated_THCTensorMathMagma.cu.o
+
+
+CMakeFiles/THC.dir/build.make:3662: recipe for target 'CMakeFiles/THC.dir/THC_generated_THCTensorMathMagma.cu.o' failed
+make[2]: *** [CMakeFiles/THC.dir/THC_generated_THCTensorMathMagma.cu.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+/usr/local/cuda-8.0/include/thrust/detail/reference.inl(127): error: no default constructor exists for class "thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>"
+          detected during:
+            instantiation of "void thrust::reference<Element, Pointer, Derived>::assign_from(OtherPointer) [with Element=signed long, Pointer=thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>, Derived=thrust::use_default, OtherPointer=const signed long *]" 
+(65): here
+            instantiation of "thrust::reference<Element, Pointer, Derived>::derived_type &thrust::reference<Element, Pointer, Derived>::operator=(const thrust::reference<Element, Pointer, Derived>::value_type &) [with Element=signed long, Pointer=thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>, Derived=thrust::use_default]" 
+/usr/local/cuda-8.0/include/thrust/system/cuda/detail/reduce_intervals.inl(150): here
+            instantiation of "void thrust::system::cuda::detail::commutative_reduce_intervals_closure<InputIterator, OutputIterator, BinaryFunction, Decomposition, Context>::operator()() [with InputIterator=thrust::transform_iterator<thrust::detail::predicate_to_integral<NonZeroOp<unsigned char>, signed long>, thrust::device_ptr<unsigned char>, signed long, thrust::use_default>, OutputIterator=thrust::detail::normal_iterator<thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>>, BinaryFunction=thrust::plus<signed long>, Decomposition=thrust::system::detail::internal::uniform_decomposition<signed long>, Context=thrust::system::cuda::detail::detail::blocked_thread_array]" 
+/usr/local/cuda-8.0/include/thrust/system/cuda/detail/detail/launch_closure.inl(52): here
+            instantiation of "void thrust::system::cuda::detail::detail::launch_closure_by_value(Closure) [with Closure=thrust::system::cuda::detail::commutative_reduce_intervals_closure<thrust::transform_iterator<thrust::detail::predicate_to_integral<NonZeroOp<unsigned char>, signed long>, thrust::device_ptr<unsigned char>, signed long, thrust::use_default>, thrust::detail::normal_iterator<thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>>, thrust::plus<signed long>, thrust::system::detail::internal::uniform_decomposition<signed long>, thrust::system::cuda::detail::detail::blocked_thread_array>]" 
+/usr/local/cuda-8.0/include/thrust/system/cuda/detail/detail/launch_closure.inl(81): here
+            instantiation of "thrust::system::cuda::detail::detail::closure_launcher_base<Closure, launch_by_value>::launch_function_t thrust::system::cuda::detail::detail::closure_launcher_base<Closure, launch_by_value>::get_launch_function() [with Closure=thrust::system::cuda::detail::commutative_reduce_intervals_closure<thrust::transform_iterator<thrust::detail::predicate_to_integral<NonZeroOp<unsigned char>, signed long>, thrust::device_ptr<unsigned char>, signed long, thrust::use_default>, thrust::detail::normal_iterator<thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>>, thrust::plus<signed long>, thrust::system::detail::internal::uniform_decomposition<signed long>, thrust::system::cuda::detail::detail::blocked_thread_array>, launch_by_value=true]" 
+/usr/local/cuda-8.0/include/thrust/system/cuda/detail/detail/launch_closure.inl(206): here
+            [ 2 instantiation contexts not shown ]
+            instantiation of "thrust::system::cuda::detail::detail::launch_calculator<Closure>::launch_calculator() [with Closure=thrust::system::cuda::detail::commutative_reduce_intervals_closure<thrust::transform_iterator<thrust::detail::predicate_to_integral<NonZeroOp<unsigned char>, signed long>, thrust::device_ptr<unsigned char>, signed long, thrust::use_default>, thrust::detail::normal_iterator<thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>>, thrust::plus<signed long>, thrust::system::detail::internal::uniform_decomposition<signed long>, thrust::system::cuda::detail::detail::blocked_thread_array>]" 
+/usr/local/cuda-8.0/include/thrust/system/cuda/detail/reduce_intervals.inl(189): here
+            instantiation of "void thrust::system::cuda::detail::reduce_intervals(thrust::system::cuda::detail::execution_policy<DerivedPolicy> &, InputIterator, OutputIterator, BinaryFunction, Decomposition) [with DerivedPolicy=thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, InputIterator=thrust::transform_iterator<thrust::detail::predicate_to_integral<NonZeroOp<unsigned char>, signed long>, thrust::device_ptr<unsigned char>, signed long, thrust::use_default>, OutputIterator=thrust::detail::normal_iterator<thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>>, BinaryFunction=thrust::plus<signed long>, Decomposition=thrust::system::detail::internal::uniform_decomposition<signed long>]" 
+/usr/local/cuda-8.0/include/thrust/system/cuda/detail/copy_if.inl(201): here
+            instantiation of "OutputIterator thrust::system::cuda::detail::copy_if_detail::copy_if(thrust::system::cuda::detail::execution_policy<DerivedPolicy> &, InputIterator1, InputIterator1, InputIterator2, OutputIterator, Predicate) [with DerivedPolicy=thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, InputIterator1=thrust::counting_iterator<long, thrust::use_default, thrust::use_default, thrust::use_default>, InputIterator2=thrust::device_ptr<unsigned char>, OutputIterator=thrust::permutation_iterator<thrust::device_ptr<long>, thrust::transform_iterator<strided_range<thrust::device_ptr<long>>::stride_functor, thrust::counting_iterator<long, thrust::use_default, thrust::use_default, thrust::use_default>, thrust::use_default, thrust::use_default>>, Predicate=NonZeroOp<unsigned char>]" 
+/usr/local/cuda-8.0/include/thrust/system/cuda/detail/copy_if.inl(251): here
+            instantiation of "OutputIterator thrust::system::cuda::detail::copy_if(thrust::system::cuda::detail::execution_policy<DerivedPolicy> &, InputIterator1, InputIterator1, InputIterator2, OutputIterator, Predicate) [with DerivedPolicy=thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, InputIterator1=thrust::counting_iterator<long, thrust::use_default, thrust::use_default, thrust::use_default>, InputIterator2=thrust::device_ptr<unsigned char>, OutputIterator=thrust::permutation_iterator<thrust::device_ptr<long>, thrust::transform_iterator<strided_range<thrust::device_ptr<long>>::stride_functor, thrust::counting_iterator<long, thrust::use_default, thrust::use_default, thrust::use_default>, thrust::use_default, thrust::use_default>>, Predicate=NonZeroOp<unsigned char>]" 
+/usr/local/cuda-8.0/include/thrust/detail/copy_if.inl(60): here
+            instantiation of "OutputIterator thrust::copy_if(const thrust::detail::execution_policy_base<DerivedPolicy> &, InputIterator1, InputIterator1, InputIterator2, OutputIterator, Predicate) [with DerivedPolicy=thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, InputIterator1=thrust::counting_iterator<long, thrust::use_default, thrust::use_default, thrust::use_default>, InputIterator2=thrust::device_ptr<unsigned char>, OutputIterator=thrust::permutation_iterator<thrust::device_ptr<long>, thrust::transform_iterator<strided_range<thrust::device_ptr<long>>::stride_functor, thrust::counting_iterator<long, thrust::use_default, thrust::use_default, thrust::use_default>, thrust::use_default, thrust::use_default>>, Predicate=NonZeroOp<unsigned char>]" 
+/home/philipp/projects/pytorch/torch/lib/THC/generic/THCTensorMath.cu(313): here
+
+/usr/local/cuda-8.0/include/thrust/detail/reference.inl(98): error: no default constructor exists for class "thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>"
+          detected during:
+            instantiation of "thrust::reference<Element, Pointer, Derived>::operator thrust::reference<Element, Pointer, Derived>::value_type() const [with Element=signed long, Pointer=thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>, Derived=thrust::use_default]" 
+/usr/local/cuda-8.0/include/thrust/system/cuda/detail/bulk/algorithm/scan.hpp(514): here
+            instantiation of "RandomAccessIterator2 thrust::system::cuda::detail::bulk_::inclusive_scan(thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<grainsize>, size> &, RandomAccessIterator1, RandomAccessIterator1, RandomAccessIterator2, BinaryFunction) [with size=512UL, grainsize=3UL, RandomAccessIterator1=thrust::detail::normal_iterator<thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>>, RandomAccessIterator2=thrust::detail::normal_iterator<thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>>, BinaryFunction=thrust::plus<signed long>]" 
+/usr/local/cuda-8.0/include/thrust/system/cuda/detail/scan.inl(55): here
+            instantiation of "void thrust::system::cuda::detail::scan_detail::inclusive_scan_n::operator()(ConcurrentGroup &, InputIterator, Size, OutputIterator, BinaryFunction) [with ConcurrentGroup=thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<3UL>, 512UL>, InputIterator=thrust::detail::normal_iterator<thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>>, Size=signed long, OutputIterator=thrust::detail::normal_iterator<thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>>, BinaryFunction=thrust::plus<signed long>]" 
+/usr/local/cuda-8.0/include/thrust/system/cuda/detail/bulk/detail/apply_from_tuple.hpp(83): here
+            instantiation of "void thrust::system::cuda::detail::bulk_::detail::apply_from_tuple(Function, const thrust::tuple<Arg1, Arg2, Arg3, Arg4, Arg5, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type> &) [with Function=thrust::system::cuda::detail::scan_detail::inclusive_scan_n, Arg1=thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<3UL>, 512UL> &, Arg2=thrust::detail::normal_iterator<thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>>, Arg3=signed long, Arg4=thrust::detail::normal_iterator<thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>>, Arg5=thrust::plus<signed long>]" 
+/usr/local/cuda-8.0/include/thrust/system/cuda/detail/bulk/detail/closure.hpp(50): here
+            instantiation of "void thrust::system::cuda::detail::bulk_::detail::closure<Function, Tuple>::operator()() [with Function=thrust::system::cuda::detail::scan_detail::inclusive_scan_n, Tuple=thrust::tuple<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<3UL>, 512UL> &, thrust::detail::normal_iterator<thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>>, signed long, thrust::detail::normal_iterator<thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>>, thrust::plus<signed long>, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>]" 
+/usr/local/cuda-8.0/include/thrust/system/cuda/detail/bulk/detail/cuda_task.hpp(58): here
+            [ 11 instantiation contexts not shown ]
+            instantiation of "OutputIterator thrust::system::cuda::detail::inclusive_scan(thrust::system::cuda::detail::execution_policy<DerivedPolicy> &, InputIterator, InputIterator, OutputIterator, AssociativeOperator) [with DerivedPolicy=thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, InputIterator=thrust::detail::normal_iterator<thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>>, OutputIterator=thrust::detail::normal_iterator<thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>>, AssociativeOperator=thrust::plus<signed long>]" 
+/usr/local/cuda-8.0/include/thrust/detail/scan.inl(63): here
+            instantiation of "OutputIterator thrust::inclusive_scan(const thrust::detail::execution_policy_base<DerivedPolicy> &, InputIterator, InputIterator, OutputIterator, AssociativeOperator) [with DerivedPolicy=thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, InputIterator=thrust::detail::normal_iterator<thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>>, OutputIterator=thrust::detail::normal_iterator<thrust::pointer<signed long, thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, thrust::use_default, thrust::use_default>>, AssociativeOperator=thrust::plus<signed long>]" 
+/usr/local/cuda-8.0/include/thrust/system/cuda/detail/copy_if.inl(204): here
+            instantiation of "OutputIterator thrust::system::cuda::detail::copy_if_detail::copy_if(thrust::system::cuda::detail::execution_policy<DerivedPolicy> &, InputIterator1, InputIterator1, InputIterator2, OutputIterator, Predicate) [with DerivedPolicy=thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, InputIterator1=thrust::counting_iterator<long, thrust::use_default, thrust::use_default, thrust::use_default>, InputIterator2=thrust::device_ptr<unsigned char>, OutputIterator=thrust::permutation_iterator<thrust::device_ptr<long>, thrust::transform_iterator<strided_range<thrust::device_ptr<long>>::stride_functor, thrust::counting_iterator<long, thrust::use_default, thrust::use_default, thrust::use_default>, thrust::use_default, thrust::use_default>>, Predicate=NonZeroOp<unsigned char>]" 
+/usr/local/cuda-8.0/include/thrust/system/cuda/detail/copy_if.inl(251): here
+            instantiation of "OutputIterator thrust::system::cuda::detail::copy_if(thrust::system::cuda::detail::execution_policy<DerivedPolicy> &, InputIterator1, InputIterator1, InputIterator2, OutputIterator, Predicate) [with DerivedPolicy=thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, InputIterator1=thrust::counting_iterator<long, thrust::use_default, thrust::use_default, thrust::use_default>, InputIterator2=thrust::device_ptr<unsigned char>, OutputIterator=thrust::permutation_iterator<thrust::device_ptr<long>, thrust::transform_iterator<strided_range<thrust::device_ptr<long>>::stride_functor, thrust::counting_iterator<long, thrust::use_default, thrust::use_default, thrust::use_default>, thrust::use_default, thrust::use_default>>, Predicate=NonZeroOp<unsigned char>]" 
+/usr/local/cuda-8.0/include/thrust/detail/copy_if.inl(60): here
+            instantiation of "OutputIterator thrust::copy_if(const thrust::detail::execution_policy_base<DerivedPolicy> &, InputIterator1, InputIterator1, InputIterator2, OutputIterator, Predicate) [with DerivedPolicy=thrust::detail::execute_with_allocator<THCThrustAllocator, thrust::system::cuda::detail::execute_on_stream_base>, InputIterator1=thrust::counting_iterator<long, thrust::use_default, thrust::use_default, thrust::use_default>, InputIterator2=thrust::device_ptr<unsigned char>, OutputIterator=thrust::permutation_iterator<thrust::device_ptr<long>, thrust::transform_iterator<strided_range<thrust::device_ptr<long>>::stride_functor, thrust::counting_iterator<long, thrust::use_default, thrust::use_default, thrust::use_default>, thrust::use_default, thrust::use_default>>, Predicate=NonZeroOp<unsigned char>]" 
+/home/philipp/projects/pytorch/torch/lib/THC/generic/THCTensorMath.cu(313): here
+
+2 errors detected in the compilation of "/tmp/tmpxft_00003e1d_00000000-7_THCTensorMath.cpp1.ii".
+CMake Error at THC_generated_THCTensorMath.cu.o.cmake:267 (message):
+  Error generating file
+  /home/philipp/projects/pytorch/torch/lib/build/THC/CMakeFiles/THC.dir//./THC_generated_THCTensorMath.cu.o
+
+
+CMakeFiles/THC.dir/build.make:2781: recipe for target 'CMakeFiles/THC.dir/THC_generated_THCTensorMath.cu.o' failed
+make[2]: *** [CMakeFiles/THC.dir/THC_generated_THCTensorMath.cu.o] Error 1
+CMakeFiles/THC.dir/build.make:3669: recipe for target 'CMakeFiles/THC.dir/THC_generated_THCTensorMathPairwise.cu.o' failed
+make[2]: *** [CMakeFiles/THC.dir/THC_generated_THCTensorMathPairwise.cu.o] Interrupt
+CMakeFiles/Makefile2:67: recipe for target 'CMakeFiles/THC.dir/all' failed
+make[1]: *** [CMakeFiles/THC.dir/all] Interrupt
+Makefile:127: recipe for target 'all' failed
+make: *** [all] Interrupt

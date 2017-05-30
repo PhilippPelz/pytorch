@@ -4,8 +4,7 @@
 
 PyObject *THPStorageClass = NULL;
 
-PyObject * THPStorage_(New)(THStorage *ptr)
-{
+PyObject *THPStorage_(New)(THStorage *ptr) {
   PyTypeObject *type = (PyTypeObject *)THPStorageClass;
   PyObject *obj = type->tp_alloc(type, 0);
   if (obj) {
@@ -16,14 +15,13 @@ PyObject * THPStorage_(New)(THStorage *ptr)
   return obj;
 }
 
-static void THPStorage_(dealloc)(THPStorage* self)
-{
+static void THPStorage_(dealloc)(THPStorage *self) {
   THStorage_(free)(LIBRARY_STATE self->cdata);
-  Py_TYPE(self)->tp_free((PyObject*)self);
+  Py_TYPE(self)->tp_free((PyObject *)self);
 }
 
-static THStorage* THPStorage_(newWithAllocator)(long size, THAllocator* allocator)
-{
+static THStorage *THPStorage_(newWithAllocator)(long size,
+                                                THAllocator *allocator) {
 #ifdef THC_GENERIC_FILE
   THPUtils_setError(THPStorageStr " does not support custom allocators");
   return NULL;
@@ -32,21 +30,21 @@ static THStorage* THPStorage_(newWithAllocator)(long size, THAllocator* allocato
 #endif
 }
 
-static PyObject * THPStorage_(pynew)(PyTypeObject *type, PyObject *args, PyObject *kwargs)
-{
+static PyObject *THPStorage_(pynew)(PyTypeObject *type, PyObject *args,
+                                    PyObject *kwargs) {
   HANDLE_TH_ERRORS
   Py_ssize_t num_args = args ? PyTuple_Size(args) : 0;
 
   THPStoragePtr self = (THPStorage *)type->tp_alloc(type, 0);
   THPUtils_assert(self, "failed to allocate a " THPStorageStr " object");
-  THAllocator* allocator = NULL;
+  THAllocator *allocator = NULL;
 
   // Internally we allow constructing with a keywoard only argument cdata
   if (kwargs != NULL) {
     PyObject *allocator_ptr = PyDict_GetItemString(kwargs, "allocator");
     if (allocator_ptr) {
       THPUtils_assert(THPUtils_checkLong(allocator_ptr), "invalid allocator");
-      allocator = (THAllocator*) PyLong_AsVoidPtr(allocator_ptr);
+      allocator = (THAllocator *)PyLong_AsVoidPtr(allocator_ptr);
       PyDict_DelItemString(kwargs, "allocator");
     }
 
@@ -54,12 +52,13 @@ static PyObject * THPStorage_(pynew)(PyTypeObject *type, PyObject *args, PyObjec
     if (num_args == 0) {
       PyObject *cdata_ptr = PyDict_GetItemString(kwargs, "cdata");
       if (num_kwargs == 1 && cdata_ptr && THPUtils_checkLong(cdata_ptr)) {
-        THStorage *ptr = (THStorage*)PyLong_AsVoidPtr(cdata_ptr);
+        THStorage *ptr = (THStorage *)PyLong_AsVoidPtr(cdata_ptr);
         self->cdata = ptr;
-        return (PyObject*)self.release();
+        return (PyObject *)self.release();
       }
     }
-    THPUtils_assert(num_kwargs == 0, THPStorageStr "(): invalid keyword arguments");
+    THPUtils_assert(num_kwargs == 0,
+                    THPStorageStr "(): invalid keyword arguments");
   }
 
   // torch.Storage()
@@ -69,7 +68,7 @@ static PyObject * THPStorage_(pynew)(PyTypeObject *type, PyObject *args, PyObjec
     } else {
       self->cdata = THStorage_(new)(LIBRARY_STATE_NOARGS);
     }
-    return (PyObject*)self.release();
+    return (PyObject *)self.release();
   }
 
   PyObject *first_arg = PyTuple_GET_ITEM(args, 0);
@@ -82,7 +81,7 @@ static PyObject * THPStorage_(pynew)(PyTypeObject *type, PyObject *args, PyObjec
     } else {
       self->cdata = THStorage_(newWithSize)(LIBRARY_STATE size);
     }
-    return (PyObject*)self.release();
+    return (PyObject *)self.release();
   }
 
   // torch.Storage(view_source, [offset, [size]])
@@ -106,26 +105,31 @@ static PyObject * THPStorage_(pynew)(PyTypeObject *type, PyObject *args, PyObjec
       size = THPUtils_unpackLong(third_arg);
     }
 
-    THPUtils_assert(offset >= 0 && offset <= numel, "specified an offset of "
-        "%ld, but the viewed storage has only %ld element(s)", offset, numel);
-    THPUtils_assert(size >= 1 && size <= numel - offset, "specified a size of "
+    THPUtils_assert(offset >= 0 && offset <= numel,
+                    "specified an offset of "
+                    "%ld, but the viewed storage has only %ld element(s)",
+                    offset, numel);
+    THPUtils_assert(
+        size >= 1 && size <= numel - offset,
+        "specified a size of "
         "%d, but the viewed storage has only %ld element(s) after offset %ld",
         size, numel - offset, offset);
 
     real *data_ptr = storage_arg->cdata->data + offset;
-    THStoragePtr storage = THStorage_(newWithData)(LIBRARY_STATE data_ptr, size);
+    THStoragePtr storage =
+        THStorage_(newWithData)(LIBRARY_STATE data_ptr, size);
     storage->flag = TH_STORAGE_REFCOUNTED | TH_STORAGE_VIEW;
     storage->view = storage_arg->cdata;
     THStorage_(retain)(LIBRARY_STATE storage_arg->cdata);
     self->cdata = storage.release();
-    return (PyObject*)self.release();
+    return (PyObject *)self.release();
   }
 
   // torch.Storage(sequence)
   if (num_args == 1 && PySequence_Check(first_arg)) {
     Py_ssize_t length = PySequence_Length(first_arg);
     THPUtils_assert(length >= 0, "couldn't obtain the length of %s",
-        THPUtils_typename(first_arg));
+                    THPUtils_typename(first_arg));
     self->cdata = THStorage_(newWithSize)(LIBRARY_STATE length);
     THPObjectPtr item;
     try {
@@ -141,36 +145,32 @@ static PyObject * THPStorage_(pynew)(PyTypeObject *type, PyObject *args, PyObjec
       }
     } catch (std::runtime_error &e) {
       THPUtils_setError("tried to construct a storage from a sequence (%s), "
-          "but one of the items was of type %s instead of %s",
-          THPUtils_typename(first_arg),
-          THPUtils_typename(item.get()),
-          THPUtils_typeTraits<real>::python_type_str);
+                        "but one of the items was of type %s instead of %s",
+                        THPUtils_typename(first_arg),
+                        THPUtils_typename(item.get()),
+                        THPUtils_typeTraits<real>::python_type_str);
       return NULL;
     }
-    return (PyObject*)self.release();
+    return (PyObject *)self.release();
   }
 
 invalid_arguments:
-  THPUtils_invalidArguments(args, kwargs, THPStorageStr " constructor", 6,
-          "no arguments",
-          "(int size)",
-          "(Sequence data)",
-          "(" THPStorageStr " view_source)",
-          "(" THPStorageStr " view_source, int offset)",
-          "(" THPStorageStr " view_source, int offset, int size)");
+  THPUtils_invalidArguments(
+      args, kwargs, THPStorageStr " constructor", 6, "no arguments",
+      "(int size)", "(Sequence data)", "(" THPStorageStr " view_source)",
+      "(" THPStorageStr " view_source, int offset)",
+      "(" THPStorageStr " view_source, int offset, int size)");
   return NULL;
   END_HANDLE_TH_ERRORS
 }
 
-static Py_ssize_t THPStorage_(length)(THPStorage *self)
-{
+static Py_ssize_t THPStorage_(length)(THPStorage *self) {
   HANDLE_TH_ERRORS
   return THStorage_(size)(LIBRARY_STATE self->cdata);
   END_HANDLE_TH_ERRORS_RET(-1)
 }
 
-static PyObject * THPStorage_(get)(THPStorage *self, PyObject *index)
-{
+static PyObject *THPStorage_(get)(THPStorage *self, PyObject *index) {
   HANDLE_TH_ERRORS
   /* Integer index */
   if (THPUtils_checkLong(index)) {
@@ -179,25 +179,29 @@ static PyObject * THPStorage_(get)(THPStorage *self, PyObject *index)
       nindex += THStorage_(size)(LIBRARY_STATE self->cdata);
     if (nindex < 0 || nindex >= self->cdata->size) {
       PyErr_Format(PyExc_IndexError, "index %ld out of range for storage of "
-              "size %ld", nindex, self->cdata->size);
+                                     "size %ld",
+                   nindex, self->cdata->size);
       return NULL;
     }
     real value = THStorage_(get)(LIBRARY_STATE self->cdata, nindex);
     return THPUtils_(newReal)(value);
-  /* Slice index */
+    /* Slice index */
   } else if (PySlice_Check(index)) {
     Py_ssize_t start, stop, slicelength, step;
     long len = THStorage_(size)(LIBRARY_STATE self->cdata);
     if (!THPUtils_parseSlice(index, len, &start, &stop, &step, &slicelength))
       return NULL;
     if (step != 1) {
-      THPUtils_setError("Trying to slice with a step of %ld, but only a step of "
-          "1 is supported", (long)step);
+      THPUtils_setError(
+          "Trying to slice with a step of %ld, but only a step of "
+          "1 is supported",
+          (long)step);
       return NULL;
     }
 
     real *data = THStorage_(data)(LIBRARY_STATE self->cdata);
-    THStoragePtr new_storage = THStorage_(newWithData)(LIBRARY_STATE data + start, slicelength);
+    THStoragePtr new_storage =
+        THStorage_(newWithData)(LIBRARY_STATE data + start, slicelength);
     new_storage->flag = TH_STORAGE_REFCOUNTED | TH_STORAGE_VIEW;
     new_storage->view = self->cdata;
     THStorage_(retain)(LIBRARY_STATE self->cdata);
@@ -207,18 +211,19 @@ static PyObject * THPStorage_(get)(THPStorage *self, PyObject *index)
     return _ret;
   }
   PyErr_Format(PyExc_TypeError, "can't index a " THPStorageStr " with %s",
-      THPUtils_typename(index));
+               THPUtils_typename(index));
   return NULL;
   END_HANDLE_TH_ERRORS
 }
 
-static int THPStorage_(set)(THPStorage *self, PyObject *index, PyObject *value)
-{
+static int THPStorage_(set)(THPStorage *self, PyObject *index,
+                            PyObject *value) {
   HANDLE_TH_ERRORS
   if (!THPUtils_(checkReal)(value)) {
     THPUtils_setError("can only set storage content with a %s, but got "
-        "%s instead", THPUtils_typeTraits<real>::python_type_str,
-        THPUtils_typename(value));
+                      "%s instead",
+                      THPUtils_typeTraits<real>::python_type_str,
+                      THPUtils_typename(value));
     return -1;
   }
 
@@ -233,81 +238,79 @@ static int THPStorage_(set)(THPStorage *self, PyObject *index, PyObject *value)
     if (!THPUtils_parseSlice(index, len, &start, &stop, &step, &slicelength))
       return -1;
     if (step != 1) {
-      THPUtils_setError("Trying to slice with a step of %ld, but only a step of "
-          "1 is supported", (long)step);
+      THPUtils_setError(
+          "Trying to slice with a step of %ld, but only a step of "
+          "1 is supported",
+          (long)step);
       return 0;
     }
     // TODO: check the bounds only once
     // TODO: fill?
-    for (;start < stop; start++)
+    for (; start < stop; start++)
       THStorage_(set)(LIBRARY_STATE self->cdata, start, rvalue);
     return 0;
   }
   THPUtils_setError("can't index a " THPStorageStr " with %s",
-      THPUtils_typename(index));
+                    THPUtils_typename(index));
   return -1;
   END_HANDLE_TH_ERRORS_RET(-1)
 }
 
 static PyMappingMethods THPStorage_(mappingmethods) = {
-  (lenfunc)THPStorage_(length),
-  (binaryfunc)THPStorage_(get),
-  (objobjargproc)THPStorage_(set)
-};
+    (lenfunc)THPStorage_(length), (binaryfunc)THPStorage_(get),
+    (objobjargproc)THPStorage_(set)};
 
 // TODO: implement equality
 PyTypeObject THPStorageType = {
-  PyVarObject_HEAD_INIT(NULL, 0)
-  "torch._C." THPStorageBaseStr,         /* tp_name */
-  sizeof(THPStorage),                    /* tp_basicsize */
-  0,                                     /* tp_itemsize */
-  (destructor)THPStorage_(dealloc),      /* tp_dealloc */
-  0,                                     /* tp_print */
-  0,                                     /* tp_getattr */
-  0,                                     /* tp_setattr */
-  0,                                     /* tp_reserved */
-  0,                                     /* tp_repr */
-  0,                                     /* tp_as_number */
-  0,                                     /* tp_as_sequence */
-  &THPStorage_(mappingmethods),          /* tp_as_mapping */
-  0,                                     /* tp_hash  */
-  0,                                     /* tp_call */
-  0,                                     /* tp_str */
-  0,                                     /* tp_getattro */
-  0,                                     /* tp_setattro */
-  0,                                     /* tp_as_buffer */
-  Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE, /* tp_flags */
-  NULL,                                  /* tp_doc */
-  0,                                     /* tp_traverse */
-  0,                                     /* tp_clear */
-  0,                                     /* tp_richcompare */
-  0,                                     /* tp_weaklistoffset */
-  0,                                     /* tp_iter */
-  0,                                     /* tp_iternext */
-  0,   /* will be assigned in init */    /* tp_methods */
-  0,   /* will be assigned in init */    /* tp_members */
-  0,                                     /* tp_getset */
-  0,                                     /* tp_base */
-  0,                                     /* tp_dict */
-  0,                                     /* tp_descr_get */
-  0,                                     /* tp_descr_set */
-  0,                                     /* tp_dictoffset */
-  0,                                     /* tp_init */
-  0,                                     /* tp_alloc */
-  THPStorage_(pynew),                    /* tp_new */
+    PyVarObject_HEAD_INIT(NULL, 0) "torch._C." THPStorageBaseStr, /* tp_name */
+    sizeof(THPStorage),                       /* tp_basicsize */
+    0,                                        /* tp_itemsize */
+    (destructor)THPStorage_(dealloc),         /* tp_dealloc */
+    0,                                        /* tp_print */
+    0,                                        /* tp_getattr */
+    0,                                        /* tp_setattr */
+    0,                                        /* tp_reserved */
+    0,                                        /* tp_repr */
+    0,                                        /* tp_as_number */
+    0,                                        /* tp_as_sequence */
+    &THPStorage_(mappingmethods),             /* tp_as_mapping */
+    0,                                        /* tp_hash  */
+    0,                                        /* tp_call */
+    0,                                        /* tp_str */
+    0,                                        /* tp_getattro */
+    0,                                        /* tp_setattro */
+    0,                                        /* tp_as_buffer */
+    Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE, /* tp_flags */
+    NULL,                                     /* tp_doc */
+    0,                                        /* tp_traverse */
+    0,                                        /* tp_clear */
+    0,                                        /* tp_richcompare */
+    0,                                        /* tp_weaklistoffset */
+    0,                                        /* tp_iter */
+    0,                                        /* tp_iternext */
+    0, /* will be assigned in init */         /* tp_methods */
+    0, /* will be assigned in init */         /* tp_members */
+    0,                                        /* tp_getset */
+    0,                                        /* tp_base */
+    0,                                        /* tp_dict */
+    0,                                        /* tp_descr_get */
+    0,                                        /* tp_descr_set */
+    0,                                        /* tp_dictoffset */
+    0,                                        /* tp_init */
+    0,                                        /* tp_alloc */
+    THPStorage_(pynew),                       /* tp_new */
 };
 
 static struct PyMemberDef THPStorage_(members)[] = {
-  {(char*)"_cdata", T_ULONGLONG, offsetof(THPStorage, cdata), READONLY, NULL},
-  {NULL}
-};
+    {(char *)"_cdata", T_ULONGLONG, offsetof(THPStorage, cdata), READONLY,
+     NULL},
+    {NULL}};
 
 extern THPCopyList THStorage_(copy_functions);
 THPCopyList THStorage_(copy_functions);
 
-void THPStorage_(initCopyMethods)()
-{
-  auto& h = THStorage_(copy_functions);
+void THPStorage_(initCopyMethods)() {
+  auto &h = THStorage_(copy_functions);
   // copy from CPU types
   THPInsertCopyFunction(h, &THStorage_(copyByte));
   THPInsertCopyFunction(h, &THStorage_(copyChar));
@@ -329,10 +332,10 @@ void THPStorage_(initCopyMethods)()
 #ifdef CUDA_HALF_TENSOR
   THPInsertCopyFunction(h, &THStorage_(copyCudaHalf));
 #endif
-  // add CPU <- GPU copies to base type
-  #define THCpuStorage_(name) TH_CONCAT_4(TH, Real, Storage_, name)
+// add CPU <- GPU copies to base type
+#define THCpuStorage_(name) TH_CONCAT_4(TH, Real, Storage_, name)
   extern THPCopyList THCpuStorage_(copy_functions);
-  auto& b = THCpuStorage_(copy_functions);
+  auto &b = THCpuStorage_(copy_functions);
   THPInsertCopyFunction(b, &THCpuStorage_(copyCudaByte));
   THPInsertCopyFunction(b, &THCpuStorage_(copyCudaChar));
   THPInsertCopyFunction(b, &THCpuStorage_(copyCudaShort));
@@ -343,15 +346,14 @@ void THPStorage_(initCopyMethods)()
 #ifdef CUDA_HALF_TENSOR
   THPInsertCopyFunction(b, &THCpuStorage_(copyCudaHalf));
 #endif
-  #undef THCpuStorage_
+#undef THCpuStorage_
 #endif
 }
 
 #include "StorageMethods.cpp"
 #include "StorageSharing.cpp"
 
-bool THPStorage_(init)(PyObject *module)
-{
+bool THPStorage_(init)(PyObject *module) {
   static std::vector<PyMethodDef> methods;
   THPUtils_addPyMethodDefs(methods, THPStorage_(methods));
   THPUtils_addPyMethodDefs(methods, THPStorage_(sharingMethods));

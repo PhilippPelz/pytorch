@@ -9,6 +9,7 @@ template<>
 struct type_traits<half> {
   static constexpr Type type = Type::HALF;
   static constexpr bool is_floating_point = true;
+  static constexpr bool is_complex = false;
 };
 
 } // namespace thpp

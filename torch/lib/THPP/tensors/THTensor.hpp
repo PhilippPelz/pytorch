@@ -87,6 +87,7 @@ public:
 
   virtual THTensor& diag(const Tensor& src, int k) override;
   virtual THTensor& eye(long n, long m) override;
+
   virtual THTensor& range(scalar_type xmin, scalar_type xmax,
                           scalar_type step) override;
   virtual THTensor& sort(const Tensor& ri, const Tensor& src,
@@ -142,6 +143,7 @@ public:
   virtual THTensor& geValueT(const Tensor& t, scalar_type value) override;
   virtual THTensor& neValueT(const Tensor& t, scalar_type value) override;
   virtual THTensor& eqValueT(const Tensor& t, scalar_type value) override;
+
   virtual THTensor& fill(scalar_type value) override;
 
   virtual THTensor& copy(const Tensor& src) override;
