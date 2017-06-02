@@ -16,7 +16,7 @@ __all__ = [
     'typename', 'is_tensor', 'is_storage', 'set_default_tensor_type',
     'set_rng_state', 'get_rng_state', 'manual_seed', 'initial_seed',
     'save', 'load', 'set_printoptions', 'chunk', 'split', 'stack',
-    'DoubleStorage', 'FloatStorage', 'LongStorage', 'IntStorage',
+    'DoubleStorage', 'FloatStorage', 'ZDoubleStorage', 'ZFloatStorage', 'LongStorage', 'IntStorage',
     'ShortStorage', 'CharStorage', 'ByteStorage',
     'DoubleTensor', 'FloatTensor','CTensor', 'ZTensor','ZDoubleTensor', 'ZFloatTensor', 'LongTensor', 'IntTensor',
     'ShortTensor', 'CharTensor', 'ByteTensor',
@@ -160,7 +160,7 @@ class FloatStorage(_C.FloatStorageBase, _StorageBase):
 
 class ZDoubleStorage(_C.DoubleStorageBase, _StorageBase):
     pass
-    
+
 class ZFloatStorage(_C.FloatStorageBase, _StorageBase):
     pass
 
@@ -306,12 +306,12 @@ class ByteTensor(_C.ByteTensorBase, _TensorBase):
 
 
 _storage_classes = {
-    DoubleStorage, FloatStorage, LongStorage, IntStorage, ShortStorage,
+    DoubleStorage, FloatStorage, ZDoubleStorage, ZFloatStorage, LongStorage, IntStorage, ShortStorage,
     CharStorage, ByteStorage,
 }
 
 _tensor_classes = {
-    DoubleTensor, FloatTensor, LongTensor, IntTensor, ShortTensor,
+    DoubleTensor, FloatTensor, ZDoubleTensor, ZFloatTensor, ZTensor, CTensor, LongTensor, IntTensor, ShortTensor,
     CharTensor, ByteTensor,
 }
 

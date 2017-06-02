@@ -342,11 +342,11 @@ void THCState_reserveStreams(THCState* state, int numStreams, int nonBlocking)
     THCCudaResourcesPerDevice* res = THCState_getDeviceResourcePtr(state, dev);
 
     /* +1 for the default stream as well */
-    THCStream** newStreams = realloc(res->streams, (numStreams + 1) * sizeof(THCStream*));
+    THCStream** newStreams = (THCStream**)realloc(res->streams, (numStreams + 1) * sizeof(THCStream*));
     THAssert(newStreams);
 
     THCState_initializeScratchSpace(state, dev);
-    void** newScratchSpace = realloc(res->devScratchSpacePerStream, (numStreams + 1) * sizeof(void*));
+    void** newScratchSpace = (void**)realloc(res->devScratchSpacePerStream, (numStreams + 1) * sizeof(void*));
     THAssert(newScratchSpace);
 
     /* Allocate new stream resources */
@@ -356,7 +356,7 @@ void THCState_reserveStreams(THCState* state, int numStreams, int nonBlocking)
 
     for (int stream = state->numUserStreams + 1; stream <= numStreams; ++stream) {
       newStreams[stream] = THCStream_new(flags);
-      newScratchSpace[stream] = NULL;
+      *(newScratchSpace + stream) = NULL;
       THCudaCheck(THCudaMalloc(state, &newScratchSpace[stream], scratchSpaceSize));
     }
 

@@ -1,12 +1,11 @@
 running install
 running build_deps
-/home/philipp/projects/pytorch/torch/_thnn/utils.py:1: RuntimeWarning: Parent module 'torch._thnn' not found while handling absolute import
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/_thnn/utils.py:1: RuntimeWarning: Parent module 'torch._thnn' not found while handling absolute import
   import os
-/home/philipp/projects/pytorch/torch/_thnn/utils.py:2: RuntimeWarning: Parent module 'torch._thnn' not found while handling absolute import
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/_thnn/utils.py:2: RuntimeWarning: Parent module 'torch._thnn' not found while handling absolute import
   import itertools
-/home/philipp/projects/pytorch/torch/_thnn/utils.py:3: RuntimeWarning: Parent module 'torch._thnn' not found while handling absolute import
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/_thnn/utils.py:3: RuntimeWarning: Parent module 'torch._thnn' not found while handling absolute import
   import importlib
-cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by cmake)
 -- Compiling with OpenMP support
 -- Could not find hardware support for NEON on this machine.
 -- No OMAP3 processor on this machine.
@@ -14,6 +13,7 @@ cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information 
 -- SSE2 Found
 -- SSE3 Found
 -- AVX Found
+-- AVX2 Found
 -- TH_SO_VERSION: 1
 -- Atomics: using GCC intrinsics
 -- Checking for [mkl_gf_lp64 - mkl_gnu_thread - mkl_core - iomp5 - pthread - m]
@@ -25,13 +25,13 @@ cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information 
 -- Checking for [mkl_gf - mkl_intel_thread - mkl_core - iomp5 - pthread - m]
 --   Library mkl_gf: not found
 -- Checking for [mkl_intel_lp64 - mkl_gnu_thread - mkl_core - iomp5 - pthread - m]
---   Library mkl_intel_lp64: /home/philipp/software/anaconda/lib/libmkl_intel_lp64.so
+--   Library mkl_intel_lp64: /home/philipp/anaconda2/lib/libmkl_intel_lp64.so
 --   Library mkl_gnu_thread: not found
 -- Checking for [mkl_intel_lp64 - mkl_intel_thread - mkl_core - iomp5 - pthread - m]
---   Library mkl_intel_lp64: /home/philipp/software/anaconda/lib/libmkl_intel_lp64.so
---   Library mkl_intel_thread: /home/philipp/software/anaconda/lib/libmkl_intel_thread.so
---   Library mkl_core: /home/philipp/software/anaconda/lib/libmkl_core.so
---   Library iomp5: /home/philipp/software/anaconda/lib/libiomp5.so
+--   Library mkl_intel_lp64: /home/philipp/anaconda2/lib/libmkl_intel_lp64.so
+--   Library mkl_intel_thread: /home/philipp/anaconda2/lib/libmkl_intel_thread.so
+--   Library mkl_core: /home/philipp/anaconda2/lib/libmkl_core.so
+--   Library iomp5: /home/philipp/anaconda2/lib/libiomp5.so
 --   Library pthread: /usr/lib/x86_64-linux-gnu/libpthread.so
 --   Library m: /usr/lib/x86_64-linux-gnu/libm.so
 -- MKL library found
@@ -40,15 +40,8 @@ cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information 
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/TH
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
 [100%] Built target TH
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
 Install the project...
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
 -- Install configuration: "Release"
 -- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
 -- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so
@@ -103,21 +96,13 @@ Install the project...
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THVectorDispatch.c
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THVector.h
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/share/cmake/TH/THConfig.cmake
-cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by cmake)
 -- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
 -- THS_SO_VERSION: 1
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THS
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
 [100%] Built target THS
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
 Install the project...
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
 -- Install configuration: "Release"
 -- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHS.so.1
 -- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHS.so
@@ -131,7 +116,6 @@ Install the project...
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/generic/THSTensor.h
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/generic/THSTensorMath.c
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/generic/THSTensorMath.h
-cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by cmake)
 -- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
 -- Compiling with OpenMP support
 CMake Warning (dev) at CMakeLists.txt:61 (LINK_DIRECTORIES):
@@ -150,80 +134,654 @@ This warning is for project developers.  Use -Wno-dev to suppress it.
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THNN
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
 [100%] Built target THNN
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
 Install the project...
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
 -- Install configuration: "Release"
 -- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHNN.so.1
 -- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHNN.so
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN/THNN.h
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN/generic/THNN.h
-cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by cmake)
 -- Removing -DNDEBUG from compile flags
 -- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
--- Compiling with MAGMA support
--- MAGMA INCLUDE DIRECTORIES: /home/philipp/software/anaconda/include
--- MAGMA LIBRARIES: /home/philipp/software/anaconda/lib/libmagma.a
--- MAGMA V2 check: 1
--- Autodetected CUDA architecture(s): 5.2
+-- MAGMA not found. Compiling without MAGMA support
+-- Autodetected CUDA architecture(s): 5.2 2.1(2.0)
 -- got cuda version 8.0
 -- Found CUDA with FP16 support, compiling with torch.CudaHalfTensor
--- CUDA_NVCC_FLAGS:  -DTH_INDEX_BASE=0 -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP;-gencode;arch=compute_52,code=sm_52;-DCUDA_HAS_FP16=1
+-- CUDA_NVCC_FLAGS:  -DTH_INDEX_BASE=0 -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP;-gencode;arch=compute_52,code=sm_52;-gencode;arch=compute_20,code=sm_21;-DCUDA_HAS_FP16=1
 -- THC_SO_VERSION: 1
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THC
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
-Scanning dependencies of target THC
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
-[  2%] Building CXX object CMakeFiles/THC.dir/THCCachingHostAllocator.cpp.o
-[  2%] Building CXX object CMakeFiles/THC.dir/THCGeneral.cpp.o
-[  3%] Building CXX object CMakeFiles/THC.dir/THCCachingAllocator.cpp.o
-/usr/bin/cmake: /home/philipp/software/anaconda/lib/libcurl.so.4: no version information available (required by /usr/bin/cmake)
-[  4%] Building CXX object CMakeFiles/THC.dir/THCStorageCopy.cpp.o
-/home/philipp/projects/pytorch/torch/lib/THC/THCGeneral.cpp: In function ‘void THCState_reserveStreams(THCState*, int, int)’:
-/home/philipp/projects/pytorch/torch/lib/THC/THCGeneral.cpp:345:37: error: invalid conversion from ‘void*’ to ‘THCStream**’ [-fpermissive]
-     THCStream** newStreams = realloc(res->streams, (numStreams + 1) * sizeof(THCStream*));
-                                     ^
-/home/philipp/projects/pytorch/torch/lib/THC/THCGeneral.cpp:349:37: error: invalid conversion from ‘void*’ to ‘void**’ [-fpermissive]
-     void** newScratchSpace = realloc(res->devScratchSpacePerStream, (numStreams + 1) * sizeof(void*));
-                                     ^
-CMakeFiles/THC.dir/build.make:49662: recipe for target 'CMakeFiles/THC.dir/THCGeneral.cpp.o' failed
-make[2]: *** [CMakeFiles/THC.dir/THCGeneral.cpp.o] Error 1
+[100%] Built target THC
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THC.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGeneral.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCBlas.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCSleep.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCStorage.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCStorageCopy.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCStream.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCThreadLocal.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorCopy.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorRandom.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorMath.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorConv.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorTopK.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCApply.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCReduce.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCReduceAll.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCReduceApplyUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCAsmUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCAtomics.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCScanUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCSortUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCAllocator.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCCachingAllocator.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCCachingHostAllocator.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCDeviceUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCDeviceTensor.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCDeviceTensor-inl.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCDeviceTensorUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCDeviceTensorUtils-inl.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateAllTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateAllTypesButComplex.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateByteType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateCharType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateShortType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateIntType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateLongType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateHalfType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateFloatType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateZFloatType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateFloatTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateDoubleType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateZDoubleType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCHalf.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCNumerics.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorSort.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorInfo.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorTypeUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorRandom.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorMathMagma.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCThrustAllocator.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorMode.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCStorage.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCStorage.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCStorage.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensor.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensor.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCStorageCopy.cpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCStorageCopy.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCStorageCopy.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorCopy.cpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorCopy.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorCopy.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMasked.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMasked.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMath.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMath.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathBlas.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathBlas.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathCompare.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathCompare.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathCompareT.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathCompareT.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathMagma.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathMagma.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathPairwise.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathPairwise.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathPointwise.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathPointwise.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathReduce.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathReduce.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathScan.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathScan.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorScatterGather.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorScatterGather.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorIndex.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorIndex.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorSort.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorSort.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCDeviceTensorUtils.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorRandom.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorRandom.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMode.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMode.cu
+-- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- THC_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so.1
+-- THS_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHS.so.1
+-- Autodetected CUDA architecture(s): 5.2 2.1(2.0)
+-- got cuda version 8.0
+-- Found CUDA with FP16 support, compiling with torch.CudaHalfTensor
+-- CUDA_NVCC_FLAGS:  -DTH_INDEX_BASE=0 -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP;-gencode;arch=compute_52,code=sm_52;-gencode;arch=compute_20,code=sm_21;-DCUDA_HAS_FP16=1
+-- THCS_SO_VERSION: 1
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THCS
+[100%] Built target THCS
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCS.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCS.so
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCS.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateAllTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateByteType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateCharType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateShortType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateIntType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateLongType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateHalfType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateFloatType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateFloatTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateDoubleType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/generic/THCSTensor.cpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/generic/THCSTensor.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/generic/THCSTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/generic/THCSTensorMath.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/generic/THCSTensorMath.cu
+-- Removing -DNDEBUG from compile flags
+-- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- THC_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so.1
+-- Autodetected CUDA architecture(s): 5.2 2.1(2.0)
+-- THCUNN_SO_VERSION: 1
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THCUNN
+[100%] Built target THCUNN
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCUNN.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCUNN.so
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN/THCUNN.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN/generic/THCUNN.h
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/nccl
+[100%] Built target nccl
+Install the project...
+-- Install configuration: "Release"
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/nccl.h
+-- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- THC_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so.1
+-- THCS_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCS.so.1
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THStorage.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCSTensor.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THSTensor.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THTensor.cpp from the build
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THPP
+Scanning dependencies of target THPP
+[ 11%] Building CXX object CMakeFiles/THPP.dir/storages/THCStorage.cpp.o
+[ 22%] Building CXX object CMakeFiles/THPP.dir/tensors/THTensor.cpp.o
+[ 33%] Building CXX object CMakeFiles/THPP.dir/Traits.cpp.o
+[ 44%] Building CXX object CMakeFiles/THPP.dir/TraitsCuda.cpp.o
+[ 55%] Building CXX object CMakeFiles/THPP.dir/tensors/THSTensor.cpp.o
+[ 66%] Building CXX object CMakeFiles/THPP.dir/tensors/THCTensor.cpp.o
+[ 77%] Building CXX object CMakeFiles/THPP.dir/storages/THStorage.cpp.o
+[ 88%] Building CXX object CMakeFiles/THPP.dir/tensors/THCSTensor.cpp.o
+In file included from storages/generic/THCStorage.cpp:1:0,
+                 from /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateAllTypes.h:27,
+                 from /home/philipp/projects/pytorch/torch/lib/THPP/storages/THCStorage.cpp:9:
+/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp: In member function ‘thpp::THCStorage<real>& thpp::THCStorage<real>::fill(thpp::THCStorage<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCStorage<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp:68:55: error: could not convert ‘value’ from ‘thpp::THCStorage<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+   THCStorage_(fill)(state, storage, cast_scalar(value));
+                                                       ^
+/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp: In member function ‘thpp::THCStorage<real>& thpp::THCStorage<real>::set(std::size_t, thpp::THCStorage<real>::scalar_type) [with real = thrust::complex<float>; std::size_t = long unsigned int; thpp::THCStorage<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp:74:59: error: could not convert ‘value’ from ‘thpp::THCStorage<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+   THCStorage_(set)(state, storage, ind, cast_scalar(value));
+                                                           ^
+/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp: In member function ‘thpp::THCStorage<real>::scalar_type thpp::THCStorage<real>::get(std::size_t) [with real = thrust::complex<float>; thpp::THCStorage<real>::scalar_type = __complex__ double; std::size_t = long unsigned int]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp:89:10: error: cannot convert ‘thrust::complex<float>’ to ‘thpp::THCStorage<thrust::complex<float> >::scalar_type {aka __complex__ double}’ in return
+   return v;
+          ^
+In file included from storages/generic/THCStorage.cpp:1:0,
+                 from /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateAllTypes.h:28,
+                 from /home/philipp/projects/pytorch/torch/lib/THPP/storages/THCStorage.cpp:9:
+/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp: In member function ‘thpp::THCStorage<real>& thpp::THCStorage<real>::fill(thpp::THCStorage<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCStorage<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp:68:55: error: could not convert ‘value’ from ‘thpp::THCStorage<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+   THCStorage_(fill)(state, storage, cast_scalar(value));
+                                                       ^
+/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp: In member function ‘thpp::THCStorage<real>& thpp::THCStorage<real>::set(std::size_t, thpp::THCStorage<real>::scalar_type) [with real = thrust::complex<double>; std::size_t = long unsigned int; thpp::THCStorage<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp:74:59: error: could not convert ‘value’ from ‘thpp::THCStorage<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+   THCStorage_(set)(state, storage, ind, cast_scalar(value));
+                                                           ^
+/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp: In member function ‘thpp::THCStorage<real>::scalar_type thpp::THCStorage<real>::get(std::size_t) [with real = thrust::complex<double>; thpp::THCStorage<real>::scalar_type = __complex__ double; std::size_t = long unsigned int]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp:89:10: error: cannot convert ‘thrust::complex<double>’ to ‘thpp::THCStorage<thrust::complex<double> >::scalar_type {aka __complex__ double}’ in return
+   return v;
+          ^
+CMakeFiles/THPP.dir/build.make:110: recipe for target 'CMakeFiles/THPP.dir/storages/THCStorage.cpp.o' failed
+make[2]: *** [CMakeFiles/THPP.dir/storages/THCStorage.cpp.o] Error 1
 make[2]: *** Waiting for unfinished jobs....
-In file included from generic/THCStorageCopy.c:1:0,
-                 from /home/philipp/projects/pytorch/torch/lib/THC/THCGenerateAllTypes.h:27,
-                 from /home/philipp/projects/pytorch/torch/lib/THC/THCStorageCopy.cpp:6:
-/home/philipp/projects/pytorch/torch/lib/THC/generic/THCStorageCopy.c: In function ‘void THCudaZFloatStorage_copyZFloat(THCState*, THCudaZFloatStorage*, THZFloatStorage*)’:
-/home/philipp/projects/pytorch/torch/lib/THC/generic/THCStorageCopy.c:19:57: error: ‘THCudaZFloatTensor_copyZFloat’ was not declared in this scope
-     THCTensor_(copy##TYPEC)(state, selfTensor, srcTensor);                     \
-                                                         ^
-/home/philipp/projects/pytorch/torch/lib/THC/generic/THCStorageCopy.c:37:1: note: in expansion of macro ‘TH_CUDA_STORAGE_IMPLEMENT_COPY’
- TH_CUDA_STORAGE_IMPLEMENT_COPY(ZFloat)
+In file included from tensors/generic/THCTensor.cpp:1:0,
+                 from /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateAllTypes.h:27,
+                 from /home/philipp/projects/pytorch/torch/lib/THPP/tensors/THCTensor.cpp:8:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::fill(thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:259:53: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+   THCTensor_(fill)(state, tensor, cast_scalar(value));
+                                                     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::sort(const thpp::Tensor&, const thpp::Tensor&, int, int) [with real = thrust::complex<float>]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:302:3: error: ‘THCudaZFloatTensor_sort’ was not declared in this scope
+   );
+   ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::ltValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:413:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(lt)
  ^
-In file included from generic/THCStorageCopy.c:1:0,
-                 from /home/philipp/projects/pytorch/torch/lib/THC/THCGenerateAllTypes.h:28,
-                 from /home/philipp/projects/pytorch/torch/lib/THC/THCStorageCopy.cpp:6:
-/home/philipp/projects/pytorch/torch/lib/THC/generic/THCStorageCopy.c: In function ‘void THCudaZDoubleStorage_copyZDouble(THCState*, THCudaZDoubleStorage*, THZDoubleStorage*)’:
-/home/philipp/projects/pytorch/torch/lib/THC/generic/THCStorageCopy.c:19:57: error: ‘THCudaZDoubleTensor_copyZDouble’ was not declared in this scope
-     THCTensor_(copy##TYPEC)(state, selfTensor, srcTensor);                     \
-                                                         ^
-/home/philipp/projects/pytorch/torch/lib/THC/generic/THCStorageCopy.c:33:1: note: in expansion of macro ‘TH_CUDA_STORAGE_IMPLEMENT_COPY’
- TH_CUDA_STORAGE_IMPLEMENT_COPY(ZDouble)
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::ltValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:413:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(lt)
  ^
-CMakeFiles/THC.dir/build.make:49686: recipe for target 'CMakeFiles/THC.dir/THCStorageCopy.cpp.o' failed
-make[2]: *** [CMakeFiles/THC.dir/THCStorageCopy.cpp.o] Error 1
-CMakeFiles/Makefile2:67: recipe for target 'CMakeFiles/THC.dir/all' failed
-make[1]: *** [CMakeFiles/THC.dir/all] Error 2
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::gtValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:414:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(gt)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::gtValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:414:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(gt)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::leValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:415:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(le)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::leValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:415:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(le)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::geValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:416:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(ge)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::geValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:416:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(ge)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::eqValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:417:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(eq)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::eqValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:417:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(eq)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::neValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:418:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(ne)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::neValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:418:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(ne)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::scatterFill(int, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:586:41: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+       index_t.tensor, cast_scalar(value));
+                                         ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::dot(const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:593:53: error: cannot convert ‘ccx {aka thrust::complex<float>}’ to ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ in return
+   return THCTensor_(dot)(state, tensor, src_t.tensor);
+                                                     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::minall() [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:598:56: error: cannot convert ‘ccx {aka thrust::complex<float>}’ to ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ in return
+   return uncast_scalar(THCTensor_(minall)(state, tensor));
+                                                        ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:19:26: note: in definition of macro ‘uncast_scalar’
+ #define uncast_scalar(v) v
+                          ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::maxall() [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:603:56: error: cannot convert ‘ccx {aka thrust::complex<float>}’ to ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ in return
+   return uncast_scalar(THCTensor_(maxall)(state, tensor));
+                                                        ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:19:26: note: in definition of macro ‘uncast_scalar’
+ #define uncast_scalar(v) v
+                          ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::sumall() [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:608:42: error: cannot convert ‘ccx {aka thrust::complex<float>}’ to ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ in return
+   return THCTensor_(sumall)(state, tensor);
+                                          ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::prodall() [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:613:43: error: cannot convert ‘ccx {aka thrust::complex<float>}’ to ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ in return
+   return THCTensor_(prodall)(state, tensor);
+                                           ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::add(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:641:66: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+   THCTensor_(add)(state, tensor, src_t.tensor, cast_scalar(value));
+                                                                  ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::sub(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:648:66: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+   THCTensor_(sub)(state, tensor, src_t.tensor, cast_scalar(value));
+                                                                  ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::mul(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:655:66: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+   THCTensor_(mul)(state, tensor, src_t.tensor, cast_scalar(value));
+                                                                  ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::div(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:662:66: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+   THCTensor_(div)(state, tensor, src_t.tensor, cast_scalar(value));
+                                                                  ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::fmod(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:669:67: error: ‘THCudaZFloatTensor_fmod’ was not declared in this scope
+   THCTensor_(fmod)(state, tensor, src_t.tensor, cast_scalar(value));
+                                                                   ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::remainder(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:677:72: error: ‘THCudaZFloatTensor_remainder’ was not declared in this scope
+   THCTensor_(remainder)(state, tensor, src_t.tensor, cast_scalar(value));
+                                                                        ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::clamp(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:686:29: error: could not convert ‘min_value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+       cast_scalar(max_value));
+                             ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cadd(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:695:83: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+   THCTensor_(cadd)(state, tensor, src1_t.tensor, cast_scalar(value), src2_t.tensor);
+                                                                                   ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::csub(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:709:83: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+   THCTensor_(csub)(state, tensor, src1_t.tensor, cast_scalar(value), src2_t.tensor);
+                                                                                   ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cfmod(const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<float>]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:741:64: error: ‘THCudaZFloatTensor_cfmod’ was not declared in this scope
+   THCTensor_(cfmod)(state, tensor, src1_t.tensor, src2_t.tensor);
+                                                                ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cremainder(const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<float>]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:750:69: error: ‘THCudaZFloatTensor_cremainder’ was not declared in this scope
+   THCTensor_(cremainder)(state, tensor, src1_t.tensor, src2_t.tensor);
+                                                                     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addcmul(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:762:35: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+       src2_t.tensor, src3_t.tensor);
+                                   ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addcdiv(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:774:35: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+       src2_t.tensor, src3_t.tensor);
+                                   ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addmv(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:786:53: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+       cast_scalar(alpha), mat_t.tensor, vec_t.tensor);
+                                                     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addmm(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:798:55: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+       cast_scalar(alpha), mat1_t.tensor, mat2_t.tensor);
+                                                       ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addr(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:810:55: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+       cast_scalar(alpha), vec1_t.tensor, vec2_t.tensor);
+                                                       ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addbmm(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:822:59: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+       cast_scalar(alpha), batch1_t.tensor, batch2_t.tensor);
+                                                           ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::baddbmm(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:834:59: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+       cast_scalar(alpha), batch1_t.tensor, batch2_t.tensor);
+                                                           ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::trace() [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:917:41: error: cannot convert ‘ccx {aka thrust::complex<float>}’ to ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ in return
+   return THCTensor_(trace)(state, tensor);
+                                         ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cmaxValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:949:72: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+   THCTensor_(cmaxValue)(state, tensor, src_t.tensor, cast_scalar(value));
+                                                                        ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cminValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:957:72: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
+   THCTensor_(cminValue)(state, tensor, src_t.tensor, cast_scalar(value));
+                                                                        ^
+In file included from tensors/generic/THCTensor.cpp:1:0,
+                 from /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateAllTypes.h:28,
+                 from /home/philipp/projects/pytorch/torch/lib/THPP/tensors/THCTensor.cpp:8:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::fill(thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:259:53: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+   THCTensor_(fill)(state, tensor, cast_scalar(value));
+                                                     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::sort(const thpp::Tensor&, const thpp::Tensor&, int, int) [with real = thrust::complex<double>]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:302:3: error: ‘THCudaZDoubleTensor_sort’ was not declared in this scope
+   );
+   ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::ltValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:413:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(lt)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::ltValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:413:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(lt)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::gtValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:414:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(gt)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::gtValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:414:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(gt)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::leValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:415:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(le)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::leValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:415:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(le)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::geValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:416:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(ge)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::geValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:416:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(ge)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::eqValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:417:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(eq)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::eqValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:417:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(eq)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::neValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:418:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(ne)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::neValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+     );                                                               \
+     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:418:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
+ TENSOR_IMPLEMENT_LOGICAL(ne)
+ ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::scatterFill(int, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:586:41: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+       index_t.tensor, cast_scalar(value));
+                                         ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::dot(const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:593:53: error: cannot convert ‘zcx {aka thrust::complex<double>}’ to ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ in return
+   return THCTensor_(dot)(state, tensor, src_t.tensor);
+                                                     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::minall() [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:598:56: error: cannot convert ‘zcx {aka thrust::complex<double>}’ to ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ in return
+   return uncast_scalar(THCTensor_(minall)(state, tensor));
+                                                        ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:19:26: note: in definition of macro ‘uncast_scalar’
+ #define uncast_scalar(v) v
+                          ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::maxall() [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:603:56: error: cannot convert ‘zcx {aka thrust::complex<double>}’ to ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ in return
+   return uncast_scalar(THCTensor_(maxall)(state, tensor));
+                                                        ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:19:26: note: in definition of macro ‘uncast_scalar’
+ #define uncast_scalar(v) v
+                          ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::sumall() [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:608:42: error: cannot convert ‘zcx {aka thrust::complex<double>}’ to ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ in return
+   return THCTensor_(sumall)(state, tensor);
+                                          ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::prodall() [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:613:43: error: cannot convert ‘zcx {aka thrust::complex<double>}’ to ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ in return
+   return THCTensor_(prodall)(state, tensor);
+                                           ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::add(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:641:66: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+   THCTensor_(add)(state, tensor, src_t.tensor, cast_scalar(value));
+                                                                  ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::sub(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:648:66: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+   THCTensor_(sub)(state, tensor, src_t.tensor, cast_scalar(value));
+                                                                  ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::mul(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:655:66: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+   THCTensor_(mul)(state, tensor, src_t.tensor, cast_scalar(value));
+                                                                  ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::div(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:662:66: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+   THCTensor_(div)(state, tensor, src_t.tensor, cast_scalar(value));
+                                                                  ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::fmod(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:669:67: error: ‘THCudaZDoubleTensor_fmod’ was not declared in this scope
+   THCTensor_(fmod)(state, tensor, src_t.tensor, cast_scalar(value));
+                                                                   ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::remainder(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:677:72: error: ‘THCudaZDoubleTensor_remainder’ was not declared in this scope
+   THCTensor_(remainder)(state, tensor, src_t.tensor, cast_scalar(value));
+                                                                        ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::clamp(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:686:29: error: could not convert ‘min_value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+       cast_scalar(max_value));
+                             ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cadd(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:695:83: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+   THCTensor_(cadd)(state, tensor, src1_t.tensor, cast_scalar(value), src2_t.tensor);
+                                                                                   ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::csub(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:709:83: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+   THCTensor_(csub)(state, tensor, src1_t.tensor, cast_scalar(value), src2_t.tensor);
+                                                                                   ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cfmod(const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<double>]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:741:64: error: ‘THCudaZDoubleTensor_cfmod’ was not declared in this scope
+   THCTensor_(cfmod)(state, tensor, src1_t.tensor, src2_t.tensor);
+                                                                ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cremainder(const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<double>]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:750:69: error: ‘THCudaZDoubleTensor_cremainder’ was not declared in this scope
+   THCTensor_(cremainder)(state, tensor, src1_t.tensor, src2_t.tensor);
+                                                                     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addcmul(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:762:35: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+       src2_t.tensor, src3_t.tensor);
+                                   ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addcdiv(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:774:35: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+       src2_t.tensor, src3_t.tensor);
+                                   ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addmv(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:786:53: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+       cast_scalar(alpha), mat_t.tensor, vec_t.tensor);
+                                                     ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addmm(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:798:55: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+       cast_scalar(alpha), mat1_t.tensor, mat2_t.tensor);
+                                                       ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addr(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:810:55: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+       cast_scalar(alpha), vec1_t.tensor, vec2_t.tensor);
+                                                       ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addbmm(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:822:59: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+       cast_scalar(alpha), batch1_t.tensor, batch2_t.tensor);
+                                                           ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::baddbmm(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:834:59: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+       cast_scalar(alpha), batch1_t.tensor, batch2_t.tensor);
+                                                           ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::trace() [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:917:41: error: cannot convert ‘zcx {aka thrust::complex<double>}’ to ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ in return
+   return THCTensor_(trace)(state, tensor);
+                                         ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cmaxValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:949:72: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+   THCTensor_(cmaxValue)(state, tensor, src_t.tensor, cast_scalar(value));
+                                                                        ^
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cminValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
+/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:957:72: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
+   THCTensor_(cminValue)(state, tensor, src_t.tensor, cast_scalar(value));
+                                                                        ^
+CMakeFiles/THPP.dir/build.make:182: recipe for target 'CMakeFiles/THPP.dir/tensors/THCTensor.cpp.o' failed
+make[2]: *** [CMakeFiles/THPP.dir/tensors/THCTensor.cpp.o] Error 1
+CMakeFiles/Makefile2:67: recipe for target 'CMakeFiles/THPP.dir/all' failed
+make[1]: *** [CMakeFiles/THPP.dir/all] Error 2
 Makefile:127: recipe for target 'all' failed
 make: *** [all] Error 2

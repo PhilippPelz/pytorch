@@ -101,7 +101,7 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_BINARY_DIR}")
 SET(CMAKE_C_FLAGS "-std=c99 ${CMAKE_C_FLAGS}")
 
 SET(src
-  THCSTensor.c
+  THCSTensor.cpp
   )
 
 SET(src-cuda
@@ -152,7 +152,7 @@ INSTALL(FILES
           DESTINATION "${THCS_INSTALL_INCLUDE_SUBDIR}/THCS")
 
 INSTALL(FILES
-          generic/THCSTensor.c
+          generic/THCSTensor.cpp
           generic/THCSTensor.cu
           generic/THCSTensor.h
           generic/THCSTensorMath.h

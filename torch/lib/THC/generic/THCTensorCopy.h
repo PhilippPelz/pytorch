@@ -13,6 +13,14 @@ THC_API void THCTensor_(copyFloat)(THCState *state, THCTensor *self, THFloatTens
 THC_API void THCTensor_(copyDouble)(THCState *state, THCTensor *self, THDoubleTensor *src);
 THC_API void THCTensor_(copyHalf)(THCState *state, THCTensor *self, struct THHalfTensor *src);
 
+#if defined(THC_REAL_IS_ZDOUBLE)
+THC_API void THCTensor_(copyZDouble)(THCState *state, THCTensor *self, THZDoubleTensor *src);
+#endif
+
+#if defined(THC_REAL_IS_ZFLOAT)
+THC_API void THCTensor_(copyZFloat)(THCState *state, THCTensor *self, THZFloatTensor *src);
+#endif
+
 THC_API void THCTensor_(copyCudaByte)(THCState *state, THCTensor *dst, struct THCudaByteTensor *src);
 THC_API void THCTensor_(copyCudaChar)(THCState *state, THCTensor *dst, struct THCudaCharTensor *src);
 THC_API void THCTensor_(copyCudaShort)(THCState *state, THCTensor *dst, struct THCudaShortTensor *src);

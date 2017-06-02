@@ -9,7 +9,7 @@ void THTensor_(copy)(THTensor *tensor, THTensor *src)
     real *rp = THTensor_(data)(tensor);
     ptrdiff_t sz = THTensor_(nElement)(tensor);
 #ifndef TH_REAL_IS_HALF
-    THVector_(copy)(rp, sp, sz); 
+    THVector_(copy)(rp, sp, sz);
 #else
     memcpy(rp, sp, sz * sizeof(real));
 #endif
@@ -41,6 +41,14 @@ void THTensor_(copy##TYPENAMESRC)(THTensor *tensor, TH##TYPENAMESRC##Tensor *src
 { \
  TH_TENSOR_APPLY2(real, tensor, TYPE_SRC, src, *tensor_data = *src_data;) \
 }
+
+#if defined(TH_REAL_IS_ZDOUBLE)
+IMPLEMENT_THTensor_COPY(ZDouble,double _Complex)
+#endif
+
+#if defined(TH_REAL_IS_ZFLOAT)
+IMPLEMENT_THTensor_COPY(ZFloat,float _Complex)
+#endif
 
 #ifndef TH_REAL_IS_HALF
 IMPLEMENT_THTensor_COPY(Byte, unsigned char)

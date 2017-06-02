@@ -303,7 +303,7 @@ INSTALL(FILES
           generic/THCStorage.c
           generic/THCStorage.cu
           generic/THCStorage.h
-          generic/THCTensor.cpp
+          generic/THCTensor.c
           generic/THCTensor.cu
           generic/THCTensor.h
           generic/THCStorageCopy.cpp

@@ -287,6 +287,12 @@ class DoubleStorage(_CudaBase, torch._C.CudaDoubleStorageBase, _StorageBase):
 class FloatStorage(_CudaBase, torch._C.CudaFloatStorageBase, _StorageBase):
     pass
 
+class ZDoubleStorage(_CudaBase, torch._C.CudaZDoubleStorageBase, _StorageBase):
+    pass
+
+
+class ZFloatStorage(_CudaBase, torch._C.CudaZFloatStorageBase, _StorageBase):
+    pass
 
 class LongStorage(_CudaBase, torch._C.CudaLongStorageBase, _StorageBase):
     pass
@@ -330,6 +336,44 @@ class FloatTensor(_CudaBase, torch._C.CudaFloatTensorBase, _TensorBase):
     @classmethod
     def storage_type(cls):
         return FloatStorage
+
+class ZTensor(_CudaBase, torch._C.CudaZDoubleTensorBase, _TensorBase):
+
+    def is_signed(self):
+        return True
+
+    @classmethod
+    def storage_type(cls):
+        return ZDoubleStorage
+
+
+class CTensor(_CudaBase, torch._C.CudaZFloatTensorBase, _TensorBase):
+
+    def is_signed(self):
+        return True
+
+    @classmethod
+    def storage_type(cls):
+        return ZFloatStorage
+
+class ZDoubleTensor(_CudaBase, torch._C.CudaZDoubleTensorBase, _TensorBase):
+
+    def is_signed(self):
+        return True
+
+    @classmethod
+    def storage_type(cls):
+        return ZDoubleStorage
+
+
+class ZFloatTensor(_CudaBase, torch._C.CudaZFloatTensorBase, _TensorBase):
+
+    def is_signed(self):
+        return True
+
+    @classmethod
+    def storage_type(cls):
+        return ZFloatStorage
 
 
 class LongTensor(_CudaBase, torch._C.CudaLongTensorBase, _TensorBase):
@@ -395,6 +439,8 @@ class HalfTensor(_CudaBase, torch._C.CudaHalfTensorBase, _TensorBase):
 
 torch._storage_classes.add(DoubleStorage)
 torch._storage_classes.add(FloatStorage)
+torch._storage_classes.add(ZDoubleStorage)
+torch._storage_classes.add(ZFloatStorage)
 torch._storage_classes.add(LongStorage)
 torch._storage_classes.add(IntStorage)
 torch._storage_classes.add(ShortStorage)
@@ -404,6 +450,8 @@ torch._storage_classes.add(HalfStorage)
 
 torch._tensor_classes.add(DoubleTensor)
 torch._tensor_classes.add(FloatTensor)
+torch._tensor_classes.add(ZDoubleTensor)
+torch._tensor_classes.add(ZFloatTensor)
 torch._tensor_classes.add(LongTensor)
 torch._tensor_classes.add(IntTensor)
 torch._tensor_classes.add(ShortTensor)

@@ -5,6 +5,8 @@
 #include "THCGeneral.h"
 #include "THCHalf.h"
 
+#include "TH/THStorage.h"
+
 #include "generic/THCStorageCopy.h"
 #include "THCGenerateAllTypes.h"
 

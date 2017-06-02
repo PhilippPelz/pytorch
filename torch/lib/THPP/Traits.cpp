@@ -6,6 +6,8 @@ constexpr Type type_traits<char>::type;
 constexpr Type type_traits<unsigned char>::type;
 constexpr Type type_traits<float>::type;
 constexpr Type type_traits<double>::type;
+constexpr Type type_traits<float _Complex>::type;
+constexpr Type type_traits<double _Complex>::type;
 constexpr Type type_traits<short>::type;
 constexpr Type type_traits<unsigned short>::type;
 constexpr Type type_traits<int>::type;

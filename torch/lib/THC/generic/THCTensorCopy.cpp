@@ -1,5 +1,5 @@
 #ifndef THC_GENERIC_FILE
-#define THC_GENERIC_FILE "generic/THCTensorCopy.c"
+#define THC_GENERIC_FILE "generic/THCTensorCopy.cpp"
 #else
 
 /* specific methods */
@@ -39,7 +39,7 @@ void THCTensor_(copy##TYPEC)(THCState *state, THCTensor *self, struct TH##TYPEC#
     THTensor_(free)(srcf);                                              \
   }                                                                     \
 }
-
+#if !(defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT))
 IMPLEMENT_TH_CUDA_TENSOR_COPY(Byte)
 IMPLEMENT_TH_CUDA_TENSOR_COPY(Char)
 IMPLEMENT_TH_CUDA_TENSOR_COPY(Short)
@@ -48,9 +48,12 @@ IMPLEMENT_TH_CUDA_TENSOR_COPY(Long)
 IMPLEMENT_TH_CUDA_TENSOR_COPY(Float)
 IMPLEMENT_TH_CUDA_TENSOR_COPY(Double)
 IMPLEMENT_TH_CUDA_TENSOR_COPY(Half)
+#endif
+
 #if defined(THC_REAL_IS_ZDOUBLE)
 IMPLEMENT_TH_CUDA_TENSOR_COPY(ZDouble)
 #endif
+
 #if defined(THC_REAL_IS_ZFLOAT)
 IMPLEMENT_TH_CUDA_TENSOR_COPY(ZFloat)
 #endif
@@ -92,6 +95,7 @@ void THTensor_(copyCuda)(THCState *state, THTensor *self, struct THCTensor *src)
     }                                                                     \
   }
 
+#if !(defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT))
 IMPLEMENT_TH_CUDA_TENSOR_COPY_TO(Byte)
 IMPLEMENT_TH_CUDA_TENSOR_COPY_TO(Char)
 IMPLEMENT_TH_CUDA_TENSOR_COPY_TO(Short)
@@ -100,6 +104,7 @@ IMPLEMENT_TH_CUDA_TENSOR_COPY_TO(Long)
 IMPLEMENT_TH_CUDA_TENSOR_COPY_TO(Float)
 IMPLEMENT_TH_CUDA_TENSOR_COPY_TO(Double)
 IMPLEMENT_TH_CUDA_TENSOR_COPY_TO(Half)
+#endif
 
 #if defined(THC_REAL_IS_ZDOUBLE)
 IMPLEMENT_TH_CUDA_TENSOR_COPY_TO(ZDouble)
