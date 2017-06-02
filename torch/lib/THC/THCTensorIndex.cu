@@ -132,8 +132,15 @@ __global__ void indexAddSmallIndex(TensorInfo<T, IndexType> dst,
       IndexType srcOffset =
         IndexToOffset<T, IndexType, SrcDim>::get(linearIndex, src);
       srcOffset += srcIndex * src.strides[srcAddDim];
-
+#if defined(THC_REAL_IS_ZFLOAT)
+      atomicAdd((float*)&dst.data[dstOffset], src.data[srcOffset].real());
+      atomicAdd(((float*)&dst.data[dstOffset])+1, src.data[srcOffset].imag());
+#elif defined(THC_REAL_IS_ZDOUBLE)
+      atomicAdd((double*)&dst.data[dstOffset], src.data[srcOffset].real());
+      atomicAdd(((double*)&dst.data[dstOffset])+1, src.data[srcOffset].imag());
+#else
       atomicAdd(&dst.data[dstOffset], src.data[srcOffset]);
+#endif
     }
   }
 }
@@ -173,7 +180,15 @@ __global__ void indexAddLargeIndex(TensorInfo<T, IndexType> dst,
       IndexToOffset<T, IndexType, SrcDim>::get(elementInSlice, src);
     srcOffset += srcIndex * src.strides[srcAddDim];
 
-    atomicAdd(&dst.data[dstOffset], src.data[srcOffset]);
+    #if defined(THC_REAL_IS_ZFLOAT)
+          atomicAdd((float*)&dst.data[dstOffset], src.data[srcOffset].real());
+          atomicAdd(((float*)&dst.data[dstOffset])+1, src.data[srcOffset].imag());
+    #elif defined(THC_REAL_IS_ZDOUBLE)
+          atomicAdd((double*)&dst.data[dstOffset], src.data[srcOffset].real());
+          atomicAdd(((double*)&dst.data[dstOffset])+1, src.data[srcOffset].imag());
+    #else
+          atomicAdd(&dst.data[dstOffset], src.data[srcOffset]);
+    #endif
   }
 }
 

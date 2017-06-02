@@ -1,7 +1,7 @@
 #ifndef THC_GENERIC_FILE
 #define THC_GENERIC_FILE "generic/THCTensorSort.h"
 #else
-
+#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
 /* Performs an in-place sort of (keys, values). Only works for slice sizes
    <= 2048 at the moment (slice size == size of keys/values dim `dim`) */
 THC_API void THCTensor_(sortKeyValueInplace)(THCState* state,
@@ -16,5 +16,5 @@ THC_API void THCTensor_(sort)(THCState* state,
                               THCudaLongTensor* indices,
                               THCTensor* input,
                               int dim, int order);
-
+#endif
 #endif

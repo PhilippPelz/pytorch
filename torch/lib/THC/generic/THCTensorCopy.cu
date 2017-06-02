@@ -16,8 +16,14 @@ THCTensor_(copyIgnoringOverlaps)(THCState* state, THCTensor* dst, THCTensor* src
   // FIXME: really, overlapping writes should be illegal/an error in Torch
   THC_pointwiseApply2(
     state, dst, src,
-    CopyOp<typename TensorUtils<THCTensor>::DataType,
-           typename TensorUtils<THCTensor>::DataType>(),
+    #if defined(THC_REAL_IS_ZFLOAT)
+      CCopyOp(),
+    #elif defined(THC_REAL_IS_ZDOUBLE)
+      ZCopyOp(),
+    #else
+      CopyOp<typename TensorUtils<THCTensor>::DataType,
+             typename TensorUtils<THCTensor>::DataType>(),
+    #endif
     ReadOnly, /* ignore overwrites */
     ReadOnly);
 }
@@ -38,6 +44,15 @@ IMPLEMENT_THC_CUDA_TENSOR_COPY(Long, Long)
 // THCudaTensor aka the non-existent THCudaFloatTensor
 IMPLEMENT_THC_CUDA_TENSOR_COPY(Float, )
 IMPLEMENT_THC_CUDA_TENSOR_COPY(Double, Double)
+
+#if defined(THC_REAL_IS_ZFLOAT)
+IMPLEMENT_THC_CUDA_TENSOR_COPY(ZFloat, ZFloat)
+#endif
+
+#if defined(THC_REAL_IS_ZDOUBLE)
+IMPLEMENT_THC_CUDA_TENSOR_COPY(ZDouble, ZDouble)
+#endif
+
 #ifdef CUDA_HALF_TENSOR
 IMPLEMENT_THC_CUDA_TENSOR_COPY(Half, Half)
 #endif

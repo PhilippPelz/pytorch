@@ -5,6 +5,12 @@
 #include <limits.h>
 #include "THCHalf.h"
 
+#include <cuComplex.h>
+#include <complex>
+#include <thrust/complex.h>
+typedef thrust::complex<float> ccx;
+typedef thrust::complex<double> zcx;
+
 /// Class for numeric limits of the particular data type, which
 /// includes support for `half`.
 /// Unfortunately since `half` does not have a constructor, these have
@@ -601,6 +607,90 @@ struct THCNumerics<double> {
   static inline __host__ __device__  double mul  (double a, double b) { return a * b; }
   static inline __host__ __device__  double sub  (double a, double b) { return a - b; }
   static inline __host__ __device__  double pow  (double a, double b) { return ::pow(a, b); }
+};
+
+template <>
+struct THCNumerics<ccx> {
+  static inline __host__ __device__ ccx min() { return ccx(-FLT_MAX,-FLT_MAX); }
+  static inline __host__ __device__ ccx max() { return ccx(FLT_MAX,FLT_MAX); }
+
+  static inline __host__ __device__ bool lt(ccx a, ccx b) { return a.real() < b.real(); }
+  static inline __host__ __device__ bool le(ccx a, ccx b) { return a.real() <= b.real(); }
+  static inline __host__ __device__ bool gt(ccx a, ccx b) { return a.real() > b.real(); }
+  static inline __host__ __device__ bool ge(ccx a, ccx b) { return a.real() >= b.real(); }
+  static inline __host__ __device__ bool eq(ccx a, ccx b) { return (a.real() == b.real() && a.imag() == b.imag()); }
+  static inline __host__ __device__ bool ne(ccx a, ccx b) { return (a.real() != b.real() && a.imag() != b.imag()); }
+
+  static inline __host__ __device__  float re  (ccx a) { return   a.real(); }
+  static inline __host__ __device__  float im  (ccx a) { return   a.imag(); }
+  static inline __host__ __device__  float arg  (ccx a) { return   thrust::arg(a); }
+  static inline __host__ __device__  ccx conj  (ccx a) { return   thrust::conj(a); }
+  static inline __host__ __device__  ccx exp  (ccx a) { return   thrust::exp(a); }
+  static inline __host__ __device__  ccx exp10(ccx a) { return thrust::exp(a); }
+  static inline __host__ __device__  ccx log  (ccx a) { return   thrust::log(a); }
+  static inline __host__ __device__  ccx log10  (ccx a) { return   thrust::log10(a); }
+  static inline __host__ __device__  ccx cos  (ccx a) { return   thrust::cos(a); }
+  static inline __host__ __device__  ccx sin  (ccx a) { return   thrust::sin(a); }
+  static inline __host__ __device__  ccx sqrt (ccx a) { return  thrust::sqrt(a); }
+  static inline __host__ __device__  ccx neg  (ccx a) { return       -a; }
+  static inline __host__ __device__  ccx acos (ccx a) { return  thrust::acos(a); }
+  static inline __host__ __device__  ccx cosh (ccx a) { return  thrust::cosh(a); }
+  static inline __host__ __device__  ccx acosh(ccx a) { return thrust::acosh(a); }
+  static inline __host__ __device__  ccx asin (ccx a) { return  thrust::asin(a); }
+  static inline __host__ __device__  ccx sinh (ccx a) { return  thrust::sinh(a); }
+  static inline __host__ __device__  ccx asinh(ccx a) { return thrust::asinh(a); }
+  static inline __host__ __device__  ccx tan  (ccx a) { return   thrust::tan(a); }
+  static inline __host__ __device__  ccx atan (ccx a) { return  thrust::atan(a); }
+  static inline __host__ __device__  ccx tanh (ccx a) { return  thrust::tanh(a); }
+  static inline __host__ __device__  ccx abs  (ccx a) { return   thrust::abs(a); }
+  static inline __host__ __device__  ccx cinv (ccx a) { return ccx(1,0) / a; }
+  static inline __host__ __device__  ccx add  (ccx a, ccx b) { return a + b; }
+  static inline __host__ __device__  ccx div  (ccx a, ccx b) { return a / b; }
+  static inline __host__ __device__  ccx mul  (ccx a, ccx b) { return a * b; }
+  static inline __host__ __device__  ccx sub  (ccx a, ccx b) { return a - b; }
+  static inline __host__ __device__  ccx pow  (ccx a, ccx b) { return thrust::pow(a, b); }
+};
+
+template <>
+struct THCNumerics<zcx> {
+  static inline __host__ __device__ zcx min() { return zcx(-FLT_MAX,-FLT_MAX); }
+  static inline __host__ __device__ zcx max() { return zcx(FLT_MAX,FLT_MAX); }
+
+  static inline __host__ __device__ bool lt(zcx a, zcx b) { return a.real() < b.real(); }
+  static inline __host__ __device__ bool le(zcx a, zcx b) { return a.real() <= b.real(); }
+  static inline __host__ __device__ bool gt(zcx a, zcx b) { return a.real() > b.real(); }
+  static inline __host__ __device__ bool ge(zcx a, zcx b) { return a.real() >= b.real(); }
+  static inline __host__ __device__ bool eq(zcx a, zcx b) { return (a.real() == b.real() && a.imag() == b.imag()); }
+  static inline __host__ __device__ bool ne(zcx a, zcx b) { return (a.real() != b.real() && a.imag() != b.imag()); }
+
+  static inline __host__ __device__  double re  (zcx a) { return   a.real(); }
+  static inline __host__ __device__  double im  (zcx a) { return   a.imag(); }
+  static inline __host__ __device__  double arg  (zcx a) { return   thrust::arg(a); }
+  static inline __host__ __device__  zcx conj  (zcx a) { return   thrust::conj(a); }
+  static inline __host__ __device__  zcx exp  (zcx a) { return   thrust::exp(a); }
+  static inline __host__ __device__  zcx exp10(zcx a) { return thrust::exp(a); }
+  static inline __host__ __device__  zcx log  (zcx a) { return   thrust::log(a); }
+  static inline __host__ __device__  zcx log10  (zcx a) { return   thrust::log10(a); }
+  static inline __host__ __device__  zcx cos  (zcx a) { return   thrust::cos(a); }
+  static inline __host__ __device__  zcx sin  (zcx a) { return   thrust::sin(a); }
+  static inline __host__ __device__  zcx sqrt (zcx a) { return  thrust::sqrt(a); }
+  static inline __host__ __device__  zcx neg  (zcx a) { return       -a; }
+  static inline __host__ __device__  zcx acos (zcx a) { return  thrust::acos(a); }
+  static inline __host__ __device__  zcx cosh (zcx a) { return  thrust::cosh(a); }
+  static inline __host__ __device__  zcx acosh(zcx a) { return thrust::acosh(a); }
+  static inline __host__ __device__  zcx asin (zcx a) { return  thrust::asin(a); }
+  static inline __host__ __device__  zcx sinh (zcx a) { return  thrust::sinh(a); }
+  static inline __host__ __device__  zcx asinh(zcx a) { return thrust::asinh(a); }
+  static inline __host__ __device__  zcx tan  (zcx a) { return   thrust::tan(a); }
+  static inline __host__ __device__  zcx atan (zcx a) { return  thrust::atan(a); }
+  static inline __host__ __device__  zcx tanh (zcx a) { return  thrust::tanh(a); }
+  static inline __host__ __device__  zcx abs  (zcx a) { return   thrust::abs(a); }
+  static inline __host__ __device__  zcx cinv (zcx a) { return zcx(1,0) / a; }
+  static inline __host__ __device__  zcx add  (zcx a, zcx b) { return a + b; }
+  static inline __host__ __device__  zcx div  (zcx a, zcx b) { return a / b; }
+  static inline __host__ __device__  zcx mul  (zcx a, zcx b) { return a * b; }
+  static inline __host__ __device__  zcx sub  (zcx a, zcx b) { return a - b; }
+  static inline __host__ __device__  zcx pow  (zcx a, zcx b) { return thrust::pow(a, b); }
 };
 
 /// `half` has some type conversion issues associated with it, since it

@@ -81,8 +81,12 @@ THC_API void THCTensor_(gesv)(THCState *state, THCTensor *rb_, THCTensor *ra_, T
   int info;
 #if defined(THC_REAL_IS_FLOAT)
   magma_sgesv_gpu(n, nrhs, a_data, n, ipiv, b_data, n, &info);
-#else
+#elif defined(THC_REAL_IS_DOUBLE)
   magma_dgesv_gpu(n, nrhs, a_data, n, ipiv, b_data, n, &info);
+#elif defined(THC_REAL_IS_ZFLOAT)
+  magma_cgesv_gpu(n, nrhs, (magmaFloatComplex*) a_data, n, ipiv, (magmaFloatComplex*) b_data, n, &info);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  magma_zgesv_gpu(n, nrhs, (magmaDoubleComplex*) a_data, n, ipiv, (magmaDoubleComplex*) b_data, n, &info);
 #endif
 
   if (info < 0)
@@ -119,16 +123,24 @@ THC_API void THCTensor_(gels)(THCState *state, THCTensor *rb_, THCTensor *ra_, T
   int info;
 #if defined(THC_REAL_IS_FLOAT)
   magma_sgels_gpu(MagmaNoTrans, m, n, nrhs, a_data, m, b_data, m, &wkopt, -1, &info);
-#else
+#elif defined(THC_REAL_IS_DOUBLE)
   magma_dgels_gpu(MagmaNoTrans, m, n, nrhs, a_data, m, b_data, m, &wkopt, -1, &info);
+#elif defined(THC_REAL_IS_ZFLOAT)
+  magma_cgels_gpu(MagmaNoTrans, m, n, nrhs, (magmaFloatComplex*)a_data, m, (magmaFloatComplex*) b_data, m, &wkopt, -1, &info);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  magma_zgels_gpu(MagmaNoTrans, m, n, nrhs, (magmaDoubleComplex*)a_data, m, (magmaDoubleComplex*) b_data, m, &wkopt, -1, &info);
 #endif
 
   real *hwork = th_magma_malloc_pinned<real>((size_t)wkopt);
 
 #if defined(THC_REAL_IS_FLOAT)
   magma_sgels_gpu(MagmaNoTrans, m, n, nrhs, a_data, m, b_data, m, hwork, (int)wkopt, &info);
-#else
+#elif defined(THC_REAL_IS_DOUBLE)
   magma_dgels_gpu(MagmaNoTrans, m, n, nrhs, a_data, m, b_data, m, hwork, (int)wkopt, &info);
+#elif defined(THC_REAL_IS_ZFLOAT)
+  magma_cgels_gpu(MagmaNoTrans, m, n, nrhs, (magmaFloatComplex*)a_data, m, (magmaFloatComplex*) b_data, m, hwork, (int)wkopt, &info);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  magma_zgels_gpu(MagmaNoTrans, m, n, nrhs, (magmaDoubleComplex*)a_data, m, (magmaDoubleComplex*) b_data, m, hwork, (int)wkopt, &info);
 #endif
 
   magma_free_pinned(hwork);
@@ -158,26 +170,47 @@ THC_API void THCTensor_(syev)(THCState *state, THCTensor *re_, THCTensor *rv_, T
   // eigen values and workspace
   real *w = th_magma_malloc_pinned<real>(n);
   real *wA = th_magma_malloc_pinned<real>(lda);
-
-  // compute optimal size of work array
-  int info;
-  real lwork;
   int liwork;
+  real lwork;
+  int info;
+#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE)
+  // compute optimal size of work array
+#elif  defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  int iworkq;
+#endif
 
 #if defined(THC_REAL_IS_FLOAT)
   magma_ssyevd_gpu(jobz, uplo, n, input_data, lda, w, wA, n, &lwork, -1, &liwork, -1, &info);
-#else
+#elif defined(THC_REAL_IS_DOUBLE)
   magma_dsyevd_gpu(jobz, uplo, n, input_data, lda, w, wA, n, &lwork, -1, &liwork, -1, &info);
+#elif defined(THC_REAL_IS_ZFLOAT)
+  magma_cheevd_gpu(jobz, uplo, n, input_data, lda, w, wA, ldwa, &lwork, -1, &liwork, -1, &iworkq, -1, &info);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  magma_zheevd_gpu(jobz, uplo, n, input_data, lda, w, wA, ldwa, &lwork, -1, &liwork, -1, &iworkq, -1, &info);
 #endif
 
-  real *work = th_magma_malloc_pinned<real>((size_t)lwork);
+
+
+
+#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE)
+  // compute optimal size of work array
   int *iwork = th_magma_malloc_pinned<int>(liwork);
+  real *work = th_magma_malloc_pinned<real>((size_t)lwork);
+#elif  defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  int *iwork = th_magma_malloc_pinned<int>(iworkq);
+  part *rwork = th_magma_malloc_pinned<part>(liwork);
+  real *work = th_magma_malloc_pinned<real>((size_t)lwork.x);
+#endif
 
   // compute eigenvalues and, optionally, eigenvectors
 #if defined(THC_REAL_IS_FLOAT)
   magma_ssyevd_gpu(jobz, uplo, n, input_data, lda, w, wA, n, work, (int) lwork, iwork, liwork, &info);
-#else
+#elif defined(THC_REAL_IS_DOUBLE)
   magma_dsyevd_gpu(jobz, uplo, n, input_data, lda, w, wA, n, work, (int) lwork, iwork, liwork, &info);
+#elif defined(THC_REAL_IS_ZFLOAT)
+  magma_cheevd_gpu(jobz, uplo, n, input_data, lda, w, wA, n, work, (int) lwork, rwork, liwork, iwork, iworkq, &info);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  magma_zheevd_gpu(jobz, uplo, n, input_data, lda, w, wA, n, work, (int) lwork, rwork, liwork, iwork, iworkq, &info);
 #endif
 
   // copy eigen values from w to re_
@@ -188,6 +221,10 @@ THC_API void THCTensor_(syev)(THCState *state, THCTensor *re_, THCTensor *rv_, T
   magma_free_pinned(work);
   magma_free_pinned(wA);
   magma_free_pinned(w);
+
+#if  defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  magma_free_pinned(rwork);
+#endif
 
   // check error value
   if (info > 0)
@@ -226,20 +263,41 @@ THC_API void THCTensor_(geev)(THCState *state, THCTensor *re_, THCTensor *rv_, T
 
   real wkopt;
   int info;
+#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE)
+  // compute optimal size of work array
+#elif  defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  part rworkq;
+#endif
 
 #if defined(THC_REAL_IS_FLOAT)
   magma_sgeev(MagmaNoVec, jobvr, n, a_data, n, wr, wi, NULL, 1, vr_data, ldvr, &wkopt, -1, &info);
-#else
+#elif defined(THC_REAL_IS_DOUBLE)
   magma_dgeev(MagmaNoVec, jobvr, n, a_data, n, wr, wi, NULL, 1, vr_data, ldvr, &wkopt, -1, &info);
+#elif defined(THC_REAL_IS_ZFLOAT)
+  magma_cgeev(MagmaNoVec, jobvr, n, a_data, n, wr, NULL, 1, vr_data, ldvr, &wkopt, -1, &rworkq, &info);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  magma_zgeev(MagmaNoVec, jobvr, n, a_data, n, wr, NULL, 1, vr_data, ldvr, &wkopt, -1, &rworkq, &info);
 #endif
 
+#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE)
+  // compute optimal size of work array
   int lwork = (int) wkopt;
   real *work_data = th_magma_malloc_pinned<real>(lwork);
+#elif  defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  int lwork = (int) wkopt.x;
+  part *work_data = th_magma_malloc_pinned<part>(lwork);
+  part *rwork = th_magma_smalloc_pinned(2*n);
+#endif
+
 
 #if defined(THC_REAL_IS_FLOAT)
   magma_sgeev(MagmaNoVec, jobvr, n, a_data, n, wr, wi, NULL, 1, vr_data, ldvr, work_data, lwork, &info);
-#else
+#elif defined(THC_REAL_IS_DOUBLE)
   magma_dgeev(MagmaNoVec, jobvr, n, a_data, n, wr, wi, NULL, 1, vr_data, ldvr, work_data, lwork, &info);
+#elif defined(THC_REAL_IS_ZFLOAT)
+  magma_cgeev(MagmaNoVec, jobvr, n, a_data, n, wr, NULL, 1, vr_data, ldvr, work_data, lwork,rwork, &info);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  magma_zgeev(MagmaNoVec, jobvr, n, a_data, n, wr, NULL, 1, vr_data, ldvr, work_data, lwork,rwork, &info);
 #endif
 
   if (info > 0)
@@ -264,6 +322,9 @@ THC_API void THCTensor_(geev)(THCState *state, THCTensor *re_, THCTensor *rv_, T
   magma_free_pinned(wi);
   magma_free_pinned(wr);
   magma_free_pinned(a_data);
+#if  defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  magma_free_pinned(rwork);
+#endif
 
 #else
   THError(NoMagma(geev));
@@ -304,20 +365,38 @@ THC_API void THCTensor_(gesvd2)(THCState *state, THCTensor *ru_, THCTensor *rs_,
 
   real wkopt;
   int info;
+#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE)
+#elif  defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  part tmp;
+#endif
 
 #if defined(THC_REAL_IS_FLOAT)
   magma_sgesvd(jobu, jobvt, m, n, a_data, m, rs_data, ru_data, m, rv_data, n, &wkopt, -1, &info);
-#else
+#elif defined(THC_REAL_IS_DOUBLE)
   magma_dgesvd(jobu, jobvt, m, n, a_data, m, rs_data, ru_data, m, rv_data, n, &wkopt, -1, &info);
+#elif defined(THC_REAL_IS_ZFLOAT)
+  magma_cgesvd(jobu, jobvt, m, n, a_data, m, rs_data, ru_data, m, rv_data, n, &wkopt, -1,&tmp, &info);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  magma_zgesvd(jobu, jobvt, m, n, a_data, m, rs_data, ru_data, m, rv_data, n, &wkopt, -1,&tmp, &info);
 #endif
 
+#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE)
   int lwork = (int) wkopt;
+#elif  defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  int lwork = (int) wkopt.x;
+  part* rwork = th_magma_malloc_pinned<part>(5*k);
+#endif
+
   real *work_data = th_magma_malloc_pinned<real>(lwork);
 
 #if defined(THC_REAL_IS_FLOAT)
   magma_sgesvd(jobu, jobvt, m, n, a_data, m, rs_data, ru_data, m, rv_data, n, work_data, lwork, &info);
-#else
+#elif defined(THC_REAL_IS_DOUBLE)
   magma_dgesvd(jobu, jobvt, m, n, a_data, m, rs_data, ru_data, m, rv_data, n, work_data, lwork, &info);
+#elif defined(THC_REAL_IS_ZFLOAT)
+  magma_cgesvd(jobu, jobvt, m, n, a_data, m, rs_data, ru_data, m, rv_data, n, work_data, lwork,rwork, &info);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  magma_zgesvd(jobu, jobvt, m, n, a_data, m, rs_data, ru_data, m, rv_data, n, work_data, lwork,rwork, &info);
 #endif
 
   if (info > 0)
@@ -338,6 +417,10 @@ THC_API void THCTensor_(gesvd2)(THCState *state, THCTensor *ru_, THCTensor *rs_,
   magma_free_pinned(ru_data);
   magma_free_pinned(rs_data);
   magma_free_pinned(a_data);
+  #if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE)
+  #elif  defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  magma_free_pinned(rwork);
+  #endif
 #else
   THError(NoMagma(gesvd2));
 #endif
@@ -364,8 +447,12 @@ THC_API void THCTensor_(getri)(THCState *state, THCTensor *ra_, THCTensor *a)
   // Run LU
 #if defined(THC_REAL_IS_FLOAT)
   magma_sgetrf_gpu(n, n, input_data, n, ipiv, &info);
-#else
+#elif defined(THC_REAL_IS_DOUBLE)
   magma_dgetrf_gpu(n, n, input_data, n, ipiv, &info);
+#elif defined(THC_REAL_IS_ZFLOAT)
+  magma_cgetrf_gpu(n, n, input_data, n, ipiv, &info);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  magma_zgetrf_gpu(n, n, input_data, n, ipiv, &info);
 #endif
 
   if (info > 0)
@@ -376,8 +463,12 @@ THC_API void THCTensor_(getri)(THCState *state, THCTensor *ra_, THCTensor *a)
   // Inverse
 #if defined(THC_REAL_IS_FLOAT)
   magma_sgetri_gpu(n, input_data, n, ipiv, work_data, lwork, &info);
-#else
+#elif defined(THC_REAL_IS_DOUBLE)
   magma_dgetri_gpu(n, input_data, n, ipiv, work_data, lwork, &info);
+#elif defined(THC_REAL_IS_ZFLOAT)
+  magma_cgetrf_gpu(n, n, input_data, n, ipiv, &info);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  magma_zgetrf_gpu(n, n, input_data, n, ipiv, &info);
 #endif
 
   if (info > 0)
@@ -431,8 +522,12 @@ THC_API void THCTensor_(getri)(THCState *state, THCTensor *ra_, THCTensor *a)
   // Run LU
 #if defined(THC_REAL_IS_FLOAT)
   THCudaBlas_Sgetrf(state, n, d_matrices1, n, ipiv_gpu, info_gpu, 1);
-#else
+#elif defined(THC_REAL_IS_DOUBLE)
   THCudaBlas_Dgetrf(state, n, d_matrices1, n, ipiv_gpu, info_gpu, 1);
+#elif defined(THC_REAL_IS_ZFLOAT)
+  THCudaBlas_Cgetrf(state, n, d_matrices1, n, ipiv_gpu, info_gpu, 1);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  THCudaBlas_Zgetrf(state, n, d_matrices1, n, ipiv_gpu, info_gpu, 1);
 #endif
 
   THCudaCheck(cudaMemcpy(&info, info_gpu, sizeof(int), cudaMemcpyDeviceToHost));
@@ -445,8 +540,12 @@ THC_API void THCTensor_(getri)(THCState *state, THCTensor *ra_, THCTensor *a)
   // Inverse
 #if defined(THC_REAL_IS_FLOAT)
   THCudaBlas_Sgetri(state, n, d_matrices1_const, n, ipiv_gpu, d_matrices2, n, info_gpu, 1);
-#else
+#elif defined(THC_REAL_IS_DOUBLE)
   THCudaBlas_Dgetri(state, n, d_matrices1_const, n, ipiv_gpu, d_matrices2, n, info_gpu, 1);
+#elif defined(THC_REAL_IS_ZFLOAT)
+  THCudaBlas_Cgetri(state, n, d_matrices1_const, n, ipiv_gpu, d_matrices2, n, info_gpu, 1);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  THCudaBlas_Zgetri(state, n, d_matrices1_const, n, ipiv_gpu, d_matrices2, n, info_gpu, 1);
 #endif
 
   if (info > 0)
@@ -497,8 +596,12 @@ THC_API void THCTensor_(potri)(THCState *state, THCTensor *ra_, THCTensor *a, co
   int info;
 #if defined(THC_REAL_IS_FLOAT)
   magma_spotri_gpu(ul, n, input_data, n, &info);
-#else
+#elif defined(THC_REAL_IS_DOUBLE)
   magma_dpotri_gpu(ul, n, input_data, n, &info);
+#elif defined(THC_REAL_IS_ZFLOAT)
+  magma_cpotri_gpu(ul, n, input_data, n, &info);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  magma_zpotri_gpu(ul, n, input_data, n, &info);
 #endif
 
   if (info > 0)
@@ -537,8 +640,12 @@ THC_API void THCTensor_(potrf)(THCState *state, THCTensor *ra_, THCTensor *a, co
   int info;
 #if defined(THC_REAL_IS_FLOAT)
   magma_spotrf_gpu(ul, n, input_data, n, &info);
-#else
+#elif defined(THC_REAL_IS_DOUBLE)
   magma_dpotrf_gpu(ul, n, input_data, n, &info);
+#elif defined(THC_REAL_IS_ZFLOAT)
+  magma_cpotrf_gpu(ul, n, input_data, n, &info);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  magma_zpotrf_gpu(ul, n, input_data, n, &info);
 #endif
 
   // check error value
@@ -575,8 +682,12 @@ THC_API void THCTensor_(potrs)(THCState *state, THCTensor *rb_, THCTensor *b, TH
   int info;
 #if defined(THC_REAL_IS_FLOAT)
   magma_spotrs_gpu(ul, n, nrhs, a_data, n, b_data, n, &info);
-#else
+#elif defined(THC_REAL_IS_DOUBLE)
   magma_dpotrs_gpu(ul, n, nrhs, a_data, n, b_data, n, &info);
+#elif defined(THC_REAL_IS_ZFLOAT)
+  magma_cpotrs_gpu(ul, n, nrhs, a_data, n, b_data, n, &info);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  magma_zpotrs_gpu(ul, n, nrhs, a_data, n, b_data, n, &info);
 #endif
 
   // check error value
@@ -615,8 +726,12 @@ THC_API void THCTensor_(qr)(THCState *state, THCTensor *rq_, THCTensor *rr_, THC
   int info;
 #if defined(THC_REAL_IS_FLOAT)
   magma_sgeqrf_gpu(m, n, a_data, m, tau_data, work_data, &info);
-#else
+#elif defined(THC_REAL_IS_DOUBLE)
   magma_dgeqrf_gpu(m, n, a_data, m, tau_data, work_data, &info);
+#elif defined(THC_REAL_IS_ZFLOAT)
+  magma_cgeqrf_gpu(m, n, a_data, m, tau_data, work_data, &info);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  magma_zgeqrf_gpu(m, n, a_data, m, tau_data, work_data, &info);
 #endif
 
   if (info != 0)
@@ -631,8 +746,12 @@ THC_API void THCTensor_(qr)(THCState *state, THCTensor *rq_, THCTensor *rr_, THC
 
 #if defined(THC_REAL_IS_FLOAT)
   magma_sorgqr_gpu(m, k, k, q_data, m, tau_data, work_data, nb, &info);
-#else
+#elif defined(THC_REAL_IS_DOUBLE)
   magma_dorgqr_gpu(m, k, k, q_data, m, tau_data, work_data, nb, &info);
+#elif defined(THC_REAL_IS_ZFLOAT)
+  magma_cungqr_gpu(m, k, k, q_data, m, tau_data, work_data, nb, &info);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  magma_zungqr_gpu(m, k, k, q_data, m, tau_data, work_data, nb, &info);
 #endif
 
   if (info != 0)

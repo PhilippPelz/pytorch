@@ -79,7 +79,7 @@ THCTensor_(div)(THCState* state, THCTensor *self_, THCTensor *src_, real value)
 
   THCudaCheck(cudaGetLastError());
 }
-
+#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
 THC_API void
 THCTensor_(lshift)(THCState* state, THCTensor *self_, THCTensor *src_, real value)
 {
@@ -323,5 +323,5 @@ THCTensor_(bitxor)(THCState* state, THCTensor *self_, THCTensor *src_, real valu
   THCudaCheck(cudaGetLastError());
 #endif
 }
-
+#endif
 #endif

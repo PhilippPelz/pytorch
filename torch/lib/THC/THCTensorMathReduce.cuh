@@ -209,6 +209,44 @@ struct TensorNormOp
 };
 
 template <int StaticExp>
+struct TensorNormOp<ccx, StaticExp>
+{
+  TensorNormOp(ccx exp) : exponent(exp) {}
+
+  __host__ __device__ ccx operator()(ccx y) const {
+    if (StaticExp == 1) {
+      return ccx(thrust::abs((ccx)y),0);
+    } else if (StaticExp == 2) {
+      float x = thrust::abs((ccx)y);
+      return ccx(x * x,0);
+    } else {
+      return ccx(thrust::pow(y, exponent));
+    }
+  }
+
+  const ccx exponent;
+};
+
+template <int StaticExp>
+struct TensorNormOp<zcx, StaticExp>
+{
+  TensorNormOp(zcx exp) : exponent(exp) {}
+
+  __host__ __device__ zcx operator()(zcx y) const {
+    if (StaticExp == 1) {
+      return zcx(thrust::abs(y),0);
+    } else if (StaticExp == 2) {
+      float x = thrust::abs(y);
+      return zcx(x * x,0);
+    } else {
+      return zcx(thrust::pow(y, exponent));
+    }
+  }
+
+  const zcx exponent;
+};
+
+template <int StaticExp>
 struct TensorNormOp<double, StaticExp>
 {
   TensorNormOp(double exp) : exponent(exp) {}

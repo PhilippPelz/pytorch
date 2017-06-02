@@ -2,6 +2,10 @@
 #define THC_GENERIC_FILE "generic/THCTensorMathReduce.cu"
 #else
 
+#include <thrust/complex.h>
+typedef thrust::complex<float> ccx;
+typedef thrust::complex<double> zcx;
+
 THC_API void
 THCTensor_(sum)(THCState* state, THCTensor *self, THCTensor *src, long dimension) {
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, self, src));
@@ -279,15 +283,17 @@ THCTensor_(prodall)(THCState *state, THCTensor *self) {
   THCudaCheck(cudaGetLastError());
   return val;
 }
-
+#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
 THC_API accreal
 THCTensor_(meanall)(THCState *state, THCTensor *self)
 {
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 1, self));
   THArgCheck(self->nDimension > 0, 1, "empty Tensor");
-  return THCTensor_(sumall)(state, self)/THCTensor_(nElement)(state, self);
+  accreal r = THCTensor_(sumall)(state, self);
+  ptrdiff_t n = THCTensor_(nElement)(state, self);
+  return r/n;
 }
-
+#endif
 THC_API real
 THCTensor_(minall)(THCState *state, THCTensor *self) {
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 1, self));

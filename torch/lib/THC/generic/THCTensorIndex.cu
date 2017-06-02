@@ -129,7 +129,7 @@ void THCTensor_(indexCopy)(THCState *state, THCTensor *dst, int dim, THCudaLongT
 #undef SMALL_INDEX
 #undef LARGE_INDEX
 }
-
+#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
 void THCTensor_(indexAdd_long)(THCState *state, THCTensor *dst, int dim, THLongTensor *indices, THCTensor *src)
 {
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, dst, src));
@@ -257,7 +257,7 @@ void THCTensor_(indexAdd)(THCState *state, THCTensor *dst, int dim, THCudaLongTe
 #undef SMALL_INDEX
 #undef LARGE_INDEX
 }
-
+#endif
 void THCTensor_(indexFill_long)(THCState *state, THCTensor *dst, int dim, THLongTensor *indices, real val)
 {
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 1, dst));

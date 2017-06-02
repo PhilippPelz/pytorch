@@ -1,7 +1,7 @@
 #include "THCApply.cuh"
 #include "THCHalf.h"
 #include "THCNumerics.cuh"
-
+#include "generic/ldg.h"
 inline int curGPU() {
   int curDev;
   THCudaCheck(cudaGetDevice(&curDev));
@@ -16,6 +16,26 @@ struct CopyOp {
     *dst = ScalarConvert<TypeSrc, TypeDst>::to(__ldg(src));
 #else
     *dst = ScalarConvert<TypeSrc, TypeDst>::to(*src);
+#endif
+  }
+};
+
+struct CCopyOp {
+  __device__ __forceinline__ void operator()(ccx* dst, ccx* src) {
+#if __CUDA_ARCH__ >= 350
+    *dst = ScalarConvert<ccx, ccx>::to(__ldg(src));
+#else
+    *dst = ScalarConvert<ccx, ccx>::to(*src);
+#endif
+  }
+};
+
+struct ZCopyOp {
+  __device__ __forceinline__ void operator()(zcx* dst, zcx* src) {
+#if __CUDA_ARCH__ >= 350
+    *dst = ScalarConvert<zcx, zcx>::to(__ldg(src));
+#else
+    *dst = ScalarConvert<zcx, zcx>::to(*src);
 #endif
   }
 };

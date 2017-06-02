@@ -2,22 +2,27 @@
 #error "You must define THC_GENERIC_FILE before including THGenerateFloatType.h"
 #endif
 
-#include <cuComplex.h>
+#include <complex>
+#include <thrust/complex.h>
+typedef thrust::complex<float> ccx;
+typedef thrust::complex<double> zcx;
 
-#define real cuFloatComplex
+#define real ccx
 /* FIXME: fp64 has bad performance on some platforms; avoid using it unless
    we opt into it? */
-#define accreal cuFloatComplex
+#define accreal ccx
+#define part float
 #define Real ZFloat
-#define CReal ZCuda
-#define THC_REAL_IS_FLOAT
+#define CReal CudaZFloat
+#define THC_REAL_IS_ZFLOAT
 #line 1 THC_GENERIC_FILE
 #include THC_GENERIC_FILE
 #undef real
 #undef accreal
+#undef part
 #undef Real
 #undef CReal
-#undef THC_REAL_IS_FLOAT
+#undef THC_REAL_IS_ZFLOAT
 
 #ifndef THCGenerateAllTypes
 #ifndef THCGenerateFloatTypes

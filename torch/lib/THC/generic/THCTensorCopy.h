@@ -24,6 +24,14 @@ THC_API void THCTensor_(copyCudaDouble)(THCState *state, THCTensor *dst, struct 
 THC_API void THCTensor_(copyCudaHalf)(THCState *state, THCTensor *dst, struct THCudaHalfTensor *src);
 #endif
 
+#if defined(THC_REAL_IS_ZDOUBLE)
+THC_API void THCTensor_(copyCudaZDouble)(THCState *state, THCTensor *dst, struct THCudaZDoubleTensor *src);
+#endif
+
+#if defined(THC_REAL_IS_ZFLOAT)
+THC_API void THCTensor_(copyCudaZFloat)(THCState *state, THCTensor *dst, struct THCudaZFloatTensor *src);
+#endif
+
 THC_API void TH_CONCAT_2(THByteTensor_copyCuda  , Real)  (THCState *state, THByteTensor *self, THCTensor *src);
 THC_API void TH_CONCAT_2(THCharTensor_copyCuda  , Real)  (THCState *state, THCharTensor *self, THCTensor *src);
 THC_API void TH_CONCAT_2(THShortTensor_copyCuda , Real)  (THCState *state, THShortTensor *self, THCTensor *src);
@@ -32,6 +40,15 @@ THC_API void TH_CONCAT_2(THLongTensor_copyCuda  , Real)  (THCState *state, THLon
 THC_API void TH_CONCAT_2(THFloatTensor_copyCuda , Real)  (THCState *state, THFloatTensor *self, THCTensor *src);
 THC_API void TH_CONCAT_2(THDoubleTensor_copyCuda, Real)  (THCState *state, THDoubleTensor *self, THCTensor *src);
 THC_API void TH_CONCAT_2(THHalfTensor_copyCuda, Real)    (THCState *state, THHalfTensor *self, THCTensor *src);
+
+#if defined(THC_REAL_IS_ZDOUBLE)
+THC_API void TH_CONCAT_2(THZDoubleTensor_copyCuda, Real)  (THCState *state, THZDoubleTensor *self, THCTensor *src);
+#endif
+
+#if defined(THC_REAL_IS_ZFLOAT)
+THC_API void TH_CONCAT_2(THZFloatTensor_copyCuda , Real)  (THCState *state, THZFloatTensor *self, THCTensor *src);
+#endif
+
 THC_API void THCTensor_(copyCuda) (THCState *state, THCTensor *self, THCTensor *src);
 
 THC_API void THTensor_(copyCuda) (THCState *state, THTensor *self, THCTensor *src);

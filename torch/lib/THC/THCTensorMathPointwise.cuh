@@ -9,6 +9,10 @@
 #include "THCNumerics.cuh"
 #include "THCReduce.cuh"
 
+#include <thrust/complex.h>
+typedef thrust::complex<float> ccx;
+typedef thrust::complex<double> zcx;
+
 template <typename T>
 struct TensorSigmoidOp {
   __device__ __forceinline__ void operator()(T* out, T* in) const {
@@ -70,6 +74,28 @@ struct TensorSignOp<unsigned char> {
   __device__ __forceinline__ void operator()(unsigned char* v) {
     unsigned char orig = *v;
     *v = (orig == 0) ? 0 : 1;
+  }
+};
+
+template <>
+struct TensorSignOp<ccx> {
+  __device__ __forceinline__ void operator()(ccx* out, ccx* in) {
+    *out = thrust::polar(1.0f,thrust::arg(*in));
+  }
+
+  __device__ __forceinline__ void operator()(ccx* v) {
+    *v = thrust::polar(1.0f,thrust::arg(*v));
+  }
+};
+
+template <>
+struct TensorSignOp<zcx> {
+  __device__ __forceinline__ void operator()(zcx* out, zcx* in) {
+    *out = thrust::polar(1.0,thrust::arg(*in));
+  }
+
+  __device__ __forceinline__ void operator()(zcx* v) {
+    *v = thrust::polar(1.0,thrust::arg(*v));
   }
 };
 
@@ -293,6 +319,36 @@ struct TensorPowOp<double> {
   const double val;
 };
 
+template <>
+struct TensorPowOp<ccx> {
+  TensorPowOp(ccx v) : val(v) {}
+
+  __device__ __forceinline__ void operator()(ccx* out, ccx* in) {
+    *out = thrust::pow(*in, val);
+  }
+
+  __device__ __forceinline__ void operator()(ccx* v) {
+    *v = thrust::pow(*v, val);
+  }
+
+  ccx val;
+};
+
+template <>
+struct TensorPowOp<zcx> {
+  TensorPowOp(zcx v) : val(v) {}
+
+  __device__ __forceinline__ void operator()(zcx* out, zcx* in) {
+    *out = thrust::pow(*in, val);
+  }
+
+  __device__ __forceinline__ void operator()(zcx* v) {
+    *v = thrust::pow(*v, val);
+  }
+
+  zcx val;
+};
+
 #ifdef CUDA_HALF_TENSOR
 template <>
 struct TensorPowOp<half> {
@@ -352,6 +408,28 @@ struct TensorCPowOp<double> {
 
   __device__ __forceinline__ void operator()(double* out, double* in1, double* in2) {
     *out = pow(*in1, *in2);
+  }
+};
+
+template <>
+struct TensorCPowOp<ccx> {
+  __device__ __forceinline__ void operator()(ccx* out, ccx* in) {
+    *out = thrust::pow(*out, *in);
+  }
+
+  __device__ __forceinline__ void operator()(ccx* out, ccx* in1, ccx* in2) {
+    *out = thrust::pow(*in1, *in2);
+  }
+};
+
+template <>
+struct TensorCPowOp<zcx> {
+  __device__ __forceinline__ void operator()(zcx* out, zcx* in) {
+    *out = thrust::pow(*out, *in);
+  }
+
+  __device__ __forceinline__ void operator()(zcx* out, zcx* in1, zcx* in2) {
+    *out = thrust::pow(*in1, *in2);
   }
 };
 

@@ -157,13 +157,13 @@ ENDIF()
 SET(src
     THCCachingAllocator.cpp
     THCCachingHostAllocator.cpp
-    THCGeneral.c
-    THCStorageCopy.c
+    THCGeneral.cpp
+    THCStorageCopy.cpp
     THCStream.cpp
-    THCTensor.c
-    THCTensorCopy.c
+    THCTensor.cpp
+    THCTensorCopy.cpp
     THCTensorRandom.cpp
-    THCThreadLocal.c
+    THCThreadLocal.cpp
     )
 
 SET(src-cuda
@@ -193,7 +193,7 @@ SET(src-cuda
   )
 
 # loop over all types
-foreach(THC_TYPE Byte Char Short Int Long Half Float Double)
+foreach(THC_TYPE Byte Char Short Int Long Half Float Double ZFloat ZDouble)
    # loop over files which need to be split between types (because of long compile times)
    foreach(THC_FILE TensorSort TensorMathCompareT TensorMathPointwise TensorMathCompare TensorMathReduce TensorMasked)
       if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/generated/THC${THC_FILE}${THC_TYPE}.cu")
@@ -276,6 +276,7 @@ INSTALL(FILES
           THCDeviceTensorUtils.cuh
           THCDeviceTensorUtils-inl.cuh
           THCGenerateAllTypes.h
+          THCGenerateAllTypesButComplex.h
           THCGenerateByteType.h
           THCGenerateCharType.h
           THCGenerateShortType.h
@@ -283,8 +284,10 @@ INSTALL(FILES
           THCGenerateLongType.h
           THCGenerateHalfType.h
           THCGenerateFloatType.h
+          THCGenerateZFloatType.h
           THCGenerateFloatTypes.h
           THCGenerateDoubleType.h
+          THCGenerateZDoubleType.h
           THCHalf.h
           THCNumerics.cuh
           THCTensorSort.cuh
@@ -300,13 +303,13 @@ INSTALL(FILES
           generic/THCStorage.c
           generic/THCStorage.cu
           generic/THCStorage.h
-          generic/THCTensor.c
+          generic/THCTensor.cpp
           generic/THCTensor.cu
           generic/THCTensor.h
-          generic/THCStorageCopy.c
+          generic/THCStorageCopy.cpp
           generic/THCStorageCopy.cu
           generic/THCStorageCopy.h
-          generic/THCTensorCopy.c
+          generic/THCTensorCopy.cpp
           generic/THCTensorCopy.cu
           generic/THCTensorCopy.h
           generic/THCTensorMasked.h

@@ -33,20 +33,14 @@
 #define IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(NAME, CFUNC, REAL) \
   IMPLEMENT_CUDA_TENSOR_BASIC_FUNC_(NAME, CFUNC, REAL)
 
-#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_HALF)
+#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_HALF)
 
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(  log, THCNumerics<real>::log,   Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(log1p, THCNumerics<real>::log1p, Real)
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(  exp, THCNumerics<real>::exp,   Real)
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(  cos, THCNumerics<real>::cos,   Real)
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(  sin, THCNumerics<real>::sin,   Real)
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC( sqrt, THCNumerics<real>::sqrt,  Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(rsqrt, THCNumerics<real>::rsqrt, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC( ceil, THCNumerics<real>::ceil,  Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(floor, THCNumerics<real>::floor, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(trunc, THCNumerics<real>::trunc, Real)
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(  neg, THCNumerics<real>::neg,   Real)
-
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC( acos, THCNumerics<real>::acos,  Real)
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC( cosh, THCNumerics<real>::cosh,  Real)
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC( asin, THCNumerics<real>::asin,  Real)
@@ -54,13 +48,55 @@ IMPLEMENT_CUDA_TENSOR_BASIC_FUNC( sinh, THCNumerics<real>::sinh,  Real)
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(  tan, THCNumerics<real>::tan,   Real)
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC( atan, THCNumerics<real>::atan,  Real)
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC( tanh, THCNumerics<real>::tanh,  Real)
+IMPLEMENT_CUDA_TENSOR_BASIC_FUNC( cinv, THCNumerics<real>::cinv,  Real)
+IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(  abs, THCNumerics<real>::abs,   Real)
+
+#endif //defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_HALF)
+
+#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_HALF)
+
+IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(log1p, THCNumerics<real>::log1p, Real)
+IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(rsqrt, THCNumerics<real>::rsqrt, Real)
+IMPLEMENT_CUDA_TENSOR_BASIC_FUNC( ceil, THCNumerics<real>::ceil,  Real)
+IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(floor, THCNumerics<real>::floor, Real)
+IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(trunc, THCNumerics<real>::trunc, Real)
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(round, THCNumerics<real>::round, Real)
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC( frac, THCNumerics<real>::frac,  Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC( cinv, THCNumerics<real>::cinv,  Real)
 
-#endif
+void THCTensor_(sigmoid)(THCState* state, THCTensor* self_, THCTensor* src) {
+  THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, self_, src));
+  if (self_ == src) {
+    if (!THC_pointwiseApply1(state, self_, TensorSigmoidOp<real>())) {
+      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+    }
+  } else {
+    THCTensor_(resizeAs)(state, self_, src);
 
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(  abs, THCNumerics<real>::abs,   Real)
+    if (!THC_pointwiseApply2(state, self_, src, TensorSigmoidOp<real>())) {
+      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+    }
+  }
+
+  THCudaCheck(cudaGetLastError());
+}
+
+
+THC_API void
+THCTensor_(lerp)(THCState *state, THCTensor *result, THCTensor *a, THCTensor *b, real w)
+{
+  THCAssertSameGPU(THCTensor_(checkGPU)(state, 3, result, a, b));
+  THArgCheck(THCTensor_(nElement)(state, a) ==
+             THCTensor_(nElement)(state, b), 3, "sizes do not match");
+  THCTensor_(resizeAs)(state, result, a);
+
+  if (!THC_pointwiseApply3(state, result, a, b, TensorLerpOp<real>(w))) {
+    THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+  }
+
+  THCudaCheck(cudaGetLastError());
+}
+
+#endif //defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_HALF)
 
 #undef IMPLEMENT_CUDA_TENSOR_BASIC_FUNC_
 #undef IMPLEMENT_CUDA_TENSOR_BASIC_FUNC
@@ -136,25 +172,7 @@ THCTensor_(cross)(THCState *state, THCTensor *self, THCTensor *x, THCTensor *y, 
   THCTensor_(free)(state, nself);
 }
 
-
-#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_HALF)
-
-void THCTensor_(sigmoid)(THCState* state, THCTensor* self_, THCTensor* src) {
-  THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, self_, src));
-  if (self_ == src) {
-    if (!THC_pointwiseApply1(state, self_, TensorSigmoidOp<real>())) {
-      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
-    }
-  } else {
-    THCTensor_(resizeAs)(state, self_, src);
-
-    if (!THC_pointwiseApply2(state, self_, src, TensorSigmoidOp<real>())) {
-      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
-    }
-  }
-
-  THCudaCheck(cudaGetLastError());
-}
+#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_HALF)
 
 void THCTensor_(pow)(THCState *state, THCTensor *self_, THCTensor *src, real value) {
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, self_, src));
@@ -191,22 +209,8 @@ void THCTensor_(tpow)(THCState *state, THCTensor *self_, real value, THCTensor *
   THCudaCheck(cudaGetLastError());
 }
 
-THC_API void
-THCTensor_(lerp)(THCState *state, THCTensor *result, THCTensor *a, THCTensor *b, real w)
-{
-  THCAssertSameGPU(THCTensor_(checkGPU)(state, 3, result, a, b));
-  THArgCheck(THCTensor_(nElement)(state, a) ==
-             THCTensor_(nElement)(state, b), 3, "sizes do not match");
-  THCTensor_(resizeAs)(state, result, a);
+#endif //defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_HALF)
 
-  if (!THC_pointwiseApply3(state, result, a, b, TensorLerpOp<real>(w))) {
-    THArgCheck(false, 2, CUTORCH_DIM_WARNING);
-  }
-
-  THCudaCheck(cudaGetLastError());
-}
-
-#endif
 
 THC_API void
 THCTensor_(cadd)(THCState *state, THCTensor *self_, THCTensor* src1, real value, THCTensor *src2)
@@ -361,62 +365,6 @@ THCTensor_(cdiv)(THCState* state, THCTensor *self_, THCTensor *src1, THCTensor *
 }
 
 THC_API void
-THCTensor_(clshift)(THCState* state, THCTensor *self_, THCTensor *src1, THCTensor *src2)
-{
-#if defined(THC_REAL_IS_HALF)
-  return THError("clshift not supported for torch.CudaHalfTensor");
-#else
-  THAssert(THCTensor_(checkGPU)(state, 3, self_, src1, src2));
-  THArgCheck(THCTensor_(nElement)(state, src1) ==
-             THCTensor_(nElement)(state, src2), 3, "sizes do not match");
-
-  if (self_ == src1) {
-    // self /= src2
-    if (!THC_pointwiseApply2(state, self_, src2, TensorLShiftOp<real>())) {
-      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
-    }
-  } else {
-    THCTensor_(resizeAs)(state, self_, src1);
-
-    // self = src1 / src2
-    if (!THC_pointwiseApply3(state, self_, src1, src2, TensorLShiftOp<real>())) {
-      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
-    }
-  }
-
-  THCudaCheck(cudaGetLastError());
-#endif
-}
-
-THC_API void
-THCTensor_(crshift)(THCState* state, THCTensor *self_, THCTensor *src1, THCTensor *src2)
-{
-#if defined(THC_REAL_IS_HALF)
-  return THError("crshift not supported for torch.CudaHalfTensor");
-#else
-  THAssert(THCTensor_(checkGPU)(state, 3, self_, src1, src2));
-  THArgCheck(THCTensor_(nElement)(state, src1) ==
-             THCTensor_(nElement)(state, src2), 3, "sizes do not match");
-
-  if (self_ == src1) {
-    // self /= src2
-    if (!THC_pointwiseApply2(state, self_, src2, TensorRShiftOp<real>())) {
-      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
-    }
-  } else {
-    THCTensor_(resizeAs)(state, self_, src1);
-
-    // self = src1 / src2
-    if (!THC_pointwiseApply3(state, self_, src1, src2, TensorRShiftOp<real>())) {
-      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
-    }
-  }
-
-  THCudaCheck(cudaGetLastError());
-#endif
-}
-
-THC_API void
 THCTensor_(cmax)(THCState *state, THCTensor *self, THCTensor *src1, THCTensor *src2)
 {
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 3, self, src1, src2));
@@ -449,44 +397,6 @@ THCTensor_(cmin)(THCState *state, THCTensor *self, THCTensor *src1, THCTensor *s
   } else {
     THCTensor_(resizeAs)(state, self, src1);
     if (!THC_pointwiseApply3(state, self, src1, src2, TensorMinOp<real>())) {
-      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
-    }
-  }
-}
-
-THC_API void
-THCTensor_(cremainder)(THCState *state, THCTensor *self, THCTensor *src1, THCTensor *src2)
-{
-  THCAssertSameGPU(THCTensor_(checkGPU)(state, 3, self, src1, src2));
-  THArgCheck(THCTensor_(nElement)(state, src1) ==
-             THCTensor_(nElement)(state, src2), 2, "sizes do not match");
-
-  if (self == src1) {
-    if (!THC_pointwiseApply2(state, self, src2, TensorCRemainderOp<real>())) {
-      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
-    }
-  } else {
-    THCTensor_(resizeAs)(state, self, src1);
-    if (!THC_pointwiseApply3(state, self, src1, src2, TensorCRemainderOp<real>())) {
-      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
-    }
-  }
-}
-
-THC_API void
-THCTensor_(cfmod)(THCState *state, THCTensor *self, THCTensor *src1, THCTensor *src2)
-{
-  THCAssertSameGPU(THCTensor_(checkGPU)(state, 3, self, src1, src2));
-  THArgCheck(THCTensor_(nElement)(state, src1) ==
-             THCTensor_(nElement)(state, src2), 2, "sizes do not match");
-
-  if (self == src1) {
-    if (!THC_pointwiseApply2(state, self, src2, TensorCFmodOp<real>())) {
-      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
-    }
-  } else {
-    THCTensor_(resizeAs)(state, self, src1);
-    if (!THC_pointwiseApply3(state, self, src1, src2, TensorCFmodOp<real>())) {
       THArgCheck(false, 2, CUTORCH_DIM_WARNING);
     }
   }
@@ -575,6 +485,102 @@ THCTensor_(addcdiv)(THCState *state, THCTensor *self_, THCTensor *t, real value,
   THCudaCheck(cudaGetLastError());
 }
 
+#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
+
+THC_API void
+THCTensor_(clshift)(THCState* state, THCTensor *self_, THCTensor *src1, THCTensor *src2)
+{
+#if defined(THC_REAL_IS_HALF)
+  return THError("clshift not supported for torch.CudaHalfTensor");
+#else
+  THAssert(THCTensor_(checkGPU)(state, 3, self_, src1, src2));
+  THArgCheck(THCTensor_(nElement)(state, src1) ==
+             THCTensor_(nElement)(state, src2), 3, "sizes do not match");
+
+  if (self_ == src1) {
+    // self /= src2
+    if (!THC_pointwiseApply2(state, self_, src2, TensorLShiftOp<real>())) {
+      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+    }
+  } else {
+    THCTensor_(resizeAs)(state, self_, src1);
+
+    // self = src1 / src2
+    if (!THC_pointwiseApply3(state, self_, src1, src2, TensorLShiftOp<real>())) {
+      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+    }
+  }
+
+  THCudaCheck(cudaGetLastError());
+#endif
+}
+
+THC_API void
+THCTensor_(crshift)(THCState* state, THCTensor *self_, THCTensor *src1, THCTensor *src2)
+{
+#if defined(THC_REAL_IS_HALF)
+  return THError("crshift not supported for torch.CudaHalfTensor");
+#else
+  THAssert(THCTensor_(checkGPU)(state, 3, self_, src1, src2));
+  THArgCheck(THCTensor_(nElement)(state, src1) ==
+             THCTensor_(nElement)(state, src2), 3, "sizes do not match");
+
+  if (self_ == src1) {
+    // self /= src2
+    if (!THC_pointwiseApply2(state, self_, src2, TensorRShiftOp<real>())) {
+      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+    }
+  } else {
+    THCTensor_(resizeAs)(state, self_, src1);
+
+    // self = src1 / src2
+    if (!THC_pointwiseApply3(state, self_, src1, src2, TensorRShiftOp<real>())) {
+      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+    }
+  }
+
+  THCudaCheck(cudaGetLastError());
+#endif
+}
+
+THC_API void
+THCTensor_(cremainder)(THCState *state, THCTensor *self, THCTensor *src1, THCTensor *src2)
+{
+  THCAssertSameGPU(THCTensor_(checkGPU)(state, 3, self, src1, src2));
+  THArgCheck(THCTensor_(nElement)(state, src1) ==
+             THCTensor_(nElement)(state, src2), 2, "sizes do not match");
+
+  if (self == src1) {
+    if (!THC_pointwiseApply2(state, self, src2, TensorCRemainderOp<real>())) {
+      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+    }
+  } else {
+    THCTensor_(resizeAs)(state, self, src1);
+    if (!THC_pointwiseApply3(state, self, src1, src2, TensorCRemainderOp<real>())) {
+      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+    }
+  }
+}
+
+THC_API void
+THCTensor_(cfmod)(THCState *state, THCTensor *self, THCTensor *src1, THCTensor *src2)
+{
+  THCAssertSameGPU(THCTensor_(checkGPU)(state, 3, self, src1, src2));
+  THArgCheck(THCTensor_(nElement)(state, src1) ==
+             THCTensor_(nElement)(state, src2), 2, "sizes do not match");
+
+  if (self == src1) {
+    if (!THC_pointwiseApply2(state, self, src2, TensorCFmodOp<real>())) {
+      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+    }
+  } else {
+    THCTensor_(resizeAs)(state, self, src1);
+    if (!THC_pointwiseApply3(state, self, src1, src2, TensorCFmodOp<real>())) {
+      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+    }
+  }
+}
+
 THC_API void
 THCTensor_(cbitand)(THCState* state, THCTensor *self_, THCTensor *src1, THCTensor *src2)
 {
@@ -658,4 +664,7 @@ THCTensor_(cbitxor)(THCState* state, THCTensor *self_, THCTensor *src1, THCTenso
   THCudaCheck(cudaGetLastError());
 #endif
 }
+
+#endif // !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
+
 #endif

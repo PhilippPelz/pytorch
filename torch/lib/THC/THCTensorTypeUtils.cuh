@@ -77,6 +77,8 @@ TENSOR_UTILS(THCudaIntTensor, int, long);
 TENSOR_UTILS(THCudaLongTensor, long, long);
 TENSOR_UTILS(THCudaTensor, float, float);
 TENSOR_UTILS(THCudaDoubleTensor, double, double);
+TENSOR_UTILS(THCudaZDoubleTensor, zcx, zcx);
+TENSOR_UTILS(THCudaZFloatTensor, ccx, ccx);
 
 #ifdef CUDA_HALF_TENSOR
 TENSOR_UTILS(THCudaHalfTensor, half, float);
