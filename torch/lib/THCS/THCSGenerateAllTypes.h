@@ -22,6 +22,7 @@
 #include "THCSGenerateHalfType.h"
 #include "THCSGenerateFloatType.h"
 #include "THCSGenerateDoubleType.h"
+#include "THCSGenerateComplexTypes.h"
 
 #undef THCSTypeIdxByte
 #undef THCSTypeIdxChar

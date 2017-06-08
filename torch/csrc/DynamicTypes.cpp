@@ -124,6 +124,12 @@ static std::unique_ptr<Tensor> createTensor(void *tensor, Type type,
     } else if (type == Type::DOUBLE) {
       return std::unique_ptr<Tensor>(
           new THCTensor<double>(state, (THCudaDoubleTensor *)tensor));
+    } else if (type == Type::ZFLOAT) {
+      return std::unique_ptr<Tensor>(
+          new THCTensor<ccx>(state, (THCudaZFloatTensor *)tensor));
+    } else if (type == Type::ZDOUBLE) {
+      return std::unique_ptr<Tensor>(
+          new THCTensor<zcx>(state, (THCudaZDoubleTensor *)tensor));
     } else if (type == Type::HALF) {
       return std::unique_ptr<Tensor>(
           new THCTensor<half>(state, (THCudaHalfTensor *)tensor));

@@ -311,6 +311,11 @@ THPCopyList THStorage_(copy_functions);
 
 void THPStorage_(initCopyMethods)() {
   auto &h = THStorage_(copy_functions);
+#if defined(TH_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZFLOAT)
+  THPInsertCopyFunction(h, &THStorage_(copyZFloat));
+#elif defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZDOUBLE)
+  THPInsertCopyFunction(h, &THStorage_(copyZDouble));
+#else
   // copy from CPU types
   THPInsertCopyFunction(h, &THStorage_(copyByte));
   THPInsertCopyFunction(h, &THStorage_(copyChar));
@@ -320,7 +325,14 @@ void THPStorage_(initCopyMethods)() {
   THPInsertCopyFunction(h, &THStorage_(copyHalf));
   THPInsertCopyFunction(h, &THStorage_(copyFloat));
   THPInsertCopyFunction(h, &THStorage_(copyDouble));
+#endif
+
 #ifdef THC_GENERIC_FILE
+#if defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZFLOAT)
+  THPInsertCopyFunction(h, &THStorage_(copyCudaZFloat));
+#elif defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZDOUBLE)
+  THPInsertCopyFunction(h, &THStorage_(copyCudaZDouble));
+#else
   // copy from GPU types
   THPInsertCopyFunction(h, &THStorage_(copyCudaByte));
   THPInsertCopyFunction(h, &THStorage_(copyCudaChar));
@@ -331,11 +343,19 @@ void THPStorage_(initCopyMethods)() {
   THPInsertCopyFunction(h, &THStorage_(copyCudaDouble));
 #ifdef CUDA_HALF_TENSOR
   THPInsertCopyFunction(h, &THStorage_(copyCudaHalf));
-#endif
+#endif // CUDA_HALF_TENSOR
+#endif // defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+
+
 // add CPU <- GPU copies to base type
 #define THCpuStorage_(name) TH_CONCAT_4(TH, Real, Storage_, name)
   extern THPCopyList THCpuStorage_(copy_functions);
   auto &b = THCpuStorage_(copy_functions);
+#if defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZFLOAT)
+  THPInsertCopyFunction(b, &THCpuStorage_(copyCudaZFloat));
+#elif defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZDOUBLE)
+  THPInsertCopyFunction(b, &THCpuStorage_(copyCudaZDouble));
+#else
   THPInsertCopyFunction(b, &THCpuStorage_(copyCudaByte));
   THPInsertCopyFunction(b, &THCpuStorage_(copyCudaChar));
   THPInsertCopyFunction(b, &THCpuStorage_(copyCudaShort));
@@ -345,9 +365,12 @@ void THPStorage_(initCopyMethods)() {
   THPInsertCopyFunction(b, &THCpuStorage_(copyCudaDouble));
 #ifdef CUDA_HALF_TENSOR
   THPInsertCopyFunction(b, &THCpuStorage_(copyCudaHalf));
-#endif
+#endif // CUDA_HALF_TENSOR
+
+#endif // defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+
 #undef THCpuStorage_
-#endif
+#endif // THC_GENERIC_FILE
 }
 
 #include "StorageMethods.cpp"

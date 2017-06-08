@@ -7,7 +7,11 @@
 THC_API void THCStorage_(rawCopy)(THCState *state, THCStorage *storage, real *src);
 THC_API void THCStorage_(copy)(THCState *state, THCStorage *storage, THCStorage *src);
 
-#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
+#if defined(THC_REAL_IS_ZFLOAT)
+THC_API void THCStorage_(copyZFloat)(THCState *state, THCStorage *storage, struct THZFloatStorage *src);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+THC_API void THCStorage_(copyZDouble)(THCState *state, THCStorage *storage, struct THZDoubleStorage *src);
+#else
 THC_API void THCStorage_(copyByte)(THCState *state, THCStorage *storage, struct THByteStorage *src);
 THC_API void THCStorage_(copyChar)(THCState *state, THCStorage *storage, struct THCharStorage *src);
 THC_API void THCStorage_(copyShort)(THCState *state, THCStorage *storage, struct THShortStorage *src);
@@ -18,15 +22,12 @@ THC_API void THCStorage_(copyDouble)(THCState *state, THCStorage *storage, struc
 THC_API void THCStorage_(copyHalf)(THCState *state, THCStorage *storage, struct THHalfStorage *src);
 #endif
 
+
 #if defined(THC_REAL_IS_ZFLOAT)
-THC_API void THCStorage_(copyZFloat)(THCState *state, THCStorage *storage, struct THZFloatStorage *src);
-#endif
-
-#if defined(THC_REAL_IS_ZDOUBLE)
-THC_API void THCStorage_(copyZDouble)(THCState *state, THCStorage *storage, struct THZDoubleStorage *src);
-#endif
-
-#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
+THC_API void THCStorage_(copyCudaZFloat)(THCState *state, THCStorage *storage, struct THCudaZFloatStorage *src);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+THC_API void THCStorage_(copyCudaZDouble)(THCState *state, THCStorage *storage, struct THCudaZDoubleStorage *src);
+#else
 THC_API void THCStorage_(copyCudaByte)(THCState *state, THCStorage *storage, struct THCudaByteStorage *src);
 THC_API void THCStorage_(copyCudaChar)(THCState *state, THCStorage *storage, struct THCudaCharStorage *src);
 THC_API void THCStorage_(copyCudaShort)(THCState *state, THCStorage *storage, struct THCudaShortStorage *src);
@@ -36,19 +37,15 @@ THC_API void THCStorage_(copyCudaFloat)(THCState *state, THCStorage *storage, st
 THC_API void THCStorage_(copyCudaDouble)(THCState *state, THCStorage *storage, struct THCudaDoubleStorage *src);
 #endif
 
-#if defined(THC_REAL_IS_ZFLOAT)
-THC_API void THCStorage_(copyCudaZFloat)(THCState *state, THCStorage *storage, struct THCudaZFloatStorage *src);
-#endif
-
-#if defined(THC_REAL_IS_ZDOUBLE)
-THC_API void THCStorage_(copyCudaZDouble)(THCState *state, THCStorage *storage, struct THCudaZDoubleStorage *src);
-#endif
-
 #ifdef CUDA_HALF_TENSOR
 THC_API void THCStorage_(copyCudaHalf)(THCState *state, THCStorage *storage, struct THCudaHalfStorage *src);
 #endif
 
-#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
+#if defined(THC_REAL_IS_ZFLOAT)
+THC_API void TH_CONCAT_2(THZFloatStorage_copyCuda , Real)(THCState *state, THZFloatStorage *self, struct THCStorage *src);
+#elif defined(THC_REAL_IS_ZDOUBLE)
+THC_API void TH_CONCAT_2(THZDoubleStorage_copyCuda, Real)(THCState *state, THZDoubleStorage *self, struct THCStorage *src);
+#else
 THC_API void TH_CONCAT_2(THByteStorage_copyCuda  , Real)(THCState *state, THByteStorage *self, struct THCStorage *src);
 THC_API void TH_CONCAT_2(THCharStorage_copyCuda  , Real)(THCState *state, THCharStorage *self, struct THCStorage *src);
 THC_API void TH_CONCAT_2(THShortStorage_copyCuda , Real)(THCState *state, THShortStorage *self, struct THCStorage *src);
@@ -59,17 +56,7 @@ THC_API void TH_CONCAT_2(THDoubleStorage_copyCuda, Real)(THCState *state, THDoub
 THC_API void TH_CONCAT_2(THHalfStorage_copyCuda, Real)(THCState *state, THHalfStorage *self, struct THCStorage *src);
 #endif
 
-#if defined(THC_REAL_IS_ZFLOAT)
-THC_API void TH_CONCAT_2(THZFloatStorage_copyCuda , Real)(THCState *state, THZFloatStorage *self, struct THCStorage *src);
-#endif
-
-#if defined(THC_REAL_IS_ZDOUBLE)
-THC_API void TH_CONCAT_2(THZDoubleStorage_copyCuda, Real)(THCState *state, THZDoubleStorage *self, struct THCStorage *src);
-#endif
-
-#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)) || ((defined(THC_REAL_IS_ZFLOAT) ) && (defined(TH_REAL_IS_ZFLOAT) )) || (( defined(THC_REAL_IS_ZDOUBLE)) && ( defined(TH_REAL_IS_ZDOUBLE)))
 THC_API void THStorage_(copyCuda)(THCState *state, THStorage *self, THCStorage *src);
-#endif
 THC_API void THCStorage_(copyCuda)(THCState *state, THCStorage *self, THCStorage *src);
 THC_API void THCStorage_(copyCPU)(THCState *state, THCStorage *self, THStorage *src);
 

@@ -10,6 +10,10 @@
     PyObject_IsInstance(obj, THCPDoubleStorageClass)
 #define THCPFloatStorage_Check(obj) \
     PyObject_IsInstance(obj, THCPFloatStorageClass)
+#define THCPZDoubleStorage_Check(obj) \
+    PyObject_IsInstance(obj, THCPZDoubleStorageClass)
+#define THCPZFloatStorage_Check(obj) \
+    PyObject_IsInstance(obj, THCPZFloatStorageClass)
 #define THCPHalfStorage_Check(obj) \
     PyObject_IsInstance(obj, THCPHalfStorageClass)
 #define THCPLongStorage_Check(obj) \
@@ -25,6 +29,8 @@
 
 #define THCPDoubleStorage_CData(obj)  (obj)->cdata
 #define THCPFloatStorage_CData(obj)   (obj)->cdata
+#define THCPZDoubleStorage_CData(obj)  (obj)->cdata
+#define THCPZFloatStorage_CData(obj)   (obj)->cdata
 #define THCPLongStorage_CData(obj)    (obj)->cdata
 #define THCPIntStorage_CData(obj)     (obj)->cdata
 #define THCPShortStorage_CData(obj)   (obj)->cdata

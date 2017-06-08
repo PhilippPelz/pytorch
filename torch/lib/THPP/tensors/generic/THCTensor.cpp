@@ -289,9 +289,12 @@ auto THCTensor<real>::range(scalar_type xmin, scalar_type xmax,
   throw std::runtime_error("THCTensor::range() not implemented");
 }
 
+// #if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
+
 template<>
 auto THCTensor<real>::sort(const Tensor& ri, const Tensor& src,
                            int dimension, int desc) -> THCTensor& {
+#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
   THCTensor_(sort)(
     state,
     tensor,
@@ -301,6 +304,9 @@ auto THCTensor<real>::sort(const Tensor& ri, const Tensor& src,
     desc
   );
   return *this;
+  #else
+    throw std::runtime_error("THCTensor::topk() is implemented not for complex float type");
+  #endif
 }
 
 template<>
@@ -322,7 +328,7 @@ auto THCTensor<real>::topk(const Tensor& ri, const Tensor& src,
   throw std::runtime_error("THCTensor::topk() is implemented only for float type");
 #endif
 }
-
+// #endif
 template<>
 auto THCTensor<real>::tril(const Tensor& src, long k) -> THCTensor& {
   THCTensor_(tril)(state, tensor, const_tensor_cast(src).tensor, k);
@@ -662,22 +668,30 @@ auto THCTensor<real>::div(const Tensor &src, scalar_type value) -> THCTensor& {
   THCTensor_(div)(state, tensor, src_t.tensor, cast_scalar(value));
   return *this;
 }
-
+// #if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
 template<>
 auto THCTensor<real>::fmod(const Tensor &src, scalar_type value) -> THCTensor& {
+#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
   const THCTensor &src_t = const_tensor_cast(src);
   THCTensor_(fmod)(state, tensor, src_t.tensor, cast_scalar(value));
   return *this;
+#else
+throw std::runtime_error("fmod is not available for `complex float` and `complex double` types");
+#endif
 }
 
 template<>
 auto THCTensor<real>::remainder(const Tensor &src,
                                 scalar_type value) -> THCTensor& {
+#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
   const THCTensor &src_t = const_tensor_cast(src);
   THCTensor_(remainder)(state, tensor, src_t.tensor, cast_scalar(value));
   return *this;
+#else
+  throw std::runtime_error("fmod is not available for `complex float` and `complex double` types");
+#endif
 }
-
+// #endif
 template<>
 auto THCTensor<real>::clamp(const Tensor &src, scalar_type min_value,
                             scalar_type max_value) -> THCTensor& {
@@ -734,22 +748,34 @@ auto THCTensor<real>::cdiv(const Tensor& src1, const Tensor& src2) -> THCTensor&
   return *this;
 }
 
+// #if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
+
 template<>
 auto THCTensor<real>::cfmod(const Tensor& src1, const Tensor& src2) -> THCTensor& {
+#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
   const THCTensor &src1_t = const_tensor_cast(src1);
   const THCTensor &src2_t = const_tensor_cast(src2);
   THCTensor_(cfmod)(state, tensor, src1_t.tensor, src2_t.tensor);
   return *this;
+#else
+  throw std::runtime_error("cfmod is not available for `complex float` and `complex double` types");
+#endif
 }
 
 template<>
 auto THCTensor<real>::cremainder(const Tensor& src1,
                                  const Tensor& src2) -> THCTensor& {
+#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
   const THCTensor &src1_t = const_tensor_cast(src1);
   const THCTensor &src2_t = const_tensor_cast(src2);
   THCTensor_(cremainder)(state, tensor, src1_t.tensor, src2_t.tensor);
   return *this;
+#else
+  throw std::runtime_error("cremainder is not available for `complex float` and `complex double` types");
+#endif
 }
+
+// #endif
 
 template<>
 auto THCTensor<real>::addcmul(const Tensor& src1, scalar_type value,

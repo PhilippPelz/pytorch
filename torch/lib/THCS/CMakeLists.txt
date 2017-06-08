@@ -140,6 +140,7 @@ INSTALL(FILES
           THCS.h
           THCSTensor.h
           THCSGenerateAllTypes.h
+          THCSGenerateComplexTypes.h
           THCSGenerateByteType.h
           THCSGenerateCharType.h
           THCSGenerateShortType.h
@@ -147,8 +148,10 @@ INSTALL(FILES
           THCSGenerateLongType.h
           THCSGenerateHalfType.h
           THCSGenerateFloatType.h
+          THCSGenerateZFloatType.h
           THCSGenerateFloatTypes.h
           THCSGenerateDoubleType.h
+          THCSGenerateZDoubleType.h
           DESTINATION "${THCS_INSTALL_INCLUDE_SUBDIR}/THCS")
 
 INSTALL(FILES

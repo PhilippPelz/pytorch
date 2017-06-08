@@ -9,6 +9,10 @@ static int getObjDevice(PyObject *obj) {
     return THCudaDoubleTensor_getDevice(LIBRARY_STATE ((THCPDoubleTensor*)obj)->cdata);
   } else if (obj_type == THCPFloatTensorClass) {
     return THCudaTensor_getDevice(LIBRARY_STATE ((THCPFloatTensor*)obj)->cdata);
+  } else if (obj_type == THCPZFloatTensorClass) {
+    return THCudaZFloatTensor_getDevice(LIBRARY_STATE ((THCPZFloatTensor*)obj)->cdata);
+  } else if (obj_type == THCPZDoubleTensorClass) {
+    return THCudaZDoubleTensor_getDevice(LIBRARY_STATE ((THCPZDoubleTensor*)obj)->cdata);
   } else if (obj_type == THCPHalfTensorClass) {
     return THCudaHalfTensor_getDevice(LIBRARY_STATE ((THCPHalfTensor*)obj)->cdata);
   } else if (obj_type == THCPLongTensorClass) {

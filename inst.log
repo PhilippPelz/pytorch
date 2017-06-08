@@ -144,10 +144,10 @@ Install the project...
 -- Removing -DNDEBUG from compile flags
 -- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
 -- MAGMA not found. Compiling without MAGMA support
--- Autodetected CUDA architecture(s): 5.2 2.1(2.0)
+-- Autodetected CUDA architecture(s): 5.2
 -- got cuda version 8.0
 -- Found CUDA with FP16 support, compiling with torch.CudaHalfTensor
--- CUDA_NVCC_FLAGS:  -DTH_INDEX_BASE=0 -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP;-gencode;arch=compute_52,code=sm_52;-gencode;arch=compute_20,code=sm_21;-DCUDA_HAS_FP16=1
+-- CUDA_NVCC_FLAGS:  -DTH_INDEX_BASE=0 -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP;-gencode;arch=compute_52,code=sm_52;-DCUDA_HAS_FP16=1
 -- THC_SO_VERSION: 1
 -- Configuring done
 -- Generating done
@@ -255,10 +255,10 @@ Install the project...
 -- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
 -- THC_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so.1
 -- THS_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHS.so.1
--- Autodetected CUDA architecture(s): 5.2 2.1(2.0)
+-- Autodetected CUDA architecture(s): 5.2
 -- got cuda version 8.0
 -- Found CUDA with FP16 support, compiling with torch.CudaHalfTensor
--- CUDA_NVCC_FLAGS:  -DTH_INDEX_BASE=0 -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP;-gencode;arch=compute_52,code=sm_52;-gencode;arch=compute_20,code=sm_21;-DCUDA_HAS_FP16=1
+-- CUDA_NVCC_FLAGS:  -DTH_INDEX_BASE=0 -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP;-gencode;arch=compute_52,code=sm_52;-DCUDA_HAS_FP16=1
 -- THCS_SO_VERSION: 1
 -- Configuring done
 -- Generating done
@@ -271,6 +271,7 @@ Install the project...
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCS.h
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSTensor.h
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateAllTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateComplexTypes.h
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateByteType.h
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateCharType.h
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateShortType.h
@@ -278,8 +279,10 @@ Install the project...
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateLongType.h
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateHalfType.h
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateFloatType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateZFloatType.h
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateFloatTypes.h
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateDoubleType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateZDoubleType.h
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/generic/THCSTensor.cpp
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/generic/THCSTensor.cu
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/generic/THCSTensor.h
@@ -288,7 +291,7 @@ Install the project...
 -- Removing -DNDEBUG from compile flags
 -- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
 -- THC_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so.1
--- Autodetected CUDA architecture(s): 5.2 2.1(2.0)
+-- Autodetected CUDA architecture(s): 5.2
 -- THCUNN_SO_VERSION: 1
 -- Configuring done
 -- Generating done
@@ -319,469 +322,978 @@ Install the project...
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THPP
-Scanning dependencies of target THPP
-[ 11%] Building CXX object CMakeFiles/THPP.dir/storages/THCStorage.cpp.o
-[ 22%] Building CXX object CMakeFiles/THPP.dir/tensors/THTensor.cpp.o
-[ 33%] Building CXX object CMakeFiles/THPP.dir/Traits.cpp.o
-[ 44%] Building CXX object CMakeFiles/THPP.dir/TraitsCuda.cpp.o
-[ 55%] Building CXX object CMakeFiles/THPP.dir/tensors/THSTensor.cpp.o
-[ 66%] Building CXX object CMakeFiles/THPP.dir/tensors/THCTensor.cpp.o
-[ 77%] Building CXX object CMakeFiles/THPP.dir/storages/THStorage.cpp.o
-[ 88%] Building CXX object CMakeFiles/THPP.dir/tensors/THCSTensor.cpp.o
-In file included from storages/generic/THCStorage.cpp:1:0,
-                 from /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateAllTypes.h:27,
-                 from /home/philipp/projects/pytorch/torch/lib/THPP/storages/THCStorage.cpp:9:
-/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp: In member function ‘thpp::THCStorage<real>& thpp::THCStorage<real>::fill(thpp::THCStorage<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCStorage<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp:68:55: error: could not convert ‘value’ from ‘thpp::THCStorage<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-   THCStorage_(fill)(state, storage, cast_scalar(value));
-                                                       ^
-/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp: In member function ‘thpp::THCStorage<real>& thpp::THCStorage<real>::set(std::size_t, thpp::THCStorage<real>::scalar_type) [with real = thrust::complex<float>; std::size_t = long unsigned int; thpp::THCStorage<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp:74:59: error: could not convert ‘value’ from ‘thpp::THCStorage<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-   THCStorage_(set)(state, storage, ind, cast_scalar(value));
-                                                           ^
-/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp: In member function ‘thpp::THCStorage<real>::scalar_type thpp::THCStorage<real>::get(std::size_t) [with real = thrust::complex<float>; thpp::THCStorage<real>::scalar_type = __complex__ double; std::size_t = long unsigned int]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp:89:10: error: cannot convert ‘thrust::complex<float>’ to ‘thpp::THCStorage<thrust::complex<float> >::scalar_type {aka __complex__ double}’ in return
-   return v;
-          ^
-In file included from storages/generic/THCStorage.cpp:1:0,
-                 from /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateAllTypes.h:28,
-                 from /home/philipp/projects/pytorch/torch/lib/THPP/storages/THCStorage.cpp:9:
-/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp: In member function ‘thpp::THCStorage<real>& thpp::THCStorage<real>::fill(thpp::THCStorage<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCStorage<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp:68:55: error: could not convert ‘value’ from ‘thpp::THCStorage<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-   THCStorage_(fill)(state, storage, cast_scalar(value));
-                                                       ^
-/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp: In member function ‘thpp::THCStorage<real>& thpp::THCStorage<real>::set(std::size_t, thpp::THCStorage<real>::scalar_type) [with real = thrust::complex<double>; std::size_t = long unsigned int; thpp::THCStorage<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp:74:59: error: could not convert ‘value’ from ‘thpp::THCStorage<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-   THCStorage_(set)(state, storage, ind, cast_scalar(value));
-                                                           ^
-/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp: In member function ‘thpp::THCStorage<real>::scalar_type thpp::THCStorage<real>::get(std::size_t) [with real = thrust::complex<double>; thpp::THCStorage<real>::scalar_type = __complex__ double; std::size_t = long unsigned int]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp:89:10: error: cannot convert ‘thrust::complex<double>’ to ‘thpp::THCStorage<thrust::complex<double> >::scalar_type {aka __complex__ double}’ in return
-   return v;
-          ^
-CMakeFiles/THPP.dir/build.make:110: recipe for target 'CMakeFiles/THPP.dir/storages/THCStorage.cpp.o' failed
-make[2]: *** [CMakeFiles/THPP.dir/storages/THCStorage.cpp.o] Error 1
-make[2]: *** Waiting for unfinished jobs....
-In file included from tensors/generic/THCTensor.cpp:1:0,
-                 from /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateAllTypes.h:27,
-                 from /home/philipp/projects/pytorch/torch/lib/THPP/tensors/THCTensor.cpp:8:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::fill(thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:259:53: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-   THCTensor_(fill)(state, tensor, cast_scalar(value));
-                                                     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::sort(const thpp::Tensor&, const thpp::Tensor&, int, int) [with real = thrust::complex<float>]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:302:3: error: ‘THCudaZFloatTensor_sort’ was not declared in this scope
-   );
-   ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::ltValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:413:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(lt)
+[100%] Built target THPP
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHPP.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHPP.so
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/THPP.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/Storage.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/Tensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/Traits.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/TraitsCuda.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/Type.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/storages/THCStorage.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/storages/THStorage.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/storages/generic/THCStorage.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/storages/generic/THStorage.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/THCSTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/THCTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/THSTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/THTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/generic/THCSTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/generic/THCTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/generic/THSTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/generic/THTensor.hpp
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/libshm
+[100%] Built target shm
+[100%] Built target torch_shm_manager
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libshm.so
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/libshm.h
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/bin/torch_shm_manager
+running build
+running build_py
+-- Building version 0.1.10+9c18392
+copying torch/version.py -> build/lib.linux-x86_64-2.7/torch
+copying torch/lib/libTH.so.1 -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/libTHCUNN.so.1 -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/libTHS.so.1 -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/libTHC.so.1 -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/libshm.so -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/libnccl.so.1 -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/libTHCS.so.1 -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/libTHPP.so.1 -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/libTHNN.so.1 -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/torch_shm_manager -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/THNN.h -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/THCUNN.h -> build/lib.linux-x86_64-2.7/torch/lib
+copying torch/lib/include/TH/THAtomic.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THGenerateComplexTypes.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THLapack.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THTensor.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THGenerateFloatTypes.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/TH.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THAllocator.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THDiskFile.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THVector.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THRandom.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THGenerateIntTypes.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THTensorMacros.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THFilePrivate.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THGenerateHalfType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THGeneral.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THBlas.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THStorage.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THMemoryFile.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THTensorApply.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THGenerateAllTypes.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THTensorDimApply.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THFile.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THLogAdd.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THHalf.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THMath.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/generic/THStorageCopy.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THLapack.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THTensor.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THTensorMath.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THTensorCopy.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THTensorRandom.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THVector.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THTensorConv.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THBlas.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THStorage.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/TH/generic/THTensorLapack.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic
+copying torch/lib/include/THC/THCGenerateFloatTypes.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateAllTypes.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCAllocator.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCSleep.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateHalfType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateFloatType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateShortType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCTensorCopy.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THC.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCTensorRandom.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateZDoubleType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCThreadLocal.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateCharType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCHalf.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateDoubleType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCTensorMath.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCStorage.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateAllTypesButComplex.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGeneral.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCStream.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCCachingAllocator.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateIntType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCBlas.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateZFloatType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateByteType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCCachingHostAllocator.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCTensorTopK.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCGenerateLongType.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCTensor.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCStorageCopy.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/THCTensorConv.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC
+copying torch/lib/include/THC/generic/THCTensorMathPointwise.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMathBlas.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorScatterGather.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorCopy.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorIndex.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorRandom.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMode.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorSort.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMath.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCStorage.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMathMagma.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMasked.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMathScan.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMathPairwise.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensor.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMathReduce.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCStorageCopy.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMathCompareT.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+copying torch/lib/include/THC/generic/THCTensorMathCompare.h -> build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic
+running build_ext
+-- Building with NumPy bindings
+-- Not using cuDNN
+-- Detected CUDA at /usr/bin/
+-- Building NCCL library
+building 'torch._C' extension
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/PtrWrapper.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/PtrWrapper.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/Generator.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/Generator.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/Exceptions.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/Exceptions.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/Storage.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/Storage.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/byte_order.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/byte_order.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/utils/object_ptr.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/utils/object_ptr.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/allocators.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/allocators.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/init.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/init.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/utils/tuple_parser.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/utils/tuple_parser.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/Module.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/Module.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/utils.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/utils.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from torch/csrc/THP.h:32:0,
+                 from torch/csrc/Exceptions.cpp:3:
+torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/Tensor.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/Tensor.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from torch/csrc/autograd/init.cpp:3:
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from torch/csrc/THP.h:32:0,
+                 from torch/csrc/Generator.cpp:6:
+torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/engine.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/engine.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from torch/csrc/THP.h:32:0,
+                 from torch/csrc/allocators.cpp:3:
+torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/Size.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/Size.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/serialization.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/serialization.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/function.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/function.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/Types.h:4,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/variable.h:9,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/grad_buffer.h:12,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/engine.h:13,
+                 from torch/csrc/autograd/engine.cpp:1:
+/home/philipp/anaconda2/include/python2.7/pyconfig.h:1190:0: warning: "_POSIX_C_SOURCE" redefined
+ #define _POSIX_C_SOURCE 200112L
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::ltValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:413:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(lt)
+In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h:430,
+                 from /usr/include/c++/4.9/bits/stl_algobase.h:59,
+                 from /usr/include/c++/4.9/deque:60,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/engine.h:6,
+                 from torch/csrc/autograd/engine.cpp:1:
+/usr/include/features.h:225:0: note: this is the location of the previous definition
+ # define _POSIX_C_SOURCE 200809L
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::gtValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:414:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(gt)
+In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/Types.h:4,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/variable.h:9,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/grad_buffer.h:12,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/engine.h:13,
+                 from torch/csrc/autograd/engine.cpp:1:
+/home/philipp/anaconda2/include/python2.7/pyconfig.h:1212:0: warning: "_XOPEN_SOURCE" redefined
+ #define _XOPEN_SOURCE 600
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::gtValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:414:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(gt)
+In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h:430,
+                 from /usr/include/c++/4.9/bits/stl_algobase.h:59,
+                 from /usr/include/c++/4.9/deque:60,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/engine.h:6,
+                 from torch/csrc/autograd/engine.cpp:1:
+/usr/include/features.h:166:0: note: this is the location of the previous definition
+ # define _XOPEN_SOURCE 700
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::leValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:415:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(le)
+In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/Types.h:4,
+                 from torch/csrc/autograd/variable.h:9,
+                 from torch/csrc/autograd/function.cpp:6:
+/home/philipp/anaconda2/include/python2.7/pyconfig.h:1190:0: warning: "_POSIX_C_SOURCE" redefined
+ #define _POSIX_C_SOURCE 200112L
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::leValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:415:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(le)
+In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h:430,
+                 from /usr/include/c++/4.9/bits/stl_algobase.h:59,
+                 from /usr/include/c++/4.9/memory:62,
+                 from torch/csrc/autograd/function.h:9,
+                 from torch/csrc/autograd/function.cpp:1:
+/usr/include/features.h:225:0: note: this is the location of the previous definition
+ # define _POSIX_C_SOURCE 200809L
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::geValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:416:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(ge)
+In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/Types.h:4,
+                 from torch/csrc/autograd/variable.h:9,
+                 from torch/csrc/autograd/function.cpp:6:
+/home/philipp/anaconda2/include/python2.7/pyconfig.h:1212:0: warning: "_XOPEN_SOURCE" redefined
+ #define _XOPEN_SOURCE 600
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::geValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:416:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(ge)
+In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h:430,
+                 from /usr/include/c++/4.9/bits/stl_algobase.h:59,
+                 from /usr/include/c++/4.9/memory:62,
+                 from torch/csrc/autograd/function.h:9,
+                 from torch/csrc/autograd/function.cpp:1:
+/usr/include/features.h:166:0: note: this is the location of the previous definition
+ # define _XOPEN_SOURCE 700
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::eqValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:417:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(eq)
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/variable.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/variable.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from torch/csrc/THP.h:32:0,
+                 from torch/csrc/Size.cpp:4:
+torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/grad_buffer.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/grad_buffer.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/Types.h:4,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/variable.h:9,
+                 from torch/csrc/autograd/variable.cpp:1:
+/home/philipp/anaconda2/include/python2.7/pyconfig.h:1190:0: warning: "_POSIX_C_SOURCE" redefined
+ #define _POSIX_C_SOURCE 200112L
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::eqValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:417:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(eq)
+In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h:430,
+                 from /usr/include/c++/4.9/bits/stl_algobase.h:59,
+                 from /usr/include/c++/4.9/memory:62,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/variable.h:3,
+                 from torch/csrc/autograd/variable.cpp:1:
+/usr/include/features.h:225:0: note: this is the location of the previous definition
+ # define _POSIX_C_SOURCE 200809L
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::neValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:418:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(ne)
+In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/Types.h:4,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/variable.h:9,
+                 from torch/csrc/autograd/variable.cpp:1:
+/home/philipp/anaconda2/include/python2.7/pyconfig.h:1212:0: warning: "_XOPEN_SOURCE" redefined
+ #define _XOPEN_SOURCE 600
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::neValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:418:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(ne)
+In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h:430,
+                 from /usr/include/c++/4.9/bits/stl_algobase.h:59,
+                 from /usr/include/c++/4.9/memory:62,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/variable.h:3,
+                 from torch/csrc/autograd/variable.cpp:1:
+/usr/include/features.h:166:0: note: this is the location of the previous definition
+ # define _XOPEN_SOURCE 700
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::scatterFill(int, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:586:41: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-       index_t.tensor, cast_scalar(value));
-                                         ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::dot(const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:593:53: error: cannot convert ‘ccx {aka thrust::complex<float>}’ to ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ in return
-   return THCTensor_(dot)(state, tensor, src_t.tensor);
-                                                     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::minall() [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:598:56: error: cannot convert ‘ccx {aka thrust::complex<float>}’ to ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ in return
-   return uncast_scalar(THCTensor_(minall)(state, tensor));
-                                                        ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:19:26: note: in definition of macro ‘uncast_scalar’
- #define uncast_scalar(v) v
-                          ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::maxall() [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:603:56: error: cannot convert ‘ccx {aka thrust::complex<float>}’ to ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ in return
-   return uncast_scalar(THCTensor_(maxall)(state, tensor));
-                                                        ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:19:26: note: in definition of macro ‘uncast_scalar’
- #define uncast_scalar(v) v
-                          ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::sumall() [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:608:42: error: cannot convert ‘ccx {aka thrust::complex<float>}’ to ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ in return
-   return THCTensor_(sumall)(state, tensor);
-                                          ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::prodall() [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:613:43: error: cannot convert ‘ccx {aka thrust::complex<float>}’ to ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ in return
-   return THCTensor_(prodall)(state, tensor);
-                                           ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::add(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:641:66: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-   THCTensor_(add)(state, tensor, src_t.tensor, cast_scalar(value));
-                                                                  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::sub(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:648:66: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-   THCTensor_(sub)(state, tensor, src_t.tensor, cast_scalar(value));
-                                                                  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::mul(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:655:66: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-   THCTensor_(mul)(state, tensor, src_t.tensor, cast_scalar(value));
-                                                                  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::div(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:662:66: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-   THCTensor_(div)(state, tensor, src_t.tensor, cast_scalar(value));
-                                                                  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::fmod(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:669:67: error: ‘THCudaZFloatTensor_fmod’ was not declared in this scope
-   THCTensor_(fmod)(state, tensor, src_t.tensor, cast_scalar(value));
-                                                                   ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::remainder(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:677:72: error: ‘THCudaZFloatTensor_remainder’ was not declared in this scope
-   THCTensor_(remainder)(state, tensor, src_t.tensor, cast_scalar(value));
-                                                                        ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::clamp(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:686:29: error: could not convert ‘min_value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-       cast_scalar(max_value));
-                             ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cadd(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:695:83: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-   THCTensor_(cadd)(state, tensor, src1_t.tensor, cast_scalar(value), src2_t.tensor);
-                                                                                   ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::csub(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:709:83: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-   THCTensor_(csub)(state, tensor, src1_t.tensor, cast_scalar(value), src2_t.tensor);
-                                                                                   ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cfmod(const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<float>]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:741:64: error: ‘THCudaZFloatTensor_cfmod’ was not declared in this scope
-   THCTensor_(cfmod)(state, tensor, src1_t.tensor, src2_t.tensor);
-                                                                ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cremainder(const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<float>]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:750:69: error: ‘THCudaZFloatTensor_cremainder’ was not declared in this scope
-   THCTensor_(cremainder)(state, tensor, src1_t.tensor, src2_t.tensor);
-                                                                     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addcmul(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:762:35: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-       src2_t.tensor, src3_t.tensor);
-                                   ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addcdiv(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:774:35: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-       src2_t.tensor, src3_t.tensor);
-                                   ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addmv(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:786:53: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-       cast_scalar(alpha), mat_t.tensor, vec_t.tensor);
-                                                     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addmm(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:798:55: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-       cast_scalar(alpha), mat1_t.tensor, mat2_t.tensor);
-                                                       ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addr(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:810:55: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-       cast_scalar(alpha), vec1_t.tensor, vec2_t.tensor);
-                                                       ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addbmm(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:822:59: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-       cast_scalar(alpha), batch1_t.tensor, batch2_t.tensor);
-                                                           ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::baddbmm(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:834:59: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-       cast_scalar(alpha), batch1_t.tensor, batch2_t.tensor);
-                                                           ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::trace() [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:917:41: error: cannot convert ‘ccx {aka thrust::complex<float>}’ to ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ in return
-   return THCTensor_(trace)(state, tensor);
-                                         ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cmaxValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:949:72: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-   THCTensor_(cmaxValue)(state, tensor, src_t.tensor, cast_scalar(value));
-                                                                        ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cminValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<float>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:957:72: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<float> >::scalar_type {aka __complex__ double}’ to ‘ccx {aka thrust::complex<float>}’
-   THCTensor_(cminValue)(state, tensor, src_t.tensor, cast_scalar(value));
-                                                                        ^
-In file included from tensors/generic/THCTensor.cpp:1:0,
-                 from /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateAllTypes.h:28,
-                 from /home/philipp/projects/pytorch/torch/lib/THPP/tensors/THCTensor.cpp:8:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::fill(thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:259:53: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-   THCTensor_(fill)(state, tensor, cast_scalar(value));
-                                                     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::sort(const thpp::Tensor&, const thpp::Tensor&, int, int) [with real = thrust::complex<double>]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:302:3: error: ‘THCudaZDoubleTensor_sort’ was not declared in this scope
-   );
-   ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::ltValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:413:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(lt)
+In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/Types.h:4,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/variable.h:9,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/grad_buffer.h:12,
+                 from torch/csrc/autograd/grad_buffer.cpp:1:
+/home/philipp/anaconda2/include/python2.7/pyconfig.h:1190:0: warning: "_POSIX_C_SOURCE" redefined
+ #define _POSIX_C_SOURCE 200112L
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::ltValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:413:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(lt)
+In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h:430,
+                 from /usr/include/c++/4.9/bits/stl_algobase.h:59,
+                 from /usr/include/c++/4.9/vector:60,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/grad_buffer.h:7,
+                 from torch/csrc/autograd/grad_buffer.cpp:1:
+/usr/include/features.h:225:0: note: this is the location of the previous definition
+ # define _POSIX_C_SOURCE 200809L
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::gtValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:414:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(gt)
+In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/Types.h:4,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/variable.h:9,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/grad_buffer.h:12,
+                 from torch/csrc/autograd/grad_buffer.cpp:1:
+/home/philipp/anaconda2/include/python2.7/pyconfig.h:1212:0: warning: "_XOPEN_SOURCE" redefined
+ #define _XOPEN_SOURCE 600
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::gtValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:414:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(gt)
+In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h:430,
+                 from /usr/include/c++/4.9/bits/stl_algobase.h:59,
+                 from /usr/include/c++/4.9/vector:60,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/grad_buffer.h:7,
+                 from torch/csrc/autograd/grad_buffer.cpp:1:
+/usr/include/features.h:166:0: note: this is the location of the previous definition
+ # define _XOPEN_SOURCE 700
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::leValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:415:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(le)
+In file included from torch/csrc/THP.h:32:0,
+                 from torch/csrc/Module.cpp:15:
+torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/python_cpp_function.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_cpp_function.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/python_function.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_function.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from torch/csrc/THP.h:32:0,
+                 from torch/csrc/serialization.cpp:4:
+torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/python_engine.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_engine.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/functions/batch_normalization.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/functions/batch_normalization.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/Types.h:4,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/variable.h:9,
+                 from torch/csrc/autograd/functions/batch_normalization.h:7,
+                 from torch/csrc/autograd/functions/batch_normalization.cpp:1:
+/home/philipp/anaconda2/include/python2.7/pyconfig.h:1190:0: warning: "_POSIX_C_SOURCE" redefined
+ #define _POSIX_C_SOURCE 200112L
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::leValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:415:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(le)
+In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h:430,
+                 from /usr/include/c++/4.9/bits/stl_algobase.h:59,
+                 from /usr/include/c++/4.9/memory:62,
+                 from torch/csrc/autograd/functions/batch_normalization.h:3,
+                 from torch/csrc/autograd/functions/batch_normalization.cpp:1:
+/usr/include/features.h:225:0: note: this is the location of the previous definition
+ # define _POSIX_C_SOURCE 200809L
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::geValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:416:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(ge)
+In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/Types.h:4,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/variable.h:9,
+                 from torch/csrc/autograd/functions/batch_normalization.h:7,
+                 from torch/csrc/autograd/functions/batch_normalization.cpp:1:
+/home/philipp/anaconda2/include/python2.7/pyconfig.h:1212:0: warning: "_XOPEN_SOURCE" redefined
+ #define _XOPEN_SOURCE 600
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::geValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:416:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(ge)
+In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h:430,
+                 from /usr/include/c++/4.9/bits/stl_algobase.h:59,
+                 from /usr/include/c++/4.9/memory:62,
+                 from torch/csrc/autograd/functions/batch_normalization.h:3,
+                 from torch/csrc/autograd/functions/batch_normalization.cpp:1:
+/usr/include/features.h:166:0: note: this is the location of the previous definition
+ # define _XOPEN_SOURCE 700
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::eqValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:417:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(eq)
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/python_variable.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_variable.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from torch/csrc/autograd/python_engine.cpp:4:
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/python_hook.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_hook.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils/object_ptr.h:3,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/python_hook.h:4,
+                 from torch/csrc/autograd/python_hook.cpp:1:
+/home/philipp/anaconda2/include/python2.7/pyconfig.h:1190:0: warning: "_POSIX_C_SOURCE" redefined
+ #define _POSIX_C_SOURCE 200112L
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::eqValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:417:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(eq)
+In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h:430,
+                 from /usr/include/c++/4.9/bits/stl_algobase.h:59,
+                 from /usr/include/c++/4.9/memory:62,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/function_hook.h:3,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/python_hook.h:3,
+                 from torch/csrc/autograd/python_hook.cpp:1:
+/usr/include/features.h:225:0: note: this is the location of the previous definition
+ # define _POSIX_C_SOURCE 200809L
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::neValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:371:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:418:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(ne)
+In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils/object_ptr.h:3,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/python_hook.h:4,
+                 from torch/csrc/autograd/python_hook.cpp:1:
+/home/philipp/anaconda2/include/python2.7/pyconfig.h:1212:0: warning: "_XOPEN_SOURCE" redefined
+ #define _XOPEN_SOURCE 600
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::neValueT(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:383:5: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-     );                                                               \
-     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:418:1: note: in expansion of macro ‘TENSOR_IMPLEMENT_LOGICAL’
- TENSOR_IMPLEMENT_LOGICAL(ne)
+In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h:430,
+                 from /usr/include/c++/4.9/bits/stl_algobase.h:59,
+                 from /usr/include/c++/4.9/memory:62,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/function_hook.h:3,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/python_hook.h:3,
+                 from torch/csrc/autograd/python_hook.cpp:1:
+/usr/include/features.h:166:0: note: this is the location of the previous definition
+ # define _XOPEN_SOURCE 700
  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::scatterFill(int, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:586:41: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-       index_t.tensor, cast_scalar(value));
-                                         ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::dot(const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:593:53: error: cannot convert ‘zcx {aka thrust::complex<double>}’ to ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ in return
-   return THCTensor_(dot)(state, tensor, src_t.tensor);
-                                                     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::minall() [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:598:56: error: cannot convert ‘zcx {aka thrust::complex<double>}’ to ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ in return
-   return uncast_scalar(THCTensor_(minall)(state, tensor));
-                                                        ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:19:26: note: in definition of macro ‘uncast_scalar’
- #define uncast_scalar(v) v
-                          ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::maxall() [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:603:56: error: cannot convert ‘zcx {aka thrust::complex<double>}’ to ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ in return
-   return uncast_scalar(THCTensor_(maxall)(state, tensor));
-                                                        ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:19:26: note: in definition of macro ‘uncast_scalar’
- #define uncast_scalar(v) v
-                          ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::sumall() [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:608:42: error: cannot convert ‘zcx {aka thrust::complex<double>}’ to ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ in return
-   return THCTensor_(sumall)(state, tensor);
-                                          ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::prodall() [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:613:43: error: cannot convert ‘zcx {aka thrust::complex<double>}’ to ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ in return
-   return THCTensor_(prodall)(state, tensor);
-                                           ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::add(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:641:66: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-   THCTensor_(add)(state, tensor, src_t.tensor, cast_scalar(value));
-                                                                  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::sub(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:648:66: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-   THCTensor_(sub)(state, tensor, src_t.tensor, cast_scalar(value));
-                                                                  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::mul(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:655:66: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-   THCTensor_(mul)(state, tensor, src_t.tensor, cast_scalar(value));
-                                                                  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::div(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:662:66: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-   THCTensor_(div)(state, tensor, src_t.tensor, cast_scalar(value));
-                                                                  ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::fmod(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:669:67: error: ‘THCudaZDoubleTensor_fmod’ was not declared in this scope
-   THCTensor_(fmod)(state, tensor, src_t.tensor, cast_scalar(value));
-                                                                   ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::remainder(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:677:72: error: ‘THCudaZDoubleTensor_remainder’ was not declared in this scope
-   THCTensor_(remainder)(state, tensor, src_t.tensor, cast_scalar(value));
-                                                                        ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::clamp(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:686:29: error: could not convert ‘min_value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-       cast_scalar(max_value));
-                             ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cadd(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:695:83: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-   THCTensor_(cadd)(state, tensor, src1_t.tensor, cast_scalar(value), src2_t.tensor);
-                                                                                   ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::csub(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:709:83: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-   THCTensor_(csub)(state, tensor, src1_t.tensor, cast_scalar(value), src2_t.tensor);
-                                                                                   ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cfmod(const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<double>]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:741:64: error: ‘THCudaZDoubleTensor_cfmod’ was not declared in this scope
-   THCTensor_(cfmod)(state, tensor, src1_t.tensor, src2_t.tensor);
-                                                                ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cremainder(const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<double>]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:750:69: error: ‘THCudaZDoubleTensor_cremainder’ was not declared in this scope
-   THCTensor_(cremainder)(state, tensor, src1_t.tensor, src2_t.tensor);
-                                                                     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addcmul(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:762:35: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-       src2_t.tensor, src3_t.tensor);
-                                   ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addcdiv(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:774:35: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-       src2_t.tensor, src3_t.tensor);
-                                   ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addmv(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:786:53: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-       cast_scalar(alpha), mat_t.tensor, vec_t.tensor);
-                                                     ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addmm(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:798:55: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-       cast_scalar(alpha), mat1_t.tensor, mat2_t.tensor);
-                                                       ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addr(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:810:55: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-       cast_scalar(alpha), vec1_t.tensor, vec2_t.tensor);
-                                                       ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::addbmm(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:822:59: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-       cast_scalar(alpha), batch1_t.tensor, batch2_t.tensor);
-                                                           ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::baddbmm(thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, thpp::THCTensor<real>::scalar_type, const thpp::Tensor&, const thpp::Tensor&) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:834:59: error: could not convert ‘beta’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-       cast_scalar(alpha), batch1_t.tensor, batch2_t.tensor);
-                                                           ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>::scalar_type thpp::THCTensor<real>::trace() [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:917:41: error: cannot convert ‘zcx {aka thrust::complex<double>}’ to ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ in return
-   return THCTensor_(trace)(state, tensor);
-                                         ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cmaxValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:949:72: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-   THCTensor_(cmaxValue)(state, tensor, src_t.tensor, cast_scalar(value));
-                                                                        ^
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp: In member function ‘thpp::THCTensor<real>& thpp::THCTensor<real>::cminValue(const thpp::Tensor&, thpp::THCTensor<real>::scalar_type) [with real = thrust::complex<double>; thpp::THCTensor<real>::scalar_type = __complex__ double]’:
-/home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp:957:72: error: could not convert ‘value’ from ‘thpp::THCTensor<thrust::complex<double> >::scalar_type {aka __complex__ double}’ to ‘zcx {aka thrust::complex<double>}’
-   THCTensor_(cminValue)(state, tensor, src_t.tensor, cast_scalar(value));
-                                                                        ^
-CMakeFiles/THPP.dir/build.make:182: recipe for target 'CMakeFiles/THPP.dir/tensors/THCTensor.cpp.o' failed
-make[2]: *** [CMakeFiles/THPP.dir/tensors/THCTensor.cpp.o] Error 1
-CMakeFiles/Makefile2:67: recipe for target 'CMakeFiles/THPP.dir/all' failed
-make[1]: *** [CMakeFiles/THPP.dir/all] Error 2
-Makefile:127: recipe for target 'all' failed
-make: *** [all] Error 2
+In file included from torch/csrc/THP.h:32:0,
+                 from torch/csrc/utils.cpp:8:
+torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/functions/init.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/functions/init.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/cuda/Module.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/cuda/Module.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/functions/convolution.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/functions/convolution.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/Types.h:4,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/variable.h:9,
+                 from torch/csrc/autograd/functions/convolution.h:8,
+                 from torch/csrc/autograd/functions/convolution.cpp:1:
+/home/philipp/anaconda2/include/python2.7/pyconfig.h:1190:0: warning: "_POSIX_C_SOURCE" redefined
+ #define _POSIX_C_SOURCE 200112L
+ ^
+In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h:430,
+                 from /usr/include/c++/4.9/bits/stl_algobase.h:59,
+                 from /usr/include/c++/4.9/memory:62,
+                 from torch/csrc/autograd/functions/convolution.h:3,
+                 from torch/csrc/autograd/functions/convolution.cpp:1:
+/usr/include/features.h:225:0: note: this is the location of the previous definition
+ # define _POSIX_C_SOURCE 200809L
+ ^
+In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/Types.h:4,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/variable.h:9,
+                 from torch/csrc/autograd/functions/convolution.h:8,
+                 from torch/csrc/autograd/functions/convolution.cpp:1:
+/home/philipp/anaconda2/include/python2.7/pyconfig.h:1212:0: warning: "_XOPEN_SOURCE" redefined
+ #define _XOPEN_SOURCE 600
+ ^
+In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h:430,
+                 from /usr/include/c++/4.9/bits/stl_algobase.h:59,
+                 from /usr/include/c++/4.9/memory:62,
+                 from torch/csrc/autograd/functions/convolution.h:3,
+                 from torch/csrc/autograd/functions/convolution.cpp:1:
+/usr/include/features.h:166:0: note: this is the location of the previous definition
+ # define _XOPEN_SOURCE 700
+ ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/nn/THNN_generic.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/nn/THNN_generic.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from torch/csrc/autograd/python_variable.cpp:5:
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from torch/csrc/autograd/python_hook.cpp:5:
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/cuda/Stream.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/cuda/Stream.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/cuda/AutoGPU.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/cuda/AutoGPU.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from torch/csrc/autograd/python_function.cpp:10:
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from torch/csrc/cuda/THCP.h:11,
+                 from torch/csrc/cuda/Module.cpp:11:
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+In file included from torch/csrc/cuda/THCP.h:19:0,
+                 from torch/csrc/cuda/Module.cpp:11:
+torch/csrc/cuda/utils.h:14:19: warning: ‘Py_complex thrust_ccomplex_to_py_complex(ccx)’ defined but not used [-Wunused-function]
+ static Py_complex thrust_ccomplex_to_py_complex(ccx cx) {
+                   ^
+torch/csrc/cuda/utils.h:20:19: warning: ‘Py_complex thrust_zcomplex_to_py_complex(zcx)’ defined but not used [-Wunused-function]
+ static Py_complex thrust_zcomplex_to_py_complex(zcx cx) {
+                   ^
+torch/csrc/cuda/utils.h:27:12: warning: ‘ccx py_complex_to_thrust_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static ccx py_complex_to_thrust_ccomplex(Py_complex x) {
+            ^
+torch/csrc/cuda/utils.h:31:12: warning: ‘zcx py_complex_to_thrust_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static zcx py_complex_to_thrust_zcomplex(Py_complex x) {
+            ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/cuda/Storage.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/cuda/Storage.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/cuda/serialization.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/cuda/serialization.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from torch/csrc/cuda/Stream.cpp:3:
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/cuda/Tensor.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/cuda/Tensor.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from torch/csrc/cuda/THCP.h:11,
+                 from torch/csrc/cuda/AutoGPU.cpp:3:
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+In file included from torch/csrc/cuda/THCP.h:19:0,
+                 from torch/csrc/cuda/AutoGPU.cpp:3:
+torch/csrc/cuda/utils.h:14:19: warning: ‘Py_complex thrust_ccomplex_to_py_complex(ccx)’ defined but not used [-Wunused-function]
+ static Py_complex thrust_ccomplex_to_py_complex(ccx cx) {
+                   ^
+torch/csrc/cuda/utils.h:20:19: warning: ‘Py_complex thrust_zcomplex_to_py_complex(zcx)’ defined but not used [-Wunused-function]
+ static Py_complex thrust_zcomplex_to_py_complex(zcx cx) {
+                   ^
+torch/csrc/cuda/utils.h:27:12: warning: ‘ccx py_complex_to_thrust_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static ccx py_complex_to_thrust_ccomplex(Py_complex x) {
+            ^
+torch/csrc/cuda/utils.h:31:12: warning: ‘zcx py_complex_to_thrust_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static zcx py_complex_to_thrust_zcomplex(Py_complex x) {
+            ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/cuda/utils.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/cuda/utils.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from torch/csrc/cuda/THCP.h:11,
+                 from torch/csrc/cuda/serialization.cpp:3:
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+In file included from torch/csrc/cuda/THCP.h:19:0,
+                 from torch/csrc/cuda/serialization.cpp:3:
+torch/csrc/cuda/utils.h:14:19: warning: ‘Py_complex thrust_ccomplex_to_py_complex(ccx)’ defined but not used [-Wunused-function]
+ static Py_complex thrust_ccomplex_to_py_complex(ccx cx) {
+                   ^
+torch/csrc/cuda/utils.h:20:19: warning: ‘Py_complex thrust_zcomplex_to_py_complex(zcx)’ defined but not used [-Wunused-function]
+ static Py_complex thrust_zcomplex_to_py_complex(zcx cx) {
+                   ^
+torch/csrc/cuda/utils.h:27:12: warning: ‘ccx py_complex_to_thrust_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static ccx py_complex_to_thrust_ccomplex(Py_complex x) {
+            ^
+torch/csrc/cuda/utils.h:31:12: warning: ‘zcx py_complex_to_thrust_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static zcx py_complex_to_thrust_zcomplex(Py_complex x) {
+            ^
+In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from torch/csrc/cuda/THCP.h:11,
+                 from torch/csrc/cuda/utils.cpp:4:
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+In file included from torch/csrc/cuda/THCP.h:19:0,
+                 from torch/csrc/cuda/utils.cpp:4:
+torch/csrc/cuda/utils.h:14:19: warning: ‘Py_complex thrust_ccomplex_to_py_complex(ccx)’ defined but not used [-Wunused-function]
+ static Py_complex thrust_ccomplex_to_py_complex(ccx cx) {
+                   ^
+torch/csrc/cuda/utils.h:20:19: warning: ‘Py_complex thrust_zcomplex_to_py_complex(zcx)’ defined but not used [-Wunused-function]
+ static Py_complex thrust_zcomplex_to_py_complex(zcx cx) {
+                   ^
+torch/csrc/cuda/utils.h:27:12: warning: ‘ccx py_complex_to_thrust_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static ccx py_complex_to_thrust_ccomplex(Py_complex x) {
+            ^
+torch/csrc/cuda/utils.h:31:12: warning: ‘zcx py_complex_to_thrust_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static zcx py_complex_to_thrust_zcomplex(Py_complex x) {
+            ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/DynamicTypes.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/DynamicTypes.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
+                 from torch/csrc/DynamicTypes.h:6,
+                 from torch/csrc/DynamicTypes.cpp:1:
+/home/philipp/anaconda2/include/python2.7/pyconfig.h:1190:0: warning: "_POSIX_C_SOURCE" redefined
+ #define _POSIX_C_SOURCE 200112L
+ ^
+In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h:430,
+                 from /usr/include/c++/4.9/bits/stl_algobase.h:59,
+                 from /usr/include/c++/4.9/memory:62,
+                 from torch/csrc/DynamicTypes.h:5,
+                 from torch/csrc/DynamicTypes.cpp:1:
+/usr/include/features.h:225:0: note: this is the location of the previous definition
+ # define _POSIX_C_SOURCE 200809L
+ ^
+In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
+                 from torch/csrc/DynamicTypes.h:6,
+                 from torch/csrc/DynamicTypes.cpp:1:
+/home/philipp/anaconda2/include/python2.7/pyconfig.h:1212:0: warning: "_XOPEN_SOURCE" redefined
+ #define _XOPEN_SOURCE 600
+ ^
+In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39:0,
+                 from /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h:430,
+                 from /usr/include/c++/4.9/bits/stl_algobase.h:59,
+                 from /usr/include/c++/4.9/memory:62,
+                 from torch/csrc/DynamicTypes.h:5,
+                 from torch/csrc/DynamicTypes.cpp:1:
+/usr/include/features.h:166:0: note: this is the location of the previous definition
+ # define _XOPEN_SOURCE 700
+ ^
+In file included from torch/csrc/THP.h:32:0,
+                 from torch/csrc/DynamicTypes.cpp:3:
+torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from torch/csrc/cuda/THCP.h:11,
+                 from torch/csrc/cuda/Storage.cpp:5:
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from torch/csrc/cuda/THCP.h:11,
+                 from torch/csrc/cuda/Tensor.cpp:9:
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -shared -L/home/philipp/anaconda2/lib -Wl,-rpath=/home/philipp/anaconda2/lib,--no-as-needed build/temp.linux-x86_64-2.7/torch/csrc/PtrWrapper.o build/temp.linux-x86_64-2.7/torch/csrc/Module.o build/temp.linux-x86_64-2.7/torch/csrc/Generator.o build/temp.linux-x86_64-2.7/torch/csrc/Size.o build/temp.linux-x86_64-2.7/torch/csrc/Exceptions.o build/temp.linux-x86_64-2.7/torch/csrc/Tensor.o build/temp.linux-x86_64-2.7/torch/csrc/Storage.o build/temp.linux-x86_64-2.7/torch/csrc/DynamicTypes.o build/temp.linux-x86_64-2.7/torch/csrc/byte_order.o build/temp.linux-x86_64-2.7/torch/csrc/utils.o build/temp.linux-x86_64-2.7/torch/csrc/utils/object_ptr.o build/temp.linux-x86_64-2.7/torch/csrc/utils/tuple_parser.o build/temp.linux-x86_64-2.7/torch/csrc/allocators.o build/temp.linux-x86_64-2.7/torch/csrc/serialization.o build/temp.linux-x86_64-2.7/torch/csrc/autograd/init.o build/temp.linux-x86_64-2.7/torch/csrc/autograd/engine.o build/temp.linux-x86_64-2.7/torch/csrc/autograd/function.o build/temp.linux-x86_64-2.7/torch/csrc/autograd/variable.o build/temp.linux-x86_64-2.7/torch/csrc/autograd/grad_buffer.o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_function.o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_cpp_function.o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_variable.o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_engine.o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_hook.o build/temp.linux-x86_64-2.7/torch/csrc/autograd/functions/batch_normalization.o build/temp.linux-x86_64-2.7/torch/csrc/autograd/functions/convolution.o build/temp.linux-x86_64-2.7/torch/csrc/autograd/functions/init.o build/temp.linux-x86_64-2.7/torch/csrc/nn/THNN_generic.o build/temp.linux-x86_64-2.7/torch/csrc/cuda/Module.o build/temp.linux-x86_64-2.7/torch/csrc/cuda/Storage.o build/temp.linux-x86_64-2.7/torch/csrc/cuda/Stream.o build/temp.linux-x86_64-2.7/torch/csrc/cuda/Tensor.o build/temp.linux-x86_64-2.7/torch/csrc/cuda/AutoGPU.o build/temp.linux-x86_64-2.7/torch/csrc/cuda/utils.o build/temp.linux-x86_64-2.7/torch/csrc/cuda/serialization.o -L/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib -L/usr/bin/lib -L/home/philipp/anaconda2/lib -lshm -lcudart -lpython2.7 -o build/lib.linux-x86_64-2.7/torch/_C.so -Wl,-rpath,/usr/bin/lib /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/libTH.so.1 /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/libTHS.so.1 /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/libTHPP.so.1 /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/libTHNN.so.1 /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/libTHC.so.1 /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/libTHCS.so.1 /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/libTHCUNN.so.1 /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/libnccl.so.1 -Wl,-rpath,$ORIGIN/lib
+building 'torch._thnn._THNN' extension
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/nn/THNN.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/nn/THNN.o -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/cuda/THCP.h:11,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP_API.h:10,
+                 from torch/csrc/nn/THNN.cpp:5:
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -shared -L/home/philipp/anaconda2/lib -Wl,-rpath=/home/philipp/anaconda2/lib,--no-as-needed build/temp.linux-x86_64-2.7/torch/csrc/nn/THNN.o -L/home/philipp/anaconda2/lib -lpython2.7 -o build/lib.linux-x86_64-2.7/torch/_thnn/_THNN.so -Wl,-rpath,/usr/bin/lib /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/libTH.so.1 /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/libTHNN.so.1 -Wl,-rpath,$ORIGIN/../lib
+building 'torch._thnn._THCUNN' extension
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/nn/THCUNN.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/nn/THCUNN.o -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/cuda/THCP.h:11,
+                 from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP_API.h:10,
+                 from torch/csrc/nn/THCUNN.cpp:11:
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+gcc -pthread -shared -L/home/philipp/anaconda2/lib -Wl,-rpath=/home/philipp/anaconda2/lib,--no-as-needed build/temp.linux-x86_64-2.7/torch/csrc/nn/THCUNN.o -L/home/philipp/anaconda2/lib -lpython2.7 -o build/lib.linux-x86_64-2.7/torch/_thnn/_THCUNN.so -Wl,-rpath,/usr/bin/lib /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/libTH.so.1 /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/libTHC.so.1 /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/libTHCUNN.so.1 -Wl,-rpath,$ORIGIN/../lib
+running install_lib
+copying build/lib.linux-x86_64-2.7/torch/version.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch
+copying build/lib.linux-x86_64-2.7/torch/_thnn/_THCUNN.so -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/_thnn
+copying build/lib.linux-x86_64-2.7/torch/_thnn/_THNN.so -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/_thnn
+copying build/lib.linux-x86_64-2.7/torch/lib/libTH.so.1 -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
+copying build/lib.linux-x86_64-2.7/torch/lib/THNN.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
+copying build/lib.linux-x86_64-2.7/torch/lib/libTHCUNN.so.1 -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
+copying build/lib.linux-x86_64-2.7/torch/lib/libTHS.so.1 -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
+copying build/lib.linux-x86_64-2.7/torch/lib/libTHC.so.1 -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
+copying build/lib.linux-x86_64-2.7/torch/lib/libshm.so -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
+copying build/lib.linux-x86_64-2.7/torch/lib/libnccl.so.1 -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
+copying build/lib.linux-x86_64-2.7/torch/lib/libTHCS.so.1 -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THAtomic.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THGenerateComplexTypes.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THLapack.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THTensor.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THGenerateFloatTypes.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/TH.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THAllocator.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THDiskFile.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THVector.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THRandom.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THGenerateIntTypes.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THTensorMacros.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THFilePrivate.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THGenerateHalfType.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THGeneral.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THBlas.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THStorage.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic/THStorageCopy.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic/THLapack.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic/THTensor.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic/THTensorMath.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic/THTensorCopy.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic/THTensorRandom.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic/THVector.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic/THTensorConv.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic/THBlas.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic/THStorage.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic/THTensorLapack.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THMemoryFile.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THTensorApply.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THGenerateAllTypes.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THTensorDimApply.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THFile.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THLogAdd.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THHalf.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THMath.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCGenerateFloatTypes.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCGenerateAllTypes.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCAllocator.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCSleep.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCGenerateHalfType.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCGenerateFloatType.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCGenerateShortType.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCTensorCopy.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THC.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCTensorRandom.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCGenerateZDoubleType.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCThreadLocal.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCGenerateCharType.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCHalf.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCGenerateDoubleType.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCTensorMath.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCStorage.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCGenerateAllTypesButComplex.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCGeneral.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCStream.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCCachingAllocator.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCGenerateIntType.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCBlas.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCGenerateZFloatType.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCGenerateByteType.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCCachingHostAllocator.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCTensorTopK.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCGenerateLongType.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCTensor.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensorMathPointwise.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensorMathBlas.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensorScatterGather.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensorCopy.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensorIndex.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensorRandom.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensorMode.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensorSort.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensorMath.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCStorage.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensorMathMagma.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensorMasked.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensorMathScan.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensorMathPairwise.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensor.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensorMathReduce.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCStorageCopy.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensorMathCompareT.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensorMathCompare.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCStorageCopy.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCTensorConv.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+copying build/lib.linux-x86_64-2.7/torch/lib/libTHPP.so.1 -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
+copying build/lib.linux-x86_64-2.7/torch/lib/libTHNN.so.1 -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
+copying build/lib.linux-x86_64-2.7/torch/lib/THCUNN.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
+copying build/lib.linux-x86_64-2.7/torch/lib/torch_shm_manager -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
+copying build/lib.linux-x86_64-2.7/torch/_C.so -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/version.py to version.pyc
+running install_egg_info
+running egg_info
+writing requirements to torch.egg-info/requires.txt
+writing torch.egg-info/PKG-INFO
+writing top-level names to torch.egg-info/top_level.txt
+writing dependency_links to torch.egg-info/dependency_links.txt
+reading manifest file 'torch.egg-info/SOURCES.txt'
+writing manifest file 'torch.egg-info/SOURCES.txt'
+removing '/home/philipp/anaconda2/lib/python2.7/site-packages/torch-0.1.10+9c18392-py2.7.egg-info' (and everything under it)
+Copying torch.egg-info to /home/philipp/anaconda2/lib/python2.7/site-packages/torch-0.1.10+9c18392-py2.7.egg-info
+running install_scripts

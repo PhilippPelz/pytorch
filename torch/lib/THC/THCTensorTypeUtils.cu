@@ -255,6 +255,8 @@ IMPL_TENSOR_UTILS(THCudaIntTensor, int)
 IMPL_TENSOR_UTILS(THCudaLongTensor, long)
 IMPL_TENSOR_UTILS(THCudaTensor, float)
 IMPL_TENSOR_UTILS(THCudaDoubleTensor, double)
+IMPL_TENSOR_UTILS(THCudaZFloatTensor, ccx)
+IMPL_TENSOR_UTILS(THCudaZDoubleTensor, zcx)
 
 #ifdef CUDA_HALF_TENSOR
 IMPL_TENSOR_UTILS(THCudaHalfTensor, half);

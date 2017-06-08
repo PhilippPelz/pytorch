@@ -22,7 +22,7 @@
 
 [[
   name: sigmoid_
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   cname: sigmoid
   return: self
   arguments:
@@ -32,7 +32,7 @@
 
 [[
   name: sigmoid
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   cname: sigmoid
   with_stateless: True
   return: argument 0
@@ -1054,6 +1054,8 @@
 [[
   name: fmod
   return: argument 0
+  ztensor: True
+  defined_if: "!defined(THC_REAL_IS_ZDOUBLE) && !defined(THC_REAL_IS_ZFLOAT)"
   with_stateless: True
   options:
     - cname: fmod
@@ -1073,6 +1075,8 @@
 [[
   name: fmod_
   return: argument 0
+  ztensor: True
+  defined_if: "!defined(THC_REAL_IS_ZDOUBLE) && !defined(THC_REAL_IS_ZFLOAT)"
   options:
     - cname: fmod
       arguments:
@@ -1091,6 +1095,7 @@
   name: remainder
   return: argument 0
   with_stateless: True
+  defined_if: "!defined(THC_REAL_IS_ZDOUBLE) && !defined(THC_REAL_IS_ZFLOAT)"
   options:
     - cname: remainder
       arguments:
@@ -1109,6 +1114,7 @@
 [[
   name: remainder_
   return: argument 0
+  defined_if: "!defined(THC_REAL_IS_ZDOUBLE) && !defined(THC_REAL_IS_ZFLOAT)"
   options:
     - cname: remainder
       arguments:

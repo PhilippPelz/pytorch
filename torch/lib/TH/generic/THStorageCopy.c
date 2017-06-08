@@ -50,6 +50,16 @@ void THStorage_(copy##TYPENAMESRC)(THStorage *storage, TH##TYPENAMESRC##Storage 
     storage->data[i] = src->data[i];		\
 }
 
+#if defined(TH_REAL_IS_ZFLOAT)
+
+IMPLEMENT_THStorage_COPY(ZFloat)
+
+#elif defined(TH_REAL_IS_ZDOUBLE)
+
+IMPLEMENT_THStorage_COPY(ZDouble)
+
+#else
+
 #ifndef TH_REAL_IS_HALF
 IMPLEMENT_THStorage_COPY(Byte)
 IMPLEMENT_THStorage_COPY(Char)
@@ -71,5 +81,6 @@ IMPLEMENT_THStorage_COPY_TO_HALF(Float)
 IMPLEMENT_THStorage_COPY_TO_HALF(Double)
 #endif
 
+#endif
 
 #endif

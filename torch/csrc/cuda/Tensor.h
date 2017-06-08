@@ -8,6 +8,8 @@
 
 #define THCPDoubleTensor_Check(obj)  PyObject_IsInstance(obj, THCPDoubleTensorClass)
 #define THCPFloatTensor_Check(obj)   PyObject_IsInstance(obj, THCPFloatTensorClass)
+#define THCPZDoubleTensor_Check(obj)  PyObject_IsInstance(obj, THCPDoubleTensorClass)
+#define THCPZFloatTensor_Check(obj)   PyObject_IsInstance(obj, THCPFloatTensorClass)
 #define THCPHalfTensor_Check(obj)    PyObject_IsInstance(obj, THCPHalfTensorClass)
 #define THCPLongTensor_Check(obj)    PyObject_IsInstance(obj, THCPLongTensorClass)
 #define THCPIntTensor_Check(obj)     PyObject_IsInstance(obj, THCPIntTensorClass)
@@ -17,6 +19,8 @@
 
 #define THCPDoubleTensor_CData(obj)  (obj)->cdata
 #define THCPFloatTensor_CData(obj)   (obj)->cdata
+#define THCPZDoubleTensor_CData(obj)  (obj)->cdata
+#define THCPZFloatTensor_CData(obj)   (obj)->cdata
 #define THCPHalfTensor_CData(obj)    (obj)->cdata
 #define THCPLongTensor_CData(obj)    (obj)->cdata
 #define THCPIntTensor_CData(obj)     (obj)->cdata
@@ -40,6 +44,8 @@
 
 #define THCSPDoubleTensor_Check(obj)  PyObject_IsInstance(obj, THCSPDoubleTensorClass)
 #define THCSPFloatTensor_Check(obj)   PyObject_IsInstance(obj, THCSPFloatTensorClass)
+#define THCSPZDoubleTensor_Check(obj)  PyObject_IsInstance(obj, THCSPDoubleTensorClass)
+#define THCSPZFloatTensor_Check(obj)   PyObject_IsInstance(obj, THCSPFloatTensorClass)
 #define THCSPHalfTensor_Check(obj)    PyObject_IsInstance(obj, THCSPHalfTensorClass)
 #define THCSPLongTensor_Check(obj)    PyObject_IsInstance(obj, THCSPLongTensorClass)
 #define THCSPIntTensor_Check(obj)     PyObject_IsInstance(obj, THCSPIntTensorClass)
@@ -49,6 +55,8 @@
 
 #define THCSPDoubleTensor_CData(obj)  (obj)->cdata
 #define THCSPFloatTensor_CData(obj)   (obj)->cdata
+#define THCSPZDoubleTensor_CData(obj)  (obj)->cdata
+#define THCSPZFloatTensor_CData(obj)   (obj)->cdata
 #define THCSPHalfTensor_CData(obj)    (obj)->cdata
 #define THCSPLongTensor_CData(obj)    (obj)->cdata
 #define THCSPIntTensor_CData(obj)     (obj)->cdata

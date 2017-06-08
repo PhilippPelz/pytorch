@@ -340,7 +340,13 @@ ${cpu}
 
         for declaration in declarations:
             # Disable all methods for THHalfTensor, unless cpu_half is True
-            if not declaration.get('cpu_half', False):
+            if declaration.get('ztensor', False):
+                if not declaration.get('cpu_half', False):
+                    defined_if = '!defined(TH_REAL_IS_HALF)'
+                    if 'defined_if' in declaration:
+                        defined_if += ' && (' + declaration['defined_if'] + ')'
+                    declaration['defined_if'] = defined_if
+            elif not declaration.get('cpu_half', False):
                 defined_if = '!defined(TH_REAL_IS_HALF)'
                 if 'defined_if' in declaration:
                     defined_if += ' && (' + declaration['defined_if'] + ')'

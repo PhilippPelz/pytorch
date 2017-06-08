@@ -20,6 +20,12 @@ void THCStorage_(copyCPU)(THCState *state, THCStorage *self,
     TH##TYPEC##Tensor_free(srcTensor);                                         \
     THCTensor_(free)(state, selfTensor);                                       \
   }
+
+#if defined(THC_REAL_IS_ZDOUBLE)
+TH_CUDA_STORAGE_IMPLEMENT_COPY(ZDouble)
+#elif defined(THC_REAL_IS_ZFLOAT)
+TH_CUDA_STORAGE_IMPLEMENT_COPY(ZFloat)
+#else
 TH_CUDA_STORAGE_IMPLEMENT_COPY(Byte)
 TH_CUDA_STORAGE_IMPLEMENT_COPY(Char)
 TH_CUDA_STORAGE_IMPLEMENT_COPY(Short)
@@ -28,14 +34,8 @@ TH_CUDA_STORAGE_IMPLEMENT_COPY(Long)
 TH_CUDA_STORAGE_IMPLEMENT_COPY(Float)
 TH_CUDA_STORAGE_IMPLEMENT_COPY(Half)
 TH_CUDA_STORAGE_IMPLEMENT_COPY(Double)
-
-#if defined(THC_REAL_IS_ZDOUBLE)
-TH_CUDA_STORAGE_IMPLEMENT_COPY(ZDouble)
 #endif
 
-#if defined(THC_REAL_IS_ZFLOAT)
-TH_CUDA_STORAGE_IMPLEMENT_COPY(ZFloat)
-#endif
 
 void THStorage_(copyCuda)(THCState *state, THStorage *self,
                           struct THCStorage *src) {
@@ -55,6 +55,12 @@ void THStorage_(copyCuda)(THCState *state, THStorage *self,
     THCTensor_(free)(state, srcTensor);                                        \
     TH##TYPEC##Tensor_free(selfTensor);                                        \
   }
+
+#if defined(THC_REAL_IS_ZDOUBLE)
+TH_CUDA_STORAGE_IMPLEMENT_COPYTO(ZDouble)
+#elif defined(THC_REAL_IS_ZFLOAT)
+TH_CUDA_STORAGE_IMPLEMENT_COPYTO(ZFloat)
+#else
 TH_CUDA_STORAGE_IMPLEMENT_COPYTO(Byte)
 TH_CUDA_STORAGE_IMPLEMENT_COPYTO(Char)
 TH_CUDA_STORAGE_IMPLEMENT_COPYTO(Short)
@@ -63,6 +69,7 @@ TH_CUDA_STORAGE_IMPLEMENT_COPYTO(Long)
 TH_CUDA_STORAGE_IMPLEMENT_COPYTO(Float)
 TH_CUDA_STORAGE_IMPLEMENT_COPYTO(Half)
 TH_CUDA_STORAGE_IMPLEMENT_COPYTO(Double)
+#endif
 
 #undef TH_CUDA_STORAGE_IMPLEMENT_COPY
 #undef TH_CUDA_STORAGE_IMPLEMENT_COPYTO

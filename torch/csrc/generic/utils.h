@@ -36,6 +36,8 @@ struct THPUtils_typeTraits<real> {
 };
 #endif
 
+
+
 #undef GENERATE_SPARSE
 
 #endif

@@ -755,8 +755,8 @@ static void updateErrorHandlers() {
 
 bool THCPDoubleStorage_init(PyObject *module);
 bool THCPFloatStorage_init(PyObject *module);
-// bool THCPZDoubleStorage_init(PyObject *module);
-// bool THCPZFloatStorage_init(PyObject *module);
+bool THCPZDoubleStorage_init(PyObject *module);
+bool THCPZFloatStorage_init(PyObject *module);
 bool THCPHalfStorage_init(PyObject *module);
 bool THCPLongStorage_init(PyObject *module);
 bool THCPIntStorage_init(PyObject *module);
@@ -766,8 +766,8 @@ bool THCPByteStorage_init(PyObject *module);
 
 bool THCPDoubleTensor_init(PyObject *module);
 bool THCPFloatTensor_init(PyObject *module);
-// bool THCPZDoubleTensor_init(PyObject *module);
-// bool THCPZFloatTensor_init(PyObject *module);
+bool THCPZDoubleTensor_init(PyObject *module);
+bool THCPZFloatTensor_init(PyObject *module);
 bool THCPHalfTensor_init(PyObject *module);
 bool THCPLongTensor_init(PyObject *module);
 bool THCPIntTensor_init(PyObject *module);
@@ -894,6 +894,8 @@ PyMODINIT_FUNC PyInit__C()
   // C, so these lines have to execute first)..
   ASSERT_TRUE(THCPDoubleStorage_init(module));
   ASSERT_TRUE(THCPFloatStorage_init(module));
+  ASSERT_TRUE(THCPZDoubleStorage_init(module));
+  ASSERT_TRUE(THCPZFloatStorage_init(module));
   ASSERT_TRUE(THCPHalfStorage_init(module));
   ASSERT_TRUE(THCPLongStorage_init(module));
   ASSERT_TRUE(THCPIntStorage_init(module));
@@ -903,6 +905,8 @@ PyMODINIT_FUNC PyInit__C()
 
   ASSERT_TRUE(THCPDoubleTensor_init(module));
   ASSERT_TRUE(THCPFloatTensor_init(module));
+  ASSERT_TRUE(THCPZDoubleTensor_init(module));
+  ASSERT_TRUE(THCPZFloatTensor_init(module));
   ASSERT_TRUE(THCPHalfTensor_init(module));
   ASSERT_TRUE(THCPLongTensor_init(module));
   ASSERT_TRUE(THCPIntTensor_init(module));

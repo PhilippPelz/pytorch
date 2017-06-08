@@ -568,6 +568,7 @@ THTensor* THTensor_(transpose_neg)(THTensor *self, THTensor *src, int dim0, int 
 
 [[
   name: indexAdd_
+  defined_if: "!defined(THC_REAL_IS_ZDOUBLE) && !defined(THC_REAL_IS_ZFLOAT)"
   python_name: index_add_
   cname: indexAdd
   return: argument 0

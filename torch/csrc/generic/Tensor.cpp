@@ -338,7 +338,7 @@ static PyObject *THPTensor_(pynew)(PyTypeObject *type, PyObject *args,
       cpu_storage->flag &= ~TH_STORAGE_FREEMEM;
       THCudaHalfStorage_copyFloat(LIBRARY_STATE tensor->storage, cpu_storage);
       THFloatStorage_free(cpu_storage);
-#else
+#elif !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
       THHostStorage *cpu_storage =
           THHostStorage_(newWithData)(data_guard.get(), numel);
       cpu_storage->flag &= ~TH_STORAGE_FREEMEM;
@@ -844,6 +844,11 @@ PyTypeObject THPTensorStatelessType = {
 void THPTensor_(initCopyMethods)() {
   auto &h = THTensor_(copy_functions);
   // copy from CPU types
+#if defined(THC_REAL_IS_ZFLOAT)
+  THPInsertCopyFunction(h, &THTensor_(copyZFloat));
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  THPInsertCopyFunction(h, &THTensor_(copyZDouble));
+#else
   THPInsertCopyFunction(h, &THTensor_(copyByte));
   THPInsertCopyFunction(h, &THTensor_(copyChar));
   THPInsertCopyFunction(h, &THTensor_(copyShort));
@@ -852,7 +857,15 @@ void THPTensor_(initCopyMethods)() {
   THPInsertCopyFunction(h, &THTensor_(copyFloat));
   THPInsertCopyFunction(h, &THTensor_(copyHalf));
   THPInsertCopyFunction(h, &THTensor_(copyDouble));
+#endif  //defined(THC_REAL_IS_ZFLOAT)
+
 #ifdef THC_GENERIC_FILE
+
+#if defined(THC_REAL_IS_ZFLOAT)
+  THPInsertCopyFunction(h, &THTensor_(copyCudaZFloat));
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  THPInsertCopyFunction(h, &THTensor_(copyCudaZDouble));
+#else
   // copy from GPU types
   THPInsertCopyFunction(h, &THTensor_(copyCudaByte));
   THPInsertCopyFunction(h, &THTensor_(copyCudaChar));
@@ -863,12 +876,19 @@ void THPTensor_(initCopyMethods)() {
   THPInsertCopyFunction(h, &THTensor_(copyCudaDouble));
 #ifdef CUDA_HALF_TENSOR
   THPInsertCopyFunction(h, &THTensor_(copyCudaHalf));
-#endif
+#endif //CUDA_HALF_TENSOR
+#endif //defined(THC_REAL_IS_ZFLOAT)
   THPInsertCopyFunction(h, &THCTensor_(copyAsyncCPU), true);
 // add CPU <- GPU copies to base type
 #define THCpuTensor_(name) TH_CONCAT_4(TH, Real, Tensor_, name)
   extern THPCopyList THCpuTensor_(copy_functions);
   auto &b = THCpuTensor_(copy_functions);
+
+#if defined(THC_REAL_IS_ZFLOAT)
+  THPInsertCopyFunction(b, &THCpuTensor_(copyCudaZFloat));
+#elif defined(THC_REAL_IS_ZDOUBLE)
+  THPInsertCopyFunction(b, &THCpuTensor_(copyCudaZDouble));
+#else
   THPInsertCopyFunction(b, &THCpuTensor_(copyCudaByte));
   THPInsertCopyFunction(b, &THCpuTensor_(copyCudaChar));
   THPInsertCopyFunction(b, &THCpuTensor_(copyCudaShort));
@@ -878,10 +898,13 @@ void THPTensor_(initCopyMethods)() {
   THPInsertCopyFunction(b, &THCpuTensor_(copyCudaDouble));
 #ifdef CUDA_HALF_TENSOR
   THPInsertCopyFunction(b, &THCpuTensor_(copyCudaHalf));
-#endif
+#endif //CUDA_HALF_TENSOR
+#endif //defined(THC_REAL_IS_ZFLOAT)
+
   THPInsertCopyFunction(b, &THCpuTensor_(copyAsyncCuda), true);
 #undef THCpuTensor_
-#endif
+
+#endif // THC_GENERIC_FILE
 }
 
 bool THPTensor_(init)(PyObject *module) {

@@ -10,6 +10,9 @@
 #include "Tensor.hpp"
 #include "Type.hpp"
 
+#include <thrust/complex.h>
+typedef thrust::complex<float> ccx;
+typedef thrust::complex<double> zcx;
 
 namespace thpp {
 
@@ -18,17 +21,17 @@ struct type_traits {};
 
 template<typename real>
 struct interface_traits {
-  using scalar_type = typename std::conditional<
-    type_traits<real>::is_complex_double,
-    double _Complex,
-    typename std::conditional<
-      type_traits<real>::is_cuda,
-      ,
-      typename std::conditional<
-        type_traits<real>::is_floating_point,
-        double,
-        long long>::type
-      >::type
+  using one = typename std::conditional<type_traits<real>::is_cuda, thrust::complex<double>,  double _Complex>::type;
+
+  using three = typename std::conditional<type_traits<real>::is_cuda,
+    thrust::complex<float>, float _Complex>::type;
+
+  using four = typename std::conditional<type_traits<real>::is_floating_point,
+    double, long long>::type;
+
+  using scalar_type = typename std::conditional<type_traits<real>::is_complex_double,
+    one,
+    typename std::conditional<type_traits<real>::is_complex_float, three, four >::type
   >::type;
   using tensor_interface_type = TensorScalarInterface<scalar_type>;
   using storage_interface_type = StorageScalarInterface<scalar_type>;

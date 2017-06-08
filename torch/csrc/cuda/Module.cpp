@@ -23,6 +23,8 @@ static bool THCPModule_loadClasses(PyObject *torch_module)
 #define ASSERT_NOT_NULL(ptr) if (!(ptr)) { THPUtils_setError("couldn't load classes"); return false; }
   ASSERT_NOT_NULL(THCPDoubleStorageClass = PyObject_GetAttrString(torch_module, (char*)"DoubleStorage"));
   ASSERT_NOT_NULL(THCPFloatStorageClass  = PyObject_GetAttrString(torch_module, (char*)"FloatStorage"));
+  ASSERT_NOT_NULL(THCPZDoubleStorageClass = PyObject_GetAttrString(torch_module, (char*)"ZDoubleStorage"));
+  ASSERT_NOT_NULL(THCPZFloatStorageClass  = PyObject_GetAttrString(torch_module, (char*)"ZFloatStorage"));
   ASSERT_NOT_NULL(THCPHalfStorageClass   = PyObject_GetAttrString(torch_module, (char*)"HalfStorage"));
   ASSERT_NOT_NULL(THCPLongStorageClass   = PyObject_GetAttrString(torch_module, (char*)"LongStorage"));
   ASSERT_NOT_NULL(THCPIntStorageClass    = PyObject_GetAttrString(torch_module, (char*)"IntStorage"));
@@ -32,6 +34,8 @@ static bool THCPModule_loadClasses(PyObject *torch_module)
 
   if (!THCPDoubleTensor_postInit(torch_module)) return false;
   if (!THCPFloatTensor_postInit(torch_module)) return false;
+  if (!THCPZDoubleTensor_postInit(torch_module)) return false;
+  if (!THCPZFloatTensor_postInit(torch_module)) return false;
   if (!THCPHalfTensor_postInit(torch_module)) return false;
   if (!THCPLongTensor_postInit(torch_module)) return false;
   if (!THCPIntTensor_postInit(torch_module)) return false;
@@ -69,6 +73,8 @@ static bool THCPModule_assignStateless()
   INIT_STATELESS(Short);
   INIT_STATELESS(Char);
   INIT_STATELESS(Byte);
+  INIT_STATELESS(ZFloat);
+  INIT_STATELESS(ZDouble);
   Py_DECREF(arg);
   return true;
 #undef INIT_STATELESS_DETAIL

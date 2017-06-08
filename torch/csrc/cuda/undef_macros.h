@@ -53,3 +53,5 @@
 #undef THHostTensor_
 #undef THHostStorage
 #undef THHostStorage_
+
+#undef THPUtils_

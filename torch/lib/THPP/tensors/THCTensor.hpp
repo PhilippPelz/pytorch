@@ -90,10 +90,12 @@ public:
   virtual THCTensor& range(scalar_type xmin, scalar_type xmax,
                           scalar_type step) override;
   // virtual Tensor& randperm() override; TODO
+#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
   virtual THCTensor& sort(const Tensor& ri, const Tensor& src,
                        int dimension, int desc) override;
   virtual THCTensor& topk(const Tensor& ri, const Tensor& src,
                        long k, int dim, int dir, int sorted) override;
+#endif
   virtual THCTensor& tril(const Tensor& src, long k) override;
   virtual THCTensor& triu(const Tensor& src, long k) override;
   // TODO: remove in favor of cat
@@ -164,8 +166,12 @@ public:
   virtual THCTensor& sub(const Tensor& src, scalar_type value) override;
   virtual THCTensor& mul(const Tensor& src, scalar_type value) override;
   virtual THCTensor& div(const Tensor& src, scalar_type value) override;
+
+#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
   virtual THCTensor& fmod(const Tensor& src, scalar_type value) override;
   virtual THCTensor& remainder(const Tensor& src, scalar_type value) override;
+#endif
+
   virtual THCTensor& clamp(const Tensor& src, scalar_type min_value,
                           scalar_type max_value) override;
   virtual THCTensor& cadd(const Tensor& src1, const Tensor& src2) override;
@@ -176,8 +182,12 @@ public:
   virtual THCTensor& cmul(const Tensor& src1, const Tensor& src2) override;
   virtual THCTensor& cpow(const Tensor& src1, const Tensor& src2) override;
   virtual THCTensor& cdiv(const Tensor& src1, const Tensor& src2) override;
+
+  #if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
   virtual THCTensor& cfmod(const Tensor& src1, const Tensor& src2) override;
   virtual THCTensor& cremainder(const Tensor& src1, const Tensor& src2) override;
+  #endif
+
   virtual THCTensor& addcmul(const Tensor& src1, scalar_type value,
                             const Tensor& src2, const Tensor& src3) override;
   virtual THCTensor& addcdiv(const Tensor& src1, scalar_type value,

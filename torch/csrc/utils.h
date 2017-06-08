@@ -3,8 +3,9 @@
 
 #include <vector>
 #include <string>
-// #include <complex.h>
-// #undef I
+#include <thrust/complex.h>
+typedef thrust::complex<float> ccx;
+typedef thrust::complex<double> zcx;
 #include "torch/csrc/utils/object_ptr.h"
 
 #define THPUtils_(NAME) TH_CONCAT_4(THP, Real, Utils_, NAME)
@@ -158,7 +159,7 @@ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
 #define THPZFloatUtils_checkAccreal(object) THPUtils_checkReal_COMPLEX(object)
 #define THPZFloatUtils_unpackAccreal(object)                                   \
   THPUtils_unpackReal_ZCOMPLEX(object)
-#define THPZFloatUtils_newAccreal(value) THPUtils_newReal_ZCOMPLEX(value)
+#define THPZFloatUtils_newAccreal(value) THPUtils_newReal_CCOMPLEX(value)
 
 #define THPHalfUtils_checkReal(object) THPUtils_checkReal_FLOAT(object)
 #ifndef THP_HOST_HALF
@@ -258,6 +259,16 @@ template <typename T> struct THPUtils_typeTraits {};
 
 #include "generic/utils.h"
 #include <TH/THGenerateHalfType.h>
+
+template <>
+struct THPUtils_typeTraits<ccx> {
+  static constexpr char *python_type_str = "complex float";
+};
+
+template <>
+struct THPUtils_typeTraits<zcx> {
+  static constexpr char *python_type_str = "complex double";
+};
 
 THLongStoragePtr THPUtils_unpackSize(PyObject *arg);
 bool THPUtils_tryUnpackLongs(PyObject *arg, THLongStoragePtr &result);

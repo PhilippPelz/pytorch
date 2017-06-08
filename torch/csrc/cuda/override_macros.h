@@ -25,9 +25,10 @@
 #define THPTensorClass THCPTensorClass
 #define THPTensorType THCPTensorType
 
+#define THPUtils_(NAME) TH_CONCAT_4(THCP, Real, Utils_, NAME)
+
 #define THPTensorStatelessType THCPTensorStatelessType
 #define THPTensorStateless THCPTensorStateless
-
 
 #define THSTensorPtr THCSTensorPtr
 #define THSPTensorPtr THCSPTensorPtr

@@ -39,7 +39,11 @@ void THCTensor_(copy##TYPEC)(THCState *state, THCTensor *self, struct TH##TYPEC#
     THTensor_(free)(srcf);                                              \
   }                                                                     \
 }
-#if !(defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT))
+#if defined(THC_REAL_IS_ZDOUBLE)
+IMPLEMENT_TH_CUDA_TENSOR_COPY(ZDouble)
+#elif defined(THC_REAL_IS_ZFLOAT)
+IMPLEMENT_TH_CUDA_TENSOR_COPY(ZFloat)
+#else
 IMPLEMENT_TH_CUDA_TENSOR_COPY(Byte)
 IMPLEMENT_TH_CUDA_TENSOR_COPY(Char)
 IMPLEMENT_TH_CUDA_TENSOR_COPY(Short)
@@ -50,13 +54,7 @@ IMPLEMENT_TH_CUDA_TENSOR_COPY(Double)
 IMPLEMENT_TH_CUDA_TENSOR_COPY(Half)
 #endif
 
-#if defined(THC_REAL_IS_ZDOUBLE)
-IMPLEMENT_TH_CUDA_TENSOR_COPY(ZDouble)
-#endif
 
-#if defined(THC_REAL_IS_ZFLOAT)
-IMPLEMENT_TH_CUDA_TENSOR_COPY(ZFloat)
-#endif
 /* copyCuda */
 
 void THTensor_(copyCuda)(THCState *state, THTensor *self, struct THCTensor *src)
@@ -95,7 +93,11 @@ void THTensor_(copyCuda)(THCState *state, THTensor *self, struct THCTensor *src)
     }                                                                     \
   }
 
-#if !(defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT))
+#if defined(THC_REAL_IS_ZDOUBLE)
+IMPLEMENT_TH_CUDA_TENSOR_COPY_TO(ZDouble)
+#elif defined(THC_REAL_IS_ZFLOAT)
+IMPLEMENT_TH_CUDA_TENSOR_COPY_TO(ZFloat)
+#else
 IMPLEMENT_TH_CUDA_TENSOR_COPY_TO(Byte)
 IMPLEMENT_TH_CUDA_TENSOR_COPY_TO(Char)
 IMPLEMENT_TH_CUDA_TENSOR_COPY_TO(Short)
@@ -104,14 +106,6 @@ IMPLEMENT_TH_CUDA_TENSOR_COPY_TO(Long)
 IMPLEMENT_TH_CUDA_TENSOR_COPY_TO(Float)
 IMPLEMENT_TH_CUDA_TENSOR_COPY_TO(Double)
 IMPLEMENT_TH_CUDA_TENSOR_COPY_TO(Half)
-#endif
-
-#if defined(THC_REAL_IS_ZDOUBLE)
-IMPLEMENT_TH_CUDA_TENSOR_COPY_TO(ZDouble)
-#endif
-
-#if defined(THC_REAL_IS_ZFLOAT)
-IMPLEMENT_TH_CUDA_TENSOR_COPY_TO(ZFloat)
 #endif
 
 void THCTensor_(copyCuda)(THCState *state, THCTensor *self, THCTensor *src)

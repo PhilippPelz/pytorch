@@ -473,6 +473,7 @@
 [[
   name: mode
   with_stateless: True
+  defined_if: "!defined(THC_REAL_IS_ZDOUBLE) && !defined(THC_REAL_IS_ZFLOAT)"
   return: argument 0,1
   options:
     - before_call: long __last_dim = THTensor_(nDimension)(LIBRARY_STATE ((THPTensor*)$arg2)->cdata)-1;
@@ -517,7 +518,7 @@
 
 [[
   name: sort
-  defined_if: "!(defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE))"
+  defined_if: "!(defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT))"
   with_stateless: True
   return: argument 0,1
   options:
