@@ -129,18 +129,23 @@ static bool THPModule_assignStateless(PyObject *self) {
 // classes
 static PyObject *THPModule_initExtension(PyObject *self,
                                          PyObject *shm_manager_path) {
+   PyErr_WarnEx(PyExc_Warning, "THPModule_loadClasses now starting\n", 1);   
   if (!THPUtils_checkBytes(shm_manager_path)) {
     THPUtils_setError("initialization error - expected bytes/string object as "
                       "shm_manager_path!");
     return NULL;
   }
   libshm_init(THPUtils_bytesAsString(shm_manager_path));
+  PyErr_WarnEx(PyExc_Warning, "THPModule_loadClasses now starting\n", 1);
   if (!THPModule_loadClasses(self))
     return NULL;
+  PyErr_WarnEx(PyExc_Warning, "THPModule_loadClasses succeeded\n", 1);
   if (!THPModule_assignStateless(self))
     return NULL;
+  PyErr_WarnEx(PyExc_Warning, "THPModule_assignStateless succeeded\n", 1);
   if (!THPAutograd_initFunctions(self))
     return NULL;
+  PyErr_WarnEx(PyExc_Warning, "THPAutograd_initFunctions succeeded\n", 1);
   return PyBool_FromLong(true);
 }
 

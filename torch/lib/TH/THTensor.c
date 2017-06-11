@@ -32,9 +32,4 @@
 
 // #pragma message "NOW DOING THTensorLapack.c"
 #include "generic/THTensorLapack.c"
-#include "THGenerateFloatTypes.h"
-
-// #pragma message "NOW DOING THTensorLapack.c complex"
-// #include "generic/THTensorLapack.c"
-// #pragma message "NOW DOING THTensorLapack.c complex 2"
-// #include "THGenerateComplexTypes.h"
+#include "THGenerateFloatAndComplexTypes.h"

@@ -83,10 +83,10 @@ TH_EXTERNC void zgels_(char *trans, int *m, int *n, int *nrhs,
 TH_EXTERNC void cgels_(char *trans, int *m, int *n, int *nrhs, float complex *a,
                        int *lda, float complex *b, int *ldb,
                        float complex *work, int *lwork, int *info);
-TH_EXTERNC void zsyev_(char *jobz, char *uplo, int *n, double complex *a,
+TH_EXTERNC void zheev_(char *jobz, char *uplo, int *n, double complex *a,
                        int *lda, double complex *w, double complex *work,
                        int *lwork, int *info);
-TH_EXTERNC void csyev_(char *jobz, char *uplo, int *n, float complex *a,
+TH_EXTERNC void cheev_(char *jobz, char *uplo, int *n, float complex *a,
                        int *lda, float complex *w, float complex *work,
                        int *lwork, int *info);
 TH_EXTERNC void zgeev_(char *jobvl, char *jobvr, int *n, double complex *a,

@@ -29,17 +29,11 @@
 /* maths */
 #include "generic/THTensorMath.h"
 #include "THGenerateAllTypes.h"
-// #pragma message "NOW DOING THTensorConv"
 /* convolutions */
 #include "generic/THTensorConv.h"
 #include "THGenerateAllTypes.h"
-// #pragma message "NOW DOING THTensorLapack"
 /* lapack support */
 #include "generic/THTensorLapack.h"
-#include "THGenerateFloatTypes.h"
-// #pragma message "NOW DOING THTensorLapack complex"
-#define TH_GENERIC_FILE "generic/THTensorLapack.h"
-// #include "generic/THTensorLapack.h"
-#include "THGenerateComplexTypes.h"
+#include "THGenerateFloatAndComplexTypes.h"
 
 #endif

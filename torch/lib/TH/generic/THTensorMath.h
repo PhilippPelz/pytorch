@@ -169,6 +169,7 @@ TH_API void THTensor_(abs)(THTensor *r_, THTensor *t);
 #if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
 TH_API void THTensor_(sigmoid)(THTensor *r_, THTensor *t);
 TH_API void THTensor_(log1p)(THTensor *r_, THTensor *t);
+TH_API void THTensor_(atan2)(THTensor *r_, THTensor *tx, THTensor *ty);
 #endif
 
 #if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) ||                 \
@@ -183,7 +184,6 @@ TH_API void THTensor_(asin)(THTensor *r_, THTensor *t);
 TH_API void THTensor_(sinh)(THTensor *r_, THTensor *t);
 TH_API void THTensor_(tan)(THTensor *r_, THTensor *t);
 TH_API void THTensor_(atan)(THTensor *r_, THTensor *t);
-TH_API void THTensor_(atan2)(THTensor *r_, THTensor *tx, THTensor *ty);
 TH_API void THTensor_(tanh)(THTensor *r_, THTensor *t);
 TH_API void THTensor_(pow)(THTensor *r_, THTensor *t, real value);
 TH_API void THTensor_(tpow)(THTensor *r_, real value, THTensor *t);

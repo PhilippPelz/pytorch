@@ -49,9 +49,11 @@ IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(  tan, THCNumerics<real>::tan,   Real)
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC( atan, THCNumerics<real>::atan,  Real)
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC( tanh, THCNumerics<real>::tanh,  Real)
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC( cinv, THCNumerics<real>::cinv,  Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(  abs, THCNumerics<real>::abs,   Real)
+
 
 #endif //defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_HALF)
+
+IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(  abs, THCNumerics<real>::abs,   Real)
 
 #if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_HALF)
 
@@ -485,13 +487,14 @@ THCTensor_(addcdiv)(THCState *state, THCTensor *self_, THCTensor *t, real value,
   THCudaCheck(cudaGetLastError());
 }
 
-#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
 
 THC_API void
 THCTensor_(clshift)(THCState* state, THCTensor *self_, THCTensor *src1, THCTensor *src2)
 {
 #if defined(THC_REAL_IS_HALF)
   return THError("clshift not supported for torch.CudaHalfTensor");
+#elif defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  return THError("clshift not supported for complex cuda tensors");
 #else
   THAssert(THCTensor_(checkGPU)(state, 3, self_, src1, src2));
   THArgCheck(THCTensor_(nElement)(state, src1) ==
@@ -520,6 +523,8 @@ THCTensor_(crshift)(THCState* state, THCTensor *self_, THCTensor *src1, THCTenso
 {
 #if defined(THC_REAL_IS_HALF)
   return THError("crshift not supported for torch.CudaHalfTensor");
+#elif defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  return THError("clshift not supported for complex cuda tensors");
 #else
   THAssert(THCTensor_(checkGPU)(state, 3, self_, src1, src2));
   THArgCheck(THCTensor_(nElement)(state, src1) ==
@@ -546,6 +551,9 @@ THCTensor_(crshift)(THCState* state, THCTensor *self_, THCTensor *src1, THCTenso
 THC_API void
 THCTensor_(cremainder)(THCState *state, THCTensor *self, THCTensor *src1, THCTensor *src2)
 {
+#if defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+    return THError("cremainder not supported for complex cuda tensors");
+#else
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 3, self, src1, src2));
   THArgCheck(THCTensor_(nElement)(state, src1) ==
              THCTensor_(nElement)(state, src2), 2, "sizes do not match");
@@ -560,11 +568,15 @@ THCTensor_(cremainder)(THCState *state, THCTensor *self, THCTensor *src1, THCTen
       THArgCheck(false, 2, CUTORCH_DIM_WARNING);
     }
   }
+#endif
 }
 
 THC_API void
 THCTensor_(cfmod)(THCState *state, THCTensor *self, THCTensor *src1, THCTensor *src2)
 {
+#if defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+    return THError("cfmod not supported for complex cuda tensors");
+#else
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 3, self, src1, src2));
   THArgCheck(THCTensor_(nElement)(state, src1) ==
              THCTensor_(nElement)(state, src2), 2, "sizes do not match");
@@ -579,6 +591,7 @@ THCTensor_(cfmod)(THCState *state, THCTensor *self, THCTensor *src1, THCTensor *
       THArgCheck(false, 2, CUTORCH_DIM_WARNING);
     }
   }
+#endif
 }
 
 THC_API void
@@ -586,6 +599,8 @@ THCTensor_(cbitand)(THCState* state, THCTensor *self_, THCTensor *src1, THCTenso
 {
 #if defined(THC_REAL_IS_HALF) || defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE)
   return THError("cbitand is only supported for integer type tensors");
+#elif defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  return THError("cbitand not supported for complex cuda tensors");
 #else
   THAssert(THCTensor_(checkGPU)(state, 3, self_, src1, src2));
   THArgCheck(THCTensor_(nElement)(state, src1) ==
@@ -614,6 +629,8 @@ THCTensor_(cbitor)(THCState* state, THCTensor *self_, THCTensor *src1, THCTensor
 {
 #if defined(THC_REAL_IS_HALF) || defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE)
   return THError("cbitor is only supported for integer type tensors");
+#elif defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  return THError("cbitor not supported for complex cuda tensors");
 #else
   THAssert(THCTensor_(checkGPU)(state, 3, self_, src1, src2));
   THArgCheck(THCTensor_(nElement)(state, src1) ==
@@ -641,7 +658,9 @@ THC_API void
 THCTensor_(cbitxor)(THCState* state, THCTensor *self_, THCTensor *src1, THCTensor *src2)
 {
 #if defined(THC_REAL_IS_HALF) || defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE)
-  return THError("cbitor is only supported for integer type tensors");
+  return THError("cbitxor is only supported for integer type tensors");
+#elif defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  return THError("cbitxor not supported for complex cuda tensors");
 #else
   THAssert(THCTensor_(checkGPU)(state, 3, self_, src1, src2));
   THArgCheck(THCTensor_(nElement)(state, src1) ==
@@ -665,6 +684,5 @@ THCTensor_(cbitxor)(THCState* state, THCTensor *self_, THCTensor *src1, THCTenso
 #endif
 }
 
-#endif // !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
 
 #endif

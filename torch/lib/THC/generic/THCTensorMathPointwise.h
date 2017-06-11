@@ -19,6 +19,8 @@ THC_API void THCTensor_(pow)(THCState *state, THCTensor *self, THCTensor *src, r
 THC_API void THCTensor_(tpow)(THCState *state, THCTensor *self, real value, THCTensor *src);
 THC_API void THCTensor_(sqrt)(THCState *state, THCTensor *self, THCTensor *src);
 THC_API void THCTensor_(neg)(THCState *state, THCTensor *self, THCTensor *src);
+THC_API void THCTensor_(cinv)(THCState *state, THCTensor *self, THCTensor *src);
+
 
 #endif
 
@@ -34,7 +36,6 @@ THC_API void THCTensor_(round)(THCState *state, THCTensor *self, THCTensor *src)
 THC_API void THCTensor_(trunc)(THCState *state, THCTensor *self, THCTensor *src);
 THC_API void THCTensor_(frac)(THCState *state, THCTensor *self, THCTensor *src);
 THC_API void THCTensor_(lerp)(THCState *state, THCTensor *result, THCTensor *a, THCTensor *b, real w);
-THC_API void THCTensor_(cinv)(THCState *state, THCTensor *self, THCTensor *src);
 
 #endif
 
@@ -58,8 +59,6 @@ THC_API void THCTensor_(cminValue)(THCState *state, THCTensor *self, THCTensor *
 THC_API void THCTensor_(addcmul)(THCState *state, THCTensor *self, THCTensor* t, real value, THCTensor *src1, THCTensor *src2);
 THC_API void THCTensor_(addcdiv)(THCState *state, THCTensor *self, THCTensor* t, real value, THCTensor *src1, THCTensor *src2);
 
-#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
-
 THC_API void THCTensor_(cbitand)(THCState *state, THCTensor *self, THCTensor *src1, THCTensor *src2);
 THC_API void THCTensor_(cbitor)(THCState *state, THCTensor *self, THCTensor *src1, THCTensor *src2);
 THC_API void THCTensor_(cbitxor)(THCState *state, THCTensor *self, THCTensor *src1, THCTensor *src2);
@@ -67,6 +66,5 @@ THC_API void THCTensor_(clshift)(THCState *state, THCTensor *self, THCTensor *sr
 THC_API void THCTensor_(crshift)(THCState *state, THCTensor *self, THCTensor *src1, THCTensor *src2);
 THC_API void THCTensor_(cfmod)(THCState *state, THCTensor *self, THCTensor *src1, THCTensor *src2);
 THC_API void THCTensor_(cremainder)(THCState *state, THCTensor *self, THCTensor *src1, THCTensor *src2);
-#endif
 
 #endif

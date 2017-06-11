@@ -2793,6 +2793,8 @@ TENSOR_IMPLEMENT_LOGICAL(ge, >= )
 TENSOR_IMPLEMENT_LOGICAL(eq, == )
 TENSOR_IMPLEMENT_LOGICAL(ne, != )
 
+#undef TENSOR_IMPLEMENT_LOGICAL
+
 #define LAB_IMPLEMENT_BASIC_FUNCTION(NAME, CFUNC)                              \
   void THTensor_(NAME)(THTensor * r_, THTensor * t) {                          \
     THTensor_(resizeAs)(r_, t);                                                \
@@ -2836,6 +2838,7 @@ void THTensor_(atan2)(THTensor *r_, THTensor *tx, THTensor *ty) {
   TH_TENSOR_APPLY3(real, r_, real, tx, real,
                    ty, *r__data = atan2(*tx_data, *ty_data););
 }
+
 void THTensor_(mean)(THTensor *r_, THTensor *t, int dimension) {
   THArgCheck(dimension >= 0 && dimension < THTensor_(nDimension)(t), 2,
              "invalid dimension %d", dimension + TH_INDEX_BASE);
@@ -2959,6 +2962,14 @@ real TH_CONCAT_2(Real, ROUND)(real z) { return round((z)); }
 #endif
 /* floating point only now */
 #if defined(TH_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_ZFLOAT)
+void THTensor_(mean)(THTensor *r_, THTensor *t, int dimension) {
+  THArgCheck(dimension >= 0 && dimension < THTensor_(nDimension)(t), 2,
+             "invalid dimension %d", dimension + TH_INDEX_BASE);
+
+  THTensor_(sum)(r_, t, dimension);
+  THTensor_(div)(r_, r_, t->size[dimension]);
+}
+
 void THTensor_(std)(THTensor *r_, THTensor *t, int dimension, int flag) {
   THLongStorage *dim;
 

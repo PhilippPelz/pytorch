@@ -1,0 +1,278 @@
+-- Compiling with OpenMP support
+-- Could not find hardware support for NEON on this machine.
+-- No OMAP3 processor on this machine.
+-- No OMAP4 processor on this machine.
+-- SSE2 Found
+-- SSE3 Found
+-- AVX Found
+-- AVX2 Found
+-- TH_SO_VERSION: 1
+-- Atomics: using GCC intrinsics
+-- Checking for [mkl_gf_lp64 - mkl_gnu_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_gf_lp64: not found
+-- Checking for [mkl_gf_lp64 - mkl_intel_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_gf_lp64: not found
+-- Checking for [mkl_gf - mkl_gnu_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_gf: not found
+-- Checking for [mkl_gf - mkl_intel_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_gf: not found
+-- Checking for [mkl_intel_lp64 - mkl_gnu_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_intel_lp64: /home/philipp/anaconda2/lib/libmkl_intel_lp64.so
+--   Library mkl_gnu_thread: not found
+-- Checking for [mkl_intel_lp64 - mkl_intel_thread - mkl_core - iomp5 - pthread - m]
+--   Library mkl_intel_lp64: /home/philipp/anaconda2/lib/libmkl_intel_lp64.so
+--   Library mkl_intel_thread: /home/philipp/anaconda2/lib/libmkl_intel_thread.so
+--   Library mkl_core: /home/philipp/anaconda2/lib/libmkl_core.so
+--   Library iomp5: /home/philipp/anaconda2/lib/libiomp5.so
+--   Library pthread: /usr/lib/x86_64-linux-gnu/libpthread.so
+--   Library m: /usr/lib/x86_64-linux-gnu/libm.so
+-- MKL library found
+-- Found a library with BLAS API (mkl).
+-- Found a library with LAPACK API. (mkl)
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/TH
+Scanning dependencies of target TH
+[  5%] Building C object CMakeFiles/TH.dir/THTensor.c.o
+[ 10%] Linking C shared library libTH.so
+[100%] Built target TH
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so
+-- Set runtime path of "/home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1" to ""
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/TH.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THAllocator.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THMath.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THBlas.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THDiskFile.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THFile.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THFilePrivate.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGeneral.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateAllTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateHalfType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateFloatTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateComplexTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateFloatAndComplexTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateIntTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THLapack.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THLogAdd.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THMemoryFile.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THRandom.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THStorage.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THTensorApply.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THTensorDimApply.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THTensorMacros.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THVector.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THAtomic.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THHalf.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/vector/AVX.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/vector/AVX2.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THBlas.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THBlas.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THLapack.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THLapack.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THStorage.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THStorage.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THStorageCopy.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THStorageCopy.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensor.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorConv.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorConv.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorCopy.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorCopy.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorLapack.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorLapack.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorMath.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorMath.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorRandom.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THTensorRandom.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THVectorDispatch.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/generic/THVector.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/share/cmake/TH/THConfig.cmake
+-- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- THS_SO_VERSION: 1
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THS
+Scanning dependencies of target THS
+[ 50%] Building C object CMakeFiles/THS.dir/THSTensor.c.o
+[100%] Linking C shared library libTHS.so
+[100%] Built target THS
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHS.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHS.so
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/THS.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/THSGenerateAllTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/THSGenerateFloatTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/THSGenerateComplexTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/THSGenerateIntTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/THSTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/generic/THSTensor.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/generic/THSTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/generic/THSTensorMath.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS/generic/THSTensorMath.h
+-- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- Compiling with OpenMP support
+CMake Warning (dev) at CMakeLists.txt:61 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- THNN_SO_VERSION: 1
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THNN
+[ 50%] Building C object CMakeFiles/THNN.dir/init.c.o
+[100%] Linking C shared library libTHNN.so
+[100%] Built target THNN
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHNN.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHNN.so
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN/THNN.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN/generic/THNN.h
+-- The C compiler identification is GNU 4.9.4
+-- The CXX compiler identification is GNU 4.9.4
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- ignoring CUDA
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THStorage.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCSTensor.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THSTensor.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THTensor.cpp from the build
+-- Excluding storages/THCStorage.hpp from the build
+-- Excluding storages/generic/THCStorage.hpp from the build
+-- Excluding tensors/THCSTensor.hpp from the build
+-- Excluding tensors/THCTensor.hpp from the build
+-- Excluding tensors/generic/THCSTensor.hpp from the build
+-- Excluding tensors/generic/THCTensor.hpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/storages/THCStorage.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/THCSTensor.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/THCTensor.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/TraitsCuda.cpp from the build
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CUDA_NVCC_FLAGS
+    THCS_LIBRARIES
+    THCUNN_SO_VERSION
+    THC_LIBRARIES
+    THC_SO_VERSION
+    THD_SO_VERSION
+    THNN_SO_VERSION
+    THPP_LIBRARIES
+    TH_INCLUDE_PATH
+    TH_LIB_PATH
+    TH_SO_VERSION
+
+
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THPP
+Scanning dependencies of target THPP
+[ 40%] Building CXX object CMakeFiles/THPP.dir/tensors/THTensor.cpp.o
+[ 40%] Building CXX object CMakeFiles/THPP.dir/Traits.cpp.o
+[ 80%] Building CXX object CMakeFiles/THPP.dir/tensors/THSTensor.cpp.o
+[ 80%] Building CXX object CMakeFiles/THPP.dir/storages/THStorage.cpp.o
+[100%] Linking CXX shared library libTHPP.so
+[100%] Built target THPP
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHPP.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHPP.so
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/THPP.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/Storage.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/Tensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/Traits.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/TraitsCuda.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/Type.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/storages/THStorage.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/storages/generic/THStorage.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/THSTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/THTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/generic/THSTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/generic/THTensor.hpp
+-- The C compiler identification is GNU 4.9.4
+-- The CXX compiler identification is GNU 4.9.4
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Looking for clock_gettime in rt
+-- Looking for clock_gettime in rt - found
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CUDA_NVCC_FLAGS
+    NO_CUDA
+    THCS_LIBRARIES
+    THCUNN_SO_VERSION
+    THC_LIBRARIES
+    THC_SO_VERSION
+    THD_SO_VERSION
+    THNN_SO_VERSION
+    THPP_LIBRARIES
+    THS_LIBRARIES
+    TH_INCLUDE_PATH
+    TH_LIB_PATH
+    TH_SO_VERSION
+    Torch_FOUND
+
+
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/libshm
+Scanning dependencies of target torch_shm_manager
+Scanning dependencies of target shm
+[ 25%] Building CXX object CMakeFiles/torch_shm_manager.dir/manager.cpp.o
+[ 50%] Building CXX object CMakeFiles/shm.dir/core.cpp.o
+[ 75%] Linking CXX shared library libshm.so
+[ 75%] Built target shm
+/home/philipp/projects/pytorch/torch/lib/libshm/manager.cpp: In function ‘void print_init_message(const char*)’:
+/home/philipp/projects/pytorch/torch/lib/libshm/manager.cpp:58:37: warning: ignoring return value of ‘ssize_t write(int, const void*, size_t)’, declared with attribute warn_unused_result [-Wunused-result]
+   write(1, message, strlen(message));
+                                     ^
+/home/philipp/projects/pytorch/torch/lib/libshm/manager.cpp:59:20: warning: ignoring return value of ‘ssize_t write(int, const void*, size_t)’, declared with attribute warn_unused_result [-Wunused-result]
+   write(1, "\n", 1);
+                    ^
+[100%] Linking CXX executable torch_shm_manager
+CMakeFiles/torch_shm_manager.dir/manager.cpp.o: In function `main':
+manager.cpp:(.text.startup+0x32): warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+[100%] Built target torch_shm_manager
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libshm.so
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/libshm.h
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/bin/torch_shm_manager

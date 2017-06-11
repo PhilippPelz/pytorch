@@ -136,7 +136,7 @@ typedef double _Complex zx;
 #define GESV cgesv_
 #define TRTRS ctrtrs_
 #define GELS cgels_
-#define SYEV csyev_
+#define SYEV cheev_
 #define GEEV cgeev_
 #define GESVD cgesvd_
 #define GETRF cgetrf_
@@ -257,7 +257,7 @@ typedef double _Complex zx;
 #define GESV zgesv_
 #define TRTRS ztrtrs_
 #define GELS zgels_
-#define SYEV zsyev_
+#define SYEV zheev_
 #define GEEV zgeev_
 #define GESVD zgesvd_
 #define GETRF zgetrf_

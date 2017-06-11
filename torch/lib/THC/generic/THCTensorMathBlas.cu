@@ -813,7 +813,7 @@ THC_API void THCTensor_(btrifact)(THCState *state, THCTensor *ra_, THCudaIntTens
   THCudaBlas_Zgetrf(state, n, d_result, lda, pivots_gpu, info_gpu, num_batches);
 #elif defined(THC_REAL_IS_ZFLOAT)
   THCudaBlas_Cgetrf(state, n, d_result, lda, pivots_gpu, info_gpu, num_batches);
-#endif
+#endif //THC_REAL_IS_FLOAT
 
   THCudaFree(state, d_result);
 
@@ -833,7 +833,7 @@ THC_API void THCTensor_(btrifact)(THCState *state, THCTensor *ra_, THCudaIntTens
     {
 #elif defined(THC_REAL_IS_ZFLOAT)
     {
-#endif
+#endif //defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE)
     }
   }
 

@@ -183,6 +183,6 @@
 #undef ORMQR
 #undef PSTRF
 
-#ifndef THGenerateAllTypes
+#if !(defined(THGenerateAllTypes) || defined(THGenerateFloatAndComplexTypes))
 #undef TH_GENERIC_FILE
 #endif

@@ -58,6 +58,7 @@ Install the project...
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateHalfType.h
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateFloatTypes.h
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateComplexTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateFloatAndComplexTypes.h
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THGenerateIntTypes.h
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THLapack.h
 -- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH/THLogAdd.h
@@ -319,6 +320,23 @@ Install the project...
 -- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp from the build
 -- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THSTensor.cpp from the build
 -- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THTensor.cpp from the build
+CMake Warning (dev) at CMakeLists.txt:96 (TARGET_LINK_LIBRARIES):
+  Policy CMP0023 is not set: Plain and keyword target_link_libraries
+  signatures cannot be mixed.  Run "cmake --help-policy CMP0023" for policy
+  details.  Use the cmake_policy command to set the policy and suppress this
+  warning.
+
+  The keyword signature for target_link_libraries has already been used with
+  the target "THPP".  All uses of target_link_libraries with a target should
+  be either all-keyword or all-plain.
+
+  The uses of the keyword signature are here:
+
+   * CMakeLists.txt:93 (TARGET_LINK_LIBRARIES)
+   * CMakeLists.txt:95 (TARGET_LINK_LIBRARIES)
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THPP
@@ -348,8 +366,8 @@ Install the project...
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/libshm
-[100%] Built target shm
 [100%] Built target torch_shm_manager
+[100%] Built target shm
 Install the project...
 -- Install configuration: "Release"
 -- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libshm.so
@@ -357,7 +375,7 @@ Install the project...
 -- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/bin/torch_shm_manager
 running build
 running build_py
--- Building version 0.1.10+9c18392
+-- Building version 0.1.10+295827d
 copying torch/version.py -> build/lib.linux-x86_64-2.7/torch
 copying torch/lib/libTH.so.1 -> build/lib.linux-x86_64-2.7/torch/lib
 copying torch/lib/libTHCUNN.so.1 -> build/lib.linux-x86_64-2.7/torch/lib
@@ -378,6 +396,7 @@ copying torch/lib/include/TH/THTensor.h -> build/lib.linux-x86_64-2.7/torch/lib/
 copying torch/lib/include/TH/THGenerateFloatTypes.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
 copying torch/lib/include/TH/TH.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
 copying torch/lib/include/TH/THAllocator.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
+copying torch/lib/include/TH/THGenerateFloatAndComplexTypes.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
 copying torch/lib/include/TH/THDiskFile.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
 copying torch/lib/include/TH/THVector.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
 copying torch/lib/include/TH/THRandom.h -> build/lib.linux-x86_64-2.7/torch/lib/include/TH
@@ -469,9 +488,9 @@ gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-
 gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/Storage.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/Storage.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
 gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/byte_order.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/byte_order.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
 gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/utils/object_ptr.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/utils/object_ptr.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/allocators.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/allocators.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
 gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/init.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/init.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
-cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
@@ -500,6 +519,7 @@ torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomple
  static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
                         ^
 gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/Tensor.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/Tensor.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
                  from torch/csrc/autograd/init.cpp:3:
 /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
@@ -514,9 +534,8 @@ In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch
 /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
  static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
                         ^
-cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 In file included from torch/csrc/THP.h:32:0,
-                 from torch/csrc/Generator.cpp:6:
+                 from torch/csrc/allocators.cpp:3:
 torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
  static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
                    ^
@@ -532,7 +551,7 @@ torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomple
 gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/engine.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/engine.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
 cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 In file included from torch/csrc/THP.h:32:0,
-                 from torch/csrc/allocators.cpp:3:
+                 from torch/csrc/Generator.cpp:6:
 torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
  static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
                    ^
@@ -545,11 +564,9 @@ torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex
 torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
  static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
                         ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/serialization.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/serialization.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
 gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/Size.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/Size.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
 cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
-gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/serialization.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/serialization.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
-cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
-gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/function.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/function.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
 cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
                  from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/Types.h:4,
@@ -587,6 +604,8 @@ In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39
 /usr/include/features.h:166:0: note: this is the location of the previous definition
  # define _XOPEN_SOURCE 700
  ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/function.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/function.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
                  from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/Types.h:4,
                  from torch/csrc/autograd/variable.h:9,
@@ -636,7 +655,6 @@ torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomple
  static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
                         ^
 gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/grad_buffer.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/grad_buffer.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
-cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
                  from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/Types.h:4,
                  from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/variable.h:9,
@@ -669,6 +687,7 @@ In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39
 /usr/include/features.h:166:0: note: this is the location of the previous definition
  # define _XOPEN_SOURCE 700
  ^
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
                  from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/Types.h:4,
                  from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/autograd/variable.h:9,
@@ -717,10 +736,6 @@ torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex
 torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
  static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
                         ^
-gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/python_cpp_function.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_cpp_function.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
-cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
-gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/python_function.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_function.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
-cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 In file included from torch/csrc/THP.h:32:0,
                  from torch/csrc/serialization.cpp:4:
 torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
@@ -735,7 +750,11 @@ torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex
 torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
  static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
                         ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/python_cpp_function.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_cpp_function.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/python_engine.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_engine.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/python_function.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_function.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
 cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/functions/batch_normalization.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/functions/batch_normalization.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
 cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
@@ -773,7 +792,6 @@ In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39
 /usr/include/features.h:166:0: note: this is the location of the previous definition
  # define _XOPEN_SOURCE 700
  ^
-gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/python_variable.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_variable.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
 In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
                  from torch/csrc/autograd/python_engine.cpp:4:
 /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
@@ -788,7 +806,6 @@ In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch
 /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
  static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
                         ^
-cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/python_hook.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_hook.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
 cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
@@ -825,6 +842,8 @@ In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39
 /usr/include/features.h:166:0: note: this is the location of the previous definition
  # define _XOPEN_SOURCE 700
  ^
+gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/autograd/python_variable.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/autograd/python_variable.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 In file included from torch/csrc/THP.h:32:0,
                  from torch/csrc/utils.cpp:8:
 torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
@@ -882,20 +901,6 @@ In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39
 gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/nn/THNN_generic.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/nn/THNN_generic.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
 cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
-                 from torch/csrc/autograd/python_variable.cpp:5:
-/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
- static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
-                   ^
-/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
- static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
-                   ^
-/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
- static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
-                       ^
-/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
- static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
-                        ^
-In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
                  from torch/csrc/autograd/python_hook.cpp:5:
 /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
  static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
@@ -911,6 +916,20 @@ In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch
                         ^
 gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/cuda/Stream.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/cuda/Stream.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
 cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
+In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from torch/csrc/autograd/python_variable.cpp:5:
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
 gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/cuda/AutoGPU.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/cuda/AutoGPU.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
 cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
@@ -1036,35 +1055,6 @@ torch/csrc/cuda/utils.h:27:12: warning: ‘ccx py_complex_to_thrust_ccomplex(Py_
 torch/csrc/cuda/utils.h:31:12: warning: ‘zcx py_complex_to_thrust_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
  static zcx py_complex_to_thrust_zcomplex(Py_complex x) {
             ^
-In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
-                 from torch/csrc/cuda/THCP.h:11,
-                 from torch/csrc/cuda/utils.cpp:4:
-/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
- static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
-                   ^
-/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
- static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
-                   ^
-/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
- static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
-                       ^
-/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
- static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
-                        ^
-In file included from torch/csrc/cuda/THCP.h:19:0,
-                 from torch/csrc/cuda/utils.cpp:4:
-torch/csrc/cuda/utils.h:14:19: warning: ‘Py_complex thrust_ccomplex_to_py_complex(ccx)’ defined but not used [-Wunused-function]
- static Py_complex thrust_ccomplex_to_py_complex(ccx cx) {
-                   ^
-torch/csrc/cuda/utils.h:20:19: warning: ‘Py_complex thrust_zcomplex_to_py_complex(zcx)’ defined but not used [-Wunused-function]
- static Py_complex thrust_zcomplex_to_py_complex(zcx cx) {
-                   ^
-torch/csrc/cuda/utils.h:27:12: warning: ‘ccx py_complex_to_thrust_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
- static ccx py_complex_to_thrust_ccomplex(Py_complex x) {
-            ^
-torch/csrc/cuda/utils.h:31:12: warning: ‘zcx py_complex_to_thrust_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
- static zcx py_complex_to_thrust_zcomplex(Py_complex x) {
-            ^
 gcc -pthread -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/TH -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THPP -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THNN -I/home/philipp/anaconda2/lib/python2.7/site-packages/numpy/core/include -I/usr/bin/include -I/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/tmp_install/include/THCUNN -I/home/philipp/anaconda2/include/python2.7 -c torch/csrc/DynamicTypes.cpp -o build/temp.linux-x86_64-2.7/torch/csrc/DynamicTypes.o -D_THP_CORE -std=gnu++11 -Wno-write-strings -DWITH_NUMPY -DWITH_CUDA -DCUDA_LIB_PATH=/usr/bin/lib -DWITH_NCCL
 cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++
 In file included from /home/philipp/anaconda2/include/python2.7/Python.h:8:0,
@@ -1097,6 +1087,35 @@ In file included from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39
 /usr/include/features.h:166:0: note: this is the location of the previous definition
  # define _XOPEN_SOURCE 700
  ^
+In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/THP.h:32:0,
+                 from torch/csrc/cuda/THCP.h:11,
+                 from torch/csrc/cuda/utils.cpp:4:
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
+ static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:47:19: warning: ‘Py_complex c_zcomplex_to_py_complex(__complex__ double)’ defined but not used [-Wunused-function]
+ static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+                   ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:53:23: warning: ‘__complex__ float py_complex_to_c_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+                       ^
+/mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/csrc/utils.h:56:24: warning: ‘__complex__ double py_complex_to_c_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+                        ^
+In file included from torch/csrc/cuda/THCP.h:19:0,
+                 from torch/csrc/cuda/utils.cpp:4:
+torch/csrc/cuda/utils.h:14:19: warning: ‘Py_complex thrust_ccomplex_to_py_complex(ccx)’ defined but not used [-Wunused-function]
+ static Py_complex thrust_ccomplex_to_py_complex(ccx cx) {
+                   ^
+torch/csrc/cuda/utils.h:20:19: warning: ‘Py_complex thrust_zcomplex_to_py_complex(zcx)’ defined but not used [-Wunused-function]
+ static Py_complex thrust_zcomplex_to_py_complex(zcx cx) {
+                   ^
+torch/csrc/cuda/utils.h:27:12: warning: ‘ccx py_complex_to_thrust_ccomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static ccx py_complex_to_thrust_ccomplex(Py_complex x) {
+            ^
+torch/csrc/cuda/utils.h:31:12: warning: ‘zcx py_complex_to_thrust_zcomplex(Py_complex)’ defined but not used [-Wunused-function]
+ static zcx py_complex_to_thrust_zcomplex(Py_complex x) {
+            ^
 In file included from torch/csrc/THP.h:32:0,
                  from torch/csrc/DynamicTypes.cpp:3:
 torch/csrc/utils.h:41:19: warning: ‘Py_complex c_ccomplex_to_py_complex(__complex__ float)’ defined but not used [-Wunused-function]
@@ -1183,9 +1202,52 @@ In file included from /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch
                         ^
 gcc -pthread -shared -L/home/philipp/anaconda2/lib -Wl,-rpath=/home/philipp/anaconda2/lib,--no-as-needed build/temp.linux-x86_64-2.7/torch/csrc/nn/THCUNN.o -L/home/philipp/anaconda2/lib -lpython2.7 -o build/lib.linux-x86_64-2.7/torch/_thnn/_THCUNN.so -Wl,-rpath,/usr/bin/lib /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/libTH.so.1 /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/libTHC.so.1 /mnt/f5c0a7bc-a539-461c-bc97-ed4eb92c48a1/projects/pytorch/torch/lib/libTHCUNN.so.1 -Wl,-rpath,$ORIGIN/../lib
 running install_lib
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch
+copying build/lib.linux-x86_64-2.7/torch/_tensor_docs.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch
+copying build/lib.linux-x86_64-2.7/torch/_utils.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/multiprocessing
+copying build/lib.linux-x86_64-2.7/torch/multiprocessing/queue.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/multiprocessing
+copying build/lib.linux-x86_64-2.7/torch/multiprocessing/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/multiprocessing
+copying build/lib.linux-x86_64-2.7/torch/multiprocessing/reductions.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/multiprocessing
+copying build/lib.linux-x86_64-2.7/torch/multiprocessing/pool.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/multiprocessing
+copying build/lib.linux-x86_64-2.7/torch/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch
+copying build/lib.linux-x86_64-2.7/torch/_dl.so -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch
 copying build/lib.linux-x86_64-2.7/torch/version.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd
+copying build/lib.linux-x86_64-2.7/torch/autograd/gradcheck.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd
+copying build/lib.linux-x86_64-2.7/torch/autograd/variable.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd
+copying build/lib.linux-x86_64-2.7/torch/autograd/function.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd
+copying build/lib.linux-x86_64-2.7/torch/autograd/engine.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd
+copying build/lib.linux-x86_64-2.7/torch/autograd/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd
+copying build/lib.linux-x86_64-2.7/torch/autograd/stochastic_function.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/_functions
+copying build/lib.linux-x86_64-2.7/torch/autograd/_functions/reduce.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/_functions
+copying build/lib.linux-x86_64-2.7/torch/autograd/_functions/blas.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/_functions
+copying build/lib.linux-x86_64-2.7/torch/autograd/_functions/compare.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/_functions
+copying build/lib.linux-x86_64-2.7/torch/autograd/_functions/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/_functions
+copying build/lib.linux-x86_64-2.7/torch/autograd/_functions/stochastic.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/_functions
+copying build/lib.linux-x86_64-2.7/torch/autograd/_functions/tensor.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/_functions
+copying build/lib.linux-x86_64-2.7/torch/autograd/_functions/basic_ops.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/_functions
+copying build/lib.linux-x86_64-2.7/torch/autograd/_functions/linalg.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/_functions
+copying build/lib.linux-x86_64-2.7/torch/autograd/_functions/pointwise.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/_functions
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/_thnn
 copying build/lib.linux-x86_64-2.7/torch/_thnn/_THCUNN.so -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/_thnn
+copying build/lib.linux-x86_64-2.7/torch/_thnn/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/_thnn
+copying build/lib.linux-x86_64-2.7/torch/_thnn/utils.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/_thnn
 copying build/lib.linux-x86_64-2.7/torch/_thnn/_THNN.so -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/_thnn
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim
+copying build/lib.linux-x86_64-2.7/torch/optim/rprop.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim
+copying build/lib.linux-x86_64-2.7/torch/optim/adagrad.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim
+copying build/lib.linux-x86_64-2.7/torch/optim/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim
+copying build/lib.linux-x86_64-2.7/torch/optim/lbfgs.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim
+copying build/lib.linux-x86_64-2.7/torch/optim/asgd.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim
+copying build/lib.linux-x86_64-2.7/torch/optim/adadelta.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim
+copying build/lib.linux-x86_64-2.7/torch/optim/optimizer.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim
+copying build/lib.linux-x86_64-2.7/torch/optim/adamax.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim
+copying build/lib.linux-x86_64-2.7/torch/optim/rmsprop.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim
+copying build/lib.linux-x86_64-2.7/torch/optim/sgd.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim
+copying build/lib.linux-x86_64-2.7/torch/optim/adam.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
 copying build/lib.linux-x86_64-2.7/torch/lib/libTH.so.1 -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
 copying build/lib.linux-x86_64-2.7/torch/lib/THNN.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
 copying build/lib.linux-x86_64-2.7/torch/lib/libTHCUNN.so.1 -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
@@ -1194,6 +1256,8 @@ copying build/lib.linux-x86_64-2.7/torch/lib/libTHC.so.1 -> /home/philipp/anacon
 copying build/lib.linux-x86_64-2.7/torch/lib/libshm.so -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
 copying build/lib.linux-x86_64-2.7/torch/lib/libnccl.so.1 -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
 copying build/lib.linux-x86_64-2.7/torch/lib/libTHCS.so.1 -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
 copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THAtomic.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
 copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THGenerateComplexTypes.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
 copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THLapack.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
@@ -1201,6 +1265,7 @@ copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THTensor.h -> /home/phil
 copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THGenerateFloatTypes.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
 copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/TH.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
 copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THAllocator.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THGenerateFloatAndComplexTypes.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
 copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THDiskFile.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
 copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THVector.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
 copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THRandom.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
@@ -1211,6 +1276,7 @@ copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THGenerateHalfType.h -> 
 copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THGeneral.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
 copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THBlas.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
 copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THStorage.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH/generic
 copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic/THStorageCopy.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH/generic
 copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic/THLapack.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH/generic
 copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/generic/THTensor.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH/generic
@@ -1230,6 +1296,7 @@ copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THFile.h -> /home/philip
 copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THLogAdd.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
 copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THHalf.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
 copying build/lib.linux-x86_64-2.7/torch/lib/include/TH/THMath.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/TH
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
 copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCGenerateFloatTypes.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
 copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCGenerateAllTypes.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
 copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCAllocator.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
@@ -1259,6 +1326,7 @@ copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCCachingHostAllocator
 copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCTensorTopK.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
 copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCGenerateLongType.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
 copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/THCTensor.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
 copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensorMathPointwise.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
 copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensorMathBlas.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
 copying build/lib.linux-x86_64-2.7/torch/lib/include/THC/generic/THCTensorScatterGather.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib/include/THC/generic
@@ -1284,8 +1352,560 @@ copying build/lib.linux-x86_64-2.7/torch/lib/libTHPP.so.1 -> /home/philipp/anaco
 copying build/lib.linux-x86_64-2.7/torch/lib/libTHNN.so.1 -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
 copying build/lib.linux-x86_64-2.7/torch/lib/THCUNN.h -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
 copying build/lib.linux-x86_64-2.7/torch/lib/torch_shm_manager -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/lib
+copying build/lib.linux-x86_64-2.7/torch/tensor.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/backends
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/backends/cudnn
+copying build/lib.linux-x86_64-2.7/torch/backends/cudnn/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/backends/cudnn
+copying build/lib.linux-x86_64-2.7/torch/backends/cudnn/rnn.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/backends/cudnn
+copying build/lib.linux-x86_64-2.7/torch/backends/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/backends
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/cuda
+copying build/lib.linux-x86_64-2.7/torch/cuda/streams.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/cuda
+copying build/lib.linux-x86_64-2.7/torch/cuda/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/cuda
+copying build/lib.linux-x86_64-2.7/torch/cuda/nccl.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/cuda
+copying build/lib.linux-x86_64-2.7/torch/cuda/sparse.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/cuda
+copying build/lib.linux-x86_64-2.7/torch/cuda/random.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/cuda
+copying build/lib.linux-x86_64-2.7/torch/cuda/comm.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/cuda
 copying build/lib.linux-x86_64-2.7/torch/_C.so -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/sparse
+copying build/lib.linux-x86_64-2.7/torch/sparse/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/sparse
+copying build/lib.linux-x86_64-2.7/torch/_tensor_str.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch
+copying build/lib.linux-x86_64-2.7/torch/functional.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch
+copying build/lib.linux-x86_64-2.7/torch/_torch_docs.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch
+copying build/lib.linux-x86_64-2.7/torch/serialization.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils
+copying build/lib.linux-x86_64-2.7/torch/utils/hooks.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/ffi
+copying build/lib.linux-x86_64-2.7/torch/utils/ffi/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/ffi
+copying build/lib.linux-x86_64-2.7/torch/utils/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils
+copying build/lib.linux-x86_64-2.7/torch/utils/model_zoo.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer
+copying build/lib.linux-x86_64-2.7/torch/utils/trainer/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer/plugins
+copying build/lib.linux-x86_64-2.7/torch/utils/trainer/plugins/accuracy.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer/plugins
+copying build/lib.linux-x86_64-2.7/torch/utils/trainer/plugins/loss.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer/plugins
+copying build/lib.linux-x86_64-2.7/torch/utils/trainer/plugins/time.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer/plugins
+copying build/lib.linux-x86_64-2.7/torch/utils/trainer/plugins/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer/plugins
+copying build/lib.linux-x86_64-2.7/torch/utils/trainer/plugins/progress.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer/plugins
+copying build/lib.linux-x86_64-2.7/torch/utils/trainer/plugins/logger.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer/plugins
+copying build/lib.linux-x86_64-2.7/torch/utils/trainer/plugins/plugin.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer/plugins
+copying build/lib.linux-x86_64-2.7/torch/utils/trainer/plugins/monitor.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer/plugins
+copying build/lib.linux-x86_64-2.7/torch/utils/trainer/trainer.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/data
+copying build/lib.linux-x86_64-2.7/torch/utils/data/sampler.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/data
+copying build/lib.linux-x86_64-2.7/torch/utils/data/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/data
+copying build/lib.linux-x86_64-2.7/torch/utils/data/dataset.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/data
+copying build/lib.linux-x86_64-2.7/torch/utils/data/dataloader.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/data
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/serialization
+copying build/lib.linux-x86_64-2.7/torch/utils/serialization/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/serialization
+copying build/lib.linux-x86_64-2.7/torch/utils/serialization/read_lua_file.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/serialization
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules
+copying build/lib.linux-x86_64-2.7/torch/nn/modules/loss.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules
+copying build/lib.linux-x86_64-2.7/torch/nn/modules/distance.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules
+copying build/lib.linux-x86_64-2.7/torch/nn/modules/pooling.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules
+copying build/lib.linux-x86_64-2.7/torch/nn/modules/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules
+copying build/lib.linux-x86_64-2.7/torch/nn/modules/pixelshuffle.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules
+copying build/lib.linux-x86_64-2.7/torch/nn/modules/container.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules
+copying build/lib.linux-x86_64-2.7/torch/nn/modules/utils.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules
+copying build/lib.linux-x86_64-2.7/torch/nn/modules/batchnorm.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules
+copying build/lib.linux-x86_64-2.7/torch/nn/modules/module.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules
+copying build/lib.linux-x86_64-2.7/torch/nn/modules/upsampling.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules
+copying build/lib.linux-x86_64-2.7/torch/nn/modules/padding.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules
+copying build/lib.linux-x86_64-2.7/torch/nn/modules/linear.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules
+copying build/lib.linux-x86_64-2.7/torch/nn/modules/rnn.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules
+copying build/lib.linux-x86_64-2.7/torch/nn/modules/sparse.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules
+copying build/lib.linux-x86_64-2.7/torch/nn/modules/conv.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules
+copying build/lib.linux-x86_64-2.7/torch/nn/modules/dropout.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules
+copying build/lib.linux-x86_64-2.7/torch/nn/modules/activation.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules
+copying build/lib.linux-x86_64-2.7/torch/nn/modules/normalization.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules
+copying build/lib.linux-x86_64-2.7/torch/nn/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/backends
+copying build/lib.linux-x86_64-2.7/torch/nn/backends/backend.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/backends
+copying build/lib.linux-x86_64-2.7/torch/nn/backends/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/backends
+copying build/lib.linux-x86_64-2.7/torch/nn/backends/thnn.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/backends
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions
+copying build/lib.linux-x86_64-2.7/torch/nn/_functions/loss.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions
+copying build/lib.linux-x86_64-2.7/torch/nn/_functions/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions
+copying build/lib.linux-x86_64-2.7/torch/nn/_functions/batchnorm.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions
+copying build/lib.linux-x86_64-2.7/torch/nn/_functions/padding.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions
+copying build/lib.linux-x86_64-2.7/torch/nn/_functions/linear.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions
+copying build/lib.linux-x86_64-2.7/torch/nn/_functions/rnn.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions
+copying build/lib.linux-x86_64-2.7/torch/nn/_functions/conv.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/thnn
+copying build/lib.linux-x86_64-2.7/torch/nn/_functions/thnn/loss.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/thnn
+copying build/lib.linux-x86_64-2.7/torch/nn/_functions/thnn/pooling.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/thnn
+copying build/lib.linux-x86_64-2.7/torch/nn/_functions/thnn/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/thnn
+copying build/lib.linux-x86_64-2.7/torch/nn/_functions/thnn/auto.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/thnn
+copying build/lib.linux-x86_64-2.7/torch/nn/_functions/thnn/upsampling.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/thnn
+copying build/lib.linux-x86_64-2.7/torch/nn/_functions/thnn/sparse.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/thnn
+copying build/lib.linux-x86_64-2.7/torch/nn/_functions/thnn/activation.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/thnn
+copying build/lib.linux-x86_64-2.7/torch/nn/_functions/thnn/normalization.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/thnn
+copying build/lib.linux-x86_64-2.7/torch/nn/_functions/dropout.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions
+copying build/lib.linux-x86_64-2.7/torch/nn/_functions/activation.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions
+copying build/lib.linux-x86_64-2.7/torch/nn/functional.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn
+copying build/lib.linux-x86_64-2.7/torch/nn/init.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn
+copying build/lib.linux-x86_64-2.7/torch/nn/parameter.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/parallel
+copying build/lib.linux-x86_64-2.7/torch/nn/parallel/data_parallel.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/parallel
+copying build/lib.linux-x86_64-2.7/torch/nn/parallel/scatter_gather.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/parallel
+copying build/lib.linux-x86_64-2.7/torch/nn/parallel/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/parallel
+copying build/lib.linux-x86_64-2.7/torch/nn/parallel/replicate.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/parallel
+copying build/lib.linux-x86_64-2.7/torch/nn/parallel/parallel_apply.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/parallel
+copying build/lib.linux-x86_64-2.7/torch/nn/parallel/_functions.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/parallel
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/utils
+copying build/lib.linux-x86_64-2.7/torch/nn/utils/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/utils
+copying build/lib.linux-x86_64-2.7/torch/nn/utils/rnn.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/utils
+copying build/lib.linux-x86_64-2.7/torch/nn/utils/clip_grad.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/utils
+copying build/lib.linux-x86_64-2.7/torch/storage.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/distributed
+copying build/lib.linux-x86_64-2.7/torch/distributed/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/distributed
+copying build/lib.linux-x86_64-2.7/torch/distributed/collectives.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/distributed
+copying build/lib.linux-x86_64-2.7/torch/distributed/remote_types.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/distributed
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy
+copying build/lib.linux-x86_64-2.7/torch/legacy/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim
+copying build/lib.linux-x86_64-2.7/torch/legacy/optim/nag.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim
+copying build/lib.linux-x86_64-2.7/torch/legacy/optim/rprop.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim
+copying build/lib.linux-x86_64-2.7/torch/legacy/optim/cg.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim
+copying build/lib.linux-x86_64-2.7/torch/legacy/optim/adagrad.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim
+copying build/lib.linux-x86_64-2.7/torch/legacy/optim/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim
+copying build/lib.linux-x86_64-2.7/torch/legacy/optim/lbfgs.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim
+copying build/lib.linux-x86_64-2.7/torch/legacy/optim/asgd.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim
+copying build/lib.linux-x86_64-2.7/torch/legacy/optim/adadelta.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim
+copying build/lib.linux-x86_64-2.7/torch/legacy/optim/adamax.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim
+copying build/lib.linux-x86_64-2.7/torch/legacy/optim/rmsprop.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim
+copying build/lib.linux-x86_64-2.7/torch/legacy/optim/sgd.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim
+copying build/lib.linux-x86_64-2.7/torch/legacy/optim/adam.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim
+creating /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/View.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Mul.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/CSubTable.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialConvolutionLocal.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Abs.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialContrastiveNormalization.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/NarrowTable.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/CAddTable.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/PartialLinear.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Sqrt.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Container.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SoftShrink.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/FlattenTable.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SoftMarginCriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SelectTable.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/L1HingeEmbeddingCriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/CosineDistance.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Exp.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/TemporalSubSampling.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Euclidean.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/DistKLDivCriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/MultiMarginCriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Threshold.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/CriterionTable.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/MultiLabelSoftMarginCriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/ClassSimplexCriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Mean.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Narrow.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Power.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialConvolutionMap.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/TemporalConvolution.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/__init__.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialCrossMapLRN.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Concat.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/ClassNLLCriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/HardTanh.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/VolumetricBatchNormalization.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialLPPooling.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/BCECriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/VolumetricFullConvolution.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Cosine.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SoftMax.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/L1Penalty.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialDropout.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/DotProduct.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/MixtureTable.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialDilatedConvolution.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/RReLU.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/DepthConcat.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/LookupTable.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/utils.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/HingeEmbeddingCriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/TanhShrink.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Log.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Replicate.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Padding.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/VolumetricConvolution.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/CMulTable.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SoftMin.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/AddConstant.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Reshape.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialFullConvolutionMap.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/GradientReversal.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialAdaptiveMaxPooling.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Index.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Square.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/VolumetricMaxPooling.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Linear.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialSubtractiveNormalization.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/MSECriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialFullConvolution.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialSoftMax.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Identity.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SmoothL1Criterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/CMul.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/LogSoftMax.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialDivisiveNormalization.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialSubSampling.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialClassNLLCriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/AbsCriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/HardShrink.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/JoinTable.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialConvolution.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/VolumetricAveragePooling.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/ParallelCriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/ReLU.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialZeroPadding.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Transpose.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/VolumetricMaxUnpooling.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Dropout.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialAveragePooling.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/PReLU.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialMaxPooling.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/MaskedSelect.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/MulConstant.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/BatchNormalization.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Unsqueeze.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SoftSign.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Parallel.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/CrossEntropyCriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Squeeze.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Min.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/WeightedEuclidean.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/MarginCriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SplitTable.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Max.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/ParallelTable.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/ELU.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/ReLU6.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialBatchNormalization.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Tanh.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Clamp.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialFractionalMaxPooling.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Copy.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Module.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Criterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Sequential.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/CosineEmbeddingCriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialMaxUnpooling.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Contiguous.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Bilinear.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/MV.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/MM.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/LogSigmoid.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/VolumetricReplicationPadding.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SoftPlus.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Add.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialUpSamplingNearest.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/CDivTable.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/LeakyReLU.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/TemporalMaxPooling.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/VolumetricDropout.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialReflectionPadding.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Sigmoid.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/WeightedMSECriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/L1Cost.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/SpatialReplicationPadding.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/MultiLabelMarginCriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Normalize.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/MultiCriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/PairwiseDistance.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/ConcatTable.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Select.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/MarginRankingCriterion.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+copying build/lib.linux-x86_64-2.7/torch/legacy/nn/Sum.py -> /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/_tensor_docs.py to _tensor_docs.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/_utils.py to _utils.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/multiprocessing/queue.py to queue.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/multiprocessing/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/multiprocessing/reductions.py to reductions.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/multiprocessing/pool.py to pool.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/__init__.py to __init__.pyc
 byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/version.py to version.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/gradcheck.py to gradcheck.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/variable.py to variable.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/function.py to function.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/engine.py to engine.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/stochastic_function.py to stochastic_function.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/_functions/reduce.py to reduce.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/_functions/blas.py to blas.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/_functions/compare.py to compare.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/_functions/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/_functions/stochastic.py to stochastic.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/_functions/tensor.py to tensor.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/_functions/basic_ops.py to basic_ops.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/_functions/linalg.py to linalg.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/autograd/_functions/pointwise.py to pointwise.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/_thnn/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/_thnn/utils.py to utils.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim/rprop.py to rprop.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim/adagrad.py to adagrad.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim/lbfgs.py to lbfgs.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim/asgd.py to asgd.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim/adadelta.py to adadelta.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim/optimizer.py to optimizer.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim/adamax.py to adamax.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim/rmsprop.py to rmsprop.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim/sgd.py to sgd.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/optim/adam.py to adam.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/tensor.py to tensor.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/backends/cudnn/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/backends/cudnn/rnn.py to rnn.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/backends/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/cuda/streams.py to streams.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/cuda/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/cuda/nccl.py to nccl.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/cuda/sparse.py to sparse.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/cuda/random.py to random.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/cuda/comm.py to comm.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/sparse/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/_tensor_str.py to _tensor_str.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/functional.py to functional.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/_torch_docs.py to _torch_docs.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/serialization.py to serialization.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/hooks.py to hooks.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/ffi/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/model_zoo.py to model_zoo.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer/plugins/accuracy.py to accuracy.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer/plugins/loss.py to loss.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer/plugins/time.py to time.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer/plugins/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer/plugins/progress.py to progress.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer/plugins/logger.py to logger.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer/plugins/plugin.py to plugin.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer/plugins/monitor.py to monitor.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/trainer/trainer.py to trainer.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/data/sampler.py to sampler.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/data/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/data/dataset.py to dataset.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/data/dataloader.py to dataloader.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/serialization/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/utils/serialization/read_lua_file.py to read_lua_file.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules/loss.py to loss.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules/distance.py to distance.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules/pooling.py to pooling.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules/pixelshuffle.py to pixelshuffle.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules/container.py to container.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules/utils.py to utils.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules/batchnorm.py to batchnorm.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules/module.py to module.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules/upsampling.py to upsampling.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules/padding.py to padding.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules/linear.py to linear.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules/rnn.py to rnn.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules/sparse.py to sparse.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules/conv.py to conv.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules/dropout.py to dropout.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules/activation.py to activation.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/modules/normalization.py to normalization.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/backends/backend.py to backend.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/backends/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/backends/thnn.py to thnn.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/loss.py to loss.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/batchnorm.py to batchnorm.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/padding.py to padding.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/linear.py to linear.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/rnn.py to rnn.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/conv.py to conv.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/thnn/loss.py to loss.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/thnn/pooling.py to pooling.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/thnn/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/thnn/auto.py to auto.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/thnn/upsampling.py to upsampling.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/thnn/sparse.py to sparse.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/thnn/activation.py to activation.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/thnn/normalization.py to normalization.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/dropout.py to dropout.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/_functions/activation.py to activation.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/functional.py to functional.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/init.py to init.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/parameter.py to parameter.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/parallel/data_parallel.py to data_parallel.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/parallel/scatter_gather.py to scatter_gather.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/parallel/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/parallel/replicate.py to replicate.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/parallel/parallel_apply.py to parallel_apply.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/parallel/_functions.py to _functions.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/utils/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/utils/rnn.py to rnn.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/nn/utils/clip_grad.py to clip_grad.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/storage.py to storage.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/distributed/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/distributed/collectives.py to collectives.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/distributed/remote_types.py to remote_types.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim/nag.py to nag.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim/rprop.py to rprop.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim/cg.py to cg.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim/adagrad.py to adagrad.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim/lbfgs.py to lbfgs.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim/asgd.py to asgd.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim/adadelta.py to adadelta.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim/adamax.py to adamax.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim/rmsprop.py to rmsprop.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim/sgd.py to sgd.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/optim/adam.py to adam.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/View.py to View.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Mul.py to Mul.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/CSubTable.py to CSubTable.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialConvolutionLocal.py to SpatialConvolutionLocal.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Abs.py to Abs.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialContrastiveNormalization.py to SpatialContrastiveNormalization.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/NarrowTable.py to NarrowTable.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/CAddTable.py to CAddTable.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/PartialLinear.py to PartialLinear.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Sqrt.py to Sqrt.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Container.py to Container.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SoftShrink.py to SoftShrink.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/FlattenTable.py to FlattenTable.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SoftMarginCriterion.py to SoftMarginCriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SelectTable.py to SelectTable.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/L1HingeEmbeddingCriterion.py to L1HingeEmbeddingCriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/CosineDistance.py to CosineDistance.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Exp.py to Exp.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/TemporalSubSampling.py to TemporalSubSampling.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Euclidean.py to Euclidean.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/DistKLDivCriterion.py to DistKLDivCriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/MultiMarginCriterion.py to MultiMarginCriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Threshold.py to Threshold.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/CriterionTable.py to CriterionTable.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/MultiLabelSoftMarginCriterion.py to MultiLabelSoftMarginCriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/ClassSimplexCriterion.py to ClassSimplexCriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Mean.py to Mean.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Narrow.py to Narrow.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Power.py to Power.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialConvolutionMap.py to SpatialConvolutionMap.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/TemporalConvolution.py to TemporalConvolution.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/__init__.py to __init__.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialCrossMapLRN.py to SpatialCrossMapLRN.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Concat.py to Concat.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/ClassNLLCriterion.py to ClassNLLCriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/HardTanh.py to HardTanh.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/VolumetricBatchNormalization.py to VolumetricBatchNormalization.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialLPPooling.py to SpatialLPPooling.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/BCECriterion.py to BCECriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/VolumetricFullConvolution.py to VolumetricFullConvolution.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Cosine.py to Cosine.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SoftMax.py to SoftMax.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/L1Penalty.py to L1Penalty.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialDropout.py to SpatialDropout.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/DotProduct.py to DotProduct.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/MixtureTable.py to MixtureTable.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialDilatedConvolution.py to SpatialDilatedConvolution.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/RReLU.py to RReLU.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/DepthConcat.py to DepthConcat.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/LookupTable.py to LookupTable.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/utils.py to utils.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/HingeEmbeddingCriterion.py to HingeEmbeddingCriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/TanhShrink.py to TanhShrink.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Log.py to Log.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Replicate.py to Replicate.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Padding.py to Padding.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/VolumetricConvolution.py to VolumetricConvolution.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/CMulTable.py to CMulTable.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SoftMin.py to SoftMin.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/AddConstant.py to AddConstant.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Reshape.py to Reshape.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialFullConvolutionMap.py to SpatialFullConvolutionMap.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/GradientReversal.py to GradientReversal.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialAdaptiveMaxPooling.py to SpatialAdaptiveMaxPooling.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Index.py to Index.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Square.py to Square.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/VolumetricMaxPooling.py to VolumetricMaxPooling.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Linear.py to Linear.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialSubtractiveNormalization.py to SpatialSubtractiveNormalization.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/MSECriterion.py to MSECriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialFullConvolution.py to SpatialFullConvolution.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialSoftMax.py to SpatialSoftMax.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Identity.py to Identity.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SmoothL1Criterion.py to SmoothL1Criterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/CMul.py to CMul.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/LogSoftMax.py to LogSoftMax.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialDivisiveNormalization.py to SpatialDivisiveNormalization.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialSubSampling.py to SpatialSubSampling.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialClassNLLCriterion.py to SpatialClassNLLCriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/AbsCriterion.py to AbsCriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/HardShrink.py to HardShrink.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/JoinTable.py to JoinTable.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialConvolution.py to SpatialConvolution.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/VolumetricAveragePooling.py to VolumetricAveragePooling.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/ParallelCriterion.py to ParallelCriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/ReLU.py to ReLU.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialZeroPadding.py to SpatialZeroPadding.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Transpose.py to Transpose.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/VolumetricMaxUnpooling.py to VolumetricMaxUnpooling.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Dropout.py to Dropout.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialAveragePooling.py to SpatialAveragePooling.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/PReLU.py to PReLU.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialMaxPooling.py to SpatialMaxPooling.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/MaskedSelect.py to MaskedSelect.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/MulConstant.py to MulConstant.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/BatchNormalization.py to BatchNormalization.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Unsqueeze.py to Unsqueeze.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SoftSign.py to SoftSign.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Parallel.py to Parallel.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/CrossEntropyCriterion.py to CrossEntropyCriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Squeeze.py to Squeeze.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Min.py to Min.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/WeightedEuclidean.py to WeightedEuclidean.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/MarginCriterion.py to MarginCriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SplitTable.py to SplitTable.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Max.py to Max.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/ParallelTable.py to ParallelTable.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/ELU.py to ELU.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/ReLU6.py to ReLU6.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialBatchNormalization.py to SpatialBatchNormalization.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Tanh.py to Tanh.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Clamp.py to Clamp.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialFractionalMaxPooling.py to SpatialFractionalMaxPooling.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Copy.py to Copy.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Module.py to Module.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Criterion.py to Criterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Sequential.py to Sequential.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/CosineEmbeddingCriterion.py to CosineEmbeddingCriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialMaxUnpooling.py to SpatialMaxUnpooling.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Contiguous.py to Contiguous.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Bilinear.py to Bilinear.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/MV.py to MV.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/MM.py to MM.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/LogSigmoid.py to LogSigmoid.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/VolumetricReplicationPadding.py to VolumetricReplicationPadding.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SoftPlus.py to SoftPlus.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Add.py to Add.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialUpSamplingNearest.py to SpatialUpSamplingNearest.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/CDivTable.py to CDivTable.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/LeakyReLU.py to LeakyReLU.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/TemporalMaxPooling.py to TemporalMaxPooling.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/VolumetricDropout.py to VolumetricDropout.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialReflectionPadding.py to SpatialReflectionPadding.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Sigmoid.py to Sigmoid.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/WeightedMSECriterion.py to WeightedMSECriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/L1Cost.py to L1Cost.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/SpatialReplicationPadding.py to SpatialReplicationPadding.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/MultiLabelMarginCriterion.py to MultiLabelMarginCriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Normalize.py to Normalize.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/MultiCriterion.py to MultiCriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/PairwiseDistance.py to PairwiseDistance.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/ConcatTable.py to ConcatTable.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Select.py to Select.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/MarginRankingCriterion.py to MarginRankingCriterion.pyc
+byte-compiling /home/philipp/anaconda2/lib/python2.7/site-packages/torch/legacy/nn/Sum.py to Sum.pyc
 running install_egg_info
 running egg_info
 writing requirements to torch.egg-info/requires.txt
@@ -1294,6 +1914,5 @@ writing top-level names to torch.egg-info/top_level.txt
 writing dependency_links to torch.egg-info/dependency_links.txt
 reading manifest file 'torch.egg-info/SOURCES.txt'
 writing manifest file 'torch.egg-info/SOURCES.txt'
-removing '/home/philipp/anaconda2/lib/python2.7/site-packages/torch-0.1.10+9c18392-py2.7.egg-info' (and everything under it)
-Copying torch.egg-info to /home/philipp/anaconda2/lib/python2.7/site-packages/torch-0.1.10+9c18392-py2.7.egg-info
+Copying torch.egg-info to /home/philipp/anaconda2/lib/python2.7/site-packages/torch-0.1.10+295827d-py2.7.egg-info
 running install_scripts

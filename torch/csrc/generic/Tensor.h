@@ -69,4 +69,4 @@ template <> struct THPTypeInfo<THTensor> {
 
 #undef GENERATE_SPARSE
 
-#endif
+#endif // TH_GENERIC_FILE

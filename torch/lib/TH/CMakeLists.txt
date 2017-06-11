@@ -362,6 +362,7 @@ INSTALL(FILES
   THGenerateHalfType.h
   THGenerateFloatTypes.h
   THGenerateComplexTypes.h
+  THGenerateFloatAndComplexTypes.h
   THGenerateIntTypes.h
   THLapack.h
   THLogAdd.h

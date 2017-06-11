@@ -79,7 +79,6 @@ THCTensor_(div)(THCState* state, THCTensor *self_, THCTensor *src_, real value)
 
   THCudaCheck(cudaGetLastError());
 }
-#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
 THC_API void
 THCTensor_(lshift)(THCState* state, THCTensor *self_, THCTensor *src_, real value)
 {
@@ -87,6 +86,8 @@ THCTensor_(lshift)(THCState* state, THCTensor *self_, THCTensor *src_, real valu
   THCTensor_(mul)(state, self_, src_, pow(2, value));
 #elif defined(THC_REAL_IS_HALF)
   return THError("lshift not supported for torch.CudaHalfTensor");
+#elif defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  return THError("lshift not supported for torch.CudaZDoubleTensor or torch.CudaZFloatTensor");
 #else
   if (self_ == src_) {
     if (!THC_pointwiseApply1(state, self_, TensorLShiftConstantOp<real>(value))) {
@@ -111,6 +112,8 @@ THCTensor_(rshift)(THCState* state, THCTensor *self_, THCTensor *src_, real valu
   THCTensor_(mul)(state, self_, src_, pow(2, value));
 #elif defined(THC_REAL_IS_HALF)
   return THError("rshift not supported for torch.CudaHalfTensor");
+#elif defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  return THError("rshift not supported for torch.CudaZDoubleTensor or torch.CudaZFloatTensor");
 #else
   if (self_ == src_) {
     if (!THC_pointwiseApply1(state, self_, TensorRShiftConstantOp<real>(value))) {
@@ -131,6 +134,9 @@ THCTensor_(rshift)(THCState* state, THCTensor *self_, THCTensor *src_, real valu
 THC_API void
 THCTensor_(fmod)(THCState *state, THCTensor *self_, THCTensor *src_, real value)
 {
+#if defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  return THError("rshift not supported for torch.CudaZDoubleTensor or torch.CudaZFloatTensor");
+#else
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, self_, src_));
   if (self_ == src_) {
     if (!THC_pointwiseApply1(state, self_, TensorFmodOp<real>(value))) {
@@ -145,11 +151,15 @@ THCTensor_(fmod)(THCState *state, THCTensor *self_, THCTensor *src_, real value)
   }
 
   THCudaCheck(cudaGetLastError());
+#endif
 }
 
 THC_API void
 THCTensor_(remainder)(THCState *state, THCTensor *self_, THCTensor *src_, real value)
 {
+#if defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  return THError("rshift not supported for torch.CudaZDoubleTensor or torch.CudaZFloatTensor");
+#else
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, self_, src_));
   if (self_ == src_) {
     if (!THC_pointwiseApply1(state, self_, TensorRemainderOp<real>(value))) {
@@ -164,6 +174,7 @@ THCTensor_(remainder)(THCState *state, THCTensor *self_, THCTensor *src_, real v
   }
 
   THCudaCheck(cudaGetLastError());
+#endif
 }
 
 void THCTensor_(tril)(THCState *state, THCTensor *self_, THCTensor *src_, long k)
@@ -261,7 +272,7 @@ THC_API int THCTensor_(equal)(THCState *state, THCTensor *self_, THCTensor *src_
 THC_API void
 THCTensor_(bitand)(THCState* state, THCTensor *self_, THCTensor *src_, real value)
 {
-#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_HALF)
+#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_HALF) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
   return THError("bitand only supported for integer type tensors");
 #else
   if (self_ == src_) {
@@ -283,7 +294,7 @@ THCTensor_(bitand)(THCState* state, THCTensor *self_, THCTensor *src_, real valu
 THC_API void
 THCTensor_(bitor)(THCState* state, THCTensor *self_, THCTensor *src_, real value)
 {
-#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_HALF)
+#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_HALF) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
   return THError("bitor only supported for integer type tensors");
 #else
   if (self_ == src_) {
@@ -305,7 +316,7 @@ THCTensor_(bitor)(THCState* state, THCTensor *self_, THCTensor *src_, real value
 THC_API void
 THCTensor_(bitxor)(THCState* state, THCTensor *self_, THCTensor *src_, real value)
 {
-#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_HALF)
+#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_HALF) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
   return THError("bitxor only supported for integer type tensors");
 #else
   if (self_ == src_) {
@@ -323,5 +334,4 @@ THCTensor_(bitxor)(THCState* state, THCTensor *self_, THCTensor *src_, real valu
   THCudaCheck(cudaGetLastError());
 #endif
 }
-#endif
 #endif
