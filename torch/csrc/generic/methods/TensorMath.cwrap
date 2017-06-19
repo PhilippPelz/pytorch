@@ -1,7 +1,7 @@
 [[
   name: abs
   return: argument 0
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_LONG) || defined(TH_REAL_IS_INT) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE || CUDA_INT || CUDA_LONG
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_LONG) || defined(TH_REAL_IS_INT) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE || CUDA_INT || CUDA_LONG
   with_stateless: True
   arguments:
     - arg: THTensor* destination
@@ -13,7 +13,7 @@
   name: abs_
   cname: abs
   return: self
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_LONG) || defined(TH_REAL_IS_INT) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE || CUDA_INT || CUDA_LONG
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_LONG) || defined(TH_REAL_IS_INT) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE || CUDA_INT || CUDA_LONG
   arguments:
     - THTensor* self
     - THTensor* self
@@ -215,7 +215,7 @@
 
 [[
   name: log_
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   cname: log
   return: self
   arguments:
@@ -225,7 +225,7 @@
 
 [[
   name: log
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   with_stateless: True
   return: argument 0
   arguments:
@@ -259,7 +259,7 @@
 
 [[
   name: exp_
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   cname: exp
   return: self
   arguments:
@@ -269,7 +269,7 @@
 
 [[
   name: exp
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   with_stateless: True
   return: argument 0
   arguments:
@@ -281,7 +281,7 @@
 
 [[
   name: cos_
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   cname: cos
   return: self
   arguments:
@@ -291,7 +291,7 @@
 
 [[
   name: cos
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   with_stateless: True
   return: argument 0
   arguments:
@@ -303,7 +303,7 @@
 
 [[
   name: acos_
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   cname: acos
   return: self
   arguments:
@@ -313,7 +313,7 @@
 
 [[
   name: acos
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   with_stateless: True
   return: argument 0
   arguments:
@@ -325,7 +325,7 @@
 
 [[
   name: cosh_
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   cname: cosh
   return: self
   arguments:
@@ -335,7 +335,7 @@
 
 [[
   name: cosh
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   with_stateless: True
   return: argument 0
   arguments:
@@ -347,7 +347,7 @@
 
 [[
   name: sin_
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   cname: sin
   return: self
   arguments:
@@ -357,7 +357,7 @@
 
 [[
   name: sin
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   with_stateless: True
   return: argument 0
   arguments:
@@ -369,7 +369,7 @@
 
 [[
   name: asin_
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   cname: asin
   return: self
   arguments:
@@ -379,7 +379,7 @@
 
 [[
   name: asin
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   with_stateless: True
   return: argument 0
   arguments:
@@ -391,7 +391,7 @@
 
 [[
   name: sinh_
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   cname: sinh
   return: self
   arguments:
@@ -401,7 +401,7 @@
 
 [[
   name: sinh
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   with_stateless: True
   return: argument 0
   arguments:
@@ -413,7 +413,7 @@
 
 [[
   name: tan_
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   cname: tan
   return: self
   arguments:
@@ -423,7 +423,7 @@
 
 [[
   name: tan
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   with_stateless: True
   return: argument 0
   arguments:
@@ -435,7 +435,7 @@
 
 [[
   name: atan_
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   cname: atan
   return: self
   arguments:
@@ -445,7 +445,7 @@
 
 [[
   name: atan
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   with_stateless: True
   return: argument 0
   arguments:
@@ -457,7 +457,7 @@
 
 [[
   name: tanh_
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   cname: tanh
   return: self
   arguments:
@@ -467,7 +467,7 @@
 
 [[
   name: tanh
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   with_stateless: True
   return: argument 0
   arguments:
@@ -479,7 +479,7 @@
 
 [[
   name: sqrt_
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   cname: sqrt
   return: self
   arguments:
@@ -489,7 +489,7 @@
 
 [[
   name: sqrt
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   with_stateless: True
   return: argument 0
   arguments:
@@ -777,7 +777,7 @@
 
 [[
   name: neg
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   with_stateless: True
   options:
     - cname: neg
@@ -790,7 +790,7 @@
 
 [[
   name: neg_
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   options:
     - cname: neg
       return: self
@@ -829,7 +829,7 @@
 // be available. Still, they differ in torch.pow.
 [[
   name: pow
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   with_stateless: True
   return: argument 0
   options:
@@ -855,7 +855,7 @@
 
 [[
   name: pow_
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   return: argument 0
   cname: pow
   options:
@@ -2079,7 +2079,7 @@ static const char *R = &__R;
 [[
   name: btrifact
   cname: btrifact
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   with_stateless: true
   return: argument 0,1
   arguments:
@@ -2096,7 +2096,7 @@ static const char *R = &__R;
 [[
   name: btrisolve
   cname: btrisolve
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
+  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE
   with_stateless: true
   return: argument 0
   arguments:

@@ -43,9 +43,9 @@ typedef double _Complex zx;
 #define SCAL cscal_
 #define COPY ccopy_
 #define AXPY caxpy_
-#define DOT cdot_
+#define DOT cdotc_
 #define GEMV cgemv_
-#define GER cger_
+#define GER cgerc_
 #define GEMM cgemm_
 
 #define GESV cgesv_
@@ -164,9 +164,9 @@ typedef double _Complex zx;
 #define SCAL zscal_
 #define COPY zcopy_
 #define AXPY zaxpy_
-#define DOT zdot_
+#define DOT zdotc_
 #define GEMV zgemv_
-#define GER zger_
+#define GER zgerc_
 #define GEMM zgemm_
 
 #define GESV zgesv_
