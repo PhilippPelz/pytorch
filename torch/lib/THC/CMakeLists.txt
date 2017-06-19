@@ -190,6 +190,7 @@ SET(src-cuda
   THCTensorTypeUtils.cu
   THCSortUtils.cu
   THCTensorMode.cu
+  THCTensorFFT.cu
   )
 
 # loop over all types
@@ -222,6 +223,7 @@ IF ("$ENV{STATIC_TH}" STREQUAL "YES")
 ELSE()
   CUDA_ADD_LIBRARY(THC SHARED ${src} ${src-cuda})
   CUDA_ADD_CUBLAS_TO_TARGET(THC)
+  CUDA_ADD_CUFFT_TO_TARGET(THC)
   TARGET_LINK_LIBRARIES(THC ${TH_LIBRARIES} ${CUDA_curand_LIBRARY})
 
   IF(USE_MAGMA)
@@ -286,6 +288,7 @@ INSTALL(FILES
           THCGenerateFloatType.h
           THCGenerateZFloatType.h
           THCGenerateFloatTypes.h
+          THCGenerateComplexTypes.h
           THCGenerateDoubleType.h
           THCGenerateZDoubleType.h
           THCHalf.h
@@ -297,6 +300,7 @@ INSTALL(FILES
           THCTensorMathMagma.cuh
           THCThrustAllocator.cuh
           THCTensorMode.cuh
+          THCTensorFFT.h
           DESTINATION "${THC_INSTALL_INCLUDE_SUBDIR}/THC")
 
 INSTALL(FILES
@@ -343,4 +347,6 @@ INSTALL(FILES
           generic/THCTensorRandom.cu
           generic/THCTensorMode.h
           generic/THCTensorMode.cu
+          generic/THCTensorFFT.cu
+          generic/THCTensorFFT.h
           DESTINATION "${THC_INSTALL_INCLUDE_SUBDIR}/THC/generic")

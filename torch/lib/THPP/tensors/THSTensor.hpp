@@ -122,6 +122,17 @@ public:
   virtual THSTensor& eqTensorT(const Tensor& ta, const Tensor& tb) override;
 
   virtual THSTensor& abs(const Tensor& src) override;
+
+  virtual THSTensor& fft(const Tensor& src) override;
+  virtual THSTensor& fft2(const Tensor& src) override;
+  virtual THSTensor& fft3(const Tensor& src) override;
+  virtual THSTensor& fftn(const Tensor& src) override;
+
+  virtual THSTensor& ifft(const Tensor& src) override;
+  virtual THSTensor& ifft2(const Tensor& src) override;
+  virtual THSTensor& ifft3(const Tensor& src) override;
+  virtual THSTensor& ifftn(const Tensor& src) override;
+
   virtual THSTensor& sigmoid(const Tensor& src) override;
   virtual THSTensor& log(const Tensor& src) override;
   virtual THSTensor& log1p(const Tensor& src) override;

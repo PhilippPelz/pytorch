@@ -19,6 +19,176 @@
     - THTensor* self
 ]]
 
+[[
+  name: fft
+  return: argument 0
+  defined_if: defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  with_stateless: True
+  arguments:
+    - arg: THTensor* destination
+      output: True
+    - THTensor* self
+]]
+
+[[
+  name: fft_
+  cname: fft
+  return: self
+  defined_if: defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  arguments:
+    - THTensor* self
+    - THTensor* self
+]]
+
+[[
+  name: fft2
+  return: argument 0
+  defined_if: defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  with_stateless: True
+  arguments:
+    - arg: THTensor* destination
+      output: True
+    - THTensor* self
+]]
+
+[[
+  name: fft2_
+  cname: fft2
+  return: self
+  defined_if: defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  arguments:
+    - THTensor* self
+    - THTensor* self
+]]
+
+[[
+  name: fft3
+  return: argument 0
+  defined_if: defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  with_stateless: True
+  arguments:
+    - arg: THTensor* destination
+      output: True
+    - THTensor* self
+]]
+
+[[
+  name: fft3_
+  cname: fft3
+  return: self
+  defined_if: defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  arguments:
+    - THTensor* self
+    - THTensor* self
+]]
+
+
+
+[[
+  name: fftn
+  return: argument 0
+  defined_if: defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  with_stateless: True
+  arguments:
+    - arg: THTensor* destination
+      output: True
+    - THTensor* self
+]]
+
+[[
+  name: fftn_
+  cname: fftn
+  return: self
+  defined_if: defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  arguments:
+    - THTensor* self
+    - THTensor* self
+]]
+
+[[
+  name: ifft
+  return: argument 0
+  defined_if: defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  with_stateless: True
+  arguments:
+    - arg: THTensor* destination
+      output: True
+    - THTensor* self
+]]
+
+[[
+  name: ifft_
+  cname: ifft
+  return: self
+  defined_if: defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  arguments:
+    - THTensor* self
+    - THTensor* self
+]]
+
+[[
+  name: ifft2
+  return: argument 0
+  defined_if: defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  with_stateless: True
+  arguments:
+    - arg: THTensor* destination
+      output: True
+    - THTensor* self
+]]
+
+[[
+  name: ifft2_
+  cname: ifft2
+  return: self
+  defined_if: defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  arguments:
+    - THTensor* self
+    - THTensor* self
+]]
+
+[[
+  name: ifft3
+  return: argument 0
+  defined_if: defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  with_stateless: True
+  arguments:
+    - arg: THTensor* destination
+      output: True
+    - THTensor* self
+]]
+
+[[
+  name: ifft3_
+  cname: ifft3
+  return: self
+  defined_if: defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  arguments:
+    - THTensor* self
+    - THTensor* self
+]]
+
+
+[[
+  name: ifftn
+  return: argument 0
+  defined_if: defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  with_stateless: True
+  arguments:
+    - arg: THTensor* destination
+      output: True
+    - THTensor* self
+]]
+
+[[
+  name: ifftn_
+  cname: ifftn
+  return: self
+  defined_if: defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  arguments:
+    - THTensor* self
+    - THTensor* self
+]]
 
 [[
   name: sigmoid_

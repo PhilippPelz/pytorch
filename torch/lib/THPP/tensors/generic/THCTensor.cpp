@@ -427,13 +427,101 @@ TENSOR_IMPLEMENT_LOGICAL(ne)
 
 template<>
 auto THCTensor<real>::abs(const Tensor& src) -> THCTensor& {
-#if defined(TH_REAL_IS_LONG) || defined(TH_REAL_IS_INT) ||\
-    defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
+#if defined(THC_REAL_IS_LONG) || defined(THC_REAL_IS_INT) ||\
+    defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_FLOAT)
   THCTensor_(abs)(state, tensor, const_tensor_cast(src).tensor);
   return *this;
 #else
   throw std::runtime_error("absolute value is only available for\
       signed type tensors");
+#endif
+}
+
+template<>
+auto THCTensor<real>::fft(const Tensor& src) -> THCTensor& {
+#if defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT)
+  THCTensor_(fft)(state, tensor, const_tensor_cast(src).tensor);
+  return *this;
+#else
+  throw std::runtime_error("fft value is only available for\
+      complex type tensors");
+#endif
+}
+
+template<>
+auto THCTensor<real>::fft2(const Tensor& src) -> THCTensor& {
+#if defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT)
+  THCTensor_(fft2)(state, tensor, const_tensor_cast(src).tensor);
+  return *this;
+#else
+  throw std::runtime_error("fft value is only available for\
+      complex type tensors");
+#endif
+}
+
+template<>
+auto THCTensor<real>::fft3(const Tensor& src) -> THCTensor& {
+#if defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT)
+  THCTensor_(fft3)(state, tensor, const_tensor_cast(src).tensor);
+  return *this;
+#else
+  throw std::runtime_error("fft value is only available for\
+      complex type tensors");
+#endif
+}
+
+template<>
+auto THCTensor<real>::fftn(const Tensor& src) -> THCTensor& {
+#if defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT)
+  THCTensor_(fftn)(state, tensor, const_tensor_cast(src).tensor);
+  return *this;
+#else
+  throw std::runtime_error("fft value is only available for\
+      complex type tensors");
+#endif
+}
+
+template<>
+auto THCTensor<real>::ifft(const Tensor& src) -> THCTensor& {
+#if defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT)
+  THCTensor_(ifft)(state, tensor, const_tensor_cast(src).tensor);
+  return *this;
+#else
+  throw std::runtime_error("fft value is only available for\
+      complex type tensors");
+#endif
+}
+
+template<>
+auto THCTensor<real>::ifft2(const Tensor& src) -> THCTensor& {
+#if defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT)
+  THCTensor_(ifft2)(state, tensor, const_tensor_cast(src).tensor);
+  return *this;
+#else
+  throw std::runtime_error("fft value is only available for\
+      complex type tensors");
+#endif
+}
+
+template<>
+auto THCTensor<real>::ifft3(const Tensor& src) -> THCTensor& {
+#if defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT)
+  THCTensor_(ifft3)(state, tensor, const_tensor_cast(src).tensor);
+  return *this;
+#else
+  throw std::runtime_error("fft value is only available for\
+      complex type tensors");
+#endif
+}
+
+template<>
+auto THCTensor<real>::ifftn(const Tensor& src) -> THCTensor& {
+#if defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT)
+  THCTensor_(ifftn)(state, tensor, const_tensor_cast(src).tensor);
+  return *this;
+#else
+  throw std::runtime_error("fft value is only available for\
+      complex type tensors");
 #endif
 }
 

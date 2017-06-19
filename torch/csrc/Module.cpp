@@ -129,23 +129,23 @@ static bool THPModule_assignStateless(PyObject *self) {
 // classes
 static PyObject *THPModule_initExtension(PyObject *self,
                                          PyObject *shm_manager_path) {
-   PyErr_WarnEx(PyExc_Warning, "THPModule_loadClasses now starting\n", 1);   
+   PyErr_WarnEx(PyExc_Warning, "THPModule_loadClasses now starting\n", 1);
   if (!THPUtils_checkBytes(shm_manager_path)) {
     THPUtils_setError("initialization error - expected bytes/string object as "
                       "shm_manager_path!");
     return NULL;
   }
   libshm_init(THPUtils_bytesAsString(shm_manager_path));
-  PyErr_WarnEx(PyExc_Warning, "THPModule_loadClasses now starting\n", 1);
+  // PyErr_WarnEx(PyExc_Warning, "THPModule_loadClasses now starting\n", 1);
   if (!THPModule_loadClasses(self))
     return NULL;
-  PyErr_WarnEx(PyExc_Warning, "THPModule_loadClasses succeeded\n", 1);
+  // PyErr_WarnEx(PyExc_Warning, "THPModule_loadClasses succeeded\n", 1);
   if (!THPModule_assignStateless(self))
     return NULL;
-  PyErr_WarnEx(PyExc_Warning, "THPModule_assignStateless succeeded\n", 1);
+  // PyErr_WarnEx(PyExc_Warning, "THPModule_assignStateless succeeded\n", 1);
   if (!THPAutograd_initFunctions(self))
     return NULL;
-  PyErr_WarnEx(PyExc_Warning, "THPAutograd_initFunctions succeeded\n", 1);
+  // PyErr_WarnEx(PyExc_Warning, "THPAutograd_initFunctions succeeded\n", 1);
   return PyBool_FromLong(true);
 }
 
@@ -256,6 +256,14 @@ IMPLEMENT_STATELESS(ceil)
 IMPLEMENT_STATELESS(floor)
 IMPLEMENT_STATELESS(round)
 IMPLEMENT_STATELESS(abs)
+IMPLEMENT_STATELESS(fft)
+IMPLEMENT_STATELESS(fft2)
+IMPLEMENT_STATELESS(fft3)
+IMPLEMENT_STATELESS(fftn)
+IMPLEMENT_STATELESS(ifft)
+IMPLEMENT_STATELESS(ifft2)
+IMPLEMENT_STATELESS(ifft3)
+IMPLEMENT_STATELESS(ifftn)
 IMPLEMENT_STATELESS(trunc)
 IMPLEMENT_STATELESS(frac)
 IMPLEMENT_STATELESS(mean)
@@ -605,6 +613,14 @@ static PyMethodDef TorchMethods[] = {
     {"floor", (PyCFunction)THPModule_floor, METH_VARARGS | METH_KEYWORDS, NULL},
     {"round", (PyCFunction)THPModule_round, METH_VARARGS | METH_KEYWORDS, NULL},
     {"abs", (PyCFunction)THPModule_abs, METH_VARARGS | METH_KEYWORDS, NULL},
+    {"fft", (PyCFunction)THPModule_fft, METH_VARARGS | METH_KEYWORDS, NULL},
+    {"fft2", (PyCFunction)THPModule_fft2, METH_VARARGS | METH_KEYWORDS, NULL},
+    {"fft3", (PyCFunction)THPModule_fft3, METH_VARARGS | METH_KEYWORDS, NULL},
+    {"fftn", (PyCFunction)THPModule_fftn, METH_VARARGS | METH_KEYWORDS, NULL},
+    {"ifft", (PyCFunction)THPModule_ifft, METH_VARARGS | METH_KEYWORDS, NULL},
+    {"ifft2", (PyCFunction)THPModule_ifft2, METH_VARARGS | METH_KEYWORDS, NULL},
+    {"ifft3", (PyCFunction)THPModule_ifft3, METH_VARARGS | METH_KEYWORDS, NULL},
+    {"ifftn", (PyCFunction)THPModule_ifftn, METH_VARARGS | METH_KEYWORDS, NULL},
     {"trunc", (PyCFunction)THPModule_trunc, METH_VARARGS | METH_KEYWORDS, NULL},
     {"frac", (PyCFunction)THPModule_frac, METH_VARARGS | METH_KEYWORDS, NULL},
     {"mean", (PyCFunction)THPModule_mean, METH_VARARGS | METH_KEYWORDS, NULL},

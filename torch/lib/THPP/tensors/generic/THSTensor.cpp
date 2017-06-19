@@ -305,6 +305,46 @@ auto THSTensor<real>::abs(const Tensor& src) -> THSTensor& {
 }
 
 template<>
+auto THSTensor<real>::fft(const Tensor& src) -> THSTensor& {
+  throw std::runtime_error("THSTensor::fft() not supported");
+}
+
+template<>
+auto THSTensor<real>::fft2(const Tensor& src) -> THSTensor& {
+  throw std::runtime_error("THSTensor::fft2() not supported");
+}
+
+template<>
+auto THSTensor<real>::fft3(const Tensor& src) -> THSTensor& {
+  throw std::runtime_error("THSTensor::fft3() not supported");
+}
+
+template<>
+auto THSTensor<real>::fftn(const Tensor& src) -> THSTensor& {
+  throw std::runtime_error("THSTensor::fftn() not supported");
+}
+
+template<>
+auto THSTensor<real>::ifft(const Tensor& src) -> THSTensor& {
+  throw std::runtime_error("THSTensor::ifft() not supported");
+}
+
+template<>
+auto THSTensor<real>::ifft2(const Tensor& src) -> THSTensor& {
+  throw std::runtime_error("THSTensor::ifft2() not supported");
+}
+
+template<>
+auto THSTensor<real>::ifft3(const Tensor& src) -> THSTensor& {
+  throw std::runtime_error("THSTensor::ifft3() not supported");
+}
+
+template<>
+auto THSTensor<real>::ifftn(const Tensor& src) -> THSTensor& {
+  throw std::runtime_error("THSTensor::ifftn() not supported");
+}
+
+template<>
 auto THSTensor<real>::sigmoid(const Tensor& src) -> THSTensor& {
   throw std::runtime_error("THSTensor::sigmoid() not supported");
 }

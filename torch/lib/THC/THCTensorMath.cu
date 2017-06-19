@@ -28,6 +28,56 @@ struct TensorFillOp {
   const T val;
 };
 
+template<typename T, typename TPart>
+struct TensorFillImOp {};
+template<typename T, typename TPart>
+struct TensorFillReOp {};
+
+template<>
+struct TensorFillImOp<ccx,float> {
+	TensorFillImOp(float v) :
+			val(v) {
+	}
+	__device__ __forceinline__ void operator()(ccx* v) {
+		*v = ccx(v->real(), val);
+	}
+  const float val;
+};
+
+template<>
+struct TensorFillImOp<zcx,double> {
+	TensorFillImOp(double v) :
+			val(v) {
+	}
+	__device__ __forceinline__ void operator()(zcx* v) {
+		*v = zcx(v->real(), val);
+	}
+  const double val;
+};
+
+template<>
+struct TensorFillReOp<ccx,float> {
+	TensorFillReOp(float v) :
+			val(v) {
+	}
+	__device__ __forceinline__ void operator()(ccx* v) {
+		*v = ccx(val, v->imag());
+	}
+
+	const float val;
+};
+
+template<>
+struct TensorFillReOp<zcx,double> {
+	TensorFillReOp(double v) :
+			val(v) {
+	}
+	__device__ __forceinline__ void operator()(zcx* v) {
+		*v = zcx(val, v->imag());
+	}
+
+	const double val;
+};
 // copypasta from https://github.com/thrust/thrust/blob/master/examples/strided_range.cu
 template <typename Iterator>
 class strided_range
@@ -109,7 +159,7 @@ struct NonZeroOp
 
 template<typename T, typename accT = T>
 struct LinspaceOp {
-  __host__ __device__ LinspaceOp(accT start, accT step): 
+  __host__ __device__ LinspaceOp(accT start, accT step):
     start_(start), step_(step) { }
   __device__ __forceinline__ T operator()(ptrdiff_t index) {
     accT increment = THCNumerics<accT>::mul(step_, ScalarConvert<ptrdiff_t,accT>::to(index));
@@ -122,7 +172,7 @@ struct LinspaceOp {
 
 template<typename T, typename accT = T>
 struct LogspaceOp {
-  __host__ __device__ LogspaceOp(accT start, accT step): 
+  __host__ __device__ LogspaceOp(accT start, accT step):
     start_(start), step_(step) { }
   __device__ __forceinline__ T operator()(ptrdiff_t index) {
     accT increment = THCNumerics<accT>::mul(step_, ScalarConvert<ptrdiff_t,accT>::to(index));
