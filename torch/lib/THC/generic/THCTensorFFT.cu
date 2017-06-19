@@ -46,7 +46,7 @@ void THCTensor_(fftnBatchedbase)(THCState *state, THCTensor *self, THCTensor *re
 	free(fft_dims);
 }
 
-void THCTensor_(fftnBatched)(THCState *state, THCTensor *result, THCTensor *self) {
+void THCTensor_(fftnBatched)(THCState *state, THCTensor *self, THCTensor *result) {
 	FILE *f;
 	f = fopen("/home/philipp/fftnBatched.log", "a+");
 	//fprintf(f,"fftnBatchedbase done\n");
@@ -95,7 +95,7 @@ void THCTensor_(fft2)(THCState *state, THCTensor *result, THCTensor *self) {
 	int self_ndim = THCTensor_(nDimension)(state, self);
 	int res_ndim = THCTensor_(nDimension)(state, result);
 	fprintf(f,"(self_dim,res_dim) = (%d,%d)\n",self_ndim,res_ndim);
-	fclose(f);
+
 	// if (!THCTensor_(isSameSizeAs)(state, self, result))
   //   THError("self_ndim must be equal result_ndim\n");
 	int self_batch_dim = 1;
@@ -106,15 +106,15 @@ void THCTensor_(fft2)(THCState *state, THCTensor *result, THCTensor *self) {
   //fprintf(f,"dim1 = %d\n",THCTensor_(size)(state, self, self_ndim-2));
 	//fprintf(f,"dim2 = %d\n",THCTensor_(size)(state, self, self_ndim-1));
 	THLongStorage *new_self_size = THLongStorage_newWithSize3( self_batch_dim, THCTensor_(size)(state, self, self_ndim-2),THCTensor_(size)(state, self, self_ndim-1));
-	//fprintf(f,"after THLongStorage_newWithSize3\n");
+	fprintf(f,"after THLongStorage_newWithSize3\n");
 	THCTensor *new_self = THCTensor_(newView)(state, self, new_self_size);
-	//fprintf(f,"after newView\n");
+	fprintf(f,"after newView\n");
 
 	THLongStorage *new_result_size = THLongStorage_newWithSize3( self_batch_dim, THCTensor_(size)(state, self, self_ndim-2),THCTensor_(size)(state, self, self_ndim-1));
-	//fprintf(f,"after THLongStorage_newWithSize3\n");
+	fprintf(f,"after THLongStorage_newWithSize3\n");
 	THCTensor *new_result = THCTensor_(newView)(state, result, new_result_size);
-	//fprintf(f,"after newView\n");
-
+	fprintf(f,"after newView\n");
+  fclose(f);
 	THCTensor_(fftnBatched)(state,new_self,new_result);
 	THLongStorage_free(new_self_size);
 	THLongStorage_free(new_result_size);
