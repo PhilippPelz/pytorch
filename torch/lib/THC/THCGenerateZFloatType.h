@@ -1,5 +1,5 @@
 #ifndef THC_GENERIC_FILE
-#error "You must define THC_GENERIC_FILE before including THGenerateFloatType.h"
+#error "You must define THC_GENERIC_FILE before including THGenerateZFloatType.h"
 #endif
 
 #include <complex>
@@ -8,8 +8,9 @@ typedef thrust::complex<float> ccx;
 typedef thrust::complex<double> zcx;
 
 #define real ccx
-/* FIXME: fp64 has bad performance on some platforms; avoid using it unless
-   we opt into it? */
+#define cureal cufftComplex
+#define cufft cufftExecC2C
+#define cufftname CUFFT_C2C
 #define accreal ccx
 #define part float
 #define Real ZFloat
@@ -18,14 +19,15 @@ typedef thrust::complex<double> zcx;
 #line 1 THC_GENERIC_FILE
 #include THC_GENERIC_FILE
 #undef real
+#undef cureal
+#undef cufft
+#undef cufftname
 #undef accreal
 #undef part
 #undef Real
 #undef CReal
 #undef THC_REAL_IS_ZFLOAT
 
-#ifndef THCGenerateAllTypes
-#ifndef THCGenerateFloatTypes
+#if !(defined(THCGenerateAllTypes) || defined(THCGenerateComplexTypes))
 #undef THC_GENERIC_FILE
-#endif
 #endif

@@ -15,6 +15,36 @@ THCTensor_(fill)(THCState* state, THCTensor *self_, real value)
   THCudaCheck(cudaGetLastError());
 }
 
+#if defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+
+THC_API void
+THCTensor_(fillIm)(THCState* state, THCTensor *self_, part value)
+{
+  THCAssertSameGPU(THCTensor_(checkGPU)(state, 1, self_));
+
+  if (!THC_pointwiseApply1(
+        state, self_, TensorFillImOp<real,part>(value))) {
+    THArgCheck(false, 1, CUTORCH_DIM_WARNING);
+  }
+
+  THCudaCheck(cudaGetLastError());
+}
+
+THC_API void
+THCTensor_(fillRe)(THCState* state, THCTensor *self_, part value)
+{
+  THCAssertSameGPU(THCTensor_(checkGPU)(state, 1, self_));
+
+  if (!THC_pointwiseApply1(
+        state, self_, TensorFillReOp<real,part>(value))) {
+    THArgCheck(false, 1, CUTORCH_DIM_WARNING);
+  }
+
+  THCudaCheck(cudaGetLastError());
+}
+
+#endif
+
 THC_API void
 THCTensor_(zero)(THCState *state, THCTensor *self_)
 {

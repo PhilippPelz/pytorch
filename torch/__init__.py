@@ -55,7 +55,7 @@ from torch._C import *
 __all__ += [name for name in dir(_C)
             if name[0] != '_' and
             not name.endswith('Base')]
-print(__all__)
+# print(__all__)
 
 sys.setdlopenflags(old_flags)
 del _dl_flags

@@ -3,6 +3,10 @@
 #else
 
 THC_API void THCTensor_(fill)(THCState *state, THCTensor *self, real value);
+#if defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+THC_API void THCTensor_(fillIm)(THCState *state, THCTensor *self, part value);
+THC_API void THCTensor_(fillRe)(THCState *state, THCTensor *self, part value);
+#endif
 THC_API void THCTensor_(zero)(THCState *state, THCTensor *self);
 
 THC_API void THCTensor_(zeros)(THCState *state, THCTensor *r_, THLongStorage *size);

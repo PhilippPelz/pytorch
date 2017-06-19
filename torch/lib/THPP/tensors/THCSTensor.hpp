@@ -117,6 +117,17 @@ public:
   virtual THCSTensor& eqTensorT(const Tensor& ta, const Tensor& tb) override;
 
   virtual THCSTensor& abs(const Tensor& src) override;
+
+  virtual THCSTensor& fft(const Tensor& src) override;
+  virtual THCSTensor& fft2(const Tensor& src) override;
+  virtual THCSTensor& fft3(const Tensor& src) override;
+  virtual THCSTensor& fftn(const Tensor& src) override;
+
+  virtual THCSTensor& ifft(const Tensor& src) override;
+  virtual THCSTensor& ifft2(const Tensor& src) override;
+  virtual THCSTensor& ifft3(const Tensor& src) override;
+  virtual THCSTensor& ifftn(const Tensor& src) override;
+
   virtual THCSTensor& sigmoid(const Tensor& src) override;
   virtual THCSTensor& log(const Tensor& src) override;
   virtual THCSTensor& log1p(const Tensor& src) override;

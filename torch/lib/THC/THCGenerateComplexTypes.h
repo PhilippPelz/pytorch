@@ -1,6 +1,6 @@
 #ifndef THC_GENERIC_FILE
 #error                                                                         \
-    "You must define THC_GENERIC_FILE before including THGenerateFloatTypes.h"
+    "You must define THC_GENERIC_FILE before including THCGenerateComplexTypes.h"
 #endif
 
 #include <complex>

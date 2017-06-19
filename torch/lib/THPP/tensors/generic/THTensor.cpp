@@ -325,6 +325,46 @@ template <> auto THTensor<real>::abs(const Tensor &src) -> THTensor & {
 #endif
 }
 
+template<>
+auto THTensor<real>::fft(const Tensor& src) -> THTensor& {
+  throw std::runtime_error("THTensor::fft() not supported");
+}
+
+template<>
+auto THTensor<real>::fft2(const Tensor& src) -> THTensor& {
+  throw std::runtime_error("THTensor::fft2() not supported");
+}
+
+template<>
+auto THTensor<real>::fft3(const Tensor& src) -> THTensor& {
+  throw std::runtime_error("THTensor::fft3() not supported");
+}
+
+template<>
+auto THTensor<real>::fftn(const Tensor& src) -> THTensor& {
+  throw std::runtime_error("THTensor::fftn() not supported");
+}
+
+template<>
+auto THTensor<real>::ifft(const Tensor& src) -> THTensor& {
+  throw std::runtime_error("THTensor::ifft() not supported");
+}
+
+template<>
+auto THTensor<real>::ifft2(const Tensor& src) -> THTensor& {
+  throw std::runtime_error("THTensor::ifft2() not supported");
+}
+
+template<>
+auto THTensor<real>::ifft3(const Tensor& src) -> THTensor& {
+  throw std::runtime_error("THTensor::ifft3() not supported");
+}
+
+template<>
+auto THTensor<real>::ifftn(const Tensor& src) -> THTensor& {
+  throw std::runtime_error("THTensor::ifftn() not supported");
+}
+
 template <> auto THTensor<real>::sigmoid(const Tensor &src) -> THTensor & {
 #if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
   THTensor_(sigmoid)(tensor, const_tensor_cast(src).tensor);

@@ -117,6 +117,17 @@ struct Tensor {
   virtual Tensor& neTensorT(const Tensor& ta, const Tensor& tb) = 0;
   virtual Tensor& eqTensorT(const Tensor& ta, const Tensor& tb) = 0;
   virtual Tensor& abs(const Tensor& src) = 0;
+
+  virtual Tensor& fft(const Tensor& src) = 0;
+  virtual Tensor& fft2(const Tensor& src) = 0;
+  virtual Tensor& fft3(const Tensor& src) = 0;
+  virtual Tensor& fftn(const Tensor& src) = 0;
+
+  virtual Tensor& ifft(const Tensor& src) = 0;
+  virtual Tensor& ifft2(const Tensor& src) = 0;
+  virtual Tensor& ifft3(const Tensor& src) = 0;
+  virtual Tensor& ifftn(const Tensor& src) = 0;
+
   virtual Tensor& sigmoid(const Tensor& src) = 0;
   virtual Tensor& log(const Tensor& src) = 0;
   virtual Tensor& log1p(const Tensor& src) = 0;
