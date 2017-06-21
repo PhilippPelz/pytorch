@@ -46,7 +46,7 @@
 #define CLOG log
 #define CPOW pow
 #define CPROJ proj
-#define CSINcsin
+#define CSIN sin
 #define CSINH sinh
 #define CSQRT sqrt
 #define CTAN tan
