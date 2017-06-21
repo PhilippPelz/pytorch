@@ -56,15 +56,27 @@ This is because there could probably some networks use a complex output, but the
 is a real network 
 */
 
-#define IMPLEMENT_THStorage_COPY_FROM_COMPLEX(TYPENAMESRC)		\
+#define IMPLEMENT_THStorage_COPY_FROM_DOUBLE_COMPLEX(TYPENAMESRC)		\
 void THStorage_(copy##TYPENAMESRC)(THStorage *storage, TH##TYPENAMESRC##Storage *src) \
 { \
   THArgCheck(storage->size == 2 * src->size, 2, "size mismatch"); \
   ptrdiff_t i;								\
   for(i = 0; i < storage->size; i++)					\
   { \
-    storage->data[2*i] = (real)CREAL(src->data[i]);		\
-    storage->data[2*i+1] = (real)CIMAG(src->data[i]);  \
+    storage->data[2*i] = (real) creal(src->data[i]);		\
+    storage->data[2*i+1] = (real) cimag(src->data[i]);  \
+  } \
+}
+
+#define IMPLEMENT_THStorage_COPY_FROM_FLOAT_COMPLEX(TYPENAMESRC)		\
+void THStorage_(copy##TYPENAMESRC)(THStorage *storage, TH##TYPENAMESRC##Storage *src) \
+{ \
+  THArgCheck(storage->size == 2 * src->size, 2, "size mismatch"); \
+  ptrdiff_t i;								\
+  for(i = 0; i < storage->size; i++)					\
+  { \
+    storage->data[2*i] = (real) crealf(src->data[i]);		\
+    storage->data[2*i+1] = (real) cimagf(src->data[i]);  \
   } \
 }
 
@@ -75,7 +87,7 @@ void THStorage_(copy##TYPENAMESRC)(THStorage *storage, TH##TYPENAMESRC##Storage 
   ptrdiff_t i;								\
   for(i = 0; i < storage->size; i++)					\
   { \
-    storage->data[i] = (part)(src->data[2*i]) + J * (part)(src->data[2*i+1]);   \		
+    storage->data[i] = (part)(src->data[2*i]) + J * (part)(src->data[2*i+1]);   \
   } \
 }
 
@@ -112,8 +124,8 @@ IMPLEMENT_THStorage_COPY(Int)
 IMPLEMENT_THStorage_COPY(Long)
 IMPLEMENT_THStorage_COPY(Float)
 IMPLEMENT_THStorage_COPY(Double)
-IMPLEMENT_THStorage_COPY_FROM_COMPLEX(ZFloat)
-IMPLEMENT_THStorage_COPY_FROM_COMPLEX(ZDouble)
+IMPLEMENT_THStorage_COPY_FROM_FLOAT_COMPLEX(ZFloat)
+IMPLEMENT_THStorage_COPY_FROM_DOUBLE_COMPLEX(ZDouble)
 IMPLEMENT_THStorage_COPY_FROM_HALF(Half)
 #else
 /* only allow pass-through for Half */
