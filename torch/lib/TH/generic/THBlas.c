@@ -46,8 +46,8 @@ TH_EXTERNC void zcopy_(int *n, double complex *x, int *incx, double complex *y,
                        int *incy);
 TH_EXTERNC void ccopy_(int *n, float complex *x, int *incx, float complex *y,
                        int *incy);
-TH_EXTERNC cx cdotc_(int *n, cx *x, int *incx, cx *y, int *incy);
-TH_EXTERNC zx zdotc_(int *n, zx *x, int *incx, zx *y, int *incy);
+TH_EXTERNC float _Complex cdotc_(int *n, float _Complex *x, int *incx, float _Complex *y, int *incy);
+TH_EXTERNC double _Complex zdotc_(int *n, double _Complex *x, int *incx, double _Complex *y, int *incy);
 TH_EXTERNC void zaxpy_(int *n, double complex *a, double complex *x, int *incx,
                        double complex *y, int *incy);
 TH_EXTERNC void caxpy_(int *n, float complex *a, float complex *x, int *incx,
@@ -62,8 +62,14 @@ TH_EXTERNC void cgemv_(char *trans, int *m, int *n, float complex *alpha,
 TH_EXTERNC void zgerc_(int *m, int *n, double complex *alpha, double complex *x,
                       int *incx, double complex *y, int *incy,
                       double complex *a, int *lda);
+TH_EXTERNC void cger_(int *m, int *n, float complex *alpha, float complex *x,
+                      int *incx, float complex *y, int *incy,
+                      float complex *a, int *lda);
 TH_EXTERNC void cgerc_(int *m, int *n, float complex *alpha, float complex *x,
                        int *incx, float complex *y, int *incy, float complex *a,
+                       int *lda);
+TH_EXTERNC void zgerc_(int *m, int *n, double complex *alpha, double complex *x,
+                       int *incx, double complex *y, int *incy, double complex *a,
                        int *lda);
 TH_EXTERNC void zgemm_(char *transa, char *transb, int *m, int *n, int *k,
                        double complex *alpha, double complex *a, int *lda,
@@ -81,7 +87,7 @@ void THBlas_(swap)(long n, real *x, long incx, real *y, long incy) {
   }
 
 #if defined(USE_BLAS) &&                                                       \
-      (defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_ZFLOAT))
+    defined(TH_REAL_IS_REAL)
   if ((n <= INT_MAX) && (incx <= INT_MAX) && (incy <= INT_MAX)) {
     int i_n = (int)n;
     int i_incx = (int)incx;
@@ -105,8 +111,8 @@ void THBlas_(scal)(long n, real a, real *x, long incx) {
   if (n == 1)
     incx = 1;
 
-  #if defined(USE_BLAS) &&                                                       \
-        (defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_ZFLOAT))
+#if defined(USE_BLAS) &&                                                       \
+    defined(TH_REAL_IS_REAL)
   if ((n <= INT_MAX) && (incx <= INT_MAX)) {
     int i_n = (int)n;
     int i_incx = (int)incx;
@@ -128,8 +134,8 @@ void THBlas_(copy)(long n, real *x, long incx, real *y, long incy) {
     incy = 1;
   }
 
-  #if defined(USE_BLAS) &&                                                       \
-      (defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_ZFLOAT))
+#if defined(USE_BLAS) &&                                                       \
+    defined(TH_REAL_IS_REAL)
   if ((n <= INT_MAX) && (incx <= INT_MAX) && (incy <= INT_MAX)) {
     int i_n = (int)n;
     int i_incx = (int)incx;
@@ -152,8 +158,8 @@ void THBlas_(axpy)(long n, real a, real *x, long incx, real *y, long incy) {
     incy = 1;
   }
 
-  #if defined(USE_BLAS) &&                                                       \
-      (defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_ZFLOAT))
+#if defined(USE_BLAS) &&                                                       \
+    defined(TH_REAL_IS_REAL)
   if ((n <= INT_MAX) && (incx <= INT_MAX) && (incy <= INT_MAX)) {
     int i_n = (int)n;
     int i_incx = (int)incx;
@@ -176,8 +182,8 @@ real THBlas_(dot)(long n, real *x, long incx, real *y, long incy) {
     incy = 1;
   }
 
-  #if defined(USE_BLAS) &&                                                       \
-      (defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_ZFLOAT))
+#if defined(USE_BLAS) &&                                                       \
+    defined(TH_REAL_IS_REAL)
   if ((n <= INT_MAX) && (incx <= INT_MAX) && (incy <= INT_MAX)) {
     int i_n = (int)n;
     int i_incx = (int)incx;
@@ -201,7 +207,7 @@ void THBlas_(gemv)(char trans, long m, long n, real alpha, real *a, long lda,
     lda = m;
 
 #if defined(USE_BLAS) &&                                                       \
-    (defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_ZFLOAT))
+    defined(TH_REAL_IS_REAL)
   if ((m <= INT_MAX) && (n <= INT_MAX) && (lda > 0) && (lda <= INT_MAX) &&
       (incx > 0) && (incx <= INT_MAX) && (incy > 0) && (incy <= INT_MAX)) {
     int i_m = (int)m;
@@ -247,8 +253,8 @@ void THBlas_(ger)(long m, long n, real alpha, real *x, long incx, real *y,
   if (n == 1)
     lda = m;
 
-  #if defined(USE_BLAS) &&                                                       \
-        (defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_ZFLOAT))
+#if defined(USE_BLAS) &&                                                       \
+    defined(TH_REAL_IS_REAL)
   if ((m <= INT_MAX) && (n <= INT_MAX) && (lda <= INT_MAX) &&
       (incx <= INT_MAX) && (incy <= INT_MAX)) {
     int i_m = (int)m;
@@ -298,7 +304,7 @@ void THBlas_(gemm)(char transa, char transb, long m, long n, long k, real alpha,
   }
 
 #if defined(USE_BLAS) &&                                                       \
-      (defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_ZFLOAT))
+    defined(TH_REAL_IS_REAL)
   if ((m <= INT_MAX) && (n <= INT_MAX) && (k <= INT_MAX) && (lda <= INT_MAX) &&
       (ldb <= INT_MAX) && (ldc <= INT_MAX)) {
     int i_m = (int)m;
