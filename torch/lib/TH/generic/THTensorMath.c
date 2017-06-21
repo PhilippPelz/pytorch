@@ -3088,6 +3088,12 @@ LAB_IMPLEMENT_BASIC_FUNCTION(re, CREAL)
 LAB_IMPLEMENT_BASIC_FUNCTION(im, CIMAG)
 LAB_IMPLEMENT_BASIC_FUNCTION(conj, CONJ)
 
+void THTensor_(hermitian)(THTensor *r_, THTensor *t, int dimension1_, int dimension2_) {
+  THTensor_(conj)(r_, t);
+  THTensor_(transpose)(r_, NULL, dimension1_, dimension2_);
+}
+
+
 real TH_CONCAT_2(Real, CEIL)(real z) {
   return ceil(CREAL(z)) + ceil(CIMAG(z)) * J;
 }
