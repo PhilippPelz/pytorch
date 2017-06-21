@@ -476,14 +476,14 @@ accreal THTensor_(dot)(THTensor *tensor, THTensor *src) {
 }
 
 #undef th_isnan
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+#if defined(TH_REAL_IS_REAL)
 #define th_isnan(val) (isnan(val))
 #else
 #define th_isnan(val) (0)
 #endif
 
 #undef th_isnan_break
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+#if defined(TH_REAL_IS_REAL)
 #define th_isnan_break(val)                                                    \
   if (isnan(val))                                                              \
     break;
@@ -491,7 +491,8 @@ accreal THTensor_(dot)(THTensor *tensor, THTensor *src) {
 #define th_isnan_break(val)
 #endif
 
-#if (defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE))
+#ifdef TH_REAL_IS_COMPLEX
+
 // numpy lexicographical ordering
 real THTensor_(minall)(THTensor *tensor) {
   real theMin;
@@ -553,6 +554,8 @@ real THTensor_(maxall)(THTensor *tensor) {
   return theMax;
 }
 #endif
+
+
 accreal THTensor_(sumall)(THTensor *tensor) {
   accreal sum = 0;
   TH_TENSOR_APPLY(real, tensor, sum += *tensor_data;);
@@ -689,7 +692,7 @@ void THTensor_(fmod)(THTensor *r_, THTensor *t, real value) {
     ptrdiff_t i;
 #pragma omp parallel for if (sz > TH_OMP_OVERHEAD_THRESHOLD) private(i)
     for (i = 0; i < sz; i++) {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+#if defined(TH_REAL_IS_REAL)
       rp[i] = fmod(tp[i], value);
 #elif defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
       rp[i] = fmod(CREAL(tp[i]), value) + fmod(CIMAG(tp[i]), value) * J;
@@ -698,7 +701,7 @@ void THTensor_(fmod)(THTensor *r_, THTensor *t, real value) {
 #endif
     }
   } else {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+#if defined(TH_REAL_IS_REAL)
     TH_TENSOR_APPLY2(real, r_, real, t, *r__data = fmod(*t_data, value););
 #elif defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
     TH_TENSOR_APPLY2(real, r_, real,
@@ -725,14 +728,14 @@ void THTensor_(remainder)(THTensor *r_, THTensor *t, real value) {
 
 #pragma omp parallel for if (sz > TH_OMP_OVERHEAD_THRESHOLD) private(i)
     for (i = 0; i < sz; i++) {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+#if defined(TH_REAL_IS_REAL)
       rp[i] = (value == 0) ? NAN : tp[i] - value * floor(tp[i] / value);
 #else
       rp[i] = tp[i] - value * (tp[i] / value); // There is no NAN for integers
 #endif
     }
   } else {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+#if defined(TH_REAL_IS_REAL)
     TH_TENSOR_APPLY2(
         real, r_, real,
         t, *r__data =
@@ -747,7 +750,7 @@ void THTensor_(remainder)(THTensor *r_, THTensor *t, real value) {
 #endif
 
 void THTensor_(bitand)(THTensor *r_, THTensor *t, real value) {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) ||                 \
+#if defined(TH_REAL_IS_REAL) ||                 \
     defined(TH_REAL_IS_HALF)
   return THError("bitand is only supported for integer type tensors");
 #elif defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
@@ -771,7 +774,7 @@ void THTensor_(bitand)(THTensor *r_, THTensor *t, real value) {
 }
 
 void THTensor_(bitor )(THTensor *r_, THTensor *t, real value) {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) ||                 \
+#if defined(TH_REAL_IS_REAL) ||                 \
     defined(TH_REAL_IS_HALF)
   return THError("bitor is only supported for integer type tensors");
 #elif defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
@@ -795,7 +798,7 @@ void THTensor_(bitor )(THTensor *r_, THTensor *t, real value) {
 }
 
 void THTensor_(bitxor)(THTensor *r_, THTensor *t, real value) {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) ||                 \
+#if defined(TH_REAL_IS_REAL) ||                 \
     defined(TH_REAL_IS_HALF)
   return THError("bitxor is only supported for integer type tensors");
 #elif defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
@@ -883,7 +886,7 @@ void THTensor_(cmul)(THTensor *r_, THTensor *t, THTensor *src) {
 }
 
 #if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) ||               \
-    defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+    defined(TH_REAL_IS_REAL)
 void THTensor_(cpow)(THTensor *r_, THTensor *t, THTensor *src) {
   THTensor_(resizeAs)(r_, t);
   if (THTensor_(isContiguous)(r_) && THTensor_(isContiguous)(t) &&
@@ -1043,14 +1046,14 @@ void THTensor_(cfmod)(THTensor *r_, THTensor *t, THTensor *src) {
     ptrdiff_t i;
 #pragma omp parallel for if (sz > TH_OMP_OVERHEAD_THRESHOLD) private(i)
     for (i = 0; i < sz; i++) {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+#if defined(TH_REAL_IS_REAL)
       rp[i] = fmod(tp[i], sp[i]);
 #else
       rp[i] = tp[i] % sp[i];
 #endif
     }
   } else {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+#if defined(TH_REAL_IS_REAL)
     TH_TENSOR_APPLY3(real, r_, real, t, real,
                      src, *r__data = fmod(*t_data, *src_data););
 #else
@@ -1073,14 +1076,14 @@ void THTensor_(cremainder)(THTensor *r_, THTensor *t, THTensor *src) {
     ptrdiff_t i;
 #pragma omp parallel for if (sz > TH_OMP_OVERHEAD_THRESHOLD) private(i)
     for (i = 0; i < sz; i++) {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+#if defined(TH_REAL_IS_REAL)
       rp[i] = (sp[i] == 0) ? NAN : tp[i] - sp[i] * floor(tp[i] / sp[i]);
 #else
       rp[i] = tp[i] - sp[i] * (tp[i] / sp[i]); // There is no NAN for integers
 #endif
     }
   } else {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+#if defined(TH_REAL_IS_REAL)
     TH_TENSOR_APPLY3(
         real, r_, real, t, real,
         src,
@@ -1097,7 +1100,7 @@ void THTensor_(cremainder)(THTensor *r_, THTensor *t, THTensor *src) {
 }
 
 void THTensor_(cbitand)(THTensor *r_, THTensor *t, THTensor *src) {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) ||                 \
+#if defined(TH_REAL_IS_REAL) ||                 \
     defined(TH_REAL_IS_HALF)
   return THError("cbitand is only supported for integer type tensors");
 #elif defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
@@ -1124,7 +1127,7 @@ void THTensor_(cbitand)(THTensor *r_, THTensor *t, THTensor *src) {
 }
 
 void THTensor_(cbitor)(THTensor *r_, THTensor *t, THTensor *src) {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) ||                 \
+#if defined(TH_REAL_IS_REAL) ||                 \
     defined(TH_REAL_IS_HALF)
   return THError("cbitor is only supported for integer type tensors");
 #elif defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
@@ -1151,7 +1154,7 @@ void THTensor_(cbitor)(THTensor *r_, THTensor *t, THTensor *src) {
 }
 
 void THTensor_(cbitxor)(THTensor *r_, THTensor *t, THTensor *src) {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) ||                 \
+#if defined(TH_REAL_IS_REAL) ||                 \
     defined(TH_REAL_IS_HALF)
   return THError("cbitxor is only supported for integer type tensors");
 #elif defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
@@ -2830,7 +2833,7 @@ TENSOR_IMPLEMENT_LOGICAL_SUM(logicalany, ||, 0)
 #endif
 #endif /* Byte only part */
 
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+#if defined(TH_REAL_IS_REAL)
 LAB_IMPLEMENT_BASIC_FUNCTION(log1p, log1p)
 LAB_IMPLEMENT_BASIC_FUNCTION(sigmoid, TH_sigmoid)
 void THTensor_(atan2)(THTensor *r_, THTensor *tx, THTensor *ty) {
@@ -2961,7 +2964,7 @@ real TH_CONCAT_2(Real, FLOOR)(real z) { return floor((z)); }
 real TH_CONCAT_2(Real, ROUND)(real z) { return round((z)); }
 #endif
 /* floating point only now */
-#if defined(TH_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_ZFLOAT)
+#if defined(TH_REAL_IS_COMPLEX)
 void THTensor_(mean)(THTensor *r_, THTensor *t, int dimension) {
   THArgCheck(dimension >= 0 && dimension < THTensor_(nDimension)(t), 2,
              "invalid dimension %d", dimension + TH_INDEX_BASE);
@@ -3079,6 +3082,7 @@ accreal THTensor_(normall)(THTensor *tensor, real value) {
     return pow(sum, 1.0 / value);
   }
 }
+
 LAB_IMPLEMENT_BASIC_FUNCTION(arg, CARG)
 LAB_IMPLEMENT_BASIC_FUNCTION(re, CREAL)
 LAB_IMPLEMENT_BASIC_FUNCTION(im, CIMAG)
@@ -3095,8 +3099,7 @@ real TH_CONCAT_2(Real, ROUND)(real z) {
 }
 #endif // complex floating point
 
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) ||                 \
-    defined(TH_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_ZFLOAT)
+#if defined(TH_REAL_IS_REAL) || defined(TH_REAL_IS_COMPLEX)
 
 LAB_IMPLEMENT_BASIC_FUNCTION(ceil, TH_CONCAT_2(Real, CEIL))
 LAB_IMPLEMENT_BASIC_FUNCTION(floor, TH_CONCAT_2(Real, FLOOR))

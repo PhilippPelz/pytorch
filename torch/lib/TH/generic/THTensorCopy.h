@@ -14,11 +14,8 @@ TH_API void THTensor_(copyFloat)(THTensor *tensor, struct THFloatTensor *src);
 TH_API void THTensor_(copyDouble)(THTensor *tensor, struct THDoubleTensor *src);
 TH_API void THTensor_(copyHalf)(THTensor *tensor, struct THHalfTensor *src);
 
-#if defined(TH_REAL_IS_ZDOUBLE)
+#ifdef TH_REAL_IS_COMPLEX
 TH_API void THTensor_(copyZDouble)(THTensor *tensor, struct THZDoubleTensor *src);
-#endif
-
-#if defined(TH_REAL_IS_ZFLOAT)
 TH_API void THTensor_(copyZFloat)(THTensor *tensor, struct THZFloatTensor *src);
 #endif
 

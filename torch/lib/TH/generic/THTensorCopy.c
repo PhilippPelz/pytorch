@@ -42,11 +42,8 @@ void THTensor_(copy##TYPENAMESRC)(THTensor *tensor, TH##TYPENAMESRC##Tensor *src
  TH_TENSOR_APPLY2(real, tensor, TYPE_SRC, src, *tensor_data = *src_data;) \
 }
 
-#if defined(TH_REAL_IS_ZDOUBLE)
+#ifdef TH_REAL_IS_COMPLEX
 IMPLEMENT_THTensor_COPY(ZDouble,double _Complex)
-#endif
-
-#if defined(TH_REAL_IS_ZFLOAT)
 IMPLEMENT_THTensor_COPY(ZFloat,float _Complex)
 #endif
 

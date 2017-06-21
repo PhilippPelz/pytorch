@@ -28,6 +28,8 @@ struct THFileVTable
     size_t (*readLong)(THFile *self, long *data, size_t n);
     size_t (*readFloat)(THFile *self, float *data, size_t n);
     size_t (*readDouble)(THFile *self, double *data, size_t n);
+    size_t (*readZFloat)(THFile *self, float _Complex *data, size_t n);
+    size_t (*readZDouble)(THFile *self, double _Complex *data, size_t n);
     size_t (*readHalf)(THFile *self, THHalf *data, size_t n);
     size_t (*readString)(THFile *self, const char *format, char **str_);
 
@@ -38,6 +40,8 @@ struct THFileVTable
     size_t (*writeLong)(THFile *self, long *data, size_t n);
     size_t (*writeFloat)(THFile *self, float *data, size_t n);
     size_t (*writeDouble)(THFile *self, double *data, size_t n);
+    size_t (*writeZFloat)(THFile *self, float _Complex *data, size_t n);
+    size_t (*writeZDouble)(THFile *self, double _Complex *data, size_t n);
     size_t (*writeHalf)(THFile *self, THHalf *data, size_t n);
     size_t (*writeString)(THFile *self, const char *str, size_t size);
 

@@ -77,6 +77,8 @@ void THTensor_(uniform)(THTensor *self, THGenerator *_generator, double a,
                   self, *self_data = (real)THRandom_uniform(_generator, a, b););
 }
 
+// complex normal is not just copying a real normal to a comple type I guess
+
 void THTensor_(normal)(THTensor *self, THGenerator *_generator, double mean,
                        double stdv) {
   TH_TENSOR_APPLY(
