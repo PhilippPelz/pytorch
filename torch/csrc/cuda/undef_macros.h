@@ -10,6 +10,13 @@
 #undef THPTensorBaseStr
 #undef THPTensorClass
 
+#undef THPPartTensor_
+#undef THPPartTensor_stateless_
+#undef THPPartTensor
+#undef THPPartTensorStr
+#undef THPPartTensorBaseStr
+#undef THPPartTensorClass
+
 #undef THPTensorStatelessType
 #undef THPTensorStateless
 #undef THPTensorType
@@ -30,6 +37,7 @@
 #undef THPStoragePtr
 #undef THTensorPtr
 #undef THPTensorPtr
+#undef THPPartTensorPtr
 
 
 #undef THSPTensor_

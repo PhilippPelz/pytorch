@@ -4,11 +4,14 @@
 #define THPStoragePtr THCPStoragePtr
 #define THTensorPtr THCTensorPtr
 #define THPTensorPtr THCPTensorPtr
+#define THPPartTensorPtr THCPPartTensorPtr
 
 #define THStorage THCStorage
 #define THStorage_(NAME) THCStorage_(NAME)
 #define THTensor THCTensor
 #define THTensor_(NAME) THCTensor_(NAME)
+#define THPartTensor THCPartTensor
+#define THPartTensor_(NAME) THCPartTensor_(NAME)
 
 #define THPStorage_(NAME) TH_CONCAT_4(THCP,Real,Storage_,NAME)
 #define THPStorage THCPStorage
@@ -24,6 +27,14 @@
 #define THPTensorBaseStr THCPTensorBaseStr
 #define THPTensorClass THCPTensorClass
 #define THPTensorType THCPTensorType
+
+#define THPPartTensor_(NAME) TH_CONCAT_4(THCP,Part,Tensor_,NAME)
+#define THPPartTensor_stateless_(NAME) TH_CONCAT_4(THCP,Part,Tensor_stateless_,NAME)
+#define THPPartTensor THCPPartTensor
+#define THPPartTensorStr THCPPartTensorStr
+#define THPPartTensorBaseStr THCPPartTensorBaseStr
+#define THPPartTensorClass THCPPartTensorClass
+#define THPPartTensorType THCPPartTensorType
 
 #define THPUtils_(NAME) TH_CONCAT_4(THCP, Real, Utils_, NAME)
 

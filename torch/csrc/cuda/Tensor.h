@@ -6,6 +6,11 @@
 #define THCPTensorClass TH_CONCAT_3(THCP,Real,TensorClass)
 #define THCPTensor_(NAME) TH_CONCAT_4(THCP,Real,Tensor_,NAME)
 
+#define THCPPartTensor TH_CONCAT_3(THCP,Part,Tensor)
+#define THCPPartTensorStr TH_CONCAT_STRING_3(torch.cuda.,Part,Tensor)
+#define THCPPartTensorClass TH_CONCAT_3(THCP,Part,TensorClass)
+#define THCPPartTensor_(NAME) TH_CONCAT_4(THCP,Part,Tensor_,NAME)
+
 #define THCPDoubleTensor_Check(obj)  PyObject_IsInstance(obj, THCPDoubleTensorClass)
 #define THCPFloatTensor_Check(obj)   PyObject_IsInstance(obj, THCPFloatTensorClass)
 #define THCPZDoubleTensor_Check(obj)  PyObject_IsInstance(obj, THCPDoubleTensorClass)

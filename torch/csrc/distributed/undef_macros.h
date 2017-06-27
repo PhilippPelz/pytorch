@@ -29,6 +29,7 @@
 #undef THPStoragePtr
 #undef THTensorPtr
 #undef THPTensorPtr
+#undef THPPartTensorPtr
 
 #undef THHostTensor
 #undef THHostTensor_

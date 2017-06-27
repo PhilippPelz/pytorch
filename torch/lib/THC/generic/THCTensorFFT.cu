@@ -47,12 +47,7 @@ void THCTensor_(fftnBatchedbase)(THCState *state, THCTensor *self, THCTensor *re
 }
 
 void THCTensor_(fftnBatched)(THCState *state, THCTensor *self, THCTensor *result) {
-	FILE *f;
-	f = fopen("/home/philipp/fftnBatched.log", "a+");
-	//fprintf(f,"fftnBatchedbase done\n");
-	//fclose(f);
 	THCTensor_(fftnBatchedbase)(state, self, result, CUFFT_FORWARD);
-
 	THCTensor_(mul)(state, result, result, ccx(1 / sqrt(THCTensor_(nElement)(state, result)),0));
 }
 
@@ -62,6 +57,9 @@ void THCTensor_(ifftnBatched)(THCState *state, THCTensor *self, THCTensor *resul
 }
 
 void THCTensor_(fft)(THCState *state, THCTensor *result, THCTensor *self) {
+	THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, result, self));
+	if (self != result)
+		THCTensor_(resizeAs)(state, result, self);
 	if(THCTensor_(nDimension)(state, self) < 1)
 		THError("tensor must at least have dimension 1\n");
 	int self_ndim = THCTensor_(nDimension)(state, self);
@@ -84,20 +82,17 @@ void THCTensor_(fft)(THCState *state, THCTensor *result, THCTensor *self) {
 	THCTensor_(free)(state,new_result);
 	THCTensor_(free)(state,new_self);
 }
-
 void THCTensor_(fft2)(THCState *state, THCTensor *result, THCTensor *self) {
-	FILE *f;
-	f = fopen("/home/philipp/x.log", "a+"); // a+ (create + append) option will allow appending which is useful in a log file
-	if (f == NULL) { /* Something is wrong   */}
-	//fprintf(f,"fft2\n");
+	THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, result, self));
+	if (self != result)
+		THCTensor_(resizeAs)(state, result, self);
 	if(THCTensor_(nDimension)(state, self) < 2)
 		THError("tensor must at least have dimension 2\n");
 	int self_ndim = THCTensor_(nDimension)(state, self);
 	int res_ndim = THCTensor_(nDimension)(state, result);
-	fprintf(f,"(self_dim,res_dim) = (%d,%d)\n",self_ndim,res_ndim);
-
-	// if (!THCTensor_(isSameSizeAs)(state, self, result))
-  //   THError("self_ndim must be equal result_ndim\n");
+	// fprintf(f,"(self_dim,res_dim) = (%d,%d)\n",self_ndim,res_ndim);
+	if (!THCTensor_(isSameSizeAs)(state, self, result))
+    THError("self_ndim must be equal result_ndim\n");
 	int self_batch_dim = 1;
 	for(int i = 0; i< self_ndim-2; i++){
 		self_batch_dim *= THCTensor_(size)(state, self, i);
@@ -106,15 +101,15 @@ void THCTensor_(fft2)(THCState *state, THCTensor *result, THCTensor *self) {
   //fprintf(f,"dim1 = %d\n",THCTensor_(size)(state, self, self_ndim-2));
 	//fprintf(f,"dim2 = %d\n",THCTensor_(size)(state, self, self_ndim-1));
 	THLongStorage *new_self_size = THLongStorage_newWithSize3( self_batch_dim, THCTensor_(size)(state, self, self_ndim-2),THCTensor_(size)(state, self, self_ndim-1));
-	fprintf(f,"after THLongStorage_newWithSize3\n");
+	// fprintf(f,"after THLongStorage_newWithSize3\n");
 	THCTensor *new_self = THCTensor_(newView)(state, self, new_self_size);
-	fprintf(f,"after newView\n");
+	// fprintf(f,"after newView\n");
 
 	THLongStorage *new_result_size = THLongStorage_newWithSize3( self_batch_dim, THCTensor_(size)(state, self, self_ndim-2),THCTensor_(size)(state, self, self_ndim-1));
-	fprintf(f,"after THLongStorage_newWithSize3\n");
+	// fprintf(f,"after THLongStorage_newWithSize3\n");
 	THCTensor *new_result = THCTensor_(newView)(state, result, new_result_size);
-	fprintf(f,"after newView\n");
-  fclose(f);
+	// fprintf(f,"after newView\n");
+  // fclose(f);
 	THCTensor_(fftnBatched)(state,new_self,new_result);
 	THLongStorage_free(new_self_size);
 	THLongStorage_free(new_result_size);
@@ -123,6 +118,9 @@ void THCTensor_(fft2)(THCState *state, THCTensor *result, THCTensor *self) {
 }
 
 void THCTensor_(fft3)(THCState *state, THCTensor *result, THCTensor *self) {
+	THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, result, self));
+	if (self != result)
+		THCTensor_(resizeAs)(state, result, self);
 	if(THCTensor_(nDimension)(state, self) < 3)
 		THError("tensor must at least have dimension 3\n");
 	int self_ndim = THCTensor_(nDimension)(state, self);
@@ -147,11 +145,17 @@ void THCTensor_(fft3)(THCState *state, THCTensor *result, THCTensor *self) {
 }
 
 void THCTensor_(fftn)(THCState *state, THCTensor *result, THCTensor *self) {
+	THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, result, self));
+	if (self != result)
+		THCTensor_(resizeAs)(state, result, self);
 	THCTensor_(fftnbase)(state, self, result, CUFFT_FORWARD);
 	THCTensor_(mul)(state, result, result, ccx(1 / sqrt(THCTensor_(nElement)(state, result)),0));
 }
 
 void THCTensor_(ifft)(THCState *state, THCTensor *result, THCTensor *self) {
+	THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, result, self));
+	if (self != result)
+		THCTensor_(resizeAs)(state, result, self);
 	if(THCTensor_(nDimension)(state, self) < 1)
 		THError("tensor must at least have dimension 1\n");
 	int self_ndim = THCTensor_(nDimension)(state, self);
@@ -176,6 +180,9 @@ void THCTensor_(ifft)(THCState *state, THCTensor *result, THCTensor *self) {
 }
 
 void THCTensor_(ifft2)(THCState *state, THCTensor *result, THCTensor *self) {
+	THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, result, self));
+	if (self != result)
+		THCTensor_(resizeAs)(state, result, self);
 	if(THCTensor_(nDimension)(state, self) < 2)
 		THError("tensor must at least have dimension 2\n");
 	int self_ndim = THCTensor_(nDimension)(state, self);
@@ -200,6 +207,9 @@ void THCTensor_(ifft2)(THCState *state, THCTensor *result, THCTensor *self) {
 }
 
 void THCTensor_(ifft3)(THCState *state, THCTensor *result, THCTensor *self) {
+	THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, result, self));
+	if (self != result)
+		THCTensor_(resizeAs)(state, result, self);
 	if(THCTensor_(nDimension)(state, self) < 3)
 		THError("tensor must at least have dimension 3\n");
 	int self_ndim = THCTensor_(nDimension)(state, self);
@@ -224,6 +234,9 @@ void THCTensor_(ifft3)(THCState *state, THCTensor *result, THCTensor *self) {
 }
 
 void THCTensor_(ifftn)(THCState *state, THCTensor *result, THCTensor *self) {
+	THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, result, self));
+	if (self != result)
+		THCTensor_(resizeAs)(state, result, self);
 	THCTensor_(fftnbase)(state, self, result, CUFFT_INVERSE);
 	THCTensor_(mul)(state, result, result, ccx(1 / sqrt(THCTensor_(nElement)(state, result)),0));
 }

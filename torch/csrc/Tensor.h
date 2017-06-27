@@ -6,6 +6,11 @@
 #define THPTensorClass TH_CONCAT_3(THP, Real, TensorClass)
 #define THPTensor_(NAME) TH_CONCAT_4(THP, Real, Tensor_, NAME)
 
+#define THPPartTensor TH_CONCAT_3(THP, Part, Tensor)
+#define THPPartTensorStr TH_CONCAT_STRING_3(torch., Part, Tensor)
+#define THPPartTensorClass TH_CONCAT_3(THP, Part, TensorClass)
+#define THPPartTensor_(NAME) TH_CONCAT_4(THP, Part, Tensor_, NAME)
+
 #define THPDoubleTensor_Check(obj)                                             \
   PyObject_IsInstance(obj, THPDoubleTensorClass)
 #define THPFloatTensor_Check(obj) PyObject_IsInstance(obj, THPFloatTensorClass)

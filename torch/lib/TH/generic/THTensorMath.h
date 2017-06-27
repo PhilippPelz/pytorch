@@ -162,9 +162,8 @@ TH_API void THTensor_(geTensorT)(THTensor *r_, THTensor *ta, THTensor *tb);
 TH_API void THTensor_(neTensorT)(THTensor *r_, THTensor *ta, THTensor *tb);
 TH_API void THTensor_(eqTensorT)(THTensor *r_, THTensor *ta, THTensor *tb);
 
-#if defined(TH_REAL_IS_INT) || defined(TH_REAL_IS_LONG)
 TH_API void THTensor_(abs)(THTensor *r_, THTensor *t);
-#endif
+TH_API void THTensor_(zabs)(THPartTensor *self, THTensor *src);
 
 #if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
 TH_API void THTensor_(sigmoid)(THTensor *r_, THTensor *t);
@@ -191,21 +190,25 @@ TH_API void THTensor_(rsqrt)(THTensor *r_, THTensor *t);
 TH_API void THTensor_(ceil)(THTensor *r_, THTensor *t);
 TH_API void THTensor_(floor)(THTensor *r_, THTensor *t);
 TH_API void THTensor_(round)(THTensor *r_, THTensor *t);
-TH_API void THTensor_(abs)(THTensor *r_, THTensor *t);
+
 TH_API void THTensor_(trunc)(THTensor *r_, THTensor *t);
 TH_API void THTensor_(frac)(THTensor *r_, THTensor *t);
 TH_API void THTensor_(lerp)(THTensor *r_, THTensor *a, THTensor *b,
                             real weight);
 
+TH_API void THTensor_(zarg)(THPartTensor *self, THTensor *src);
+TH_API void THTensor_(zre)(THPartTensor *self, THTensor *src);
+TH_API void THTensor_(zim)(THPartTensor *self, THTensor *src);
+TH_API void THTensor_(zconj)(THPartTensor *self, THTensor *src);
+
 #ifdef TH_REAL_IS_COMPLEX
-TH_API void THTensor_(arg)(THTensor *r_, THTensor *t);
-TH_API void THTensor_(re)(THTensor *r_, THTensor *t);
-TH_API void THTensor_(im)(THTensor *r_, THTensor *t);
-TH_API void THTensor_(conj)(THTensor *r_, THTensor *t);
 
-void THTensor_(hermitian)(THTensor *r_, THTensor *t, int dimension1_, int dimension2_);
+TH_API void THTensor_(arg)(THTensor *self, THTensor *src);
+TH_API void THTensor_(re)(THTensor *self, THTensor *src);
+TH_API void THTensor_(im)(THTensor *self, THTensor *src);
+TH_API void THTensor_(conj)(THTensor *self, THTensor *src);
+
 #endif
-
 
 TH_API void THTensor_(mean)(THTensor *r_, THTensor *t, int dimension);
 TH_API void THTensor_(std)(THTensor *r_, THTensor *t, int dimension, int flag);

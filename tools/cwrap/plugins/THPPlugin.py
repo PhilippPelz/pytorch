@@ -15,6 +15,7 @@ class THPPlugin(CWrapPlugin):
         'THLongTensor*': Template('((THPLongTensor*)$arg)->cdata'),
         'THIntTensor*': Template('((THPIntTensor*)$arg)->cdata'),
         'THTensor*': Template('((THPTensor*)$arg)->cdata'),
+        'THPartTensor*': Template('((THPPartTensor*)$arg)->cdata'),
         'THBoolTensor*': Template('((THPBoolTensor*)$arg)->cdata'),
         'THIndexTensor*': Template('((THPIndexTensor*)$arg)->cdata'),
         'THIntegerTensor*': Template('((THPIntegerTensor*)$arg)->cdata'),
@@ -56,6 +57,7 @@ class THPPlugin(CWrapPlugin):
         'THLongTensor*': Template('(PyObject*)Py_TYPE($arg) == THPLongTensorClass'),
         'THIntTensor*': Template('(PyObject*)Py_TYPE($arg) == THPIntTensorClass'),
         'THTensor*': Template('(PyObject*)Py_TYPE($arg) == THPTensorClass'),
+        'THPartTensor*': Template('(PyObject*)Py_TYPE($arg) == THPPartTensorClass'),
         'THBoolTensor*': Template('(PyObject*)Py_TYPE($arg) == THPBoolTensorClass'),
         'THIndexTensor*': Template('(PyObject*)Py_TYPE($arg) == THPIndexTensorClass'),
         'THIntegerTensor*': Template('(PyObject*)Py_TYPE($arg) == THPIntegerTensorClass'),
@@ -93,6 +95,7 @@ class THPPlugin(CWrapPlugin):
 
     RETURN_WRAPPER = {
         'THTensor*': Template('return THPTensor_(New)($result);'),
+        'THPartTensor*': Template('return THPPartTensor_(New)($result);'),
         'THSTensor*': Template('return THSPTensor_(New)($result);'),
         'THLongTensor*': Template('return THPLongTensor_New($result);'),
         'THLongStorage*': Template('return THPLongStorage_New($result);'),
@@ -146,7 +149,7 @@ ${cpu}
 
     def _allocate(typename, tmpl, cuda_tmpl=None, sparse=False):
         code = tmpl.safe_substitute(type=typename)
-        if typename == '':
+        if typename == '' or typename == 'Part':
             code = code.replace('NewEmpty', '(NewEmpty)')
         if cuda_tmpl:
             cuda_code = code.replace('THP', 'THCP')
@@ -158,6 +161,7 @@ ${cpu}
 
     ALLOCATE_TYPE = {
         'THTensor*': _allocate('', ALLOCATE_TMPL),
+        'THPartTensor*': _allocate('Part', ALLOCATE_TMPL),
         'THLongTensor*': _allocate('Long', ALLOCATE_TMPL),
         'THIntTensor*': _allocate('Int', ALLOCATE_TMPL),
         'THBoolTensor*': _allocate('Byte', ALLOCATE_TMPL, ALLOCATE_CUDA),
@@ -169,6 +173,7 @@ ${cpu}
 
     TYPE_NAMES = {
         'THTensor*': '" THPTensorStr "',
+        'THPartTensor*': '" THPPartTensorStr "',
         'THSTensor*': '" THSPTensorStr "',
         'THStorage*': '" THPStorageStr "',
         'THGenerator*': 'torch.Generator',

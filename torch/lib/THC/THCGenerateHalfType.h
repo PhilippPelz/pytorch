@@ -7,23 +7,28 @@
 #if defined(CUDA_HALF_TENSOR) || defined(FORCE_TH_HALF)
 
 #define real half
+#define part half
 #define accreal float
 #define Real Half
-
+#define Part Half
 // if only here via FORCE_TH_HALF, don't define CReal since
 // FORCE_TH_HALF should only be used for TH types
 #ifdef CUDA_HALF_TENSOR
 #define CReal CudaHalf
+#define CPart CudaHalf
 #endif
 
 #define THC_REAL_IS_HALF
 #line 1 THC_GENERIC_FILE
 #include THC_GENERIC_FILE
+#undef part
 #undef real
 #undef accreal
 #undef Real
+#undef Part
 
 #ifdef CUDA_HALF_TENSOR
+#undef CPart
 #undef CReal
 #endif
 
