@@ -2795,6 +2795,25 @@ TENSOR_IMPLEMENT_LOGICAL(ne, != )
 
 #undef TENSOR_IMPLEMENT_LOGICAL
 
+#define LAB_IMPLEMENT_BASIC_ZFUNCTION(NAME, CFUNC)          \
+  void THTensor_(z##NAME)(THPartTensor * r_, THTensor * t){                                                         \
+    int d;                                                  \
+    int isSameSizeAs = 1;                                   \
+    if (r_->nDimension != t->nDimension){               \
+      isSameSizeAs = 0;                                     \
+    }                                                       \
+    for(d = 0; d < r_->nDimension; ++d)                   \
+    {                                                       \
+      if(r_->size[d] != t->size[d]){                    \
+        isSameSizeAs = 0;                                   \
+        break;                                              \
+      }                                                     \
+    }                                                       \
+    if(!isSameSizeAs)                                       \
+      THPartTensor_(resizeNd)(r_, t->nDimension, t->size, NULL);                   \
+    TH_TENSOR_APPLY2(real, t, part, r_, *r__data = CFUNC(*t_data););           \
+  }
+
 #define LAB_IMPLEMENT_BASIC_FUNCTION(NAME, CFUNC)                              \
   void THTensor_(NAME)(THTensor * r_, THTensor * t) {                          \
     THTensor_(resizeAs)(r_, t);                                                \
@@ -3079,6 +3098,7 @@ accreal THTensor_(normall)(THTensor *tensor, real value) {
     return pow(sum, 1.0 / value);
   }
 }
+
 LAB_IMPLEMENT_BASIC_FUNCTION(arg, CARG)
 LAB_IMPLEMENT_BASIC_FUNCTION(re, CREAL)
 LAB_IMPLEMENT_BASIC_FUNCTION(im, CIMAG)
@@ -3093,23 +3113,49 @@ real TH_CONCAT_2(Real, FLOOR)(real z) {
 real TH_CONCAT_2(Real, ROUND)(real z) {
   return round(CREAL(z)) + round(CIMAG(z)) * J;
 }
+
+
+
+// THC_API void THTensor_(zabs)(THPartTensor *self, THTensor *src);
+// THC_API void THTensor_(zarg)(THPartTensor *self, THTensor *src);
+// THC_API void THTensor_(zre)(THPartTensor *self, THTensor *src);
+// THC_API void THTensor_(zim)(THPartTensor *self, THTensor *src);
+// THC_API void THTensor_(zconj)(THPartTensor *self, THTensor *src);
+//
+// THC_API void THTensor_(arg)(THTensor *self, THTensor *src);
+// THC_API void THTensor_(re)(THTensor *self, THTensor *src);
+// THC_API void THTensor_(im)(THTensor *self, THTensor *src);
+// THC_API void THTensor_(conj)(THTensor *self, THTensor *src);
+#else
 #endif // complex floating point
+
+LAB_IMPLEMENT_BASIC_ZFUNCTION(abs, CABS)
 
 #if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) ||                 \
     defined(TH_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_ZFLOAT)
 
+
+LAB_IMPLEMENT_BASIC_ZFUNCTION(arg, CARG)
+LAB_IMPLEMENT_BASIC_ZFUNCTION(re, CREAL)
+LAB_IMPLEMENT_BASIC_ZFUNCTION(im, CIMAG)
+LAB_IMPLEMENT_BASIC_ZFUNCTION(conj, CONJ)
+
 LAB_IMPLEMENT_BASIC_FUNCTION(ceil, TH_CONCAT_2(Real, CEIL))
 LAB_IMPLEMENT_BASIC_FUNCTION(floor, TH_CONCAT_2(Real, FLOOR))
 LAB_IMPLEMENT_BASIC_FUNCTION(round, TH_CONCAT_2(Real, ROUND))
+
 #ifdef CEIL
 #undef CEIL
 #endif
+
 #ifdef FLOOR
 #undef FLOOR
 #endif
+
 #ifdef ROUND
 #undef ROUND
 #endif
+
 LAB_IMPLEMENT_BASIC_FUNCTION(log, log)
 LAB_IMPLEMENT_BASIC_FUNCTION(exp, exp)
 LAB_IMPLEMENT_BASIC_FUNCTION(cos, cos)
@@ -3129,6 +3175,8 @@ LAB_IMPLEMENT_BASIC_FUNCTION(trunc, trunc)
 LAB_IMPLEMENT_BASIC_FUNCTION(frac, TH_frac)
 LAB_IMPLEMENT_BASIC_FUNCTION(neg, -)
 LAB_IMPLEMENT_BASIC_FUNCTION(cinv, 1.0 / )
+
+
 
 void THTensor_(lerp)(THTensor *r_, THTensor *a, THTensor *b, real weight) {
   THArgCheck(THTensor_(nElement)(a) == THTensor_(nElement)(b), 2,
@@ -3337,5 +3385,6 @@ void THTensor_(bhistc)(THTensor *hist, THTensor *tensor, long nbins,
 }
 
 #endif /* floating point only part */
+
 #undef IS_NONZERO
 #endif

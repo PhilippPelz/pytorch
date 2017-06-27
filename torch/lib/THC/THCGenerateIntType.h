@@ -3,16 +3,22 @@
 #endif
 
 #define real int
+#define part int
 #define accreal long
 #define Real Int
 #define CReal CudaInt
+#define Part Int
+#define CPart CudaInt
 #define THC_REAL_IS_INT
 #line 1 THC_GENERIC_FILE
 #include THC_GENERIC_FILE
 #undef real
+#undef part
 #undef accreal
 #undef Real
 #undef CReal
+#undef Part
+#undef CPart
 #undef THC_REAL_IS_INT
 
 #ifndef THCGenerateAllTypes

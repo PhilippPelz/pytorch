@@ -33,6 +33,104 @@
 #define IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(NAME, CFUNC, REAL) \
   IMPLEMENT_CUDA_TENSOR_BASIC_FUNC_(NAME, CFUNC, REAL)
 
+#define IMPLEMENT_ZCUDA_TENSOR_BASIC_FUNC_(NAME, CFUNC, REAL)             \
+  struct ZTensor_##NAME##_##REAL##_Op {                                  \
+    __device__ __forceinline__ void operator()(part* out, real* in) const { \
+      *out = CFUNC(*in);                                                \
+    }                                                                  \
+  };                                                                    \
+                                                                        \
+  void THCTensor_(z##NAME)(THCState* state, THCPartTensor* self_, THCTensor* src) { \
+    int tensorDev1 = THCTensor_(getDevice)(state, src);\
+    int tensorDev2 = THCPartTensor_(getDevice)(state, self_);\
+    THCAssertSameGPU(tensorDev1 == tensorDev2);               \
+    int isSame = 0;\
+    int d;\
+    if(self_->nDimension == src->nDimension)\
+    {\
+      isSame = 1;\
+      for(d = 0; d < self_->nDimension; d++)\
+      {\
+        if(self_->size[d] != src->size[d])\
+        {\
+          isSame = 0;\
+          break;\
+        }\
+      }\
+    }\
+\
+    if(!isSame)\
+      THCPartTensor_(resizeNd)(state, self_, src->nDimension, src->size, NULL);\
+    if (!THC_pointwiseApply2(state, self_, src, ZTensor_##NAME##_##REAL##_Op())) { \
+      THArgCheck(false, 2, CUTORCH_DIM_WARNING);                      \
+    }                                                                 \
+    THCudaCheck(cudaGetLastError());                                    \
+  }
+#define IMPLEMENT_ZCUDA_TENSOR_BASIC_FUNC(NAME, CFUNC, REAL) \
+  IMPLEMENT_ZCUDA_TENSOR_BASIC_FUNC_(NAME, CFUNC, REAL)
+
+#if defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+
+#define IMPLEMENT_ZCUDA_TENSOR_BASIC_FUNC_2(NAME, CFUNC, REAL)             \
+  struct ZTensor_##NAME##_##REAL##_Op {                                  \
+    __device__ __forceinline__ void operator()(part* out, num* in) const { \
+      *out = (*in).CFUNC();                                                \
+    }                                                                  \
+  };                                                                    \
+                                                                        \
+  void THCTensor_(z##NAME)(THCState* state, THCPartTensor* self_, THCTensor* src) { \
+    int tensorDev1 = THCTensor_(getDevice)(state, src);\
+    int tensorDev2 = THCPartTensor_(getDevice)(state, self_);\
+    THCAssertSameGPU(tensorDev1 == tensorDev2);               \
+    int isSame = 0;\
+    int d;\
+    if(self_->nDimension == src->nDimension)\
+    {\
+      isSame = 1;\
+      for(d = 0; d < self_->nDimension; d++)\
+      {\
+        if(self_->size[d] != src->size[d])\
+        {\
+          isSame = 0;\
+          break;\
+        }\
+      }\
+    }\
+\
+    if(!isSame)\
+      THCPartTensor_(resizeNd)(state, self_, src->nDimension, src->size, NULL);\
+    if (!THC_pointwiseApply2(state, self_, src, ZTensor_##NAME##_##REAL##_Op())) { \
+      THArgCheck(false, 2, CUTORCH_DIM_WARNING);                      \
+    }                                                                 \
+    THCudaCheck(cudaGetLastError());                                    \
+  }
+
+IMPLEMENT_ZCUDA_TENSOR_BASIC_FUNC(  arg, thrust::arg,   Real)
+#undef real
+#if defined(THC_REAL_IS_ZFLOAT)
+#define num ccx
+#elif defined(THC_REAL_IS_ZDOUBLE)
+#define num zcx
+#endif
+
+IMPLEMENT_ZCUDA_TENSOR_BASIC_FUNC_2(  re, real,   Real)
+IMPLEMENT_ZCUDA_TENSOR_BASIC_FUNC_2(  im, imag,   Real)
+
+#if defined(THC_REAL_IS_ZFLOAT)
+#define real ccx
+#elif defined(THC_REAL_IS_ZDOUBLE)
+#define real zcx
+#endif
+
+IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(  re, THCNumerics<real>::zre,   Real)
+IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(  im, THCNumerics<real>::zim,   Real)
+IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(  conj, THCNumerics<real>::conj,   Real)
+IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(  arg, THCNumerics<real>::zarg,   Real)
+IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(  abs, THCNumerics<real>::zabs,   Real)
+#else
+IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(  abs, THCNumerics<real>::abs,   Real)
+#endif //defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+
 #if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_HALF)
 
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(  log, THCNumerics<real>::log,   Real)
@@ -53,7 +151,7 @@ IMPLEMENT_CUDA_TENSOR_BASIC_FUNC( cinv, THCNumerics<real>::cinv,  Real)
 
 #endif //defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_HALF)
 
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(  abs, THCNumerics<real>::abs,   Real)
+IMPLEMENT_ZCUDA_TENSOR_BASIC_FUNC(  abs, THCNumerics<real>::abs,   Real)
 
 #if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_HALF)
 
@@ -102,6 +200,10 @@ THCTensor_(lerp)(THCState *state, THCTensor *result, THCTensor *a, THCTensor *b,
 
 #undef IMPLEMENT_CUDA_TENSOR_BASIC_FUNC_
 #undef IMPLEMENT_CUDA_TENSOR_BASIC_FUNC
+
+#undef IMPLEMENT_ZCUDA_TENSOR_BASIC_FUNC_
+#undef IMPLEMENT_ZCUDA_TENSOR_BASIC_FUNC_2
+#undef IMPLEMENT_ZCUDA_TENSOR_BASIC_FUNC
 
 void THCTensor_(sign)(THCState* state, THCTensor* self_, THCTensor* src) {
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, self_, src));

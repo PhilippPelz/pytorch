@@ -24,6 +24,8 @@
 #define CUDA_LONG defined(THC_REAL_IS_LONG)
 #define CUDA_FLOAT defined(THC_REAL_IS_FLOAT)
 #define CUDA_DOUBLE defined(THC_REAL_IS_DOUBLE)
+#define CUDA_ZFLOAT defined(THC_REAL_IS_ZFLOAT)
+#define CUDA_ZDOUBLE defined(THC_REAL_IS_ZDOUBLE)
 #define CUDA_HALF defined(THC_REAL_IS_HALF)
 #endif
 

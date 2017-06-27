@@ -107,6 +107,7 @@ class cwrap(object):
         if 'cname' not in declaration:
             declaration['cname'] = declaration['name']
         # Simulate multiple dispatch, even if it's not necessary
+        print(declaration['name'])
         if 'options' not in declaration:
             declaration['options'] = [{'arguments': declaration['arguments']}]
             del declaration['arguments']
@@ -122,6 +123,7 @@ class cwrap(object):
     def parse_arguments(self, args):
         new_args = []
         for arg in args:
+            #print(arg)
             # Simple arg declaration of form "<type> <name>"
             if isinstance(arg, str):
                 t, _, name = arg.partition(' ')

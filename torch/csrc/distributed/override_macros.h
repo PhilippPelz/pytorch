@@ -4,6 +4,7 @@
 #define THPStoragePtr THDPStoragePtr
 #define THTensorPtr THDTensorPtr
 #define THPTensorPtr THDPTensorPtr
+#define THPPartTensorPtr THDPPartTensorPtr
 
 #define THStorage THDStorage
 #define THStorage_(NAME) THDStorage_(NAME)

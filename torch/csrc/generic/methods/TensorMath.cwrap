@@ -1,11 +1,103 @@
+
 [[
   name: abs
   return: argument 0
-  defined_if: defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_LONG) || defined(TH_REAL_IS_INT) || CUDA_FLOAT || CUDA_HALF || CUDA_DOUBLE || CUDA_INT || CUDA_LONG
+  defined_if: defined(TH_REAL_IS_FLOAT)||defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_LONG) || defined(TH_REAL_IS_INT) || CUDA_FLOAT || CUDA_HALF ||CUDA_DOUBLE || CUDA_INT || CUDA_LONG || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
   with_stateless: True
+  options:
+    - cname: abs
+      arguments:
+      - arg: THTensor* destination
+        output: True
+      - THTensor* self
+    - cname: zabs
+      arguments:
+      - arg: THPartTensor* destination
+        output: True
+      - THTensor* self
+]]
+
+[[
+  name: arg
+  return: argument 0
+  defined_if:  defined(TH_REAL_IS_ZFLOAT)||defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  with_stateless: True
+  options:
+    - cname: arg
+      arguments:
+      - arg: THTensor* destination
+        output: True
+      - THTensor* self
+    - cname: zarg
+      arguments:
+      - arg: THPartTensor* destination
+        output: True
+      - THTensor* self
+]]
+
+[[
+  name: arg_
+  cname: arg
+  return: self
+  defined_if:  defined(TH_REAL_IS_ZFLOAT)||defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
   arguments:
-    - arg: THTensor* destination
-      output: True
+    - THTensor* self
+    - THTensor* self
+]]
+
+[[
+  name: re
+  return: argument 0
+  defined_if:  defined(TH_REAL_IS_ZFLOAT)||defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  with_stateless: True
+  options:
+    - cname: re
+      arguments:
+      - arg: THTensor* destination
+        output: True
+      - THTensor* self
+    - cname: zre
+      arguments:
+      - arg: THPartTensor* destination
+        output: True
+      - THTensor* self
+]]
+
+[[
+  name: re_
+  cname: re
+  return: self
+  defined_if:  defined(TH_REAL_IS_ZFLOAT)||defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  arguments:
+    - THTensor* self
+    - THTensor* self
+]]
+
+[[
+  name: im
+  return: argument 0
+  defined_if:  defined(TH_REAL_IS_ZFLOAT)||defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  with_stateless: True
+  options:
+    - cname: im
+      arguments:
+      - arg: THTensor* destination
+        output: True
+      - THTensor* self
+    - cname: zim
+      arguments:
+      - arg: THPartTensor* destination
+        output: True
+      - THTensor* self
+]]
+
+[[
+  name: im_
+  cname: im
+  return: self
+  defined_if:  defined(TH_REAL_IS_ZFLOAT)||defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  arguments:
+    - THTensor* self
     - THTensor* self
 ]]
 

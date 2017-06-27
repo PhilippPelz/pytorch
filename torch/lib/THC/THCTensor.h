@@ -8,6 +8,9 @@
 #define THCTensor          TH_CONCAT_3(TH,CReal,Tensor)
 #define THCTensor_(NAME)   TH_CONCAT_4(TH,CReal,Tensor_,NAME)
 
+#define THCPartTensor          TH_CONCAT_3(TH,CPart,Tensor)
+#define THCPartTensor_(NAME)   TH_CONCAT_4(TH,CPart,Tensor_,NAME)
+
 #define THC_DESC_BUFF_LEN 64
 
 typedef struct THC_CLASS THCDescBuff

@@ -247,6 +247,7 @@ int THPUtils_getCallable(PyObject *arg, PyObject **result);
 #define THTensorPtr TH_CONCAT_3(TH, Real, TensorPtr)
 #define THPStoragePtr TH_CONCAT_3(THP, Real, StoragePtr)
 #define THPTensorPtr TH_CONCAT_3(THP, Real, TensorPtr)
+#define THPPartTensorPtr TH_CONCAT_3(THP, Part, TensorPtr)
 #define THSTensorPtr TH_CONCAT_3(THS, Real, TensorPtr)
 #define THSPTensorPtr TH_CONCAT_3(THSP, Real, TensorPtr)
 

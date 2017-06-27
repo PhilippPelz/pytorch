@@ -3,16 +3,22 @@
 #endif
 
 #define real short
+#define part short
 #define accreal long
 #define Real Short
 #define CReal CudaShort
+#define Part Short
+#define CPart CudaShort
 #define THC_REAL_IS_SHORT
 #line 1 THC_GENERIC_FILE
 #include THC_GENERIC_FILE
 #undef real
+#undef part
 #undef accreal
 #undef Real
 #undef CReal
+#undef Part
+#undef CPart
 #undef THC_REAL_IS_SHORT
 
 #ifndef THCGenerateAllTypes

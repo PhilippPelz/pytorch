@@ -5,7 +5,6 @@
 
 #include <complex>
 #include <thrust/complex.h>
-typedef thrust::complex<float> ccx;
 typedef thrust::complex<double> zcx;
 
 #define real zcx
@@ -16,6 +15,8 @@ typedef thrust::complex<double> zcx;
 #define part double
 #define Real ZDouble
 #define CReal CudaZDouble
+#define Part Double
+#define CPart CudaDouble
 #define THC_REAL_IS_ZDOUBLE
 #line 1 THC_GENERIC_FILE
 #include THC_GENERIC_FILE
@@ -27,6 +28,8 @@ typedef thrust::complex<double> zcx;
 #undef part
 #undef Real
 #undef CReal
+#undef Part
+#undef CPart
 #undef THC_REAL_IS_ZDOUBLE
 
 #if !(defined(THCGenerateAllTypes) || defined(THCGenerateComplexTypes))

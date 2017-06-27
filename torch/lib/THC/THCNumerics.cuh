@@ -624,6 +624,13 @@ struct THCNumerics<ccx> {
   static inline __host__ __device__  float re  (ccx a) { return   a.real(); }
   static inline __host__ __device__  float im  (ccx a) { return   a.imag(); }
   static inline __host__ __device__  float arg  (ccx a) { return   thrust::arg(a); }
+  static inline __host__ __device__  float abs  (ccx a) { return   thrust::abs(a); }
+
+  static inline __host__ __device__  ccx zre  (ccx a) { return   ccx(a.real(),0); }
+  static inline __host__ __device__  ccx zim  (ccx a) { return   ccx(0,a.imag()); }
+  static inline __host__ __device__  ccx zarg  (ccx a) { return   ccx(thrust::arg(a),0); }
+  static inline __host__ __device__  ccx zabs  (ccx a) { return   ccx(thrust::abs(a),0); }
+
   static inline __host__ __device__  ccx conj  (ccx a) { return   thrust::conj(a); }
   static inline __host__ __device__  ccx exp  (ccx a) { return   thrust::exp(a); }
   static inline __host__ __device__  ccx exp10(ccx a) { return thrust::exp(a); }
@@ -642,7 +649,8 @@ struct THCNumerics<ccx> {
   static inline __host__ __device__  ccx tan  (ccx a) { return   thrust::tan(a); }
   static inline __host__ __device__  ccx atan (ccx a) { return  thrust::atan(a); }
   static inline __host__ __device__  ccx tanh (ccx a) { return  thrust::tanh(a); }
-  static inline __host__ __device__  ccx abs  (ccx a) { return   thrust::abs(a); }
+
+
   static inline __host__ __device__  ccx cinv (ccx a) { return ccx(1,0) / a; }
   static inline __host__ __device__  ccx add  (ccx a, ccx b) { return a + b; }
   static inline __host__ __device__  ccx div  (ccx a, ccx b) { return a / b; }
@@ -666,6 +674,13 @@ struct THCNumerics<zcx> {
   static inline __host__ __device__  double re  (zcx a) { return   a.real(); }
   static inline __host__ __device__  double im  (zcx a) { return   a.imag(); }
   static inline __host__ __device__  double arg  (zcx a) { return   thrust::arg(a); }
+  static inline __host__ __device__  double abs  (zcx a) { return   thrust::abs(a); }
+
+  static inline __host__ __device__  zcx zre  (zcx a) { return   zcx(a.real(),0); }
+  static inline __host__ __device__  zcx zim  (zcx a) { return   zcx(0,a.imag()); }
+  static inline __host__ __device__  zcx zarg  (zcx a) { return   zcx(thrust::arg(a),0); }
+  static inline __host__ __device__  zcx zabs  (zcx a) { return   zcx(thrust::abs(a),0); }
+
   static inline __host__ __device__  zcx conj  (zcx a) { return   thrust::conj(a); }
   static inline __host__ __device__  zcx exp  (zcx a) { return   thrust::exp(a); }
   static inline __host__ __device__  zcx exp10(zcx a) { return thrust::exp(a); }
@@ -684,7 +699,7 @@ struct THCNumerics<zcx> {
   static inline __host__ __device__  zcx tan  (zcx a) { return   thrust::tan(a); }
   static inline __host__ __device__  zcx atan (zcx a) { return  thrust::atan(a); }
   static inline __host__ __device__  zcx tanh (zcx a) { return  thrust::tanh(a); }
-  static inline __host__ __device__  zcx abs  (zcx a) { return   thrust::abs(a); }
+
   static inline __host__ __device__  zcx cinv (zcx a) { return zcx(1,0) / a; }
   static inline __host__ __device__  zcx add  (zcx a, zcx b) { return a + b; }
   static inline __host__ __device__  zcx div  (zcx a, zcx b) { return a / b; }

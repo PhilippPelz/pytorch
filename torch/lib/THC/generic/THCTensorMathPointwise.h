@@ -1,6 +1,9 @@
 #ifndef THC_GENERIC_FILE
 #define THC_GENERIC_FILE "generic/THCTensorMathPointwise.h"
 #else
+#include <thrust/complex.h>
+typedef thrust::complex<float> ccx;
+typedef thrust::complex<double> zcx;
 
 #if (defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_HALF))
 
@@ -21,7 +24,6 @@ THC_API void THCTensor_(sqrt)(THCState *state, THCTensor *self, THCTensor *src);
 THC_API void THCTensor_(neg)(THCState *state, THCTensor *self, THCTensor *src);
 THC_API void THCTensor_(cinv)(THCState *state, THCTensor *self, THCTensor *src);
 
-
 #endif
 
 #if (defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_HALF))
@@ -37,6 +39,21 @@ THC_API void THCTensor_(trunc)(THCState *state, THCTensor *self, THCTensor *src)
 THC_API void THCTensor_(frac)(THCState *state, THCTensor *self, THCTensor *src);
 THC_API void THCTensor_(lerp)(THCState *state, THCTensor *result, THCTensor *a, THCTensor *b, real w);
 
+#endif
+
+#if defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+
+THC_API void THCTensor_(zabs)(THCState *state, THCPartTensor *self, THCTensor *src);
+THC_API void THCTensor_(zarg)(THCState *state, THCPartTensor *self, THCTensor *src);
+THC_API void THCTensor_(zre)(THCState *state, THCPartTensor *self, THCTensor *src);
+THC_API void THCTensor_(zim)(THCState *state, THCPartTensor *self, THCTensor *src);
+
+THC_API void THCTensor_(arg)(THCState *state, THCTensor *self, THCTensor *src);
+THC_API void THCTensor_(re)(THCState *state, THCTensor *self, THCTensor *src);
+THC_API void THCTensor_(im)(THCState *state, THCTensor *self, THCTensor *src);
+THC_API void THCTensor_(conj)(THCState *state, THCTensor *self, THCTensor *src);
+#else
+THC_API void THCTensor_(zabs)(THCState *state, THCTensor *self, THCTensor *src);
 #endif
 
 THC_API void THCTensor_(abs)(THCState *state, THCTensor *self, THCTensor *src);
