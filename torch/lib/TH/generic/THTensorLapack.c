@@ -694,7 +694,7 @@ void THTensor_(potri)(THTensor *ra_, THTensor *a, const char *uplo) {
  */
 void THTensor_(pstrf)(THTensor *ra_, THIntTensor *rpiv_, THTensor *a,
                       const char *uplo, real tol) {
-#if defined(TH_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_ZFLOAT)
+#ifdef TH_REAL_IS_COMPLEX
   return THError("pstrf is not supported for complex type tensors");
 #else
   THArgCheck(a->nDimension == 2, 1, "A should be 2 dimensional");

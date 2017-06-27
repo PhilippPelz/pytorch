@@ -171,8 +171,7 @@ TH_API void THTensor_(log1p)(THTensor *r_, THTensor *t);
 TH_API void THTensor_(atan2)(THTensor *r_, THTensor *tx, THTensor *ty);
 #endif
 
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) ||                 \
-    defined(TH_REAL_IS_ZDOUBLE) || defined(TH_REAL_IS_ZFLOAT)
+#if defined(TH_REAL_IS_REAL) || defined(TH_REAL_IS_COMPLEX)
 TH_API void THTensor_(log)(THTensor *r_, THTensor *t);
 TH_API void THTensor_(exp)(THTensor *r_, THTensor *t);
 TH_API void THTensor_(cos)(THTensor *r_, THTensor *t);
@@ -202,7 +201,7 @@ TH_API void THTensor_(zre)(THPartTensor *self, THTensor *src);
 TH_API void THTensor_(zim)(THPartTensor *self, THTensor *src);
 TH_API void THTensor_(zconj)(THPartTensor *self, THTensor *src);
 
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
+#ifdef TH_REAL_IS_COMPLEX
 
 TH_API void THTensor_(arg)(THTensor *self, THTensor *src);
 TH_API void THTensor_(re)(THTensor *self, THTensor *src);
@@ -236,6 +235,7 @@ TH_API void THTensor_(rand)(THTensor *r_, THGenerator *_generator,
 TH_API void THTensor_(randn)(THTensor *r_, THGenerator *_generator,
                              THLongStorage *size);
 #endif
+
 
 #if defined(TH_REAL_IS_BYTE)
 

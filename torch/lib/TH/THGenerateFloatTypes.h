@@ -5,6 +5,8 @@
 //#include <complex.h>
 //#undef I
 
+#define TH_REAL_IS_REAL // well this is odd...
+
 #define SWAPS sswap_
 #define SCAL sscal_
 #define COPY scopy_
@@ -44,7 +46,7 @@
 #define CLOG log
 #define CPOW pow
 #define CPROJ proj
-#define CSINcsin
+#define CSIN sin
 #define CSINH sinh
 #define CSQRT sqrt
 #define CTAN tan
@@ -196,6 +198,8 @@
 #undef ORGQR
 #undef ORMQR
 #undef PSTRF
+
+#undef TH_REAL_IS_REAL
 
 #if !(defined(THGenerateAllTypes) || defined(THGenerateFloatAndComplexTypes))
 #undef TH_GENERIC_FILE
