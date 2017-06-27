@@ -1,6 +1,8 @@
 This is a fork of pytorch that enables complex tensor types on CPU and GPU, brought to you by [Philipp Pelz](http://philipp.pelz.site).
 
-It implements most methods known for float tensors.
+It implements most methods known for float tensors. Additional methods:
+- fft1, fft2, fft3, fftn
+- im, re, arg, conj
 
 Todo List of nice to have features:
 - heevr instead of cheev for faster performance. this breaks the common interface
