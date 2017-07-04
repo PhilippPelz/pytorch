@@ -21,7 +21,7 @@ if cffi.__version_info__ < (1, 4, 0):
 
 def _generate_typedefs():
     typedefs = []
-    for t in ['Double', 'Float', 'Long', 'Int', 'Short', 'Char', 'Byte']:
+    for t in ['Double', 'Float', 'ZDouble', 'ZFloat', 'Long', 'Int', 'Short', 'Char', 'Byte']:
         for lib in ['TH', 'THCuda']:
             for kind in ['Tensor', 'Storage']:
                 python_name = t + kind
@@ -61,6 +61,7 @@ def _setup_wrapper(with_cuda):
     here = os.path.abspath(os.path.dirname(__file__))
     lib_dir = os.path.join(here, '..', '..', 'lib')
     include_dirs = [
+        lib_dir,
         os.path.join(lib_dir, 'include'),
         os.path.join(lib_dir, 'include', 'TH'),
     ]
@@ -155,7 +156,9 @@ def create_extension(name, headers, sources, verbose=True, with_cuda=False,
     sources = [os.path.join(base_path, src) for src in sources]
     ffi.set_source(cffi_wrapper_name, wrapper_source + all_headers_source,
                    sources=sources,
-                   include_dirs=include_dirs, **kwargs)
+                   include_dirs=include_dirs,
+                   extra_compile_args=["-lstdc++"],
+                   **kwargs)
     ffi.cdef(_typedefs + all_headers_source)
 
     _make_python_wrapper(name_suffix, '_' + name_suffix, target_dir)

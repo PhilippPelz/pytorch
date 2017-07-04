@@ -249,6 +249,7 @@ ENDIF()
 INSTALL(FILES
           THC.h
           ${CMAKE_CURRENT_BINARY_DIR}/THCGeneral.h
+          THCApply.cuh
           THCBlas.h
           THCSleep.h
           THCStorage.h

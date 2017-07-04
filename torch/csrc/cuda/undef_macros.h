@@ -32,6 +32,8 @@
 #undef THStorage_
 #undef THTensor
 #undef THTensor_
+#undef THPartTensor
+#undef THPartTensor_ 
 
 #undef THStoragePtr
 #undef THPStoragePtr
