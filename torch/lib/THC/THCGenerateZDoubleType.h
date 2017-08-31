@@ -3,9 +3,6 @@
     "You must define THC_GENERIC_FILE before including THGenerateZDoubleType.h"
 #endif
 
-#include <complex>
-#include <thrust/complex.h>
-typedef thrust::complex<double> zcx;
 
 #define real zcx
 #define cureal cufftDoubleComplex

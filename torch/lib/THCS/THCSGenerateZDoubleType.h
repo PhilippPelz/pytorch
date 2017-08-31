@@ -3,11 +3,6 @@
     "You must define THCS_GENERIC_FILE before including THCSGenerateZDoubleType.h"
 #endif
 
-#include <complex>
-#include <thrust/complex.h>
-typedef thrust::complex<float> ccx;
-typedef thrust::complex<double> zcx;
-
 #define real zcx
 #define accreal zcx
 #define part double

@@ -2,6 +2,13 @@
 #include "THCGeneral.h"
 #include "THCHalf.h"
 
+static inline ccx toCcx(cuComplex val) {
+	return ccx(cuCrealf(val), cuCimagf(val));
+}
+static inline ccx toCcx(cuDoubleComplex val) {
+	return zcx(cuCreal(val), cuCimag(val));
+}
+
 float THCudaBlas_Sdot(THCState *state, long n, float *x, long incx, float *y, long incy)
 {
   if (n == 1) {

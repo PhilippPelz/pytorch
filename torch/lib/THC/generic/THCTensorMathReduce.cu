@@ -149,6 +149,34 @@ THCTensor_(varall)(THCState *state, THCTensor *self)
   return val;
 }
 
+accreal THCTensor_(dist)(THCState *state, THCTensor *self,
+                         THCTensor *src, real value)
+{
+  THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, self, src));
+  self = THCTensor_(newContiguous)(state, self);
+  ptrdiff_t size = THCTensor_(nElement)(state, self);
+  src = THCTensor_(newContiguous)(state, src);
+  thrust::device_ptr<real> self_data(THCTensor_(data)(state, self));
+  thrust::device_ptr<real> src_data(THCTensor_(data)(state, src));
+
+  THCThrustAllocator thrustAlloc(state);
+  accreal result = thrust::inner_product(
+#if CUDA_VERSION >= 7000
+    thrust::cuda::par(thrustAlloc).on(THCState_getCurrentStream(state)),
+#endif
+    self_data, self_data+size, src_data, ScalarConvert<int, accreal>::to(0),
+    thrust::plus<accreal>(),
+    TensorDistOp<accreal, real>(ScalarConvert<real, accreal>::to(value)));
+
+  THCTensor_(free)(state, src);
+  THCTensor_(free)(state, self);
+
+  return THCNumerics<accreal>::pow(result, 1.0 / ScalarConvert<real, accreal>::to(value));
+}
+
+#endif
+
+#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) ||defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_HALF)
 THC_API void
 THCTensor_(norm)(THCState *state, THCTensor* self, THCTensor* src, real value, long dimension)
 {
@@ -221,31 +249,6 @@ THCTensor_(normall)(THCState *state, THCTensor *self, real value)
 
   THCudaCheck(cudaGetLastError());
   return result;
-}
-
-accreal THCTensor_(dist)(THCState *state, THCTensor *self,
-                         THCTensor *src, real value)
-{
-  THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, self, src));
-  self = THCTensor_(newContiguous)(state, self);
-  ptrdiff_t size = THCTensor_(nElement)(state, self);
-  src = THCTensor_(newContiguous)(state, src);
-  thrust::device_ptr<real> self_data(THCTensor_(data)(state, self));
-  thrust::device_ptr<real> src_data(THCTensor_(data)(state, src));
-
-  THCThrustAllocator thrustAlloc(state);
-  accreal result = thrust::inner_product(
-#if CUDA_VERSION >= 7000
-    thrust::cuda::par(thrustAlloc).on(THCState_getCurrentStream(state)),
-#endif
-    self_data, self_data+size, src_data, ScalarConvert<int, accreal>::to(0),
-    thrust::plus<accreal>(),
-    TensorDistOp<accreal, real>(ScalarConvert<real, accreal>::to(value)));
-
-  THCTensor_(free)(state, src);
-  THCTensor_(free)(state, self);
-
-  return THCNumerics<accreal>::pow(result, 1.0 / ScalarConvert<real, accreal>::to(value));
 }
 
 #endif

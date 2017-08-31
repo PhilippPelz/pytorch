@@ -1,9 +1,6 @@
 #ifndef THC_GENERIC_FILE
 #define THC_GENERIC_FILE "generic/THCTensorMathPointwise.h"
 #else
-#include <thrust/complex.h>
-typedef thrust::complex<float> ccx;
-typedef thrust::complex<double> zcx;
 
 #if (defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_HALF))
 

@@ -3,7 +3,6 @@
     "You must define THC_GENERIC_FILE before including THCGenerateComplexTypes.h"
 #endif
 
-#include <complex>
 #define THCGenerateComplexTypes
 
 #define THCTypeIdxByte 1

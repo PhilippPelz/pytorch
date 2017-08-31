@@ -85,8 +85,10 @@ def _create_module_dir(base_path, fullname):
         target_dir = reduce(os.path.join, fullname.split('.'))
     target_dir = os.path.join(base_path, target_dir)
     try:
+        print 'os.makedirs', target_dir
         os.makedirs(target_dir)
     except os.error:
+        print 'ERROR'
         pass
     for dirname in _accumulate(fullname.split('.'), os.path.join):
         init_file = os.path.join(base_path, dirname, '__init__.py')
@@ -144,6 +146,8 @@ def create_extension(name, headers, sources, verbose=True, with_cuda=False,
 
     wrapper_source, include_dirs = _setup_wrapper(with_cuda)
     include_dirs.extend(kwargs.pop('include_dirs', []))
+    extra_compile_args = ["-lstdc++"]
+    extra_compile_args.extend(kwargs.pop('extra_compile_args', []))
 
     if isinstance(headers, str):
         headers = [headers]
@@ -157,7 +161,7 @@ def create_extension(name, headers, sources, verbose=True, with_cuda=False,
     ffi.set_source(cffi_wrapper_name, wrapper_source + all_headers_source,
                    sources=sources,
                    include_dirs=include_dirs,
-                   extra_compile_args=["-lstdc++"],
+                   extra_compile_args=extra_compile_args,
                    **kwargs)
     ffi.cdef(_typedefs + all_headers_source)
 

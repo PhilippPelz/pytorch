@@ -220,7 +220,7 @@ struct TensorNormOp<ccx, StaticExp>
       float x = thrust::abs((ccx)y);
       return ccx(x * x,0);
     } else {
-      return ccx(thrust::pow(y, exponent));
+      return thrust::pow(y, exponent);
     }
   }
 
@@ -239,7 +239,7 @@ struct TensorNormOp<zcx, StaticExp>
       float x = thrust::abs(y);
       return zcx(x * x,0);
     } else {
-      return zcx(thrust::pow(y, exponent));
+      return thrust::pow(y, exponent);
     }
   }
 

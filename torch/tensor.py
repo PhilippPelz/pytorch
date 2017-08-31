@@ -2,7 +2,10 @@ import torch
 from . import _tensor_str
 from ._utils import _type, _cuda, _range, _rebuild_tensor
 import sys
-
+from numpy.compat import integer_types
+from numpy.core import (
+        asarray, concatenate, arange, take, integer, empty
+        )
 
 class _TensorBase(object):
     #: bool: True if this is a CUDA tensor
@@ -175,6 +178,107 @@ class _TensorBase(object):
                 self.view(tensor.size())
         """
         return self.view(tensor.size())
+
+    def fftshift(x, axes=None, out = None):
+        """
+        Shift the zero-frequency component to the center of the spectrum.
+        This function swaps half-spaces for all axes listed (defaults to all).
+        Note that ``y[0]`` is the Nyquist component only if ``len(x)`` is even.
+        Parameters
+        ----------
+        x : array_like
+            Input array.
+        axes : int or shape tuple, optional
+            Axes over which to shift.  Default is None, which shifts all axes.
+        Returns
+        -------
+        y : ndarray
+            The shifted array.
+        See Also
+        --------
+        ifftshift : The inverse of `fftshift`.
+        Examples
+        --------
+        >>> freqs = np.fft.fftfreq(10, 0.1)
+        >>> freqs
+        array([ 0.,  1.,  2.,  3.,  4., -5., -4., -3., -2., -1.])
+        >>> np.fft.fftshift(freqs)
+        array([-5., -4., -3., -2., -1.,  0.,  1.,  2.,  3.,  4.])
+        Shift the zero-frequency component only along the second axis:
+        >>> freqs = np.fft.fftfreq(9, d=1./9).reshape(3, 3)
+        >>> freqs
+        array([[ 0.,  1.,  2.],
+               [ 3.,  4., -4.],
+               [-3., -2., -1.]])
+        >>> np.fft.fftshift(freqs, axes=(1,))
+        array([[ 2.,  0.,  1.],
+               [-4.,  3.,  4.],
+               [-1., -3., -2.]])
+        """
+        if out is None:
+            out = x.new().resize_as_(x)
+        ndim = out.ndimension()
+        if axes is None:
+            axes = list(range(ndim))
+        elif isinstance(axes, integer_types):
+            axes = (axes,)
+        y = out
+        for k in axes:
+            n = y.size()[k]
+            p2 = (n+1)//2
+            half1 = (p2,n-1)
+            half2 = (0,p2-1)
+            tmp = y.narrow(k,half1[0],half1[1]-half1[0]+1).clone()
+            y.narrow(k,half1[0],half1[1]-half1[0]+1).copy_(y.narrow(k,half2[0],half2[1]-half2[0]+1))
+            y.narrow(k,half2[0],half2[1]-half2[0]+1).copy_(tmp)
+        return y
+
+    def ifftshift(x, axes=None):
+        """
+        The inverse of `fftshift`. Although identical for even-length `x`, the
+        functions differ by one sample for odd-length `x`.
+        Parameters
+        ----------
+        x : array_like
+            Input array.
+        axes : int or shape tuple, optional
+            Axes over which to calculate.  Defaults to None, which shifts all axes.
+        Returns
+        -------
+        y : ndarray
+            The shifted array.
+        See Also
+        --------
+        fftshift : Shift zero-frequency component to the center of the spectrum.
+        Examples
+        --------
+        >>> freqs = np.fft.fftfreq(9, d=1./9).reshape(3, 3)
+        >>> freqs
+        array([[ 0.,  1.,  2.],
+               [ 3.,  4., -4.],
+               [-3., -2., -1.]])
+        >>> np.fft.ifftshift(np.fft.fftshift(freqs))
+        array([[ 0.,  1.,  2.],
+               [ 3.,  4., -4.],
+               [-3., -2., -1.]])
+        """
+        if out is None:
+            out = x.new().resize_as_(x)
+        ndim = out.ndimension()
+        if axes is None:
+            axes = list(range(ndim))
+        elif isinstance(axes, integer_types):
+            axes = (axes,)
+        y = out
+        for k in axes:
+            n = y.size()[k]
+            p2 = n-(n+1)//2
+            half1 = (p2,n-1)
+            half2 = (0,p2-1)
+            tmp = y.narrow(k,half1[0],half1[1]-half1[0]+1).clone()
+            y.narrow(k,half1[0],half1[1]-half1[0]+1).copy_(y.narrow(k,half2[0],half2[1]-half2[0]+1))
+            y.narrow(k,half2[0],half2[1]-half2[0]+1).copy_(tmp)
+        return y
 
     def permute(self, *dims):
         """Permute the dimensions of this tensor.

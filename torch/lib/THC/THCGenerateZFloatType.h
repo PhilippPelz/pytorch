@@ -2,10 +2,6 @@
 #error "You must define THC_GENERIC_FILE before including THGenerateZFloatType.h"
 #endif
 
-#include <complex>
-#include <thrust/complex.h>
-typedef thrust::complex<float> ccx;
-
 #define real ccx
 #define cureal cufftComplex
 #define cufft cufftExecC2C

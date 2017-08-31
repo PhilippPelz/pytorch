@@ -5,11 +5,6 @@
 #include <limits.h>
 #include "THCHalf.h"
 
-#include <cuComplex.h>
-#include <complex>
-#include <thrust/complex.h>
-typedef thrust::complex<float> ccx;
-typedef thrust::complex<double> zcx;
 
 /// Class for numeric limits of the particular data type, which
 /// includes support for `half`.
@@ -715,6 +710,20 @@ struct THCNumerics<zcx> {
 template <typename In, typename Out>
 struct ScalarConvert {
   static __host__ __device__ Out to(const In v) { return (Out) v; }
+};
+
+template <>
+struct ScalarConvert<ccx, float> {
+  static __host__ __device__ float to(const ccx v) {
+    return v.real();
+  }
+};
+
+template <>
+struct ScalarConvert<zcx, float> {
+  static __host__ __device__ float to(const zcx v) {
+    return (float)v.real();
+  }
 };
 
 #ifdef CUDA_HALF_TENSOR

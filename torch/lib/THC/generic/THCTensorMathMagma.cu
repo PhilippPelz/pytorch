@@ -2,7 +2,7 @@
 #define THC_GENERIC_FILE "generic/THCTensorMathMagma.cu"
 #else
 
-#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE)
+#if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
 
 #ifdef USE_MAGMA
 

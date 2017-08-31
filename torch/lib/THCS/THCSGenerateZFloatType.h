@@ -2,11 +2,6 @@
 #error "You must define THCS_GENERIC_FILE before including THCSGenerateZFloatType.h"
 #endif
 
-#include <complex>
-#include <thrust/complex.h>
-typedef thrust::complex<float> ccx;
-typedef thrust::complex<double> zcx;
-
 #define real ccx
 /* FIXME: fp64 has bad performance on some platforms; avoid using it unless
    we opt into it? */

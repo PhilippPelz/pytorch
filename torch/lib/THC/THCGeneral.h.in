@@ -10,17 +10,19 @@
 #include "cuda_runtime.h"
 #include "cublas_v2.h"
 
-//#include <complex>
+#ifdef __GNUG__
+
 #include <thrust/complex.h>
 typedef thrust::complex<float> ccx;
 typedef thrust::complex<double> zcx;
 
-static inline ccx toCcx(cuComplex val) {
-	return ccx(cuCrealf(val), cuCimagf(val));
-}
-static inline ccx toCcx(cuDoubleComplex val) {
-	return zcx(cuCreal(val), cuCimag(val));
-}
+#else
+
+#include "cuComplex.h"
+typedef cuDoubleComplex zcx;
+typedef cuFloatComplex ccx;
+
+#endif
 
 #cmakedefine USE_MAGMA
 
