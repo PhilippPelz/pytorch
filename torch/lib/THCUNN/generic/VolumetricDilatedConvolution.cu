@@ -96,6 +96,9 @@ void THNN_(VolumetricDilatedConvolution_updateOutput)(
   int nOutputPlane = weight->size[0];
 
   input = THCTensor_(newContiguous)(state, input);
+  weight = THCTensor_(newContiguous)(state, weight);
+  bias = bias ? THCTensor_(newContiguous)(state, bias) : bias;
+
   int batch = 1;
   if (input->nDimension == 4) {
     // Force batch
@@ -213,6 +216,8 @@ void THNN_(VolumetricDilatedConvolution_updateOutput)(
   }
 
   THCTensor_(free)(state, input);
+  THCTensor_(free)(state, weight);
+  if (bias) THCTensor_(free)(state, bias);
 }
 
 void THNN_(VolumetricDilatedConvolution_updateGradInput)(
@@ -234,6 +239,8 @@ void THNN_(VolumetricDilatedConvolution_updateGradInput)(
         kT, kH, kW, dT, dH, dW, padT, padH, padW,
         dilationT, dilationH, dilationW);
 
+  weight = THCTensor_(newContiguous)(state, weight);
+  
   // Params
   int nInputPlane = weight->size[1];
   int nOutputPlane = weight->size[0];
@@ -303,6 +310,7 @@ void THNN_(VolumetricDilatedConvolution_updateGradInput)(
       THCState_getCurrentStream(state),
       THCTensor_(data)(state, gradColumns),
       nInputPlane, inputDepth, inputHeight, inputWidth,
+      outputDepth, outputHeight, outputWidth,
       kT, kH, kW, padT, padH, padW, dT, dH, dW,
       dilationT, dilationH, dilationW,
       THCTensor_(data)(state, gradInput_n)
@@ -322,6 +330,7 @@ void THNN_(VolumetricDilatedConvolution_updateGradInput)(
 
   THCTensor_(free)(state, input);
   THCTensor_(free)(state, gradOutput);
+  THCTensor_(free)(state, weight);
 }
 
 void THNN_(VolumetricDilatedConvolution_accGradParameters)(

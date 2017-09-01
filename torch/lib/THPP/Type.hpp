@@ -27,6 +27,7 @@ enum class Type : char {
   LONG_STORAGE = 'X',
   TENSOR = 'T',
   STORAGE = 'S',
+  GENERATOR = 'G',
 };
 
 inline bool isComplex(Type t) {
@@ -35,10 +36,6 @@ inline bool isComplex(Type t) {
 
 inline bool isFloat(Type t) {
   return (t == Type::FLOAT || t == Type::DOUBLE || t == Type::HALF);
-}
-
-inline bool isObject(Type t) {
-  return (t == Type::TENSOR || t == Type::STORAGE);
 }
 
 inline bool isInteger(Type t) {
@@ -71,6 +68,10 @@ inline const char* toString(Type t) {
     case Type::STORAGE: return "Storage";
     default: return "<unknown>";
   }
+}
+
+inline bool isObject(Type t) {
+  return (t == Type::TENSOR || t == Type::STORAGE || t == Type::GENERATOR);
 }
 
 } // namespace thpp

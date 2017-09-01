@@ -924,11 +924,13 @@ void THTensor_(ormqr)(THTensor *ra_, THTensor *a, THTensor *tau, THTensor *c,
   THTensor_(freeCopyTo)(ra__, ra_);
   THTensor_(free)(work);
 }
-
 void THTensor_(btrifact)(THTensor *ra_, THIntTensor *rpivots_,
-                         THIntTensor *rinfo_, THTensor *a) {
+                         THIntTensor *rinfo_, int pivot, THTensor *a) {
   THArgCheck(THTensor_(nDimension)(a) == 3, 1, "expected 3D tensor, got %dD",
              THTensor_(nDimension)(a));
+  if (!pivot) {
+    THError("btrifact without pivoting is not implemented on the CPU");
+  }
 
   if (ra_ != a) {
     THTensor_(resizeAs)(ra_, a);
@@ -1002,11 +1004,29 @@ void THTensor_(btrisolve)(THTensor *rb_, THTensor *b, THTensor *atf,
                           THIntTensor *pivots) {
   THArgCheck(THTensor_(nDimension)(atf) == 3, 1, "expected 3D tensor, got %dD",
              THTensor_(nDimension)(atf));
+  THArgCheck(THTensor_(nDimension)(b) == 3 || THTensor_(nDimension)(b) == 2, 4,
+             "expected 2D or 3D tensor");
+  THArgCheck(THTensor_(size)(atf, 0) == THTensor_(size)(b, 0), 3,
+             "number of batches must be equal");
+  THArgCheck(THTensor_(size)(atf, 1) == THTensor_(size)(atf, 2), 3,
+             "A matrices must be square");
+  THArgCheck(THTensor_(size)(atf, 1) == THTensor_(size)(b, 1), 3,
+             "dimensions of A and b must be equal");
 
-  int lda;
+  if (rb_ != b) {
+    THTensor_(resizeAs)(rb_, b);
+    THTensor_(copy)(rb_, b);
+  }
+
+  long num_batches = atf->size[0];
+  long n = atf->size[1];
+  int nrhs = rb_->nDimension > 2 ? rb_->size[2] : 1;
+
+  int lda, ldb;
   THTensor *atf_;
+  THTensor *rb__;
 
-  // correct ordering of A_a
+  // correct ordering of A
   if (atf->stride[1] == 1) {
     // column ordered, what BLAS wants
     lda = atf->stride[2];
@@ -1023,13 +1043,28 @@ void THTensor_(btrisolve)(THTensor *rb_, THTensor *b, THTensor *atf,
     lda = atf_->stride[2];
   }
 
-  if (rb_ != b) {
-    THTensor_(resizeAs)(rb_, b);
-    THTensor_(copy)(rb_, b);
+  // correct ordering of B
+  if (rb_->stride[1] == 1) {
+    // column ordered
+    if (rb_->nDimension == 2 || rb_->size[2] == 1) {
+      ldb = n;
+    } else {
+      ldb = rb_->stride[2];
+    }
+    rb__ = rb_;
+  } else {
+    // make column ordered
+    if (rb_->nDimension > 2) {
+      THTensor *transp_r_ = THTensor_(newTranspose)(rb_, 1, 2);
+      rb__ = THTensor_(newClone)(transp_r_);
+      THTensor_(free)(transp_r_);
+      THTensor_(transpose)(rb__, NULL, 1, 2);
+      ldb = rb__->stride[2];
+    } else {
+      rb__ = THTensor_(newClone)(rb_);
+      ldb = n;
+    }
   }
-
-  long num_batches = atf->size[0];
-  long n = atf->size[1];
 
   THTensor *ai = THTensor_(new)();
   THTensor *rbi = THTensor_(new)();
@@ -1041,13 +1076,14 @@ void THTensor_(btrisolve)(THTensor *rb_, THTensor *b, THTensor *atf,
 
   for (long batch = 0; batch < num_batches; ++batch) {
     THTensor_(select)(ai, atf_, 0, batch);
-    THTensor_(select)(rbi, rb_, 0, batch);
+    THTensor_(select)(rbi, rb__, 0, batch);
     THIntTensor_select(pivoti, pivots, 0, batch);
 
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_FLOAT)
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
     int info;
-    THLapack_(getrs)('N', n, 1, THTensor_(data)(ai), lda,
-                     THIntTensor_data(pivoti), THTensor_(data)(rbi), n, &info);
+    THLapack_(getrs)('N', n, nrhs, THTensor_(data)(ai), lda,
+                     THIntTensor_data(pivoti), THTensor_(data)(rbi), ldb,
+                     &info);
     if (info != 0) {
       THError("Error: Nonzero info.");
     }
@@ -1063,6 +1099,9 @@ void THTensor_(btrisolve)(THTensor *rb_, THTensor *b, THTensor *atf,
   if (atf_ != atf) {
     THTensor_(free)(atf_);
   }
-}
 
+  if (rb__ != rb_) {
+    THTensor_(freeCopyTo)(rb__, rb_);
+  }
+}
 #endif

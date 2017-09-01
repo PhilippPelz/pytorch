@@ -1,11 +1,16 @@
 #ifndef TH_GENERIC_FILE
-#error "You must define TH_GENERIC_FILE before including THGenerateAllTypes.h"
+#error "You must define TH_GENERIC_FILE before including THGenerateFloatTypes.h"
 #endif
 
 //#include <complex.h>
 //#undef I
 
 #define TH_REAL_IS_REAL // well this is odd...
+
+#if !(defined(THGenerateManyTypes) || defined(THFCLocalGenerateManyTypes))
+#define THFloatLocalGenerateManyTypes
+#define THGenerateManyTypes
+#endif
 
 #define SWAPS sswap_
 #define SCAL sscal_
@@ -56,26 +61,13 @@
 #define CARG
 #define CONJ
 
-#define real float
 #define part float
-#define accreal double
-#define TH_CONVERT_REAL_TO_ACCREAL(_val) (accreal)(_val)
-#define TH_CONVERT_ACCREAL_TO_REAL(_val) (real)(_val)
-#define Real Float
 #define Part Float
-#define THInf FLT_MAX
-#define TH_REAL_IS_FLOAT
-#line 1 TH_GENERIC_FILE
-#include TH_GENERIC_FILE
-#undef accreal
-#undef real
+
+#include "THGenerateFloatType.h"
+
 #undef part
-#undef Real
 #undef Part
-#undef THInf
-#undef TH_REAL_IS_FLOAT
-#undef TH_CONVERT_REAL_TO_ACCREAL
-#undef TH_CONVERT_ACCREAL_TO_REAL
 
 #undef SWAPS
 #undef SCAL
@@ -129,26 +121,13 @@
 #define GER dger_
 #define GEMM dgemm_
 
-#define real double
 #define part double
-#define accreal double
-#define TH_CONVERT_REAL_TO_ACCREAL(_val) (accreal)(_val)
-#define TH_CONVERT_ACCREAL_TO_REAL(_val) (real)(_val)
-#define Real Double
 #define Part Double
-#define THInf DBL_MAX
-#define TH_REAL_IS_DOUBLE
-#line 1 TH_GENERIC_FILE
-#include TH_GENERIC_FILE
-#undef accreal
-#undef real
+
+#include "THGenerateDoubleType.h"
+
 #undef part
-#undef Real
 #undef Part
-#undef THInf
-#undef TH_REAL_IS_DOUBLE
-#undef TH_CONVERT_REAL_TO_ACCREAL
-#undef TH_CONVERT_ACCREAL_TO_REAL
 
 #undef CABS
 #undef CACOS
@@ -201,6 +180,8 @@
 
 #undef TH_REAL_IS_REAL
 
-#if !(defined(THGenerateAllTypes) || defined(THGenerateFloatAndComplexTypes))
+#ifdef THFloatLocalGenerateManyTypes
+#undef THFloatLocalGenerateManyTypes
+#undef THGenerateManyTypes
 #undef TH_GENERIC_FILE
 #endif

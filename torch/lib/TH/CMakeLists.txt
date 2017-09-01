@@ -20,13 +20,34 @@ IF(NOT TH_INSTALL_BIN_SUBDIR
   SET(TH_INSTALL_CMAKE_SUBDIR "share/cmake/TH" CACHE PATH "TH install cmake subdirectory")
 ENDIF()
 
+######################################################################
+###### macros section
+#####################################################################
+IF(NOT ADD_TORCH_LIBRARY)
+MACRO(ADD_TORCH_LIBRARY package type src)
+  IF ("${type}" STREQUAL "STATIC")
+    if ("${src}" MATCHES "cu$" OR "${src}" MATCHES "cu;")
+      CUDA_ADD_LIBRARY(${package} STATIC ${src})
+    else()
+      ADD_LIBRARY(${package} STATIC ${src})
+    endif()
+  ELSE()
+    if ("${src}" MATCHES "cu$" OR "${src}" MATCHES "cu;")
+      CUDA_ADD_LIBRARY(${package} ${type} ${src})
+    else()
+      ADD_LIBRARY(${package} ${type} ${src})
+    endif()
+  ENDIF()
+ENDMACRO()
+ENDIF()
+
 #######################################################################
 ##### flags section
 ######################################################################
 
 IF(MSVC)
-  # MSVC now supports C99 since VS2013/VS2015
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /std:c99")
+  # MSVC now supports C99 since VS2013/VS2015, however the standard version switch is not provided yet
+  # SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /std:c99")
 ELSE(MSVC)
   # enable gnu99 and not c99 because we use
   # gnu extensions like posix_memalign
@@ -133,7 +154,7 @@ IF(C_SSE3_FOUND)
   MESSAGE(STATUS "SSE3 Found")
   SET(CMAKE_C_FLAGS "${C_SSE3_FLAGS} -DUSE_SSE3 ${CMAKE_C_FLAGS}")
 ENDIF(C_SSE3_FOUND)
-# we dont set -mavx and -mavx2 flags globally, but only for specific files
+# we don't set -mavx and -mavx2 flags globally, but only for specific files
 # however, we want to enable the AVX codepaths, so we still need to
 # add USE_AVX and USE_AVX2 macro defines
 IF(C_AVX_FOUND)
@@ -144,7 +165,6 @@ IF(C_AVX2_FOUND)
   MESSAGE(STATUS "AVX2 Found")
   SET(CMAKE_C_FLAGS "-DUSE_AVX2 ${CMAKE_C_FLAGS}")
 ENDIF(C_AVX2_FOUND)
-
 
 CHECK_C_SOURCE_RUNS("
 #include <stdatomic.h>
@@ -212,7 +232,7 @@ ENDIF(C_SSE4_1_FOUND AND C_SSE4_2_FOUND)
 IF(C_AVX_FOUND)
   IF(MSVC)
     SET_SOURCE_FILES_PROPERTIES(generic/simd/convolve5x5_avx.c PROPERTIES COMPILE_FLAGS "/Ox /fp:fast ${C_AVX_FLAGS}")
-    SET_SOURCE_FILES_PROPERTIES(vector/AVX.c PROPERTIES COMPILE_FLAGS "/Ox ${C_AVX_FLAGS}")
+    SET_SOURCE_FILES_PROPERTIES(vector/AVX.c PROPERTIES COMPILE_FLAGS "/Ox /arch:AVX ${C_AVX_FLAGS}")
   ELSE(MSVC)
     SET_SOURCE_FILES_PROPERTIES(generic/simd/convolve5x5_avx.c PROPERTIES COMPILE_FLAGS "-O3 -ffast-math ${C_AVX_FLAGS}")
     SET_SOURCE_FILES_PROPERTIES(vector/AVX.c PROPERTIES COMPILE_FLAGS "-O3 ${C_AVX_FLAGS}")
@@ -222,7 +242,7 @@ ENDIF(C_AVX_FOUND)
 
 IF(C_AVX2_FOUND)
   IF(MSVC)
-    SET_SOURCE_FILES_PROPERTIES(vector/AVX2.c PROPERTIES COMPILE_FLAGS "/Ox ${C_AVX2_FLAGS}")
+    SET_SOURCE_FILES_PROPERTIES(vector/AVX2.c PROPERTIES COMPILE_FLAGS "/Ox /arch:AVX2 ${C_AVX2_FLAGS}")
   ELSE(MSVC)
     SET_SOURCE_FILES_PROPERTIES(vector/AVX2.c PROPERTIES COMPILE_FLAGS "-O3 ${C_AVX2_FLAGS}")
   ENDIF(MSVC)
@@ -230,11 +250,11 @@ IF(C_AVX2_FOUND)
 ENDIF(C_AVX2_FOUND)
 
 SET(hdr
-  THGeneral.h THHalf.h THAllocator.h THStorage.h THTensor.h THTensorApply.h THBlas.h THMath.h
+  THGeneral.h THHalf.h THAllocator.h THSize.h THStorage.h THTensor.h THTensorApply.h THBlas.h THMath.h
   THLapack.h THLogAdd.h THRandom.h THVector.h THAtomic.h )
 
 SET(src
-  THGeneral.c THHalf.c THAllocator.c THStorage.c THTensor.c THBlas.c THLapack.c
+  THGeneral.c THHalf.c THAllocator.c THSize.c THStorage.c THTensor.c THBlas.c THLapack.c
   THLogAdd.c THRandom.c THFile.c THDiskFile.c THMemoryFile.c THAtomic.c THVector.c)
 
 SET(src ${src} ${hdr} ${simd})
@@ -243,10 +263,15 @@ SET(src ${src} ${hdr} ${simd})
 ##### build section
 ######################################################################
 
-ADD_LIBRARY(TH SHARED ${src})
-if(BUILD_STATIC)
-  ADD_LIBRARY(TH_static STATIC ${src})
-endif()
+ADD_TORCH_LIBRARY(TH SHARED "${src}")
+
+IF (BUILD_STATIC OR "$ENV{STATIC_TH}" STREQUAL "YES")
+  ADD_TORCH_LIBRARY(TH_static STATIC "${src}")
+  SET_TARGET_PROPERTIES(TH_static PROPERTIES
+    COMPILE_FLAGS "-fPIC")
+  SET_TARGET_PROPERTIES(TH_static PROPERTIES
+    PREFIX "lib" IMPORT_PREFIX "lib" OUTPUT_NAME "TH")
+ENDIF()
 
 IF(NOT TH_SO_VERSION)
   SET(TH_SO_VERSION 0)
@@ -278,7 +303,16 @@ ENDIF()
 FIND_PACKAGE(BLAS)
 IF(BLAS_FOUND)
   SET(USE_BLAS 1)
-  TARGET_LINK_LIBRARIES(TH ${BLAS_LIBRARIES})
+  IF ($ENV{TH_BINARY_BUILD})
+    MESSAGE(STATUS "TH_BINARY_BUILD detected. Enabling special linkage.")
+    TARGET_LINK_LIBRARIES(TH "${BLAS_LIBRARIES};${BLAS_LIBRARIES};${BLAS_LIBRARIES}")
+  ELSE ($ENV{TH_BINARY_BUILD})
+    TARGET_LINK_LIBRARIES(TH ${BLAS_LIBRARIES})
+  ENDIF ($ENV{TH_BINARY_BUILD})
+  
+  IF(BLAS_INFO STREQUAL "mkl")
+    ADD_DEFINITIONS(-DTH_BLAS_MKL)
+  ENDIF()
 ENDIF(BLAS_FOUND)
 
 FIND_PACKAGE(LAPACK)
@@ -359,7 +393,14 @@ INSTALL(FILES
   THFilePrivate.h
   ${CMAKE_CURRENT_BINARY_DIR}/THGeneral.h
   THGenerateAllTypes.h
+  THGenerateDoubleType.h
+  THGenerateFloatType.h
   THGenerateHalfType.h
+  THGenerateLongType.h
+  THGenerateIntType.h
+  THGenerateShortType.h
+  THGenerateCharType.h
+  THGenerateByteType.h
   THGenerateFloatTypes.h
   THGenerateComplexTypes.h
   THGenerateFloatAndComplexTypes.h
@@ -368,6 +409,7 @@ INSTALL(FILES
   THLogAdd.h
   THMemoryFile.h
   THRandom.h
+  THSize.h
   THStorage.h
   THTensor.h
   THTensorApply.h
@@ -433,7 +475,6 @@ IF (BLAS_FOUND AND BLAS_INSTALL_LIBRARIES)
     Install_Required_Library(${BLAS_openblas_LIBRARY})
     Install_Required_Library("${libpath}/libquadmath")
     Install_Required_Library("${libpath}/libgfortran")
-    Install_Required_Library("${libpath}/libquadmath")
     Install_Required_Library("${libpath}/libgcc")
   ENDIF()
 ENDIF()

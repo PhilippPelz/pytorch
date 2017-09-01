@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include "THP.h"
+#include "torch/csrc/utils/python_strings.h"
 
 #include "generic/utils.cpp"
 #include <TH/THGenerateAllTypes.h>
@@ -31,28 +32,26 @@ THLongStoragePtr THPUtils_unpackSize(PyObject *arg) {
   return result;
 }
 
-bool THPUtils_tryUnpackLongs(PyObject *arg, THLongStoragePtr &result) {
+bool THPUtils_tryUnpackLongs(PyObject *arg, THLongStoragePtr& result) {
   bool tuple = PyTuple_Check(arg);
   bool list = PyList_Check(arg);
   if (tuple || list) {
     int nDim = tuple ? PyTuple_GET_SIZE(arg) : PyList_GET_SIZE(arg);
-    THLongStoragePtr storage = THLongStorage_newWithSize(nDim);
+    THLongStoragePtr storage(THLongStorage_newWithSize(nDim));
     for (int i = 0; i != nDim; ++i) {
-      PyObject *item =
-          tuple ? PyTuple_GET_ITEM(arg, i) : PyList_GET_ITEM(arg, i);
+      PyObject* item = tuple ? PyTuple_GET_ITEM(arg, i) : PyList_GET_ITEM(arg, i);
       if (!THPUtils_checkLong(item)) {
         return false;
       }
       storage->data[i] = THPUtils_unpackLong(item);
     }
-    result = storage.release();
+    result  = std::move(storage);
     return true;
   }
   return false;
 }
 
-bool THPUtils_tryUnpackLongVarArgs(PyObject *args, int ignore_first,
-                                   THLongStoragePtr &result) {
+bool THPUtils_tryUnpackLongVarArgs(PyObject *args, int ignore_first, THLongStoragePtr& result) {
   Py_ssize_t length = PyTuple_Size(args) - ignore_first;
   if (length < 1) {
     return false;
@@ -75,7 +74,8 @@ bool THPUtils_tryUnpackLongVarArgs(PyObject *args, int ignore_first,
   return true;
 }
 
-bool THPUtils_checkIntTuple(PyObject *arg) {
+bool THPUtils_checkIntTuple(PyObject *arg)
+{
   if (!PyTuple_Check(arg)) {
     return false;
   }
@@ -87,7 +87,8 @@ bool THPUtils_checkIntTuple(PyObject *arg) {
   return true;
 }
 
-std::vector<int> THPUtils_unpackIntTuple(PyObject *arg) {
+std::vector<int> THPUtils_unpackIntTuple(PyObject *arg)
+{
   if (!THPUtils_checkIntTuple(arg)) {
     throw std::runtime_error("Couldn't unpack int tuple");
   }
@@ -98,7 +99,8 @@ std::vector<int> THPUtils_unpackIntTuple(PyObject *arg) {
   return values;
 }
 
-void THPUtils_setError(const char *format, ...) {
+void THPUtils_setError(const char *format, ...)
+{
   static const size_t ERROR_BUFFER_SIZE = 1000;
   char buffer[ERROR_BUFFER_SIZE];
   va_list fmt_args;
@@ -109,8 +111,8 @@ void THPUtils_setError(const char *format, ...) {
   PyErr_SetString(PyExc_RuntimeError, buffer);
 }
 
-void THPUtils_addPyMethodDefs(std::vector<PyMethodDef> &vector,
-                              PyMethodDef *methods) {
+void THPUtils_addPyMethodDefs(std::vector<PyMethodDef>& vector, PyMethodDef* methods)
+{
   if (!vector.empty()) {
     // remove NULL terminator
     vector.pop_back();
@@ -124,66 +126,47 @@ void THPUtils_addPyMethodDefs(std::vector<PyMethodDef> &vector,
   }
 }
 
-static const char *classOrTypename(PyObject *obj) {
+static const char* classOrTypename(PyObject* obj) {
   if (PyType_Check(obj)) {
-    return ((PyTypeObject *)obj)->tp_name;
+    return ((PyTypeObject*)obj)->tp_name;
   }
   return Py_TYPE(obj)->tp_name;
 }
 
-PyObject *THPUtils_dispatchStateless(PyObject *tensor, const char *name,
-                                     PyObject *args, PyObject *kwargs) {
-  THPObjectPtr methods =
-      PyObject_GetAttrString(tensor, THP_STATELESS_ATTRIBUTE_NAME);
+PyObject * THPUtils_dispatchStateless(
+    PyObject *tensor, const char *name, PyObject *args, PyObject *kwargs)
+{
+  THPObjectPtr methods(PyObject_GetAttrString(tensor, THP_STATELESS_ATTRIBUTE_NAME));
   if (!methods) {
-    return PyErr_Format(PyExc_TypeError,
-                        "Type %s doesn't implement stateless methods",
-                        classOrTypename(tensor));
+    return PyErr_Format(
+        PyExc_TypeError,
+        "Type %s doesn't implement stateless methods",
+        classOrTypename(tensor));
   }
-  THPObjectPtr method = PyObject_GetAttrString(methods, name);
+  THPObjectPtr method(PyObject_GetAttrString(methods, name));
   if (!method) {
-    return PyErr_Format(PyExc_TypeError,
-                        "Type %s doesn't implement stateless method %s",
-                        classOrTypename(tensor), name);
+    return PyErr_Format(
+        PyExc_TypeError,
+        "Type %s doesn't implement stateless method %s",
+        classOrTypename(tensor),
+        name);
   }
   return PyObject_Call(method.get(), args, kwargs);
 }
 
-std::string _THPUtils_typename(PyObject *object) {
-  std::string type_name = Py_TYPE(object)->tp_name;
-  std::string result;
-  if (type_name.find("Storage") != std::string::npos ||
-      type_name.find("Tensor") != std::string::npos) {
-    PyObject *module_name = PyObject_GetAttrString(object, "__module__");
-#if PY_MAJOR_VERSION == 2
-    if (module_name && PyString_Check(module_name)) {
-      result = PyString_AS_STRING(module_name);
-    }
-#else
-    if (module_name && PyUnicode_Check(module_name)) {
-      PyObject *module_name_bytes = PyUnicode_AsASCIIString(module_name);
-      if (module_name_bytes) {
-        result = PyBytes_AS_STRING(module_name_bytes);
-        Py_DECREF(module_name_bytes);
-      }
-    }
-#endif
-    Py_XDECREF(module_name);
-    result += ".";
-    result += type_name;
-  } else {
-    result = std::move(type_name);
-  }
-  return result;
+static inline std::string _THPUtils_typename(PyObject *object)
+{
+  return Py_TYPE(object)->tp_name;
 }
+
 
 struct Type {
   virtual bool is_matching(PyObject *object) = 0;
-  virtual ~Type(){};
+  virtual ~Type() {};
 };
 
-struct SimpleType : public Type {
-  SimpleType(std::string &name) : name(name){};
+struct SimpleType: public Type {
+  SimpleType(std::string& name): name(name) {};
 
   bool is_matching(PyObject *object) {
     return _THPUtils_typename(object) == name;
@@ -192,9 +175,9 @@ struct SimpleType : public Type {
   std::string name;
 };
 
-struct MultiType : public Type {
-  MultiType(std::initializer_list<std::string> accepted_types)
-      : types(accepted_types){};
+struct MultiType: public Type {
+  MultiType(std::initializer_list<std::string> accepted_types):
+    types(accepted_types) {};
 
   bool is_matching(PyObject *object) {
     auto it = std::find(types.begin(), types.end(), _THPUtils_typename(object));
@@ -204,8 +187,8 @@ struct MultiType : public Type {
   std::vector<std::string> types;
 };
 
-struct NullableType : public Type {
-  NullableType(std::unique_ptr<Type> type) : type(std::move(type)){};
+struct NullableType: public Type {
+  NullableType(std::unique_ptr<Type> type): type(std::move(type)) {};
 
   bool is_matching(PyObject *object) {
     return object == Py_None || type->is_matching(object);
@@ -214,16 +197,14 @@ struct NullableType : public Type {
   std::unique_ptr<Type> type;
 };
 
-struct TupleType : public Type {
-  TupleType(std::vector<std::unique_ptr<Type>> types)
-      : types(std::move(types)){};
+struct TupleType: public Type {
+  TupleType(std::vector<std::unique_ptr<Type>> types):
+    types(std::move(types)) {};
 
   bool is_matching(PyObject *object) {
-    if (!PyTuple_Check(object))
-      return false;
+    if (!PyTuple_Check(object)) return false;
     auto num_elements = PyTuple_GET_SIZE(object);
-    if (num_elements != (long)types.size())
-      return false;
+    if (num_elements != (long)types.size()) return false;
     for (int i = 0; i < num_elements; i++) {
       if (!types[i]->is_matching(PyTuple_GET_ITEM(object, i)))
         return false;
@@ -234,12 +215,12 @@ struct TupleType : public Type {
   std::vector<std::unique_ptr<Type>> types;
 };
 
-struct SequenceType : public Type {
-  SequenceType(std::unique_ptr<Type> type) : type(std::move(type)){};
+struct SequenceType: public Type {
+  SequenceType(std::unique_ptr<Type> type):
+    type(std::move(type)) {};
 
   bool is_matching(PyObject *object) {
-    if (!PySequence_Check(object))
-      return false;
+    if (!PySequence_Check(object)) return false;
     auto num_elements = PySequence_Length(object);
     for (int i = 0; i < num_elements; i++) {
       if (!type->is_matching(PySequence_GetItem(object, i)))
@@ -252,35 +233,34 @@ struct SequenceType : public Type {
 };
 
 struct Argument {
-  Argument(std::string name, std::unique_ptr<Type> type)
-      : name(name), type(std::move(type)){};
+  Argument(std::string name, std::unique_ptr<Type> type):
+      name(name), type(std::move(type)) {};
 
   std::string name;
   std::unique_ptr<Type> type;
 };
 
 struct Option {
-  Option(std::vector<Argument> arguments, bool is_variadic, bool has_out)
-      : arguments(std::move(arguments)), is_variadic(is_variadic),
-        has_out(has_out){};
-  Option(bool is_variadic, bool has_out)
-      : arguments(), is_variadic(is_variadic), has_out(has_out){};
-  Option(const Option &) = delete;
-  Option(Option &&other)
-      : arguments(std::move(other.arguments)), is_variadic(other.is_variadic){};
+  Option(std::vector<Argument> arguments, bool is_variadic, bool has_out):
+      arguments(std::move(arguments)), is_variadic(is_variadic), has_out(has_out) {};
+  Option(bool is_variadic, bool has_out):
+      arguments(), is_variadic(is_variadic), has_out(has_out) {};
+  Option(const Option&) = delete;
+  Option(Option&& other):
+    arguments(std::move(other.arguments)), is_variadic(other.is_variadic),
+    has_out(other.has_out) {};
 
   std::vector<Argument> arguments;
   bool is_variadic;
   bool has_out;
 };
 
-std::vector<std::string> _splitString(const std::string &s,
-                                      const std::string &delim) {
+std::vector<std::string> _splitString(const std::string &s, const std::string& delim) {
   std::vector<std::string> tokens;
   std::size_t start = 0;
   std::size_t end;
-  while ((end = s.find(delim, start)) != std::string::npos) {
-    tokens.push_back(s.substr(start, end - start));
+  while((end = s.find(delim, start)) != std::string::npos) {
+    tokens.push_back(s.substr(start, end-start));
     start = end + delim.length();
   }
   tokens.push_back(s.substr(start));
@@ -297,7 +277,7 @@ std::unique_ptr<Type> _buildType(std::string type_name, bool is_nullable) {
     auto type_list = type_name.substr(6);
     type_list.pop_back();
     std::vector<std::unique_ptr<Type>> types;
-    for (auto &type : _splitString(type_list, ","))
+    for (auto& type: _splitString(type_list, ","))
       types.emplace_back(_buildType(type, false));
     result.reset(new TupleType(std::move(types)));
   } else if (type_name.find("sequence[") == 0) {
@@ -312,26 +292,26 @@ std::unique_ptr<Type> _buildType(std::string type_name, bool is_nullable) {
   return result;
 }
 
-std::pair<Option, std::string>
-_parseOption(const std::string &_option_str,
-             const std::unordered_map<std::string, PyObject *> kwargs) {
+std::pair<Option, std::string> _parseOption(const std::string& _option_str,
+    const std::unordered_map<std::string, PyObject*> kwargs)
+{
   if (_option_str == "no arguments")
     return std::pair<Option, std::string>(Option(false, false), _option_str);
   bool has_out = false;
   std::vector<Argument> arguments;
   std::string printable_option = _option_str;
-  std::string option_str = _option_str.substr(1, _option_str.length() - 2);
+  std::string option_str = _option_str.substr(1, _option_str.length()-2);
 
   /// XXX: this is a hack only for the out arg in TensorMethods
   auto out_pos = printable_option.find('#');
   if (out_pos != std::string::npos) {
     if (kwargs.count("out") > 0) {
-      std::string kwonly_part = printable_option.substr(out_pos + 1);
+      std::string kwonly_part = printable_option.substr(out_pos+1);
       printable_option.erase(out_pos);
       printable_option += "*, ";
       printable_option += kwonly_part;
     } else if (out_pos >= 2) {
-      printable_option.erase(out_pos - 2);
+      printable_option.erase(out_pos-2);
       printable_option += ")";
     } else {
       printable_option.erase(out_pos);
@@ -340,7 +320,7 @@ _parseOption(const std::string &_option_str,
     has_out = true;
   }
 
-  for (auto &arg : _splitString(option_str, ", ")) {
+  for (auto& arg: _splitString(option_str, ", ")) {
     bool is_nullable = false;
     auto type_start_idx = 0;
     if (arg[type_start_idx] == '#') {
@@ -359,37 +339,42 @@ _parseOption(const std::string &_option_str,
     //          ^              ^
     auto dots_idx = arg.find("...");
     if (dots_idx != std::string::npos)
-      type_end_idx -= 4;
+        type_end_idx -= 4;
 
     std::string type_name =
-        arg.substr(type_start_idx, type_end_idx - type_start_idx);
-    std::string name = arg.substr(name_start_idx);
+      arg.substr(type_start_idx, type_end_idx-type_start_idx);
+    std::string name =
+        arg.substr(name_start_idx);
 
     arguments.emplace_back(name, _buildType(type_name, is_nullable));
   }
 
   bool is_variadic = option_str.find("...") != std::string::npos;
   return std::pair<Option, std::string>(
-      Option(std::move(arguments), is_variadic, has_out),
-      std::move(printable_option));
+    Option(std::move(arguments), is_variadic, has_out),
+    std::move(printable_option)
+  );
 }
 
-bool _argcountMatch(const Option &option,
-                    const std::vector<PyObject *> &arguments,
-                    const std::unordered_map<std::string, PyObject *> &kwargs) {
+bool _argcountMatch(
+    const Option& option,
+    const std::vector<PyObject*>& arguments,
+    const std::unordered_map<std::string, PyObject*>& kwargs)
+{
   auto num_expected = option.arguments.size();
   auto num_got = arguments.size() + kwargs.size();
   // Note: variadic functions don't accept kwargs, so it's ok
   if (option.has_out && kwargs.count("out") == 0)
     num_expected--;
   return num_got == num_expected ||
-         (option.is_variadic && num_got > num_expected);
+    (option.is_variadic && num_got > num_expected);
 }
 
-std::string
-_formattedArgDesc(const Option &option,
-                  const std::vector<PyObject *> &arguments,
-                  const std::unordered_map<std::string, PyObject *> &kwargs) {
+std::string _formattedArgDesc(
+    const Option& option,
+    const std::vector<PyObject*>& arguments,
+    const std::unordered_map<std::string, PyObject*>& kwargs)
+{
   std::string red;
   std::string reset_red;
   std::string green;
@@ -410,8 +395,7 @@ _formattedArgDesc(const Option &option,
   std::string result = "(";
   for (size_t i = 0; i < num_args; i++) {
     bool is_kwarg = i >= arguments.size();
-    PyObject *arg =
-        is_kwarg ? kwargs.at(option.arguments[i].name) : arguments[i];
+    PyObject *arg = is_kwarg ? kwargs.at(option.arguments[i].name) : arguments[i];
 
     bool is_matching = false;
     if (i < option.arguments.size()) {
@@ -424,45 +408,43 @@ _formattedArgDesc(const Option &option,
       result += green;
     else
       result += red;
-    if (is_kwarg)
-      result += option.arguments[i].name + "=";
+    if (is_kwarg) result += option.arguments[i].name + "=";
     result += _THPUtils_typename(arg);
     if (is_matching)
-      result += reset_green;
+        result += reset_green;
     else
-      result += reset_red;
+        result += reset_red;
     result += ", ";
   }
   if (arguments.size() > 0)
-    result.erase(result.length() - 2);
+    result.erase(result.length()-2);
   result += ")";
   return result;
 }
 
-std::string
-_argDesc(const std::vector<PyObject *> &arguments,
-         const std::unordered_map<std::string, PyObject *> &kwargs) {
+std::string _argDesc(const std::vector<PyObject *>& arguments,
+    const std::unordered_map<std::string, PyObject *>& kwargs)
+{
   std::string result = "(";
-  for (auto &arg : arguments)
+  for (auto& arg: arguments)
     result += std::string(_THPUtils_typename(arg)) + ", ";
-  for (auto &kwarg : kwargs)
+  for (auto& kwarg: kwargs)
     result += kwarg.first + "=" + _THPUtils_typename(kwarg.second) + ", ";
   if (arguments.size() > 0)
-    result.erase(result.length() - 2);
+    result.erase(result.length()-2);
   result += ")";
   return result;
 }
 
-std::vector<std::string>
-_tryMatchKwargs(const Option &option,
-                const std::unordered_map<std::string, PyObject *> &kwargs) {
+std::vector<std::string> _tryMatchKwargs(const Option& option,
+    const std::unordered_map<std::string, PyObject*>& kwargs) {
   std::vector<std::string> unmatched;
   int start_idx = option.arguments.size() - kwargs.size();
   if (option.has_out && kwargs.count("out") == 0)
     start_idx--;
   if (start_idx < 0)
     start_idx = 0;
-  for (auto &entry : kwargs) {
+  for (auto& entry: kwargs) {
     bool found = false;
     for (unsigned int i = start_idx; i < option.arguments.size(); i++) {
       if (option.arguments[i].name == entry.first) {
@@ -476,18 +458,8 @@ _tryMatchKwargs(const Option &option,
   return unmatched;
 }
 
-std::string _parseDictKey(PyObject *key_str) {
-#if PY_MAJOR_VERSION == 3
-  THPObjectPtr ascii = PyUnicode_AsASCIIString(key_str);
-  return std::string(PyBytes_AS_STRING(ascii.get()));
-#else
-  return std::string(PyString_AS_STRING(key_str));
-#endif
-}
-
 void THPUtils_invalidArguments(PyObject *given_args, PyObject *given_kwargs,
-                               const char *function_name, size_t num_options,
-                               ...) {
+        const char *function_name, size_t num_options, ...) {
   std::vector<std::string> option_strings;
   std::vector<PyObject *> args;
   std::unordered_map<std::string, PyObject *> kwargs;
@@ -498,7 +470,7 @@ void THPUtils_invalidArguments(PyObject *given_args, PyObject *given_kwargs,
   va_list option_list;
   va_start(option_list, num_options);
   for (size_t i = 0; i < num_options; i++)
-    option_strings.push_back(va_arg(option_list, const char *));
+    option_strings.push_back(va_arg(option_list, const char*));
   va_end(option_list);
 
   Py_ssize_t num_args = PyTuple_Size(given_args);
@@ -513,22 +485,22 @@ void THPUtils_invalidArguments(PyObject *given_args, PyObject *given_kwargs,
     Py_ssize_t pos = 0;
 
     while (PyDict_Next(given_kwargs, &pos, &key, &value)) {
-      kwargs.emplace(_parseDictKey(key), value);
+      kwargs.emplace(THPUtils_unpackString(key), value);
     }
   }
 
   if (num_options == 1) {
     auto pair = _parseOption(option_strings[0], kwargs);
-    auto &option = pair.first;
-    auto &option_str = pair.second;
+    auto& option = pair.first;
+    auto& option_str = pair.second;
     std::vector<std::string> unmatched_kwargs;
     if (has_kwargs)
       unmatched_kwargs = _tryMatchKwargs(option, kwargs);
     if (unmatched_kwargs.size()) {
       error_msg += "got unrecognized keyword arguments: ";
-      for (auto &kwarg : unmatched_kwargs)
+      for (auto& kwarg: unmatched_kwargs)
         error_msg += kwarg + ", ";
-      error_msg.erase(error_msg.length() - 2);
+      error_msg.erase(error_msg.length()-2);
     } else {
       error_msg += "got ";
       if (_argcountMatch(option, args, kwargs)) {
@@ -543,10 +515,10 @@ void THPUtils_invalidArguments(PyObject *given_args, PyObject *given_kwargs,
     error_msg += "got ";
     error_msg += _argDesc(args, kwargs);
     error_msg += ", but expected one of:\n";
-    for (auto &option_str : option_strings) {
+    for (auto &option_str: option_strings) {
       auto pair = _parseOption(option_str, kwargs);
-      auto &option = pair.first;
-      auto &printable_option_str = pair.second;
+      auto& option = pair.first;
+      auto& printable_option_str = pair.second;
       error_msg += " * ";
       error_msg += printable_option_str;
       error_msg += "\n";
@@ -555,15 +527,13 @@ void THPUtils_invalidArguments(PyObject *given_args, PyObject *given_kwargs,
         if (has_kwargs)
           unmatched_kwargs = _tryMatchKwargs(option, kwargs);
         if (unmatched_kwargs.size() > 0) {
-          error_msg += "      didn't match because some of the keywords were "
-                       "incorrect: ";
-          for (auto &kwarg : unmatched_kwargs)
+          error_msg += "      didn't match because some of the keywords were incorrect: ";
+          for (auto& kwarg: unmatched_kwargs)
             error_msg += kwarg + ", ";
-          error_msg.erase(error_msg.length() - 2);
+          error_msg.erase(error_msg.length()-2);
           error_msg += "\n";
         } else {
-          error_msg += "      didn't match because some of the arguments have "
-                       "invalid types: ";
+          error_msg += "      didn't match because some of the arguments have invalid types: ";
           error_msg += _formattedArgDesc(option, args, kwargs);
           error_msg += "\n";
         }
@@ -574,9 +544,40 @@ void THPUtils_invalidArguments(PyObject *given_args, PyObject *given_kwargs,
   PyErr_SetString(PyExc_TypeError, error_msg.c_str());
 }
 
-template <> void THPPointer<THPGenerator>::free() {
+template<>
+void THPPointer<THPGenerator>::free() {
   if (ptr)
     Py_DECREF(ptr);
 }
 
 template class THPPointer<THPGenerator>;
+
+static bool backCompatBroadcastWarn = false;
+
+void setBackCompatBroadcastWarn(bool warn) {
+  backCompatBroadcastWarn = warn;
+}
+
+bool getBackCompatBroadcastWarn() {
+  return backCompatBroadcastWarn;
+}
+
+static bool backCompatKeepdimWarn = false;
+
+void setBackCompatKeepdimWarn(bool warn) {
+  backCompatKeepdimWarn = warn;
+}
+
+bool getBackCompatKeepdimWarn() {
+  return backCompatKeepdimWarn;
+}
+
+bool maybeThrowBackCompatKeepdimWarn(char *func) {
+  if(getBackCompatKeepdimWarn()) {
+     std::ostringstream ss;
+     ss << "backwards compatibility: call to \"" << func
+        << "\" uses default value for keepdim which has changed default to False.  Consider passing as kwarg.",
+    PyErr_WarnEx(PyExc_UserWarning, ss.str().c_str(), 1);
+  }
+  return true;
+}

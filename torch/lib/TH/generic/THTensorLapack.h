@@ -32,7 +32,7 @@ TH_API void THTensor_(pstrf)(THTensor *ra_, THIntTensor *rpiv_, THTensor *a,
                              const char *uplo, real tol);
 
 TH_API void THTensor_(btrifact)(THTensor *ra_, THIntTensor *rpivots_,
-                                THIntTensor *rinfo_, THTensor *a);
+                                THIntTensor *rinfo_, int pivot, THTensor *a);
 TH_API void THTensor_(btrisolve)(THTensor *rb_, THTensor *b, THTensor *atf,
                                  THIntTensor *pivots);
 

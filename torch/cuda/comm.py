@@ -1,8 +1,6 @@
 import torch
 from . import nccl
-from torch._utils import _accumulate
-
-# TODO: sync streams when implemented
+from torch._utils import _accumulate, _take_tensors, _flatten_tensors, _unflatten_tensors
 
 
 def broadcast(tensor, devices):
@@ -26,7 +24,6 @@ def broadcast(tensor, devices):
         nccl.broadcast(tensors)
         return tuple(tensors)
 
-    # TODO: copy to a pinned buffer first (if copy is from CPU)
     return tuple(tensor.cuda(gpu, async=True) for gpu in devices)
 
 
@@ -92,7 +89,7 @@ def reduce_add(inputs, destination=None):
 
     if nccl.is_available(inputs) and inputs[0].get_device() == destination:
         outputs = [result] + [t.new(t.size()) for t in inputs[1:]]
-        nccl.reduce(inputs, outputs)
+        nccl.reduce(inputs, outputs, root=destination)
         return result
 
     for inp in inputs:
@@ -108,7 +105,8 @@ def reduce_add_coalesced(inputs, destination=None, buffer_size=10485760):
     of synchronizations.
 
     Arguments:
-        inputs (Iterable[Tensor]): an iterable of tensors to add.
+        inputs (Iterable[Iterable[Tensor]]): iterable of iterables that
+            contain tensors from a single device.
         destination (int, optional): a device on which the output will be
             placed (default: current device).
         buffer_size (int): maximum size of the buffer used for coalescing
@@ -140,7 +138,7 @@ def scatter(tensor, devices, chunk_sizes=None, dim=0, streams=None):
         dim (int, optional): A dimension along which to chunk the tensor.
 
     Returns:
-        A tuple containing chunks of the ``tensor``, spread accross given
+        A tuple containing chunks of the ``tensor``, spread across given
         ``devices``.
     """
     if chunk_sizes is None:
@@ -206,42 +204,3 @@ def gather(tensors, dim=0, destination=None):
         result.narrow(dim, chunk_start, tensor.size(dim)).copy_(tensor, True)
         chunk_start += tensor.size(dim)
     return result
-
-
-def _flatten_tensors(tensors):
-    """Flatten tensors into a single contiguous 1D buffer"""
-    if len(tensors) == 1:
-        return tensors[0].contiguous().view(-1)
-    size = sum(tensor.numel() for tensor in tensors)
-    offset = 0
-    flat = tensors[0].new(size)
-    for tensor in tensors:
-        flat.narrow(0, offset, tensor.numel()).copy_(tensor)
-        offset += tensor.numel()
-    return flat
-
-
-def _unflatten_tensors(flat, tensors):
-    """View a flat buffer using the sizes of tensors"""
-    outputs = []
-    offset = 0
-    for tensor in tensors:
-        outputs.append(flat.narrow(0, offset, tensor.numel()).view_as(tensor))
-        offset += tensor.numel()
-    return tuple(outputs)
-
-
-def _take_tensors(tensors, size_limit):
-    """Groups tensors into lists of up to size_limit bytes"""
-    buf = []
-    size = 0
-    for tensor in tensors:
-        param_size = tensor.numel() * tensor.element_size()
-        if size + param_size > size_limit and size > 0:
-            yield buf
-            size = 0
-            buf = []
-        buf.append(tensor)
-        size += param_size
-    if len(buf) > 0:
-        yield buf

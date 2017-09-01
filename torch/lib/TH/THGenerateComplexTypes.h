@@ -12,6 +12,8 @@
 #include <complex.h>
 #undef I
 #define J _Complex_I
+typedef float _Complex cx;
+typedef double _Complex zx;
 
 #define TH_REAL_IS_COMPLEX
 
@@ -67,7 +69,7 @@
 // #pragma message "NOW DOING COMPLEX FLOAT"
 
 #define real float _Complex
-#define accreal double _Complex
+#define accreal float _Complex
 #define part float
 #define TH_CONVERT_REAL_TO_ACCREAL(_val) (accreal)(_val)
 #define TH_CONVERT_ACCREAL_TO_REAL(_val) (real)(_val)
@@ -187,8 +189,8 @@
 
 // #pragma message "NOW DOING COMPLEX double"
 
-#define real double _Complex
-#define accreal double _Complex
+#define real zx
+#define accreal zx
 #define part double
 #define TH_CONVERT_REAL_TO_ACCREAL(_val) (accreal)(_val)
 #define TH_CONVERT_ACCREAL_TO_REAL(_val) (real)(_val)
@@ -259,6 +261,6 @@
 
 #undef TH_REAL_IS_COMPLEX
 
-#if !(defined(THGenerateAllTypes) || defined(THGenerateFloatAndComplexTypes))
+#ifndef THGenerateManyTypes
 #undef TH_GENERIC_FILE
 #endif

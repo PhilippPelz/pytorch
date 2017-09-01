@@ -55,6 +55,7 @@ PyObject * THSPTensor_(size)(PyObject *self, PyObject *args, PyObject *kwargs)
 
 [[
   name: nnz
+  python_name: _nnz
   sparse: yes
   return: long
   arguments:
@@ -62,9 +63,9 @@ PyObject * THSPTensor_(size)(PyObject *self, PyObject *args, PyObject *kwargs)
 ]]
 
 [[
-  name: isContiguous
+  name: isCoalesced
   sparse: yes
-  python_name: is_contiguous
+  python_name: is_coalesced
   return: bool
   arguments:
   - THSTensor* self
@@ -72,35 +73,29 @@ PyObject * THSPTensor_(size)(PyObject *self, PyObject *args, PyObject *kwargs)
 
 [[
   name: indices
-  defined_if: "!IS_CUDA"
+  python_name: _indices
   sparse: yes
-  return: THLongTensor*
+  cname: newIndices
+  return: THIndexTensor*
   arguments:
   - THSTensor* self
 ]]
-
-[[
-  name: indices
-  defined_if: "IS_CUDA"
-  sparse: yes
-  return: THCudaLongTensor*
-  arguments:
-  - THSTensor* self
-]]
-
 
 [[
   name: values
+  python_name: _values
   sparse: yes
+  cname: newValues
   return: THTensor*
   arguments:
   - THSTensor* self
 ]]
 
 [[
-  name: contiguous
+  name: coalesce
+  cname: newCoalesce
   sparse: yes
-  return: argument 0
+  return: THSTensor*
   arguments:
   - THSTensor* self
 ]]
@@ -131,7 +126,7 @@ PyObject * THSPTensor_(size)(PyObject *self, PyObject *args, PyObject *kwargs)
   return: self
   arguments:
     - THSTensor* self
-    - THSTensor* template
+    - THSTensor* the_template
 ]]
 
 [[
@@ -157,15 +152,45 @@ PyObject * THSPTensor_(size)(PyObject *self, PyObject *args, PyObject *kwargs)
 ]]
 
 [[
+  name: t
+  sparse: yes
+  variants:
+    - method
+    - function
+  cname: newTranspose
+  return: THSTensor*
+  before_call: |
+    long nDimI = ((THSPTensor*)${arg0})->cdata->nDimensionI;
+    long nDimV = ((THSPTensor*)${arg0})->cdata->nDimensionV;
+    THPUtils_assert(nDimI == 2 && nDimV == 0, "t() expects a 2D sparse tensor, but self is %ldD indices and %ldD values", nDimI, nDimV);
+  arguments:
+    - THSTensor* self
+    - CONSTANT 0
+    - CONSTANT 1
+]]
+
+[[
+  name: t_
+  sparse: yes
+  cname: transpose
+  return: self
+  before_call: |
+    long nDimI = ((THSPTensor*)${arg0})->cdata->nDimensionI;
+    long nDimV = ((THSPTensor*)${arg0})->cdata->nDimensionV;
+    THPUtils_assert(nDimI == 2 && nDimV == 0, "t_() expects a 2D sparse tensor, but self is %ldD indices and %ldD values", nDimI, nDimV);
+  arguments:
+    - THSTensor* self
+    - CONSTANT 0
+    - CONSTANT 1
+]]
+
+[[
   name: mm
   sparse: yes
-  only_stateless: True
+  variants:
+    - function
   cname: spaddmm
   return: argument 0
-  before_call: |
-    long s1 = THSTensor_(size)(LIBRARY_STATE ((THSPTensor*)$arg4)->cdata, 0);
-    long s2 = THTensor_(size)(LIBRARY_STATE ((THPTensor*)$arg5)->cdata, 1);
-    THTensor_(resize2d)(LIBRARY_STATE ((THPTensor*)$arg0)->cdata, s1, s2);
   arguments:
     - arg: THTensor* result
       output: True
@@ -178,15 +203,11 @@ PyObject * THSPTensor_(size)(PyObject *self, PyObject *args, PyObject *kwargs)
 
 [[
   name: spmm
-  only_stateless: True
+  variants:
+    - function
   sparse: yes
   cname: spaddmm
   return: argument 0
-  before_call: |
-    long s1 = THSTensor_(size)(LIBRARY_STATE ((THSPTensor*)$arg4)->cdata, 0);
-    long s2 = THTensor_(size)(LIBRARY_STATE ((THPTensor*)$arg5)->cdata, 1);
-    THTensor_(resize2d)(LIBRARY_STATE ((THPTensor*)$arg0)->cdata, s1, s2);
-    THTensor_(zero)(LIBRARY_STATE ((THPTensor*)$arg0)->cdata);
   arguments:
     - arg: THTensor* result
       output: True
@@ -198,15 +219,27 @@ PyObject * THSPTensor_(size)(PyObject *self, PyObject *args, PyObject *kwargs)
 ]]
 
 [[
+  name: hspmm
+  variants:
+    - function
+  sparse: yes
+  cname: hspmm
+  return: argument 0
+  arguments:
+    - arg: THSTensor* result
+      output: True
+    - CONSTANT AS_REAL(1)
+    - THSTensor* mat1
+    - THTensor* mat2
+]]
+
+[[
   name: sspmm
-  only_stateless: True
+  variants:
+    - function
   sparse: yes
   cname: sspaddmm
   return: argument 0
-  before_call: |
-    long s1 = THSTensor_(size)(LIBRARY_STATE ((THSPTensor*)$arg4)->cdata, 0);
-    long s2 = THTensor_(size)(LIBRARY_STATE ((THPTensor*)$arg5)->cdata, 1);
-    THSTensor_(resize2d)(LIBRARY_STATE ((THSPTensor*)$arg0)->cdata, s1, s2);
   arguments:
     - arg: THSTensor* result
       output: True
@@ -220,7 +253,9 @@ PyObject * THSPTensor_(size)(PyObject *self, PyObject *args, PyObject *kwargs)
 [[
   name: sspaddmm
   sparse: yes
-  with_stateless: True
+  variants:
+    - method
+    - function
   return: argument 0
   arguments:
     - arg: THSTensor* result
@@ -238,7 +273,9 @@ PyObject * THSPTensor_(size)(PyObject *self, PyObject *args, PyObject *kwargs)
   name: spadd
   sparse: yes
   cname: spcadd
-  with_stateless: True
+  variants:
+    - method
+    - function
   return: argument 0
   arguments:
     - arg: THTensor* result
@@ -261,7 +298,9 @@ PyObject * THSPTensor_(size)(PyObject *self, PyObject *args, PyObject *kwargs)
 [[
   name: add
   sparse: yes
-  with_stateless: True
+  variants:
+    - method
+    - function
   return: argument 0
   cname: cadd
   arguments:
@@ -289,7 +328,9 @@ PyObject * THSPTensor_(size)(PyObject *self, PyObject *args, PyObject *kwargs)
 [[
   name: sub
   sparse: yes
-  with_stateless: True
+  variants:
+    - method
+    - function
   return: argument 0
   cname: csub
   arguments:
@@ -318,7 +359,9 @@ PyObject * THSPTensor_(size)(PyObject *self, PyObject *args, PyObject *kwargs)
   name: mul
   sparse: yes
   return: argument 0
-  with_stateless: True
+  variants:
+    - method
+    - function
   options:
     - cname: mul
       arguments:
@@ -355,7 +398,9 @@ PyObject * THSPTensor_(size)(PyObject *self, PyObject *args, PyObject *kwargs)
   name: div
   sparse: yes
   cname: div
-  with_stateless: True
+  variants:
+    - method
+    - function
   return: argument 0
   arguments:
     - arg: THSTensor* result
@@ -376,7 +421,29 @@ PyObject * THSPTensor_(size)(PyObject *self, PyObject *args, PyObject *kwargs)
 ]]
 
 [[
-  name: sparse_mask
+  name: pow
+  types:
+    - float
+    - double
+  backends:
+    - CPU
+    - CUDA
+  sparse: yes
+  cname: pow
+  variants:
+    - method
+    - function
+  return: argument 0
+  arguments:
+    - arg: THSTensor* result
+      output: True
+    - THSTensor* self
+    - real value
+]]
+
+[[
+  name: _sparse_mask
+  defined_if: "!IS_DISTRIBUTED"
   cname: sparseMask
   return: argument 0
   arguments:
@@ -384,4 +451,15 @@ PyObject * THSPTensor_(size)(PyObject *self, PyObject *args, PyObject *kwargs)
       output: True
     - THTensor* self
     - THSTensor* mask
+]]
+
+[[
+  name: getDevice
+  sparse: yes
+  python_name: get_device
+  backends:
+    - CUDA
+  return: long
+  arguments:
+    - THSTensor* self
 ]]

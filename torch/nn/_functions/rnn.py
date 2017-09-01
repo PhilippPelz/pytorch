@@ -1,6 +1,9 @@
+import warnings
 from torch.autograd import Function, NestedIOFunction, Variable
 import torch.backends.cudnn as cudnn
 from .. import functional as F
+from .thnn import rnnFusedPointwise as fusedBackend
+
 try:
     import torch.backends.cudnn.rnn
 except ImportError:
@@ -18,8 +21,15 @@ def RNNTanhCell(input, hidden, w_ih, w_hh, b_ih=None, b_hh=None):
 
 
 def LSTMCell(input, hidden, w_ih, w_hh, b_ih=None, b_hh=None):
+    if input.is_cuda:
+        igates = F.linear(input, w_ih)
+        hgates = F.linear(hidden[0], w_hh)
+        state = fusedBackend.LSTMFused()
+        return state(igates, hgates, hidden[1]) if b_ih is None else state(igates, hgates, hidden[1], b_ih, b_hh)
+
     hx, cx = hidden
     gates = F.linear(input, w_ih, b_ih) + F.linear(hx, w_hh, b_hh)
+
     ingate, forgetgate, cellgate, outgate = gates.chunk(4, 1)
 
     ingate = F.sigmoid(ingate)
@@ -34,6 +44,13 @@ def LSTMCell(input, hidden, w_ih, w_hh, b_ih=None, b_hh=None):
 
 
 def GRUCell(input, hidden, w_ih, w_hh, b_ih=None, b_hh=None):
+
+    if input.is_cuda:
+        gi = F.linear(input, w_ih)
+        gh = F.linear(hidden, w_hh)
+        state = fusedBackend.GRUFused()
+        return state(gi, gh, hidden) if b_ih is None else state(gi, gh, hidden, b_ih, b_hh)
+
     gi = F.linear(input, w_ih, b_ih)
     gh = F.linear(hidden, w_hh, b_hh)
     i_r, i_i, i_n = gi.chunk(3, 1)
@@ -95,7 +112,7 @@ def Recurrent(inner, reverse=False):
         for i in steps:
             hidden = inner(input[i], hidden, *weight)
             # hack to handle LSTM
-            output.append(isinstance(hidden, tuple) and hidden[0] or hidden)
+            output.append(hidden[0] if isinstance(hidden, tuple) else hidden)
 
         if reverse:
             output.reverse()
@@ -191,7 +208,7 @@ def VariableRecurrentReverse(batch_sizes, inner):
 
 def AutogradRNN(mode, input_size, hidden_size, num_layers=1, batch_first=False,
                 dropout=0, train=True, bidirectional=False, batch_sizes=None,
-                dropout_state=None):
+                dropout_state=None, flat_weight=None):
 
     if mode == 'RNN_RELU':
         cell = RNNReLUCell
@@ -238,7 +255,7 @@ class CudnnRNN(NestedIOFunction):
 
     def __init__(self, mode, input_size, hidden_size, num_layers=1,
                  batch_first=False, dropout=0, train=True, bidirectional=False,
-                 batch_sizes=None, dropout_state=None):
+                 batch_sizes=None, dropout_state=None, flat_weight=None):
         super(CudnnRNN, self).__init__()
         if dropout_state is None:
             dropout_state = {}
@@ -255,9 +272,16 @@ class CudnnRNN(NestedIOFunction):
         self.batch_sizes = batch_sizes
         self.dropout_seed = torch.IntTensor(1).random_()[0]
         self.dropout_state = dropout_state
+        self.weight_buf = flat_weight
+        if flat_weight is None:
+            warnings.warn("RNN module weights are not part of single contiguous "
+                          "chunk of memory. This means they need to be compacted "
+                          "at every call, possibly greately increasing memory usage. "
+                          "To compact weights again call flatten_parameters().", stacklevel=5)
 
     def forward_extended(self, input, weight, hx):
         assert cudnn.is_acceptable(input)
+        # TODO: raise a warning if weight_data_ptr is None
 
         output = input.new()
 

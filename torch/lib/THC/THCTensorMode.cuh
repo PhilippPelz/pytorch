@@ -229,7 +229,7 @@ __global__ void computeMode(
 
   struct ModeUnsignedPair max = {0, 0};
 
-  max = reduceBlockN<struct ModeUnsignedPair, MaxReduceOp<struct ModeUnsignedPair>, 2>
+  max = reduceBlockWithNThreadLocalReductions<struct ModeUnsignedPair, MaxReduceOp<struct ModeUnsignedPair>, 2>
     (uupmem, uup, sliceSize, MaxReduceOp<struct ModeUnsignedPair>(), max);
 
   // Store the mode in shared memory for use in finding the mode in the input slice
@@ -245,7 +245,7 @@ __global__ void computeMode(
   // Finally, we need to find the "an" index of the mode in the input Tensor. The API does
   // not constrain which index we pick, so it can be any of the indices that contain the mode.
   // We will do a reduction to find the index. We go back to using the (index, flag) buffer
-  // arrangment. First, we mark indices that are equal to the mode, i.e B[i] = true if
+  // arrangement. First, we mark indices that are equal to the mode, i.e B[i] = true if
   // input[i] == mode, and initialize C[i] to be the index
   //
   // Again we reduce 2 elements in the thread's registers prior to the block-wide reduction
@@ -265,7 +265,7 @@ __global__ void computeMode(
   // with the mode.
   struct ModeUnsignedBoolPair match = {0, false};
 
-  match = reduceBlockN<struct ModeUnsignedBoolPair, MatchReduceOp<struct ModeUnsignedBoolPair>, 2>
+  match = reduceBlockWithNThreadLocalReductions<struct ModeUnsignedBoolPair, MatchReduceOp<struct ModeUnsignedBoolPair>, 2>
     (ubpmem, ubpp, sliceSize, MatchReduceOp<struct ModeUnsignedBoolPair>(), match);
 
   // Finally, we have the mode, and an index where it occurs. We use a single thread

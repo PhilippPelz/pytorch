@@ -142,7 +142,7 @@ def _save(obj, f, pickle_module, pickle_protocol):
             try:
                 source_file = inspect.getsourcefile(obj)
                 source = inspect.getsource(obj)
-            except (TypeError, IOError):
+            except:  # saving the source is optional, so we can ignore any errors
                 warnings.warn("Couldn't retrieve source code for container of "
                               "type " + obj.__name__ + ". It won't be checked "
                               "for correctness upon loading.")
@@ -208,11 +208,13 @@ def load(f, map_location=None, pickle_module=pickle):
     tagging and deserialization methods using register_package.
 
     Args:
-        f: a file-like object (has to implement fileno that returns a file descriptor,
-            and must implement seek), or a string containing a file name
-        map_location: a function or a dict specifying how to remap storage locations
-        pickle_module: module used for unpickling metadata and objects (has to match
-            the pickle_module used to serialize file)
+        f: a file-like object (has to implement fileno that returns a file
+            descriptor, and must implement seek), or a string containing a file
+            name
+        map_location: a function or a dict specifying how to remap storage
+            locations
+        pickle_module: module used for unpickling metadata and objects (has to
+            match the pickle_module used to serialize file)
 
     Example:
         >>> torch.load('tensors.pt')

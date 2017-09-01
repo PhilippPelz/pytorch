@@ -89,6 +89,9 @@ void THNN_(SpatialDilatedConvolution_updateOutput)(
   int nOutputPlane = weight->size[0];
 
   input = THCTensor_(newContiguous)(state, input);
+  weight = THCTensor_(newContiguous)(state, weight);
+  bias = bias ? THCTensor_(newContiguous)(state, bias) : bias;
+  
   int batch = 1;
   if (input->nDimension == 3) {
     // Force batch
@@ -203,6 +206,8 @@ void THNN_(SpatialDilatedConvolution_updateOutput)(
   }
 
   THCTensor_(free)(state, input);
+  THCTensor_(free)(state, weight);
+  if (bias) THCTensor_(free)(state, bias);
 }
 
 void THNN_(SpatialDilatedConvolution_updateGradInput)(
@@ -229,6 +234,8 @@ void THNN_(SpatialDilatedConvolution_updateGradInput)(
 
   input = THCTensor_(newContiguous)(state, input);
   gradOutput = THCTensor_(newContiguous)(state, gradOutput);
+  weight = THCTensor_(newContiguous)(state, weight);
+  
   int batch = 1;
   if (input->nDimension == 3) {
     // Force batch
@@ -289,7 +296,7 @@ void THNN_(SpatialDilatedConvolution_updateGradInput)(
     col2im<real, accreal>(
       THCState_getCurrentStream(state),
       THCTensor_(data)(state, gradColumns),
-      nInputPlane, inputHeight, inputWidth, kH, kW, padH, padW, dH, dW,
+      nInputPlane, inputHeight, inputWidth, outputHeight, outputWidth, kH, kW, padH, padW, dH, dW,
       dilationH, dilationW,
       THCTensor_(data)(state, gradInput_n)
     );
@@ -308,6 +315,7 @@ void THNN_(SpatialDilatedConvolution_updateGradInput)(
 
   THCTensor_(free)(state, input);
   THCTensor_(free)(state, gradOutput);
+  THCTensor_(free)(state, weight);
 }
 
 void THNN_(SpatialDilatedConvolution_accGradParameters)(
@@ -333,6 +341,10 @@ void THNN_(SpatialDilatedConvolution_accGradParameters)(
        (state, input, gradOutput, gradWeight, gradBias, kH, kW, dH, dW, padH, padW,
         dilationH, dilationW);
 
+  THArgCheck(THCTensor_(isContiguous)(state, gradWeight), 4, "gradWeight needs to be contiguous");
+  if (gradBias)
+    THArgCheck(THCTensor_(isContiguous)(state, gradBias), 5, "gradBias needs to be contiguous");
+  
   // Params
   int nInputPlane = gradWeight->size[1];
   int nOutputPlane = gradWeight->size[0];

@@ -22,6 +22,6 @@
 #undef TH_CONVERT_REAL_TO_ACCREAL
 #undef TH_CONVERT_ACCREAL_TO_REAL
 
-#ifndef THGenerateAllTypes
+#ifndef THGenerateManyTypes
 #undef TH_GENERIC_FILE
 #endif

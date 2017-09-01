@@ -69,7 +69,7 @@
       TENSOR##_sizes = TENSOR##_counter + TENSOR##_dim; \
       TENSOR##_strides = TENSOR##_counter + 2*TENSOR##_dim; \
       TH_TENSOR_dim_index = TENSOR##_dim-1; \
-      TENSOR##_dimOffset = (DIM == TENSOR##_dim-1) ? &TENSOR##_i : &TENSOR##_counter[DIM]; \
+      TENSOR##_dimOffset = (DIM == TENSOR->nDimension-1) ? &TENSOR##_i : &TENSOR##_counter[DIM]; \
       TENSOR##_sizes[TH_TENSOR_dim_index] = TENSOR->size[TENSOR->nDimension-1]; \
       TENSOR##_strides[TH_TENSOR_dim_index] = TENSOR->stride[TENSOR->nDimension-1]; \
       /* TENSOR##_counter tracks where we are in the storage. The offset into the */ \
@@ -81,7 +81,7 @@
       for(TENSOR##_i = TENSOR->nDimension-2; TENSOR##_i >= 0; --TENSOR##_i) { \
         if (TENSOR->stride[TENSOR##_i] == TENSOR->stride[TENSOR##_i+1] * TENSOR->size[TENSOR##_i+1] && TENSOR##_i != DIM && TENSOR##_i+1 != DIM) { \
           TENSOR##_sizes[TH_TENSOR_dim_index] = TENSOR->size[TENSOR##_i] * TENSOR##_sizes[TH_TENSOR_dim_index]; \
-          if (DIM != TENSOR##_dim-1 && TENSOR##_i < DIM) \
+          if (DIM != TENSOR->nDimension-1 && TENSOR##_i < DIM) \
             TENSOR##_dimOffset--; \
         } else { \
           --TH_TENSOR_dim_index; \
@@ -141,10 +141,24 @@
   __TH_TENSOR_APPLYX_PREAMBLE(TYPE1, TENSOR1, DIM, 1) \
   __TH_TENSOR_APPLYX_PREAMBLE(TYPE2, TENSOR2, DIM, 1) \
   __TH_TENSOR_APPLYX_PREAMBLE(TYPE3, TENSOR3, DIM, 1) \
-\
-  if(TENSOR1##_n != TENSOR2##_n || TENSOR1##_n != TENSOR3##_n) /* should we do the check in the function instead? i think so */ \
-    THError("inconsistent tensor size"); \
-\
+                                                                        \
+  int elements_equal = 1;                                               \
+  if(TENSOR1##_n != TENSOR2##_n) {                                      \
+    elements_equal = 0;                                                 \
+  }                                                                     \
+  else if(TENSOR1##_n != TENSOR3##_n) {                                 \
+    elements_equal = 0;                                                 \
+  }                                                                     \
+  if (elements_equal == 0) {                                            \
+    THDescBuff T1buff = _THSizeDesc(TENSOR1->size, TENSOR1->nDimension); \
+    THDescBuff T2buff = _THSizeDesc(TENSOR2->size, TENSOR2->nDimension); \
+    THDescBuff T3buff = _THSizeDesc(TENSOR3->size, TENSOR3->nDimension); \
+    THError("inconsistent tensor size, expected %s %s, %s %s and %s %s to have the same " \
+            "number of elements, but got %d, %d and %d elements respectively", \
+            #TENSOR1, T1buff.str, #TENSOR2, T2buff.str, #TENSOR3, T3buff.str, \
+            TENSOR1##_n, TENSOR2##_n, TENSOR3##_n);                     \
+  }                                                                     \
+                                                                        \
   while(!TH_TENSOR_APPLY_hasFinished) \
   { \
     /* Loop through the inner most region of the Tensor */ \
@@ -174,9 +188,13 @@
   __TH_TENSOR_APPLYX_PREAMBLE(TYPE1, TENSOR1, DIM, 1) \
   __TH_TENSOR_APPLYX_PREAMBLE(TYPE2, TENSOR2, DIM, 1) \
 \
-  if(TENSOR1##_n != TENSOR2##_n) /* should we do the check in the function instead? i think so */ \
-    THError("inconsistent tensor size"); \
-\
+    if(TENSOR1##_n != TENSOR2##_n) {                                    \
+      THDescBuff T1buff = _THSizeDesc(TENSOR1->size, TENSOR1->nDimension); \
+      THDescBuff T2buff = _THSizeDesc(TENSOR2->size, TENSOR2->nDimension); \
+      THError("inconsistent tensor size, expected %s %s and %s %s to have the same " \
+              "number of elements, but got %d and %d elements respectively", \
+              #TENSOR1, T1buff.str, #TENSOR2, T2buff.str, TENSOR1##_n, TENSOR2##_n); \
+    }                                                                   \
   while(!TH_TENSOR_APPLY_hasFinished) \
   { \
     /* Loop through the inner most region of the Tensor */ \

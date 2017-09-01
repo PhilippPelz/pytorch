@@ -228,6 +228,12 @@ class MaxUnpool1d(Module):
         return F.max_unpool1d(input, indices, self.kernel_size, self.stride,
                               self.padding, output_size)
 
+    def __repr__(self):
+        return self.__class__.__name__ + ' (' \
+            + 'size=' + str(self.kernel_size) \
+            + ', stride=' + str(self.stride) \
+            + ', padding=' + str(self.padding) + ')'
+
 
 class MaxUnpool2d(Module):
     r"""Computes a partial inverse of :class:`MaxPool2d`.
@@ -303,6 +309,12 @@ class MaxUnpool2d(Module):
         return F.max_unpool2d(input, indices, self.kernel_size, self.stride,
                               self.padding, output_size)
 
+    def __repr__(self):
+        return self.__class__.__name__ + ' (' \
+            + 'size=' + str(self.kernel_size) \
+            + ', stride=' + str(self.stride) \
+            + ', padding=' + str(self.padding) + ')'
+
 
 class MaxUnpool3d(Module):
     r"""Computes a partial inverse of :class:`MaxPool3d`.
@@ -357,6 +369,12 @@ class MaxUnpool3d(Module):
     def forward(self, input, indices, output_size=None):
         return F.max_unpool3d(input, indices, self.kernel_size, self.stride,
                               self.padding, output_size)
+
+    def __repr__(self):
+        return self.__class__.__name__ + ' (' \
+            + 'size=' + str(self.kernel_size) \
+            + ', stride=' + str(self.stride) \
+            + ', padding=' + str(self.padding) + ')'
 
 
 class AvgPool1d(Module):
@@ -416,6 +434,14 @@ class AvgPool1d(Module):
         return F.avg_pool1d(
             input, self.kernel_size, self.stride, self.padding, self.ceil_mode,
             self.count_include_pad)
+
+    def __repr__(self):
+        return self.__class__.__name__ + ' (' \
+            + 'size=' + str(self.kernel_size) \
+            + ', stride=' + str(self.stride) \
+            + ', padding=' + str(self.padding) \
+            + ', ceil_mode=' + str(self.ceil_mode) \
+            + ', count_include_pad=' + str(self.count_include_pad) + ')'
 
 
 class AvgPool2d(Module):
@@ -478,6 +504,14 @@ class AvgPool2d(Module):
         return F.avg_pool2d(input, self.kernel_size, self.stride,
                             self.padding, self.ceil_mode, self.count_include_pad)
 
+    def __repr__(self):
+        return self.__class__.__name__ + ' (' \
+            + 'size=' + str(self.kernel_size) \
+            + ', stride=' + str(self.stride) \
+            + ', padding=' + str(self.padding) \
+            + ', ceil_mode=' + str(self.ceil_mode) \
+            + ', count_include_pad=' + str(self.count_include_pad) + ')'
+
 
 class MaxPool3d(Module):
     r"""Applies a 3D max pooling over an input signal composed of several input
@@ -501,9 +535,9 @@ class MaxPool3d(Module):
 
     The parameters :attr:`kernel_size`, :attr:`stride`, :attr:`padding`, :attr:`dilation` can either be:
 
-        - a single ``int`` -- in which case the same value is used for the height and width dimension
+        - a single ``int`` -- in which case the same value is used for the depth, height and width dimension
         - a ``tuple`` of three ints -- in which case, the first `int` is used for the depth dimension,
-          the second `int` for the width dimension and the third `int` for the width dimension
+          the second `int` for the height dimension and the third `int` for the width dimension
 
     Args:
         kernel_size: the size of the window to take a max over
@@ -549,6 +583,14 @@ class MaxPool3d(Module):
                             self.padding, self.dilation, self.ceil_mode,
                             self.return_indices)
 
+    def __repr__(self):
+        return self.__class__.__name__ + ' (' \
+            + 'size=' + str(self.kernel_size) \
+            + ', stride=' + str(self.stride) \
+            + ', padding=' + str(self.padding) \
+            + ', dilation=' + str(self.dilation) \
+            + ', ceil_mode=' + str(self.ceil_mode) + ')'
+
 
 class AvgPool3d(Module):
     r"""Applies a 3D average pooling over an input signal composed of several input
@@ -565,22 +607,28 @@ class AvgPool3d(Module):
                                input(N_i, C_j, stride[0] * d + k, stride[1] * h + m, stride[2] * w + n)
         \end{array}
 
+    | If :attr:`padding` is non-zero, then the input is implicitly zero-padded on all three sides
+      for :attr:`padding` number of points
+
     The parameters :attr:`kernel_size`, :attr:`stride` can either be:
 
-        - a single ``int`` -- in which case the same value is used for the height and width dimension
+        - a single ``int`` -- in which case the same value is used for the depth, height and width dimension
         - a ``tuple`` of three ints -- in which case, the first `int` is used for the depth dimension,
-          the second `int` for the width dimension and the third `int` for the width dimension
+          the second `int` for the height dimension and the third `int` for the width dimension
 
     Args:
         kernel_size: the size of the window
         stride: the stride of the window. Default value is :attr:`kernel_size`
+        padding: implicit zero padding to be added on all three sides
+        ceil_mode: when True, will use `ceil` instead of `floor` to compute the output shape
+        count_include_pad: when True, will include the zero-padding in the averaging calculation
 
     Shape:
         - Input: :math:`(N, C, D_{in}, H_{in}, W_{in})`
         - Output: :math:`(N, C, D_{out}, H_{out}, W_{out})` where
-          :math:`D_{out} = floor((D_{in}  - kernel\_size[0]) / stride[0] + 1)`
-          :math:`H_{out} = floor((H_{in}  - kernel\_size[1]) / stride[1] + 1)`
-          :math:`W_{out} = floor((W_{in}  - kernel\_size[2]) / stride[2] + 1)`
+          :math:`D_{out} = floor((D_{in} + 2 * padding[0] - kernel\_size[0]) / stride[0] + 1)`
+          :math:`H_{out} = floor((H_{in} + 2 * padding[1] - kernel\_size[1]) / stride[1] + 1)`
+          :math:`W_{out} = floor((W_{in} + 2 * padding[2] - kernel\_size[2]) / stride[2] + 1)`
 
     Examples::
 
@@ -592,13 +640,32 @@ class AvgPool3d(Module):
         >>> output = m(input)
     """
 
-    def __init__(self, kernel_size, stride=None):
+    def __init__(self, kernel_size, stride=None, padding=0, ceil_mode=False,
+                 count_include_pad=True):
         super(AvgPool3d, self).__init__()
         self.kernel_size = kernel_size
-        self.stride = stride
+        self.stride = stride or kernel_size
+        self.padding = padding
+        self.ceil_mode = ceil_mode
+        self.count_include_pad = count_include_pad
 
     def forward(self, input):
-        return F.avg_pool3d(input, self.kernel_size, self.stride)
+        return F.avg_pool3d(input, self.kernel_size, self.stride,
+                            self.padding, self.ceil_mode, self.count_include_pad)
+
+    def __setstate__(self, d):
+        super(AvgPool3d, self).__setstate__(d)
+        self.__dict__.setdefault('padding', 0)
+        self.__dict__.setdefault('ceil_mode', False)
+        self.__dict__.setdefault('count_include_pad', True)
+
+    def __repr__(self):
+        return self.__class__.__name__ + ' (' \
+            + 'size=' + str(self.kernel_size) \
+            + ', stride=' + str(self.stride) \
+            + ', padding=' + str(self.padding) \
+            + ', ceil_mode=' + str(self.ceil_mode) \
+            + ', count_include_pad=' + str(self.count_include_pad) + ')'
 
 
 class FractionalMaxPool2d(Module):
@@ -653,15 +720,14 @@ class FractionalMaxPool2d(Module):
                              "an output size, or a pooling ratio")
 
     def forward(self, input):
-        kwargs = {}
+        output_size, output_ratio = None, None
         if self.outh is not None:
-            kwargs['output_size'] = self.outh, self.outw
+            output_size = self.outh, self.outw
         else:
-            kwargs['output_ratio'] = self.rh, self.rw
-        func = self._backend.FractionalMaxPool2d(self.kw, self.kh,
-                                                 return_indices=self.return_indices,
-                                                 _random_samples=self._random_samples, **kwargs)
-        return func(input)
+            output_ratio = self.rh, self.rw
+        ret = self._backend.FractionalMaxPool2d.apply(input, self.kw, self.kh, output_size, output_ratio,
+                                                      self._random_samples)
+        return ret if self.return_indices else ret[0]
 
 
 class LPPool2d(Module):
