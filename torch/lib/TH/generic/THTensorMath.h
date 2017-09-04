@@ -92,7 +92,6 @@ TH_API void THTensor_(match)(THTensor *r_, THTensor *m1, THTensor *m2,
                              real gain);
 
 TH_API ptrdiff_t THTensor_(numel)(THTensor *t);
-#if !defined(TH_REAL_IS_COMPLEX)
 TH_API void THTensor_(max)(THTensor *values_, THLongTensor *indices_,
                            THTensor *t, int dimension, int keepdim);
 TH_API void THTensor_(min)(THTensor *values_, THLongTensor *indices_,
@@ -100,7 +99,6 @@ TH_API void THTensor_(min)(THTensor *values_, THLongTensor *indices_,
 TH_API void THTensor_(kthvalue)(THTensor *values_, THLongTensor *indices_,
                                 THTensor *t, long k, int dimension,
                                 int keepdim);
-#endif
 TH_API void THTensor_(mode)(THTensor *values_, THLongTensor *indices_,
                             THTensor *t, int dimension, int keepdim);
 TH_API void THTensor_(median)(THTensor *values_, THLongTensor *indices_,
@@ -216,14 +214,10 @@ TH_API void THTensor_(zre)(THPartTensor *self, THTensor *src);
 TH_API void THTensor_(zim)(THPartTensor *self, THTensor *src);
 TH_API void THTensor_(zconj)(THPartTensor *self, THTensor *src);
 
-#ifdef TH_REAL_IS_COMPLEX
-
 TH_API void THTensor_(arg)(THTensor *self, THTensor *src);
 TH_API void THTensor_(re)(THTensor *self, THTensor *src);
 TH_API void THTensor_(im)(THTensor *self, THTensor *src);
 TH_API void THTensor_(conj)(THTensor *self, THTensor *src);
-
-#endif
 
 TH_API void THTensor_(mean)(THTensor *r_, THTensor *t, int dimension,
                             int keepdim);

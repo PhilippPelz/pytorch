@@ -181,63 +181,451 @@ Install the project...
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THC
-[  1%] Building NVCC (Device) object CMakeFiles/THC.dir/THC_generated_THCTensorMath.cu.o
-[  2%] Building NVCC (Device) object CMakeFiles/THC.dir/THC_generated_THCTensorMath2.cu.o
-[  3%] Building NVCC (Device) object CMakeFiles/THC.dir/THC_generated_THCTensorMathPairwise.cu.o
-[  4%] Building NVCC (Device) object CMakeFiles/THC.dir/THC_generated_THCTensorMathReduce.cu.o
-[  5%] Building NVCC (Device) object CMakeFiles/THC.dir/THC_generated_THCTensorMathMagma.cu.o
-[  6%] Building NVCC (Device) object CMakeFiles/THC.dir/THC_generated_THCTensorMathBlas.cu.o
-[  7%] Building NVCC (Device) object CMakeFiles/THC.dir/THC_generated_THCTensorMathScan.cu.o
-[  8%] Building NVCC (Device) object CMakeFiles/THC.dir/THC_generated_THCTensorIndex.cu.o
-/home/philipp/projects/pytorch/torch/lib/THC/THCTensorMath.cu:6:29: fatal error: THCTensorMath.cuh: No such file or directory
- #include "THCTensorMath.cuh"
-                             ^
-compilation terminated.
-CMake Error at THC_generated_THCTensorMath.cu.o.cmake:207 (message):
-  Error generating
-  /home/philipp/projects/pytorch/torch/lib/build/THC/CMakeFiles/THC.dir//./THC_generated_THCTensorMath.cu.o
+[100%] Built target THC
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so
+-- Set runtime path of "/home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so.1" to ""
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THC.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGeneral.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCApply.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCBlas.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCSleep.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCStorage.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCStorageCopy.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCStream.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCThreadLocal.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorCopy.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorRandom.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorMath.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorConv.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCApply.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCReduce.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCReduceAll.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCReduceApplyUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCAsmUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCAtomics.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCScanUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCSortUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCAllocator.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCCachingAllocator.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCCachingHostAllocator.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCDeviceUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCDeviceTensor.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCDeviceTensor-inl.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCDeviceTensorUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCDeviceTensorUtils-inl.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateAllTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateAllTypesButComplex.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateByteType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateCharType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateShortType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateIntType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateLongType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateHalfType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateFloatType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateZFloatType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateFloatTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateComplexTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateDoubleType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCGenerateZDoubleType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCHalf.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCNumerics.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorSort.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorInfo.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorMathPointwise.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorTypeUtils.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorRandom.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorMathMagma.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCThrustAllocator.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorMode.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorFFT.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/THCTensorTopK.cuh
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCStorage.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCStorage.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCStorage.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensor.c
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensor.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCStorageCopy.cpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCStorageCopy.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCStorageCopy.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorCopy.cpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorCopy.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorCopy.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMasked.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMasked.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMath.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMath.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathBlas.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathBlas.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathCompare.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathCompare.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathCompareT.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathCompareT.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathMagma.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathMagma.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathPairwise.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathPairwise.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathPointwise.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathPointwise.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathReduce.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathReduce.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathScan.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMathScan.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorScatterGather.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorScatterGather.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorIndex.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorIndex.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorSort.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorSort.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCDeviceTensorUtils.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorRandom.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorRandom.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMode.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorMode.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorFFT.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorFFT.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorTopK.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC/generic/THCTensorTopK.cu
+-- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- THC_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so.1
+-- THS_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHS.so.1
+-- Autodetected CUDA architecture(s): 5.2
+-- got cuda version 8.0
+-- Found CUDA with FP16 support, compiling with torch.CudaHalfTensor
+-- CUDA_NVCC_FLAGS:  -DTH_INDEX_BASE=0 -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/TH -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THC   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THS -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THNN   -I/home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN;-gencode;arch=compute_52,code=sm_52;-DCUDA_HAS_FP16=1
+-- THCS_SO_VERSION: 1
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THCS
+[100%] Built target THCS
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCS.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCS.so
+-- Set runtime path of "/home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCS.so.1" to ""
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCS.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateAllTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateComplexTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateByteType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateCharType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateShortType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateIntType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateLongType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateHalfType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateFloatType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateZFloatType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateFloatTypes.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSGenerateDoubleType.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/THCSparse.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/generic/THCSTensor.cpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/generic/THCSTensor.cu
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/generic/THCSTensor.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/generic/THCSTensorMath.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCS/generic/THCSTensorMath.cu
+-- Removing -DNDEBUG from compile flags
+-- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- THC_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so.1
+-- Autodetected CUDA architecture(s): 5.2
+-- THCUNN_SO_VERSION: 1
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THCUNN
+[100%] Built target THCUNN
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCUNN.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCUNN.so
+-- Set runtime path of "/home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCUNN.so.1" to ""
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN/THCUNN.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THCUNN/generic/THCUNN.h
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/nccl
+[100%] Built target nccl
+Install the project...
+-- Install configuration: "Release"
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/nccl.h
+-- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- THC_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so.1
+-- THCS_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCS.so.1
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THCStorage.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/storages/generic/THStorage.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCSTensor.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THCTensor.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THSTensor.cpp from the build
+-- Excluding /home/philipp/projects/pytorch/torch/lib/THPP/tensors/generic/THTensor.cpp from the build
+CMake Warning (dev) at CMakeLists.txt:101 (TARGET_LINK_LIBRARIES):
+  Policy CMP0023 is not set: Plain and keyword target_link_libraries
+  signatures cannot be mixed.  Run "cmake --help-policy CMP0023" for policy
+  details.  Use the cmake_policy command to set the policy and suppress this
+  warning.
 
+  The keyword signature for target_link_libraries has already been used with
+  the target "THPP".  All uses of target_link_libraries with a target should
+  be either all-keyword or all-plain.
 
-CMakeFiles/THC.dir/build.make:2757: recipe for target 'CMakeFiles/THC.dir/THC_generated_THCTensorMath.cu.o' failed
-make[2]: *** [CMakeFiles/THC.dir/THC_generated_THCTensorMath.cu.o] Error 1
+  The uses of the keyword signature are here:
+
+   * CMakeLists.txt:98 (TARGET_LINK_LIBRARIES)
+   * CMakeLists.txt:100 (TARGET_LINK_LIBRARIES)
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/THPP
+[100%] Built target THPP
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHPP.so.1
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHPP.so
+-- Set runtime path of "/home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHPP.so.1" to ""
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/THPP.h
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/Generator.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/Storage.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/Tensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/Traits.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/TraitsCuda.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/Type.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/generators/THCGenerator.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/generators/THGenerator.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/storages/THCStorage.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/storages/THStorage.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/storages/generic/THCStorage.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/storages/generic/THStorage.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/THCSTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/THCTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/THSTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/THTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/generic/THCSTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/generic/THCTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/generic/THSTensor.hpp
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/THPP/tensors/generic/THTensor.hpp
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/libshm
+[100%] Built target shm
+[100%] Built target torch_shm_manager
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libshm.so
+-- Set runtime path of "/home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libshm.so" to ""
+-- Up-to-date: /home/philipp/projects/pytorch/torch/lib/tmp_install/include/libshm.h
+-- Installing: /home/philipp/projects/pytorch/torch/lib/tmp_install/bin/torch_shm_manager
+-- TH_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTH.so.1
+-- THNN_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHNN.so.1
+-- THC_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHC.so.1
+-- THCS_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCS.so.1
+-- THCUNN_LIBRARIES: /home/philipp/projects/pytorch/torch/lib/tmp_install/lib/libTHCUNN.so.1
+Excluding arange
+Excluding arange
+Excluding arange
+Excluding arange
+Excluding random_
+Excluding random_
+Excluding random_
+Excluding random_
+Excluding random_
+Excluding random_
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal_
+Excluding normal_
+Excluding normal_
+Excluding normal_
+Excluding normal_
+Excluding normal_
+Excluding exponential_
+Excluding exponential_
+Excluding exponential_
+Excluding exponential_
+Excluding bernoulli
+Excluding bernoulli
+Excluding bernoulli
+Excluding bernoulli
+Excluding bernoulli_
+Excluding bernoulli_
+Excluding bernoulli_
+Excluding bernoulli_
+Excluding bernoulli_
+Excluding bernoulli_
+Excluding bernoulli_
+Excluding bernoulli_
+Excluding bernoulli
+Excluding bernoulli
+Excluding bernoulli_
+Excluding bernoulli_
+Excluding bernoulli_
+Excluding bernoulli_
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philipp/projects/pytorch/torch/lib/build/ATen
+[  1%] Generating ATen/CPUGenerator.h, ATen/CUDAGenerator.h, ATen/Declarations.yaml, ATen/CPUByteStorage.cpp, ATen/CPUByteStorage.h, ATen/CPUByteType.cpp, ATen/CPUByteType.h, ATen/CPUByteTensor.cpp, ATen/CPUByteTensor.h, ATen/CPUCharStorage.cpp, ATen/CPUCharStorage.h, ATen/CPUCharType.cpp, ATen/CPUCharType.h, ATen/CPUCharTensor.cpp, ATen/CPUCharTensor.h, ATen/CPUDoubleStorage.cpp, ATen/CPUDoubleStorage.h, ATen/CPUDoubleType.cpp, ATen/CPUDoubleType.h, ATen/CPUDoubleTensor.cpp, ATen/CPUDoubleTensor.h, ATen/CPUFloatStorage.cpp, ATen/CPUFloatStorage.h, ATen/CPUFloatType.cpp, ATen/CPUFloatType.h, ATen/CPUFloatTensor.cpp, ATen/CPUFloatTensor.h, ATen/CPUZDoubleStorage.cpp, ATen/CPUZDoubleStorage.h, ATen/CPUZDoubleType.cpp, ATen/CPUZDoubleType.h, ATen/CPUZDoubleTensor.cpp, ATen/CPUZDoubleTensor.h, ATen/CPUZFloatStorage.cpp, ATen/CPUZFloatStorage.h, ATen/CPUZFloatType.cpp, ATen/CPUZFloatType.h, ATen/CPUZFloatTensor.cpp, ATen/CPUZFloatTensor.h, ATen/CPUIntStorage.cpp, ATen/CPUIntStorage.h, ATen/CPUIntType.cpp, ATen/CPUIntType.h, ATen/CPUIntTensor.cpp, ATen/CPUIntTensor.h, ATen/CPULongStorage.cpp, ATen/CPULongStorage.h, ATen/CPULongType.cpp, ATen/CPULongType.h, ATen/CPULongTensor.cpp, ATen/CPULongTensor.h, ATen/CPUShortStorage.cpp, ATen/CPUShortStorage.h, ATen/CPUShortType.cpp, ATen/CPUShortType.h, ATen/CPUShortTensor.cpp, ATen/CPUShortTensor.h, ATen/CPUHalfStorage.cpp, ATen/CPUHalfStorage.h, ATen/CPUHalfType.cpp, ATen/CPUHalfType.h, ATen/CPUHalfTensor.cpp, ATen/CPUHalfTensor.h, ATen/SparseCPUByteType.cpp, ATen/SparseCPUByteType.h, ATen/SparseCPUByteTensor.cpp, ATen/SparseCPUByteTensor.h, ATen/SparseCPUCharType.cpp, ATen/SparseCPUCharType.h, ATen/SparseCPUCharTensor.cpp, ATen/SparseCPUCharTensor.h, ATen/SparseCPUDoubleType.cpp, ATen/SparseCPUDoubleType.h, ATen/SparseCPUDoubleTensor.cpp, ATen/SparseCPUDoubleTensor.h, ATen/SparseCPUFloatType.cpp, ATen/SparseCPUFloatType.h, ATen/SparseCPUFloatTensor.cpp, ATen/SparseCPUFloatTensor.h, ATen/SparseCPUIntType.cpp, ATen/SparseCPUIntType.h, ATen/SparseCPUIntTensor.cpp, ATen/SparseCPUIntTensor.h, ATen/SparseCPULongType.cpp, ATen/SparseCPULongType.h, ATen/SparseCPULongTensor.cpp, ATen/SparseCPULongTensor.h, ATen/SparseCPUShortType.cpp, ATen/SparseCPUShortType.h, ATen/SparseCPUShortTensor.cpp, ATen/SparseCPUShortTensor.h, ATen/CUDAByteStorage.cpp, ATen/CUDAByteStorage.h, ATen/CUDAByteType.cpp, ATen/CUDAByteType.h, ATen/CUDAByteTensor.cpp, ATen/CUDAByteTensor.h, ATen/CUDACharStorage.cpp, ATen/CUDACharStorage.h, ATen/CUDACharType.cpp, ATen/CUDACharType.h, ATen/CUDACharTensor.cpp, ATen/CUDACharTensor.h, ATen/CUDADoubleStorage.cpp, ATen/CUDADoubleStorage.h, ATen/CUDADoubleType.cpp, ATen/CUDADoubleType.h, ATen/CUDADoubleTensor.cpp, ATen/CUDADoubleTensor.h, ATen/CUDAFloatStorage.cpp, ATen/CUDAFloatStorage.h, ATen/CUDAFloatType.cpp, ATen/CUDAFloatType.h, ATen/CUDAFloatTensor.cpp, ATen/CUDAFloatTensor.h, ATen/CUDAZDoubleStorage.cpp, ATen/CUDAZDoubleStorage.h, ATen/CUDAZDoubleType.cpp, ATen/CUDAZDoubleType.h, ATen/CUDAZDoubleTensor.cpp, ATen/CUDAZDoubleTensor.h, ATen/CUDAZFloatStorage.cpp, ATen/CUDAZFloatStorage.h, ATen/CUDAZFloatType.cpp, ATen/CUDAZFloatType.h, ATen/CUDAZFloatTensor.cpp, ATen/CUDAZFloatTensor.h, ATen/CUDAIntStorage.cpp, ATen/CUDAIntStorage.h, ATen/CUDAIntType.cpp, ATen/CUDAIntType.h, ATen/CUDAIntTensor.cpp, ATen/CUDAIntTensor.h, ATen/CUDALongStorage.cpp, ATen/CUDALongStorage.h, ATen/CUDALongType.cpp, ATen/CUDALongType.h, ATen/CUDALongTensor.cpp, ATen/CUDALongTensor.h, ATen/CUDAShortStorage.cpp, ATen/CUDAShortStorage.h, ATen/CUDAShortType.cpp, ATen/CUDAShortType.h, ATen/CUDAShortTensor.cpp, ATen/CUDAShortTensor.h, ATen/CUDAHalfStorage.cpp, ATen/CUDAHalfStorage.h, ATen/CUDAHalfType.cpp, ATen/CUDAHalfType.h, ATen/CUDAHalfTensor.cpp, ATen/CUDAHalfTensor.h, ATen/SparseCUDAByteType.cpp, ATen/SparseCUDAByteType.h, ATen/SparseCUDAByteTensor.cpp, ATen/SparseCUDAByteTensor.h, ATen/SparseCUDACharType.cpp, ATen/SparseCUDACharType.h, ATen/SparseCUDACharTensor.cpp, ATen/SparseCUDACharTensor.h, ATen/SparseCUDADoubleType.cpp, ATen/SparseCUDADoubleType.h, ATen/SparseCUDADoubleTensor.cpp, ATen/SparseCUDADoubleTensor.h, ATen/SparseCUDAFloatType.cpp, ATen/SparseCUDAFloatType.h, ATen/SparseCUDAFloatTensor.cpp, ATen/SparseCUDAFloatTensor.h, ATen/SparseCUDAIntType.cpp, ATen/SparseCUDAIntType.h, ATen/SparseCUDAIntTensor.cpp, ATen/SparseCUDAIntTensor.h, ATen/SparseCUDALongType.cpp, ATen/SparseCUDALongType.h, ATen/SparseCUDALongTensor.cpp, ATen/SparseCUDALongTensor.h, ATen/SparseCUDAShortType.cpp, ATen/SparseCUDAShortType.h, ATen/SparseCUDAShortTensor.cpp, ATen/SparseCUDAShortTensor.h, ATen/Type.h, ATen/Type.cpp, ATen/Tensor.h, ATen/TensorMethods.h, ATen/Functions.h, ATen/Dispatch.h, ATen/Copy.cpp
+Excluding arange
+Excluding arange
+Excluding arange
+Excluding arange
+Excluding random_
+Excluding random_
+Excluding random_
+Excluding random_
+Excluding random_
+Excluding random_
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal
+Excluding normal_
+Excluding normal_
+Excluding normal_
+Excluding normal_
+Excluding normal_
+Excluding normal_
+Excluding exponential_
+Excluding exponential_
+Excluding exponential_
+Excluding exponential_
+Excluding bernoulli
+Excluding bernoulli
+Excluding bernoulli
+Excluding bernoulli
+Excluding bernoulli_
+Excluding bernoulli_
+Excluding bernoulli_
+Excluding bernoulli_
+Excluding bernoulli_
+Excluding bernoulli_
+Excluding bernoulli_
+Excluding bernoulli_
+Excluding bernoulli
+Excluding bernoulli
+Excluding bernoulli_
+Excluding bernoulli_
+Excluding bernoulli_
+Excluding bernoulli_
+Scanning dependencies of target ATen
+[  2%] Building CXX object CMakeFiles/ATen.dir/CPUGenerator.cpp.o
+[  3%] Building CXX object CMakeFiles/ATen.dir/Formatting.cpp.o
+[  4%] Building CXX object CMakeFiles/ATen.dir/Context.cpp.o
+[  5%] Building CXX object CMakeFiles/ATen.dir/CUDAGenerator.cpp.o
+[  6%] Building CXX object CMakeFiles/ATen.dir/ATen/CPUByteType.cpp.o
+[  7%] Building CXX object CMakeFiles/ATen.dir/Scalar.cpp.o
+[  9%] Building CXX object CMakeFiles/ATen.dir/ATen/CPUByteTensor.cpp.o
+[  9%] Building CXX object CMakeFiles/ATen.dir/ATen/CPUByteStorage.cpp.o
+[ 10%] Building CXX object CMakeFiles/ATen.dir/ATen/CPUCharStorage.cpp.o
+[ 11%] Building CXX object CMakeFiles/ATen.dir/ATen/CPUCharType.cpp.o
+In file included from /home/philipp/projects/pytorch/torch/lib/ATen/../THC/THC.h:18:0,
+                 from /home/philipp/projects/pytorch/torch/lib/build/ATen/ATen/CUDAGenerator.h:3,
+                 from /home/philipp/projects/pytorch/torch/lib/ATen/CUDAGenerator.cpp:3:
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h: In function ‘const char* _cudaGetErrorEnum(cufftResult)’:
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h:18:9: warning: enumeration value ‘CUFFT_INCOMPLETE_PARAMETER_LIST’ not handled in switch [-Wswitch]
+  switch (error)
+         ^
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h:18:9: warning: enumeration value ‘CUFFT_INVALID_DEVICE’ not handled in switch [-Wswitch]
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h:18:9: warning: enumeration value ‘CUFFT_PARSE_ERROR’ not handled in switch [-Wswitch]
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h:18:9: warning: enumeration value ‘CUFFT_NO_WORKSPACE’ not handled in switch [-Wswitch]
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h:18:9: warning: enumeration value ‘CUFFT_NOT_IMPLEMENTED’ not handled in switch [-Wswitch]
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h:18:9: warning: enumeration value ‘CUFFT_LICENSE_ERROR’ not handled in switch [-Wswitch]
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h:18:9: warning: enumeration value ‘CUFFT_NOT_SUPPORTED’ not handled in switch [-Wswitch]
+/home/philipp/projects/pytorch/torch/lib/build/ATen/ATen/CPUByteType.cpp: In member function ‘virtual at::Tensor at::CPUByteType::m_arg(const at::Tensor&)’:
+/home/philipp/projects/pytorch/torch/lib/build/ATen/ATen/CPUByteType.cpp:1934:57: error: ‘THByteTensor_arg’ was not declared in this scope
+     THByteTensor_arg(destination_->tensor, self_->tensor);
+                                                         ^
+/home/philipp/projects/pytorch/torch/lib/build/ATen/ATen/CPUByteType.cpp: In member function ‘virtual at::Tensor& at::CPUByteType::m_arg_(at::Tensor&)’:
+/home/philipp/projects/pytorch/torch/lib/build/ATen/ATen/CPUByteType.cpp:1940:50: error: ‘THByteTensor_arg’ was not declared in this scope
+     THByteTensor_arg(self_->tensor, self_->tensor);
+                                                  ^
+/home/philipp/projects/pytorch/torch/lib/build/ATen/ATen/CPUByteType.cpp: In member function ‘virtual at::Tensor at::CPUByteType::m_re(const at::Tensor&)’:
+/home/philipp/projects/pytorch/torch/lib/build/ATen/ATen/CPUByteType.cpp:1948:56: error: ‘THByteTensor_re’ was not declared in this scope
+     THByteTensor_re(destination_->tensor, self_->tensor);
+                                                        ^
+[ 12%] Building CXX object CMakeFiles/ATen.dir/ATen/CPUCharTensor.cpp.o
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h: At global scope:
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h:16:20: warning: ‘const char* _cudaGetErrorEnum(cufftResult)’ defined but not used [-Wunused-function]
+ static const char *_cudaGetErrorEnum(cufftResult error)
+                    ^
+[ 13%] Building CXX object CMakeFiles/ATen.dir/ATen/CPUDoubleStorage.cpp.o
+In file included from /home/philipp/projects/pytorch/torch/lib/ATen/../THC/THC.h:18:0,
+                 from /home/philipp/projects/pytorch/torch/lib/ATen/Context.cpp:7:
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h: In function ‘const char* _cudaGetErrorEnum(cufftResult)’:
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h:18:9: warning: enumeration value ‘CUFFT_INCOMPLETE_PARAMETER_LIST’ not handled in switch [-Wswitch]
+  switch (error)
+         ^
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h:18:9: warning: enumeration value ‘CUFFT_INVALID_DEVICE’ not handled in switch [-Wswitch]
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h:18:9: warning: enumeration value ‘CUFFT_PARSE_ERROR’ not handled in switch [-Wswitch]
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h:18:9: warning: enumeration value ‘CUFFT_NO_WORKSPACE’ not handled in switch [-Wswitch]
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h:18:9: warning: enumeration value ‘CUFFT_NOT_IMPLEMENTED’ not handled in switch [-Wswitch]
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h:18:9: warning: enumeration value ‘CUFFT_LICENSE_ERROR’ not handled in switch [-Wswitch]
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h:18:9: warning: enumeration value ‘CUFFT_NOT_SUPPORTED’ not handled in switch [-Wswitch]
+[ 14%] Building CXX object CMakeFiles/ATen.dir/ATen/CPUDoubleType.cpp.o
+CMakeFiles/ATen.dir/build.make:822: recipe for target 'CMakeFiles/ATen.dir/ATen/CPUByteType.cpp.o' failed
+make[2]: *** [CMakeFiles/ATen.dir/ATen/CPUByteType.cpp.o] Error 1
 make[2]: *** Waiting for unfinished jobs....
-/home/philipp/projects/pytorch/torch/lib/THC/THCTensorMathScan.cu(60): warning: __shared__ memory variable with non-empty constructor or destructor (potential race between threads)
-          detected during:
-            instantiation of "void THCTensor_kernel_scanInnermostDim<T,num_threads_x,num_threads_y,BinaryFunction>(T *, T *, unsigned int, unsigned int, T, BinaryFunction) [with T=ccx, num_threads_x=16, num_threads_y=32, BinaryFunction=AddOp<ccx>]" 
-/home/philipp/projects/pytorch/torch/lib/THC/generic/THCTensorMathScan.cu(51): here
-            instantiation of "void THCudaZFloatTensor_scanInnermostDim(THCState *, THCudaZFloatTensor *, THCudaZFloatTensor *, ccx, BinaryFunction) [with BinaryFunction=AddOp<ccx>]" 
-/home/philipp/projects/pytorch/torch/lib/THC/generic/THCTensorMathScan.cu(66): here
-            instantiation of "void THCudaZFloatTensor_scanDim(THCState *, THCudaZFloatTensor *, THCudaZFloatTensor *, long, ccx, BinaryFunction) [with BinaryFunction=AddOp<ccx>]" 
-/home/philipp/projects/pytorch/torch/lib/THC/generic/THCTensorMathScan.cu(78): here
-
-/home/philipp/projects/pytorch/torch/lib/THC/THCTensorMathScan.cu(60): warning: __shared__ memory variable with non-empty constructor or destructor (potential race between threads)
-          detected during:
-            instantiation of "void THCTensor_kernel_scanInnermostDim<T,num_threads_x,num_threads_y,BinaryFunction>(T *, T *, unsigned int, unsigned int, T, BinaryFunction) [with T=ccx, num_threads_x=16, num_threads_y=32, BinaryFunction=MulOp<ccx>]" 
-/home/philipp/projects/pytorch/torch/lib/THC/generic/THCTensorMathScan.cu(51): here
-            instantiation of "void THCudaZFloatTensor_scanInnermostDim(THCState *, THCudaZFloatTensor *, THCudaZFloatTensor *, ccx, BinaryFunction) [with BinaryFunction=MulOp<ccx>]" 
-/home/philipp/projects/pytorch/torch/lib/THC/generic/THCTensorMathScan.cu(66): here
-            instantiation of "void THCudaZFloatTensor_scanDim(THCState *, THCudaZFloatTensor *, THCudaZFloatTensor *, long, ccx, BinaryFunction) [with BinaryFunction=MulOp<ccx>]" 
-/home/philipp/projects/pytorch/torch/lib/THC/generic/THCTensorMathScan.cu(85): here
-
-/home/philipp/projects/pytorch/torch/lib/THC/THCTensorMathScan.cu(60): warning: __shared__ memory variable with non-empty constructor or destructor (potential race between threads)
-          detected during:
-            instantiation of "void THCTensor_kernel_scanInnermostDim<T,num_threads_x,num_threads_y,BinaryFunction>(T *, T *, unsigned int, unsigned int, T, BinaryFunction) [with T=zcx, num_threads_x=16, num_threads_y=32, BinaryFunction=AddOp<zcx>]" 
-/home/philipp/projects/pytorch/torch/lib/THC/generic/THCTensorMathScan.cu(51): here
-            instantiation of "void THCudaZDoubleTensor_scanInnermostDim(THCState *, THCudaZDoubleTensor *, THCudaZDoubleTensor *, zcx, BinaryFunction) [with BinaryFunction=AddOp<zcx>]" 
-/home/philipp/projects/pytorch/torch/lib/THC/generic/THCTensorMathScan.cu(66): here
-            instantiation of "void THCudaZDoubleTensor_scanDim(THCState *, THCudaZDoubleTensor *, THCudaZDoubleTensor *, long, zcx, BinaryFunction) [with BinaryFunction=AddOp<zcx>]" 
-/home/philipp/projects/pytorch/torch/lib/THC/generic/THCTensorMathScan.cu(78): here
-
-/home/philipp/projects/pytorch/torch/lib/THC/THCTensorMathScan.cu(60): warning: __shared__ memory variable with non-empty constructor or destructor (potential race between threads)
-          detected during:
-            instantiation of "void THCTensor_kernel_scanInnermostDim<T,num_threads_x,num_threads_y,BinaryFunction>(T *, T *, unsigned int, unsigned int, T, BinaryFunction) [with T=zcx, num_threads_x=16, num_threads_y=32, BinaryFunction=MulOp<zcx>]" 
-/home/philipp/projects/pytorch/torch/lib/THC/generic/THCTensorMathScan.cu(51): here
-            instantiation of "void THCudaZDoubleTensor_scanInnermostDim(THCState *, THCudaZDoubleTensor *, THCudaZDoubleTensor *, zcx, BinaryFunction) [with BinaryFunction=MulOp<zcx>]" 
-/home/philipp/projects/pytorch/torch/lib/THC/generic/THCTensorMathScan.cu(66): here
-            instantiation of "void THCudaZDoubleTensor_scanDim(THCState *, THCudaZDoubleTensor *, THCudaZDoubleTensor *, long, zcx, BinaryFunction) [with BinaryFunction=MulOp<zcx>]" 
-/home/philipp/projects/pytorch/torch/lib/THC/generic/THCTensorMathScan.cu(85): here
-
-CMakeFiles/Makefile2:67: recipe for target 'CMakeFiles/THC.dir/all' failed
-make[1]: *** [CMakeFiles/THC.dir/all] Error 2
+[ 15%] Building CXX object CMakeFiles/ATen.dir/ATen/CPUDoubleTensor.cpp.o
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h: At global scope:
+/home/philipp/projects/pytorch/torch/lib/ATen/../THC/THCTensorFFT.h:16:20: warning: ‘const char* _cudaGetErrorEnum(cufftResult)’ defined but not used [-Wunused-function]
+ static const char *_cudaGetErrorEnum(cufftResult error)
+                    ^
+/home/philipp/projects/pytorch/torch/lib/build/ATen/ATen/CPUCharType.cpp: In member function ‘virtual at::Tensor at::CPUCharType::m_arg(const at::Tensor&)’:
+/home/philipp/projects/pytorch/torch/lib/build/ATen/ATen/CPUCharType.cpp:1926:57: error: ‘THCharTensor_arg’ was not declared in this scope
+     THCharTensor_arg(destination_->tensor, self_->tensor);
+                                                         ^
+/home/philipp/projects/pytorch/torch/lib/build/ATen/ATen/CPUCharType.cpp: In member function ‘virtual at::Tensor& at::CPUCharType::m_arg_(at::Tensor&)’:
+/home/philipp/projects/pytorch/torch/lib/build/ATen/ATen/CPUCharType.cpp:1932:50: error: ‘THCharTensor_arg’ was not declared in this scope
+     THCharTensor_arg(self_->tensor, self_->tensor);
+                                                  ^
+/home/philipp/projects/pytorch/torch/lib/build/ATen/ATen/CPUCharType.cpp: In member function ‘virtual at::Tensor at::CPUCharType::m_re(const at::Tensor&)’:
+/home/philipp/projects/pytorch/torch/lib/build/ATen/ATen/CPUCharType.cpp:1940:56: error: ‘THCharTensor_re’ was not declared in this scope
+     THCharTensor_re(destination_->tensor, self_->tensor);
+                                                        ^
+CMakeFiles/ATen.dir/build.make:894: recipe for target 'CMakeFiles/ATen.dir/ATen/CPUCharType.cpp.o' failed
+make[2]: *** [CMakeFiles/ATen.dir/ATen/CPUCharType.cpp.o] Error 1
+/home/philipp/projects/pytorch/torch/lib/build/ATen/ATen/CPUDoubleType.cpp: In member function ‘virtual at::Tensor at::CPUDoubleType::m_arg(const at::Tensor&)’:
+/home/philipp/projects/pytorch/torch/lib/build/ATen/ATen/CPUDoubleType.cpp:1941:59: error: ‘THDoubleTensor_arg’ was not declared in this scope
+     THDoubleTensor_arg(destination_->tensor, self_->tensor);
+                                                           ^
+/home/philipp/projects/pytorch/torch/lib/build/ATen/ATen/CPUDoubleType.cpp: In member function ‘virtual at::Tensor& at::CPUDoubleType::m_arg_(at::Tensor&)’:
+/home/philipp/projects/pytorch/torch/lib/build/ATen/ATen/CPUDoubleType.cpp:1947:52: error: ‘THDoubleTensor_arg’ was not declared in this scope
+     THDoubleTensor_arg(self_->tensor, self_->tensor);
+                                                    ^
+/home/philipp/projects/pytorch/torch/lib/build/ATen/ATen/CPUDoubleType.cpp: In member function ‘virtual at::Tensor at::CPUDoubleType::m_re(const at::Tensor&)’:
+/home/philipp/projects/pytorch/torch/lib/build/ATen/ATen/CPUDoubleType.cpp:1955:58: error: ‘THDoubleTensor_re’ was not declared in this scope
+     THDoubleTensor_re(destination_->tensor, self_->tensor);
+                                                          ^
+CMakeFiles/ATen.dir/build.make:966: recipe for target 'CMakeFiles/ATen.dir/ATen/CPUDoubleType.cpp.o' failed
+make[2]: *** [CMakeFiles/ATen.dir/ATen/CPUDoubleType.cpp.o] Error 1
+CMakeFiles/Makefile2:67: recipe for target 'CMakeFiles/ATen.dir/all' failed
+make[1]: *** [CMakeFiles/ATen.dir/all] Error 2
 Makefile:127: recipe for target 'all' failed
 make: *** [all] Error 2

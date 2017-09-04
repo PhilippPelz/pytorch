@@ -67,14 +67,16 @@ if not options.no_cuda:
 densities = ['Dense', 'Sparse']
 
 scalar_types = [
-    ('Byte', 'uint8_t', 'Long', 'unsigned char'),
-    ('Char', 'int8_t', 'Long', 'char'),
-    ('Double', 'double', 'Double', 'double'),
-    ('Float', 'float', 'Double', 'float'),
-    ('Int', 'int', 'Long', 'int'),
-    ('Long', 'int64_t', 'Long', 'long'),
-    ('Short', 'int16_t', 'Long', 'short'),
-    ('Half', 'Half', 'Double', 'THHalf'),
+    ('Byte', 'uint8_t', 'Long', 'unsigned char','Byte', 'unsigned char'),
+    ('Char', 'int8_t', 'Long', 'char', 'Char','char'),
+    ('Double', 'double', 'Double', 'double','Double', 'double'),
+    ('Float', 'float', 'Double', 'float','Float', 'float'),
+    ('ZDouble', 'double _Complex', 'ZDouble', 'double _Complex','Double', 'double'),
+    ('ZFloat', 'float _Complex', 'ZDouble', 'float _Complex','Float', 'float'),
+    ('Int', 'int', 'Long', 'int','Int', 'int'),
+    ('Long', 'int64_t', 'Long', 'long','Long', 'long'),
+    ('Short', 'int16_t', 'Long', 'short','Short', 'short'),
+    ('Half', 'Half', 'Double', 'THHalf','Half', 'Half'),
 ]
 
 # shared environment for non-derived base classes Type.h Tensor.h Storage.h
@@ -110,7 +112,7 @@ def format_yaml(data):
 
 
 def generate_storage_type_and_tensor(backend, density, scalar_type, declarations):
-    scalar_name, c_type, accreal, th_scalar_type = scalar_type
+    scalar_name, c_type, accreal, th_scalar_type, part_name, th_part_type = scalar_type
     env = {}
     density_tag = 'Sparse' if density == 'Sparse' else ''
     th_density_tag = 'S' if density == 'Sparse' else ''
@@ -143,6 +145,7 @@ def generate_storage_type_and_tensor(backend, density, scalar_type, declarations
         env['THStorage'] = 'THCuda{}Storage'.format(sname)
         if density == 'Dense':
             env['THTensor'] = 'THCuda{}Tensor'.format(sname)
+            env['THPartTensor'] = 'THCuda{}Tensor'.format(part_name)
         else:
             env['THTensor'] = 'THCS{}Tensor'.format(scalar_name)
         env['THIndexTensor'] = 'THCudaLongTensor'
@@ -160,6 +163,7 @@ def generate_storage_type_and_tensor(backend, density, scalar_type, declarations
         env['THType'] = scalar_name
         env['THStorage'] = "TH{}Storage".format(scalar_name)
         env['THTensor'] = 'TH{}{}Tensor'.format(th_density_tag, scalar_name)
+        env['THPartTensor'] = 'TH{}{}Tensor'.format(th_density_tag, part_name)
         env['THIndexTensor'] = 'THLongTensor'
         env['state'] = []
         env['isCUDA'] = 'false'
@@ -240,6 +244,12 @@ for backend in backends:
     for density in densities:
         for scalar_type in scalar_types:
             if density == 'Sparse' and scalar_type[0] == 'Half':
+                # THS does not do half type yet.
+                continue
+            if density == 'Sparse' and scalar_type[0] == 'ZFloat':
+                # THS does not do half type yet.
+                continue
+            if density == 'Sparse' and scalar_type[0] == 'ZDouble':
                 # THS does not do half type yet.
                 continue
             all_types.append(generate_storage_type_and_tensor(

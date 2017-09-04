@@ -81,6 +81,7 @@ class NYIError(Exception):
 
 TYPE_FORMAL_GENERIC = {
     'THTensor*': 'Tensor &',
+    'THPartTensor*': 'Tensor &',
     'THSTensor*': 'SparseTensor',
     'THBoolTensor*': 'Tensor &',
     'THIndexTensor*': 'Tensor &',
@@ -96,6 +97,7 @@ TYPE_FORMAL_GENERIC = {
 
 DYNAMIC_TYPE = {
     'THTensor*': 'Tensor',
+    'THPartTensor*': 'Tensor',
     'THBoolTensor*': 'BoolTensor',
     'THIndexTensor*': 'IndexTensor',
     'THIntegerTensor*': 'IntegerTensor',
@@ -110,6 +112,7 @@ DYNAMIC_TYPE = {
 
 TYPE_RETURN = {
     'THTensor*': 'Tensor',
+    'THPartTensor*': 'Tensor',
     'THIndexTensor*': 'Tensor',
     'THBoolTensor*': 'Tensor',
     'THIntegerTensor*': 'Tensor',
@@ -143,6 +146,7 @@ CHECKED_CAST = {
 
 CHECKED_USE = {
     'THTensor*': '{}_->tensor',
+    'THPartTensor*': '{}_->tensor',
     'THSTensor*': '{}_->tensor',
     'THIndexTensor*': '{}_->tensor',
     'THBoolTensor*': '{}_->tensor',
@@ -156,6 +160,7 @@ CHECKED_USE_NULLABLE = CodeTemplate('${arg_name}_ ? ${usage} : NULL')
 
 ALLOC_WRAP = {
     'THTensor*': 'new ${Tensor}(context)',
+    'THPartTensor*': 'new ${Tensor}(context)',
     'THBoolTensor*': 'new ${Backend}ByteTensor(context)',
     'THIndexTensor*': 'new ${Backend}LongTensor(context)',
     'THIntegerTensor*': 'new ${Backend}IntTensor(context)',

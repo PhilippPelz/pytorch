@@ -1,7 +1,7 @@
 #ifndef THC_GENERIC_FILE
 #define THC_GENERIC_FILE "generic/THCTensorTopK.cu"
 #else
-
+#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
 THC_API void THCTensor_(topk)(THCState* state,
                                THCTensor *topK,
                                THCudaLongTensor *indices,
@@ -155,5 +155,5 @@ THC_API void THCTensor_(topk)(THCState* state,
 
   THCudaCheck(cudaGetLastError());
 }
-
+#endif
 #endif // THC_GENERIC_FILE
