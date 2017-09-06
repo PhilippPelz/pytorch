@@ -50,6 +50,14 @@ def create_one(env, all_types):
             cuda = 'Cuda'
         if env['Backend'] == 'CUDA' or src_type['Backend'] == 'CUDA':
             state.append('context->thc_state')
+        if src_type['ScalarName'] == 'ZDouble' and env['ScalarName'] != 'ZDouble':
+            continue
+        if src_type['ScalarName'] == 'ZFloat' and env['ScalarName'] != 'ZFloat':
+            continue
+        if env['ScalarName'] == 'ZDouble' and src_type['ScalarName'] != 'ZDouble':
+            continue
+        if env['ScalarName'] == 'ZFloat' and src_type['ScalarName'] != 'ZFloat':
+            continue
         copy_body.append(CASE.substitute(env,
                                          src_scalar_name=src_type['ScalarName'],
                                          src_id=src_type['TypeID'],

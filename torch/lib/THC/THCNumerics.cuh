@@ -1,40 +1,61 @@
 #ifndef THC_NUMERICS_INC
 #define THC_NUMERICS_INC
 
+#include "THCHalf.h"
 #include <cuda.h>
 #include <limits.h>
-#include "THCHalf.h"
-
 
 /// Class for numeric limits of the particular data type, which
 /// includes support for `half`.
 /// Unfortunately since `half` does not have a constructor, these have
 /// to be expressed as functions (either that or non-const statics).
-template <typename T>
-struct THCNumerics {
-};
+template <typename T> struct THCNumerics {};
 
-template <>
-struct THCNumerics<unsigned char> {
+template <> struct THCNumerics<unsigned char> {
   static inline __host__ __device__ unsigned char min() { return 0; }
   static inline __host__ __device__ unsigned char max() { return UCHAR_MAX; }
 
-  static inline __host__ __device__ bool lt(unsigned char a, unsigned char b) { return a < b; }
-  static inline __host__ __device__ bool le(unsigned char a, unsigned char b) { return a <= b; }
-  static inline __host__ __device__ bool gt(unsigned char a, unsigned char b) { return a > b; }
-  static inline __host__ __device__ bool ge(unsigned char a, unsigned char b) { return a >= b; }
-  static inline __host__ __device__ bool eq(unsigned char a, unsigned char b) { return a == b; }
-  static inline __host__ __device__ bool ne(unsigned char a, unsigned char b) { return a != b; }
+  static inline __host__ __device__ bool lt(unsigned char a, unsigned char b) {
+    return a < b;
+  }
+  static inline __host__ __device__ bool le(unsigned char a, unsigned char b) {
+    return a <= b;
+  }
+  static inline __host__ __device__ bool gt(unsigned char a, unsigned char b) {
+    return a > b;
+  }
+  static inline __host__ __device__ bool ge(unsigned char a, unsigned char b) {
+    return a >= b;
+  }
+  static inline __host__ __device__ bool eq(unsigned char a, unsigned char b) {
+    return a == b;
+  }
+  static inline __host__ __device__ bool ne(unsigned char a, unsigned char b) {
+    return a != b;
+  }
 
-  static inline __host__ __device__  unsigned char add(unsigned char a, unsigned char b) { return a + b; }
-  static inline __host__ __device__  unsigned char mul(unsigned char a, unsigned char b) { return a * b; }
-  static inline __host__ __device__  unsigned char sub(unsigned char a, unsigned char b) { return a - b; }
-  static inline __host__ __device__  unsigned char div(unsigned char a, unsigned char b) { return a / b; }
-  static inline __host__ __device__  unsigned char abs(unsigned char a) { return abs(a); }
+  static inline __host__ __device__ unsigned char add(unsigned char a,
+                                                      unsigned char b) {
+    return a + b;
+  }
+  static inline __host__ __device__ unsigned char mul(unsigned char a,
+                                                      unsigned char b) {
+    return a * b;
+  }
+  static inline __host__ __device__ unsigned char sub(unsigned char a,
+                                                      unsigned char b) {
+    return a - b;
+  }
+  static inline __host__ __device__ unsigned char div(unsigned char a,
+                                                      unsigned char b) {
+    return a / b;
+  }
+  static inline __host__ __device__ unsigned char abs(unsigned char a) {
+    return abs(a);
+  }
 };
 
-template <>
-struct THCNumerics<char> {
+template <> struct THCNumerics<char> {
   static inline __host__ __device__ char min() { return CHAR_MIN; }
   static inline __host__ __device__ char max() { return CHAR_MAX; }
 
@@ -45,16 +66,15 @@ struct THCNumerics<char> {
   static inline __host__ __device__ bool eq(char a, char b) { return a == b; }
   static inline __host__ __device__ bool ne(char a, char b) { return a != b; }
 
-  static inline __host__ __device__  char neg(char a) { return -a; }
-  static inline __host__ __device__  char add(char a, char b) { return a + b; }
-  static inline __host__ __device__  char mul(char a, char b) { return a * b; }
-  static inline __host__ __device__  char sub(char a, char b) { return a - b; }
-  static inline __host__ __device__  char div(char a, char b) { return a / b; }
-  static inline __host__ __device__  char abs(char a) { return ::abs((int)a); }
+  static inline __host__ __device__ char neg(char a) { return -a; }
+  static inline __host__ __device__ char add(char a, char b) { return a + b; }
+  static inline __host__ __device__ char mul(char a, char b) { return a * b; }
+  static inline __host__ __device__ char sub(char a, char b) { return a - b; }
+  static inline __host__ __device__ char div(char a, char b) { return a / b; }
+  static inline __host__ __device__ char abs(char a) { return ::abs((int)a); }
 };
 
-template <>
-struct THCNumerics<short> {
+template <> struct THCNumerics<short> {
   static inline __host__ __device__ short min() { return SHRT_MIN; }
   static inline __host__ __device__ short max() { return SHRT_MAX; }
 
@@ -65,16 +85,23 @@ struct THCNumerics<short> {
   static inline __host__ __device__ bool eq(short a, short b) { return a == b; }
   static inline __host__ __device__ bool ne(short a, short b) { return a != b; }
 
-  static inline __host__ __device__  short neg(short a) { return -a; }
-  static inline __host__ __device__  short add(short a, short b) { return a + b; }
-  static inline __host__ __device__  short mul(short a, short b) { return a * b; }
-  static inline __host__ __device__  short sub(short a, short b) { return a - b; }
-  static inline __host__ __device__  short div(short a, short b) { return a / b; }
-  static inline __host__ __device__  short abs(short a) { return ::abs((int)a); }
+  static inline __host__ __device__ short neg(short a) { return -a; }
+  static inline __host__ __device__ short add(short a, short b) {
+    return a + b;
+  }
+  static inline __host__ __device__ short mul(short a, short b) {
+    return a * b;
+  }
+  static inline __host__ __device__ short sub(short a, short b) {
+    return a - b;
+  }
+  static inline __host__ __device__ short div(short a, short b) {
+    return a / b;
+  }
+  static inline __host__ __device__ short abs(short a) { return ::abs((int)a); }
 };
 
-template <>
-struct THCNumerics<int> {
+template <> struct THCNumerics<int> {
   static inline __host__ __device__ int min() { return INT_MIN; }
   static inline __host__ __device__ int max() { return INT_MAX; }
 
@@ -85,16 +112,15 @@ struct THCNumerics<int> {
   static inline __host__ __device__ bool eq(int a, int b) { return a == b; }
   static inline __host__ __device__ bool ne(int a, int b) { return a != b; }
 
-  static inline __host__ __device__  int neg(int a) { return -a; }
-  static inline __host__ __device__  int add(int a, int b) { return a + b; }
-  static inline __host__ __device__  int mul(int a, int b) { return a * b; }
-  static inline __host__ __device__  int sub(int a, int b) { return a - b; }
-  static inline __host__ __device__  int div(int a, int b) { return a / b; }
-  static inline __host__ __device__  int abs(int a) { return ::abs(a); }
+  static inline __host__ __device__ int neg(int a) { return -a; }
+  static inline __host__ __device__ int add(int a, int b) { return a + b; }
+  static inline __host__ __device__ int mul(int a, int b) { return a * b; }
+  static inline __host__ __device__ int sub(int a, int b) { return a - b; }
+  static inline __host__ __device__ int div(int a, int b) { return a / b; }
+  static inline __host__ __device__ int abs(int a) { return ::abs(a); }
 };
 
-template <>
-struct THCNumerics<long> {
+template <> struct THCNumerics<long> {
   static inline __host__ __device__ long min() { return LONG_MIN; }
   static inline __host__ __device__ long max() { return LONG_MAX; }
 
@@ -105,23 +131,38 @@ struct THCNumerics<long> {
   static inline __host__ __device__ bool eq(long a, long b) { return a == b; }
   static inline __host__ __device__ bool ne(long a, long b) { return a != b; }
 
-  static inline __host__ __device__  long neg(long a) { return -a; }
-  static inline __host__ __device__  long add(long a, long b) { return a + b; }
-  static inline __host__ __device__  long mul(long a, long b) { return a * b; }
-  static inline __host__ __device__  long sub(long a, long b) { return a - b; }
-  static inline __host__ __device__  long div(long a, long b) { return a / b; };
-  static inline __host__ __device__  long abs(long a) { return labs(a); }
+  static inline __host__ __device__ long neg(long a) { return -a; }
+  static inline __host__ __device__ long add(long a, long b) { return a + b; }
+  static inline __host__ __device__ long mul(long a, long b) { return a * b; }
+  static inline __host__ __device__ long sub(long a, long b) { return a - b; }
+  static inline __host__ __device__ long div(long a, long b) { return a / b; };
+  static inline __host__ __device__ long abs(long a) { return labs(a); }
 };
 
 #ifdef CUDA_HALF_TENSOR
-template <>
-struct THCNumerics<half> {
+template <> struct THCNumerics<half> {
 #if CUDA_VERSION < 9000
-  static inline __host__ __device__ half min() { half h; h.x = 0xfbff; return h; }
-  static inline __host__ __device__ half max() { half h; h.x = 0x7bff; return h; }
+  static inline __host__ __device__ half min() {
+    half h;
+    h.x = 0xfbff;
+    return h;
+  }
+  static inline __host__ __device__ half max() {
+    half h;
+    h.x = 0x7bff;
+    return h;
+  }
 #else
-  static inline __host__ __device__ half min() { __half_raw h; h.x = 0xfbff; return h; }
-  static inline __host__ __device__ half max() { __half_raw h; h.x = 0x7bff; return h; }
+  static inline __host__ __device__ half min() {
+    __half_raw h;
+    h.x = 0xfbff;
+    return h;
+  }
+  static inline __host__ __device__ half max() {
+    __half_raw h;
+    h.x = 0x7bff;
+    return h;
+  }
 #endif
 
   static inline __host__ __device__ bool lt(half a, half b) {
@@ -256,7 +297,7 @@ struct THCNumerics<half> {
 #endif
   }
 
-static inline __host__ __device__ half lgamma(half a) {
+  static inline __host__ __device__ half lgamma(half a) {
 #ifdef __CUDA_ARCH__
     float fa = __half2float(a);
     return __float2half(lgammaf(fa));
@@ -476,7 +517,7 @@ static inline __host__ __device__ half lgamma(half a) {
 #else
     float fa = __half2float(a);
     float fb = __half2float(b);
-    return __float2half( fa + fb );
+    return __float2half(fa + fb);
 #endif
 #else // __CUDA_ARCH__
     return THC_float2half(THC_half2float(a) + THC_half2float(b));
@@ -487,7 +528,7 @@ static inline __host__ __device__ half lgamma(half a) {
 #ifdef __CUDA_ARCH__
     float fa = __half2float(a);
     float fb = __half2float(b);
-    return __float2half( fa / fb );
+    return __float2half(fa / fb);
 #else // __CUDA_ARCH__
     return THC_float2half(THC_half2float(a) / THC_half2float(b));
 #endif
@@ -500,7 +541,7 @@ static inline __host__ __device__ half lgamma(half a) {
 #else
     float fa = __half2float(a);
     float fb = __half2float(b);
-    return __float2half( fa * fb );
+    return __float2half(fa * fb);
 #endif
 #else // __CUDA_ARCH__
     return THC_float2half(THC_half2float(a) * THC_half2float(b));
@@ -514,7 +555,7 @@ static inline __host__ __device__ half lgamma(half a) {
 #else
     float fa = __half2float(a);
     float fb = __half2float(b);
-    return __float2half( fa - fb );
+    return __float2half(fa - fb);
 #endif
 #else // __CUDA_ARCH__
     return THC_float2half(THC_half2float(a) - THC_half2float(b));
@@ -530,12 +571,10 @@ static inline __host__ __device__ half lgamma(half a) {
     return THC_float2half(powf(THC_half2float(a), THC_half2float(b)));
 #endif
   }
-
 };
 #endif
 
-template <>
-struct THCNumerics<float> {
+template <> struct THCNumerics<float> {
   static inline __host__ __device__ float min() { return -FLT_MAX; }
   static inline __host__ __device__ float max() { return FLT_MAX; }
 
@@ -546,234 +585,324 @@ struct THCNumerics<float> {
   static inline __host__ __device__ bool eq(float a, float b) { return a == b; }
   static inline __host__ __device__ bool ne(float a, float b) { return a != b; }
 
-  static inline __host__ __device__  float lgamma(float a) { return lgammaf(a);}
-  static inline __host__ __device__  float exp  (float a) { return   expf(a); }
-  static inline __host__ __device__  float exp10(float a) { return exp10f(a); }
-  static inline __host__ __device__  float log  (float a) { return   logf(a); }
-  static inline __host__ __device__  float log1p(float a) { return log1pf(a); }
-  static inline __host__ __device__  float cos  (float a) { return   cosf(a); }
-  static inline __host__ __device__  float sin  (float a) { return   sinf(a); }
-  static inline __host__ __device__  float sqrt (float a) { return  sqrtf(a); }
-  static inline __host__ __device__  float rsqrt(float a) { return rsqrtf(a); }
-  static inline __host__ __device__  float ceil (float a) { return  ceilf(a); }
-  static inline __host__ __device__  float floor(float a) { return floorf(a); }
-  static inline __host__ __device__  float trunc(float a) { return truncf(a); }
-  static inline __host__ __device__  float neg  (float a) { return        -a; }
-  static inline __host__ __device__  float acos (float a) { return  acosf(a); }
-  static inline __host__ __device__  float cosh (float a) { return  coshf(a); }
-  static inline __host__ __device__  float acosh(float a) { return acoshf(a); }
-  static inline __host__ __device__  float asin (float a) { return  asinf(a); }
-  static inline __host__ __device__  float sinh (float a) { return  sinhf(a); }
-  static inline __host__ __device__  float asinh(float a) { return asinhf(a); }
-  static inline __host__ __device__  float tan  (float a) { return   tanf(a); }
-  static inline __host__ __device__  float atan (float a) { return  atanf(a); }
-  static inline __host__ __device__  float tanh (float a) { return  tanhf(a); }
-  static inline __host__ __device__  float abs  (float a) { return   fabs(a); }
-  static inline __host__ __device__  float round(float a) { return roundf(a); }
-  static inline __host__ __device__  float frac (float a) { return a - truncf(a); }
-  static inline __host__ __device__  float cinv (float a) { return 1.0f / a; }
-  static inline __host__ __device__  float add  (float a, float b) { return a + b; }
-  static inline __host__ __device__  float div  (float a, float b) { return a / b; }
-  static inline __host__ __device__  float mul  (float a, float b) { return a * b; }
-  static inline __host__ __device__  float sub  (float a, float b) { return a - b; }
-  static inline __host__ __device__  float pow  (float a, float b) { return powf(a, b); }
+  static inline __host__ __device__ float lgamma(float a) { return lgammaf(a); }
+  static inline __host__ __device__ float exp(float a) { return expf(a); }
+  static inline __host__ __device__ float exp10(float a) { return exp10f(a); }
+  static inline __host__ __device__ float log(float a) { return logf(a); }
+  static inline __host__ __device__ float log1p(float a) { return log1pf(a); }
+  static inline __host__ __device__ float cos(float a) { return cosf(a); }
+  static inline __host__ __device__ float sin(float a) { return sinf(a); }
+  static inline __host__ __device__ float sqrt(float a) { return sqrtf(a); }
+  static inline __host__ __device__ float rsqrt(float a) { return rsqrtf(a); }
+  static inline __host__ __device__ float ceil(float a) { return ceilf(a); }
+  static inline __host__ __device__ float floor(float a) { return floorf(a); }
+  static inline __host__ __device__ float trunc(float a) { return truncf(a); }
+  static inline __host__ __device__ float neg(float a) { return -a; }
+  static inline __host__ __device__ float acos(float a) { return acosf(a); }
+  static inline __host__ __device__ float cosh(float a) { return coshf(a); }
+  static inline __host__ __device__ float acosh(float a) { return acoshf(a); }
+  static inline __host__ __device__ float asin(float a) { return asinf(a); }
+  static inline __host__ __device__ float sinh(float a) { return sinhf(a); }
+  static inline __host__ __device__ float asinh(float a) { return asinhf(a); }
+  static inline __host__ __device__ float tan(float a) { return tanf(a); }
+  static inline __host__ __device__ float atan(float a) { return atanf(a); }
+  static inline __host__ __device__ float tanh(float a) { return tanhf(a); }
+  static inline __host__ __device__ float abs(float a) { return fabs(a); }
+  static inline __host__ __device__ float round(float a) { return roundf(a); }
+  static inline __host__ __device__ float frac(float a) {
+    return a - truncf(a);
+  }
+  static inline __host__ __device__ float cinv(float a) { return 1.0f / a; }
+  static inline __host__ __device__ float add(float a, float b) {
+    return a + b;
+  }
+  static inline __host__ __device__ float div(float a, float b) {
+    return a / b;
+  }
+  static inline __host__ __device__ float mul(float a, float b) {
+    return a * b;
+  }
+  static inline __host__ __device__ float sub(float a, float b) {
+    return a - b;
+  }
+  static inline __host__ __device__ float pow(float a, float b) {
+    return powf(a, b);
+  }
 };
 
-template <>
-struct THCNumerics<double> {
+template <> struct THCNumerics<double> {
   static inline __host__ __device__ double min() { return -DBL_MAX; }
   static inline __host__ __device__ double max() { return DBL_MAX; }
 
-  static inline __host__ __device__ bool lt(double a, double b) { return a < b; }
-  static inline __host__ __device__ bool le(double a, double b) { return a <= b; }
-  static inline __host__ __device__ bool gt(double a, double b) { return a > b; }
-  static inline __host__ __device__ bool ge(double a, double b) { return a >= b; }
-  static inline __host__ __device__ bool eq(double a, double b) { return a == b; }
-  static inline __host__ __device__ bool ne(double a, double b) { return a != b; }
+  static inline __host__ __device__ bool lt(double a, double b) {
+    return a < b;
+  }
+  static inline __host__ __device__ bool le(double a, double b) {
+    return a <= b;
+  }
+  static inline __host__ __device__ bool gt(double a, double b) {
+    return a > b;
+  }
+  static inline __host__ __device__ bool ge(double a, double b) {
+    return a >= b;
+  }
+  static inline __host__ __device__ bool eq(double a, double b) {
+    return a == b;
+  }
+  static inline __host__ __device__ bool ne(double a, double b) {
+    return a != b;
+  }
 
-  static inline __host__ __device__  double lgamma(double a) { return ::lgamma(a);}
-  static inline __host__ __device__  double exp  (double a) { return   ::exp(a); }
-  static inline __host__ __device__  double exp10(double a) { return ::exp10(a); }
-  static inline __host__ __device__  double log  (double a) { return   ::log(a); }
-  static inline __host__ __device__  double log1p(double a) { return ::log1p(a); }
-  static inline __host__ __device__  double cos  (double a) { return   ::cos(a); }
-  static inline __host__ __device__  double sin  (double a) { return   ::sin(a); }
-  static inline __host__ __device__  double sqrt (double a) { return  ::sqrt(a); }
-  static inline __host__ __device__  double rsqrt(double a) { return ::rsqrt(a); }
-  static inline __host__ __device__  double ceil (double a) { return  ::ceil(a); }
-  static inline __host__ __device__  double floor(double a) { return ::floor(a); }
-  static inline __host__ __device__  double trunc(double a) { return ::trunc(a); }
-  static inline __host__ __device__  double neg  (double a) { return       -a; }
-  static inline __host__ __device__  double acos (double a) { return  ::acos(a); }
-  static inline __host__ __device__  double cosh (double a) { return  ::cosh(a); }
-  static inline __host__ __device__  double acosh(double a) { return ::acosh(a); }
-  static inline __host__ __device__  double asin (double a) { return  ::asin(a); }
-  static inline __host__ __device__  double sinh (double a) { return  ::sinh(a); }
-  static inline __host__ __device__  double asinh(double a) { return ::asinh(a); }
-  static inline __host__ __device__  double tan  (double a) { return   ::tan(a); }
-  static inline __host__ __device__  double atan (double a) { return  ::atan(a); }
-  static inline __host__ __device__  double tanh (double a) { return  ::tanh(a); }
-  static inline __host__ __device__  double abs  (double a) { return   ::abs(a); }
-  static inline __host__ __device__  double round(double a) { return ::round(a); }
-  static inline __host__ __device__  double frac (double a) { return a - ::trunc(a); }
-  static inline __host__ __device__  double cinv (double a) { return 1.0 / a; }
-  static inline __host__ __device__  double add  (double a, double b) { return a + b; }
-  static inline __host__ __device__  double div  (double a, double b) { return a / b; }
-  static inline __host__ __device__  double mul  (double a, double b) { return a * b; }
-  static inline __host__ __device__  double sub  (double a, double b) { return a - b; }
-  static inline __host__ __device__  double pow  (double a, double b) { return ::pow(a, b); }
+  static inline __host__ __device__ double lgamma(double a) {
+    return ::lgamma(a);
+  }
+  static inline __host__ __device__ double exp(double a) { return ::exp(a); }
+  static inline __host__ __device__ double exp10(double a) {
+    return ::exp10(a);
+  }
+  static inline __host__ __device__ double log(double a) { return ::log(a); }
+  static inline __host__ __device__ double log1p(double a) {
+    return ::log1p(a);
+  }
+  static inline __host__ __device__ double cos(double a) { return ::cos(a); }
+  static inline __host__ __device__ double sin(double a) { return ::sin(a); }
+  static inline __host__ __device__ double sqrt(double a) { return ::sqrt(a); }
+  static inline __host__ __device__ double rsqrt(double a) {
+    return ::rsqrt(a);
+  }
+  static inline __host__ __device__ double ceil(double a) { return ::ceil(a); }
+  static inline __host__ __device__ double floor(double a) {
+    return ::floor(a);
+  }
+  static inline __host__ __device__ double trunc(double a) {
+    return ::trunc(a);
+  }
+  static inline __host__ __device__ double neg(double a) { return -a; }
+  static inline __host__ __device__ double acos(double a) { return ::acos(a); }
+  static inline __host__ __device__ double cosh(double a) { return ::cosh(a); }
+  static inline __host__ __device__ double acosh(double a) {
+    return ::acosh(a);
+  }
+  static inline __host__ __device__ double asin(double a) { return ::asin(a); }
+  static inline __host__ __device__ double sinh(double a) { return ::sinh(a); }
+  static inline __host__ __device__ double asinh(double a) {
+    return ::asinh(a);
+  }
+  static inline __host__ __device__ double tan(double a) { return ::tan(a); }
+  static inline __host__ __device__ double atan(double a) { return ::atan(a); }
+  static inline __host__ __device__ double tanh(double a) { return ::tanh(a); }
+  static inline __host__ __device__ double abs(double a) { return ::abs(a); }
+  static inline __host__ __device__ double round(double a) {
+    return ::round(a);
+  }
+  static inline __host__ __device__ double frac(double a) {
+    return a - ::trunc(a);
+  }
+  static inline __host__ __device__ double cinv(double a) { return 1.0 / a; }
+  static inline __host__ __device__ double add(double a, double b) {
+    return a + b;
+  }
+  static inline __host__ __device__ double div(double a, double b) {
+    return a / b;
+  }
+  static inline __host__ __device__ double mul(double a, double b) {
+    return a * b;
+  }
+  static inline __host__ __device__ double sub(double a, double b) {
+    return a - b;
+  }
+  static inline __host__ __device__ double pow(double a, double b) {
+    return ::pow(a, b);
+  }
 };
 
-template <>
-struct THCNumerics<ccx> {
-  static inline __host__ __device__ ccx min() { return ccx(-FLT_MAX,-FLT_MAX); }
-  static inline __host__ __device__ ccx max() { return ccx(FLT_MAX,FLT_MAX); }
+template <> struct THCNumerics<ccx> {
+  static inline __host__ __device__ ccx min() {
+    return ccx(-FLT_MAX, -FLT_MAX);
+  }
+  static inline __host__ __device__ ccx max() { return ccx(FLT_MAX, FLT_MAX); }
 
-  static inline __host__ __device__ bool lt(ccx a, ccx b) { return a.real() < b.real(); }
-  static inline __host__ __device__ bool le(ccx a, ccx b) { return a.real() <= b.real(); }
-  static inline __host__ __device__ bool gt(ccx a, ccx b) { return a.real() > b.real(); }
-  static inline __host__ __device__ bool ge(ccx a, ccx b) { return a.real() >= b.real(); }
-  static inline __host__ __device__ bool eq(ccx a, ccx b) { return (a.real() == b.real() && a.imag() == b.imag()); }
-  static inline __host__ __device__ bool ne(ccx a, ccx b) { return (a.real() != b.real() && a.imag() != b.imag()); }
+  static inline __host__ __device__ bool lt(ccx a, ccx b) {
+    return a.real() < b.real();
+  }
+  static inline __host__ __device__ bool le(ccx a, ccx b) {
+    return a.real() <= b.real();
+  }
+  static inline __host__ __device__ bool gt(ccx a, ccx b) {
+    return a.real() > b.real();
+  }
+  static inline __host__ __device__ bool ge(ccx a, ccx b) {
+    return a.real() >= b.real();
+  }
+  static inline __host__ __device__ bool eq(ccx a, ccx b) {
+    return (a.real() == b.real() && a.imag() == b.imag());
+  }
+  static inline __host__ __device__ bool ne(ccx a, ccx b) {
+    return (a.real() != b.real() && a.imag() != b.imag());
+  }
 
-  static inline __host__ __device__  float re  (ccx a) { return   a.real(); }
-  static inline __host__ __device__  float im  (ccx a) { return   a.imag(); }
-  static inline __host__ __device__  float arg  (ccx a) { return   thrust::arg(a); }
-  static inline __host__ __device__  float abs  (ccx a) { return   thrust::abs(a); }
+  static inline __host__ __device__ float re(ccx a) { return a.real(); }
+  static inline __host__ __device__ float im(ccx a) { return a.imag(); }
+  static inline __host__ __device__ float arg(ccx a) { return thrust::arg(a); }
+  static inline __host__ __device__ float abs(ccx a) { return thrust::abs(a); }
 
-  static inline __host__ __device__  ccx zre  (ccx a) { return   ccx(a.real(),0); }
-  static inline __host__ __device__  ccx zim  (ccx a) { return   ccx(0,a.imag()); }
-  static inline __host__ __device__  ccx zarg  (ccx a) { return   ccx(thrust::arg(a),0); }
-  static inline __host__ __device__  ccx zabs  (ccx a) { return   ccx(thrust::abs(a),0); }
+  static inline __host__ __device__ ccx zre(ccx a) { return ccx(a.real(), 0); }
+  static inline __host__ __device__ ccx zim(ccx a) { return ccx(0, a.imag()); }
+  static inline __host__ __device__ ccx zarg(ccx a) {
+    return ccx(thrust::arg(a), 0);
+  }
+  static inline __host__ __device__ ccx zabs(ccx a) {
+    return ccx(thrust::abs(a), 0);
+  }
 
-  static inline __host__ __device__  ccx conj  (ccx a) { return   thrust::conj(a); }
-  static inline __host__ __device__  ccx exp  (ccx a) { return   thrust::exp(a); }
-  static inline __host__ __device__  ccx exp10(ccx a) { return thrust::exp(a); }
-  static inline __host__ __device__  ccx log  (ccx a) { return   thrust::log(a); }
-  static inline __host__ __device__  ccx log10  (ccx a) { return   thrust::log10(a); }
-  static inline __host__ __device__  ccx cos  (ccx a) { return   thrust::cos(a); }
-  static inline __host__ __device__  ccx sin  (ccx a) { return   thrust::sin(a); }
-  static inline __host__ __device__  ccx sqrt (ccx a) { return  thrust::sqrt(a); }
-  static inline __host__ __device__  ccx neg  (ccx a) { return       -a; }
-  static inline __host__ __device__  ccx acos (ccx a) { return  thrust::acos(a); }
-  static inline __host__ __device__  ccx cosh (ccx a) { return  thrust::cosh(a); }
-  static inline __host__ __device__  ccx acosh(ccx a) { return thrust::acosh(a); }
-  static inline __host__ __device__  ccx asin (ccx a) { return  thrust::asin(a); }
-  static inline __host__ __device__  ccx sinh (ccx a) { return  thrust::sinh(a); }
-  static inline __host__ __device__  ccx asinh(ccx a) { return thrust::asinh(a); }
-  static inline __host__ __device__  ccx tan  (ccx a) { return   thrust::tan(a); }
-  static inline __host__ __device__  ccx atan (ccx a) { return  thrust::atan(a); }
-  static inline __host__ __device__  ccx tanh (ccx a) { return  thrust::tanh(a); }
+  static inline __host__ __device__ ccx conj(ccx a) { return thrust::conj(a); }
+  static inline __host__ __device__ ccx exp(ccx a) { return thrust::exp(a); }
+  static inline __host__ __device__ ccx exp10(ccx a) { return thrust::exp(a); }
+  static inline __host__ __device__ ccx log(ccx a) { return thrust::log(a); }
+  static inline __host__ __device__ ccx log10(ccx a) {
+    return thrust::log10(a);
+  }
+  static inline __host__ __device__ ccx cos(ccx a) { return thrust::cos(a); }
+  static inline __host__ __device__ ccx sin(ccx a) { return thrust::sin(a); }
+  static inline __host__ __device__ ccx sqrt(ccx a) { return thrust::sqrt(a); }
+  static inline __host__ __device__ ccx neg(ccx a) { return -a; }
+  static inline __host__ __device__ ccx acos(ccx a) { return thrust::acos(a); }
+  static inline __host__ __device__ ccx cosh(ccx a) { return thrust::cosh(a); }
+  static inline __host__ __device__ ccx acosh(ccx a) {
+    return thrust::acosh(a);
+  }
+  static inline __host__ __device__ ccx asin(ccx a) { return thrust::asin(a); }
+  static inline __host__ __device__ ccx sinh(ccx a) { return thrust::sinh(a); }
+  static inline __host__ __device__ ccx asinh(ccx a) {
+    return thrust::asinh(a);
+  }
+  static inline __host__ __device__ ccx tan(ccx a) { return thrust::tan(a); }
+  static inline __host__ __device__ ccx atan(ccx a) { return thrust::atan(a); }
+  static inline __host__ __device__ ccx tanh(ccx a) { return thrust::tanh(a); }
 
-
-  static inline __host__ __device__  ccx cinv (ccx a) { return ccx(1,0) / a; }
-  static inline __host__ __device__  ccx add  (ccx a, ccx b) { return a + b; }
-  static inline __host__ __device__  ccx div  (ccx a, ccx b) { return a / b; }
-  static inline __host__ __device__  ccx mul  (ccx a, ccx b) { return a * b; }
-  static inline __host__ __device__  ccx sub  (ccx a, ccx b) { return a - b; }
-  static inline __host__ __device__  ccx pow  (ccx a, ccx b) { return thrust::pow(a, b); }
+  static inline __host__ __device__ ccx cinv(ccx a) { return ccx(1, 0) / a; }
+  static inline __host__ __device__ ccx add(ccx a, ccx b) { return a + b; }
+  static inline __host__ __device__ ccx div(ccx a, ccx b) { return a / b; }
+  static inline __host__ __device__ ccx mul(ccx a, ccx b) { return a * b; }
+  static inline __host__ __device__ ccx sub(ccx a, ccx b) { return a - b; }
+  static inline __host__ __device__ ccx pow(ccx a, ccx b) {
+    return thrust::pow(a, b);
+  }
 };
 
-template <>
-struct THCNumerics<zcx> {
-  static inline __host__ __device__ zcx min() { return zcx(-FLT_MAX,-FLT_MAX); }
-  static inline __host__ __device__ zcx max() { return zcx(FLT_MAX,FLT_MAX); }
+template <> struct THCNumerics<zcx> {
+  static inline __host__ __device__ zcx min() {
+    return zcx(-FLT_MAX, -FLT_MAX);
+  }
+  static inline __host__ __device__ zcx max() { return zcx(FLT_MAX, FLT_MAX); }
 
-  static inline __host__ __device__ bool lt(zcx a, zcx b) { return a.real() < b.real(); }
-  static inline __host__ __device__ bool le(zcx a, zcx b) { return a.real() <= b.real(); }
-  static inline __host__ __device__ bool gt(zcx a, zcx b) { return a.real() > b.real(); }
-  static inline __host__ __device__ bool ge(zcx a, zcx b) { return a.real() >= b.real(); }
-  static inline __host__ __device__ bool eq(zcx a, zcx b) { return (a.real() == b.real() && a.imag() == b.imag()); }
-  static inline __host__ __device__ bool ne(zcx a, zcx b) { return (a.real() != b.real() && a.imag() != b.imag()); }
+  static inline __host__ __device__ bool lt(zcx a, zcx b) {
+    return a.real() < b.real();
+  }
+  static inline __host__ __device__ bool le(zcx a, zcx b) {
+    return a.real() <= b.real();
+  }
+  static inline __host__ __device__ bool gt(zcx a, zcx b) {
+    return a.real() > b.real();
+  }
+  static inline __host__ __device__ bool ge(zcx a, zcx b) {
+    return a.real() >= b.real();
+  }
+  static inline __host__ __device__ bool eq(zcx a, zcx b) {
+    return (a.real() == b.real() && a.imag() == b.imag());
+  }
+  static inline __host__ __device__ bool ne(zcx a, zcx b) {
+    return (a.real() != b.real() && a.imag() != b.imag());
+  }
 
-  static inline __host__ __device__  double re  (zcx a) { return   a.real(); }
-  static inline __host__ __device__  double im  (zcx a) { return   a.imag(); }
-  static inline __host__ __device__  double arg  (zcx a) { return   thrust::arg(a); }
-  static inline __host__ __device__  double abs  (zcx a) { return   thrust::abs(a); }
+  static inline __host__ __device__ double re(zcx a) { return a.real(); }
+  static inline __host__ __device__ double im(zcx a) { return a.imag(); }
+  static inline __host__ __device__ double arg(zcx a) { return thrust::arg(a); }
+  static inline __host__ __device__ double abs(zcx a) { return thrust::abs(a); }
 
-  static inline __host__ __device__  zcx zre  (zcx a) { return   zcx(a.real(),0); }
-  static inline __host__ __device__  zcx zim  (zcx a) { return   zcx(0,a.imag()); }
-  static inline __host__ __device__  zcx zarg  (zcx a) { return   zcx(thrust::arg(a),0); }
-  static inline __host__ __device__  zcx zabs  (zcx a) { return   zcx(thrust::abs(a),0); }
+  static inline __host__ __device__ zcx zre(zcx a) { return zcx(a.real(), 0); }
+  static inline __host__ __device__ zcx zim(zcx a) { return zcx(0, a.imag()); }
+  static inline __host__ __device__ zcx zarg(zcx a) {
+    return zcx(thrust::arg(a), 0);
+  }
+  static inline __host__ __device__ zcx zabs(zcx a) {
+    return zcx(thrust::abs(a), 0);
+  }
 
-  static inline __host__ __device__  zcx conj  (zcx a) { return   thrust::conj(a); }
-  static inline __host__ __device__  zcx exp  (zcx a) { return   thrust::exp(a); }
-  static inline __host__ __device__  zcx exp10(zcx a) { return thrust::exp(a); }
-  static inline __host__ __device__  zcx log  (zcx a) { return   thrust::log(a); }
-  static inline __host__ __device__  zcx log10  (zcx a) { return   thrust::log10(a); }
-  static inline __host__ __device__  zcx cos  (zcx a) { return   thrust::cos(a); }
-  static inline __host__ __device__  zcx sin  (zcx a) { return   thrust::sin(a); }
-  static inline __host__ __device__  zcx sqrt (zcx a) { return  thrust::sqrt(a); }
-  static inline __host__ __device__  zcx neg  (zcx a) { return       -a; }
-  static inline __host__ __device__  zcx acos (zcx a) { return  thrust::acos(a); }
-  static inline __host__ __device__  zcx cosh (zcx a) { return  thrust::cosh(a); }
-  static inline __host__ __device__  zcx acosh(zcx a) { return thrust::acosh(a); }
-  static inline __host__ __device__  zcx asin (zcx a) { return  thrust::asin(a); }
-  static inline __host__ __device__  zcx sinh (zcx a) { return  thrust::sinh(a); }
-  static inline __host__ __device__  zcx asinh(zcx a) { return thrust::asinh(a); }
-  static inline __host__ __device__  zcx tan  (zcx a) { return   thrust::tan(a); }
-  static inline __host__ __device__  zcx atan (zcx a) { return  thrust::atan(a); }
-  static inline __host__ __device__  zcx tanh (zcx a) { return  thrust::tanh(a); }
+  static inline __host__ __device__ zcx conj(zcx a) { return thrust::conj(a); }
+  static inline __host__ __device__ zcx exp(zcx a) { return thrust::exp(a); }
+  static inline __host__ __device__ zcx exp10(zcx a) { return thrust::exp(a); }
+  static inline __host__ __device__ zcx log(zcx a) { return thrust::log(a); }
+  static inline __host__ __device__ zcx log10(zcx a) {
+    return thrust::log10(a);
+  }
+  static inline __host__ __device__ zcx cos(zcx a) { return thrust::cos(a); }
+  static inline __host__ __device__ zcx sin(zcx a) { return thrust::sin(a); }
+  static inline __host__ __device__ zcx sqrt(zcx a) { return thrust::sqrt(a); }
+  static inline __host__ __device__ zcx neg(zcx a) { return -a; }
+  static inline __host__ __device__ zcx acos(zcx a) { return thrust::acos(a); }
+  static inline __host__ __device__ zcx cosh(zcx a) { return thrust::cosh(a); }
+  static inline __host__ __device__ zcx acosh(zcx a) {
+    return thrust::acosh(a);
+  }
+  static inline __host__ __device__ zcx asin(zcx a) { return thrust::asin(a); }
+  static inline __host__ __device__ zcx sinh(zcx a) { return thrust::sinh(a); }
+  static inline __host__ __device__ zcx asinh(zcx a) {
+    return thrust::asinh(a);
+  }
+  static inline __host__ __device__ zcx tan(zcx a) { return thrust::tan(a); }
+  static inline __host__ __device__ zcx atan(zcx a) { return thrust::atan(a); }
+  static inline __host__ __device__ zcx tanh(zcx a) { return thrust::tanh(a); }
 
-  static inline __host__ __device__  zcx cinv (zcx a) { return zcx(1,0) / a; }
-  static inline __host__ __device__  zcx add  (zcx a, zcx b) { return a + b; }
-  static inline __host__ __device__  zcx div  (zcx a, zcx b) { return a / b; }
-  static inline __host__ __device__  zcx mul  (zcx a, zcx b) { return a * b; }
-  static inline __host__ __device__  zcx sub  (zcx a, zcx b) { return a - b; }
-  static inline __host__ __device__  zcx pow  (zcx a, zcx b) { return thrust::pow(a, b); }
+  static inline __host__ __device__ zcx cinv(zcx a) { return zcx(1, 0) / a; }
+  static inline __host__ __device__ zcx add(zcx a, zcx b) { return a + b; }
+  static inline __host__ __device__ zcx div(zcx a, zcx b) { return a / b; }
+  static inline __host__ __device__ zcx mul(zcx a, zcx b) { return a * b; }
+  static inline __host__ __device__ zcx sub(zcx a, zcx b) { return a - b; }
+  static inline __host__ __device__ zcx pow(zcx a, zcx b) {
+    return thrust::pow(a, b);
+  }
 };
 
 /// `half` has some type conversion issues associated with it, since it
 /// is a struct without a constructor/implicit conversion constructor.
 /// We use this to convert scalar values to the given type that the
 /// tensor expects.
-template <typename In, typename Out>
-struct ScalarConvert {
-  static __host__ __device__ Out to(const In v) { return (Out) v; }
+template <typename In, typename Out> struct ScalarConvert {
+  static __host__ __device__ Out to(const In v) { return (Out)v; }
 };
 
-template <>
-struct ScalarConvert<ccx, float> {
-  static __host__ __device__ float to(const ccx v) {
-    return v.real();
-  }
+template <> struct ScalarConvert<ccx, float> {
+  static __host__ __device__ float to(const ccx v) { return v.real(); }
 };
 
-template <>
-struct ScalarConvert<zcx, float> {
-  static __host__ __device__ float to(const zcx v) {
-    return (float)v.real();
-  }
+template <> struct ScalarConvert<zcx, float> {
+  static __host__ __device__ float to(const zcx v) { return (float)v.real(); }
 };
 
 #ifdef CUDA_HALF_TENSOR
-template <typename Out>
-struct ScalarConvert<half, Out> {
+template <typename Out> struct ScalarConvert<half, Out> {
   static __host__ __device__ Out to(const half v) {
 #ifdef __CUDA_ARCH__
-    return (Out) __half2float(v);
+    return (Out)__half2float(v);
 #else
-    return (Out) THC_half2float(v);
+    return (Out)THC_half2float(v);
 #endif
   }
 };
 
-template <typename In>
-struct ScalarConvert<In, half> {
+template <typename In> struct ScalarConvert<In, half> {
   static __host__ __device__ half to(const In v) {
 #ifdef __CUDA_ARCH__
-    return __float2half((float) v);
+    return __float2half((float)v);
 #else
-    return THC_float2half((float) v);
+    return THC_float2half((float)v);
 #endif
   }
 };
 
-template <>
-struct ScalarConvert<half, half> {
-  static __host__ __device__ half to(const half v) {
-    return v;
-  }
+template <> struct ScalarConvert<half, half> {
+  static __host__ __device__ half to(const half v) { return v; }
 };
 #endif
 

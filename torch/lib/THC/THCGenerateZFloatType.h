@@ -1,5 +1,6 @@
 #ifndef THC_GENERIC_FILE
-#error "You must define THC_GENERIC_FILE before including THGenerateZFloatType.h"
+#error                                                                         \
+    "You must define THC_GENERIC_FILE before including THGenerateZFloatType.h"
 #endif
 
 #define real ccx

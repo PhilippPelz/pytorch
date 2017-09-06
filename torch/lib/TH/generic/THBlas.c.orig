@@ -57,8 +57,8 @@ TH_EXTERNC void zcopy_(int *n, double complex *x, int *incx, double complex *y,
                        int *incy);
 TH_EXTERNC void ccopy_(int *n, float complex *x, int *incx, float complex *y,
                        int *incy);
-TH_EXTERNC float _Complex cdotc_(int *n, float _Complex *x, int *incx, float _Complex *y, int *incy);
-TH_EXTERNC double _Complex zdotc_(int *n, double _Complex *x, int *incx, double _Complex *y, int *incy);
+TH_EXTERNC cx cdotc_(int *n, cx *x, int *incx, cx *y, int *incy);
+TH_EXTERNC zx zdotc_(int *n, zx *x, int *incx, zx *y, int *incy);
 TH_EXTERNC void zaxpy_(int *n, double complex *a, double complex *x, int *incx,
                        double complex *y, int *incy);
 TH_EXTERNC void caxpy_(int *n, float complex *a, float complex *x, int *incx,

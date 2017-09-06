@@ -48,22 +48,22 @@ typedef thrust::complex<double> zcx;
 
 >>>>>>> upstream/master
 
-static Py_complex c_ccomplex_to_py_complex(float _Complex cx) {
+static Py_complex c_ccomplex_to_py_complex(cx cx) {
   Py_complex x;
   x.real = (double)creal(cx);
   x.imag = (double)cimag(cx);
   return x;
 }
-static Py_complex c_zcomplex_to_py_complex(double _Complex cx) {
+static Py_complex c_zcomplex_to_py_complex(zx cx) {
   Py_complex x;
   x.real = creal(cx);
   x.imag = cimag(cx);
   return x;
 }
-static float _Complex py_complex_to_c_ccomplex(Py_complex x) {
+static cx py_complex_to_c_ccomplex(Py_complex x) {
   return ((float)x.real) + ((float)x.imag) * _Complex_I;
 }
-static double _Complex py_complex_to_c_zcomplex(Py_complex x) {
+static zx py_complex_to_c_zcomplex(Py_complex x) {
   return ((double)x.real) + ((double)x.imag) * _Complex_I;
 }
 

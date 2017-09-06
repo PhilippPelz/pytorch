@@ -9,12 +9,6 @@
 // #pragma message "__STDC_NO_COMPLEX__ defined"
 // #endif
 
-#include <complex.h>
-#undef I
-#define J _Complex_I
-typedef float _Complex cx;
-typedef double _Complex zx;
-
 #define TH_REAL_IS_COMPLEX
 
 #define CABS cabsf
@@ -68,8 +62,8 @@ typedef double _Complex zx;
 
 // #pragma message "NOW DOING COMPLEX FLOAT"
 
-#define real float _Complex
-#define accreal float _Complex
+#define real cx
+#define accreal cx
 #define part float
 #define TH_CONVERT_REAL_TO_ACCREAL(_val) (accreal)(_val)
 #define TH_CONVERT_ACCREAL_TO_REAL(_val) (real)(_val)

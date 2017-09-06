@@ -349,12 +349,12 @@ READ_WRITE_METHODS(double, Double,
                    nByteWritten = snprintf(mfself->storage->data+mfself->position, mfself->storage->size-mfself->position, "%.17g", data[i]),
                    1)
 
-READ_WRITE_METHODS(float _Complex, ZFloat,
+READ_WRITE_METHODS(cx, ZFloat,
                    int nByteRead_; float re; float im; int ret = sscanf(mfself->storage->data+mfself->position, "%g,%g%n", &re, &im, &nByteRead_); data[i] = re + _Complex_I * im; nByteRead = nByteRead_; if(ret <= 0) break; else nread++,
                    nByteWritten = snprintf(mfself->storage->data+mfself->position, mfself->storage->size-mfself->position, "%.9g, %.9g", crealf(data[i]), cimagf(data[i])),
                    1)
 
-READ_WRITE_METHODS(double _Complex, ZDouble,
+READ_WRITE_METHODS(zx, ZDouble,
                    int nByteRead_; double re; double im; int ret = sscanf(mfself->storage->data+mfself->position, "%lg,%lg%n", &re, &im, &nByteRead_); data[i] = re + _Complex_I * im; nByteRead = nByteRead_; if(ret <= 0) break; else nread++,
                    nByteWritten = snprintf(mfself->storage->data+mfself->position, mfself->storage->size-mfself->position, "%.17g,%.17g", creal(data[i]), cimag(data[i])),
                    1)

@@ -48,7 +48,7 @@
 [[
   name: multinomial
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -71,7 +71,7 @@
 [[
   name: uniform_
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -91,7 +91,7 @@
 [[
   name: normal
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -133,7 +133,7 @@
 [[
   name: normal_
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -153,7 +153,7 @@
 [[
   name: cauchy_
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -175,7 +175,7 @@
   cname: logNormal
   python_name: log_normal_
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -194,7 +194,7 @@
 [[
   name: exponential_
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -212,7 +212,7 @@
 [[
   name: rand
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -232,7 +232,7 @@
 [[
   name: randn
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -356,7 +356,7 @@
 [[
   name: bernoulli_
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CUDA
   return: self

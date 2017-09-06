@@ -121,7 +121,7 @@ static PyObject *THPStorage_(pynew)(PyTypeObject *type, PyObject *args,
 
     real *data_ptr = storage_arg->cdata->data + offset;
     THStoragePtr storage(THStorage_(newWithData)(LIBRARY_STATE data_ptr, size));
-        THStorage_(newWithData)(LIBRARY_STATE data_ptr, size);
+    THStorage_(newWithData)(LIBRARY_STATE data_ptr, size);
     storage->flag = TH_STORAGE_REFCOUNTED | TH_STORAGE_VIEW;
     storage->view = storage_arg->cdata;
     THStorage_(retain)(LIBRARY_STATE storage_arg->cdata);
@@ -133,7 +133,8 @@ static PyObject *THPStorage_(pynew)(PyTypeObject *type, PyObject *args,
   // torch.Storage(sequence)
   if (num_args == 1 && PySequence_Check(first_arg)) {
 #ifdef THD_GENERIC_FILE
-    THPUtils_setError("distributed storages don't support construction from a sequence");
+    THPUtils_setError(
+        "distributed storages don't support construction from a sequence");
 #else
     Py_ssize_t length = PySequence_Length(first_arg);
     THPUtils_assert(length >= 0, "couldn't obtain the length of %s",
@@ -156,7 +157,7 @@ static PyObject *THPStorage_(pynew)(PyTypeObject *type, PyObject *args,
                         "but one of the items was of type %s instead of %s",
                         THPUtils_typename(first_arg),
                         THPUtils_typename(item.get()),
-                        THPUtils_typeTraits<real>::python_type_str);
+                        ""); // THPUtils_typeTraits<real>::python_type_str
       return NULL;
     }
     return (PyObject *)self.release();
@@ -166,13 +167,11 @@ static PyObject *THPStorage_(pynew)(PyTypeObject *type, PyObject *args,
 #ifndef THD_GENERIC_FILE
 invalid_arguments:
 #endif
-  THPUtils_invalidArguments(args, kwargs, THPStorageStr " constructor", 6,
-          "no arguments",
-          "(int size)",
-          "(Sequence data)",
-          "(" THPStorageStr " view_source)",
-          "(" THPStorageStr " view_source, int offset)",
-          "(" THPStorageStr " view_source, int offset, int size)");
+  THPUtils_invalidArguments(
+      args, kwargs, THPStorageStr " constructor", 6, "no arguments",
+      "(int size)", "(Sequence data)", "(" THPStorageStr " view_source)",
+      "(" THPStorageStr " view_source, int offset)",
+      "(" THPStorageStr " view_source, int offset, int size)");
   return NULL;
   END_HANDLE_TH_ERRORS
 }
@@ -217,8 +216,9 @@ static PyObject *THPStorage_(get)(THPStorage *self, PyObject *index) {
     }
 
     real *data = THStorage_(data)(LIBRARY_STATE self->cdata);
-    THStoragePtr new_storage(THStorage_(newWithData)(LIBRARY_STATE data + start, slicelength));
-        THStorage_(newWithData)(LIBRARY_STATE data + start, slicelength);
+    THStoragePtr new_storage(
+        THStorage_(newWithData)(LIBRARY_STATE data + start, slicelength));
+    THStorage_(newWithData)(LIBRARY_STATE data + start, slicelength);
     new_storage->flag = TH_STORAGE_REFCOUNTED | TH_STORAGE_VIEW;
     new_storage->view = self->cdata;
     THStorage_(retain)(LIBRARY_STATE self->cdata);
@@ -240,7 +240,7 @@ static int THPStorage_(set)(THPStorage *self, PyObject *index,
   if (!THPUtils_(checkReal)(value)) {
     THPUtils_setError("can only set storage content with a %s, but got "
                       "%s instead",
-                      THPUtils_typeTraits<real>::python_type_str,
+                      "", // THPUtils_typeTraits<real>::python_type_str
                       THPUtils_typename(value));
     return -1;
   }
@@ -331,9 +331,9 @@ void THPStorage_(initCopyMethods)() {
 #ifndef THD_GENERIC_FILE
   auto &h = THStorage_(copy_functions);
 #if defined(TH_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZFLOAT)
-  THPInsertCopyFunction(h, &THStorage_(copyZFloat));
+  THPInsertStorageCopyFunction(h, &THStorage_(copyZFloat));
 #elif defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZDOUBLE)
-  THPInsertCopyFunction(h, &THStorage_(copyZDouble));
+  THPInsertStorageCopyFunction(h, &THStorage_(copyZDouble));
 #else
   // copy from CPU types
   THPInsertStorageCopyFunction(h, &THStorage_(copyByte));
@@ -348,9 +348,9 @@ void THPStorage_(initCopyMethods)() {
 
 #ifdef THC_GENERIC_FILE
 #if defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZFLOAT)
-  THPInsertCopyFunction(h, &THStorage_(copyCudaZFloat));
+  THPInsertStorageCopyFunction(h, &THStorage_(copyCudaZFloat));
 #elif defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZDOUBLE)
-  THPInsertCopyFunction(h, &THStorage_(copyCudaZDouble));
+  THPInsertStorageCopyFunction(h, &THStorage_(copyCudaZDouble));
 #else
   // copy from GPU types
   THPInsertStorageCopyFunction(h, &THStorage_(copyCudaByte));
@@ -365,12 +365,11 @@ void THPStorage_(initCopyMethods)() {
 #endif // CUDA_HALF_TENSOR
 #endif // defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
 
-
 // add CPU <- GPU copies to base type
 #define THCpuStorage_(name) TH_CONCAT_4(TH, Real, Storage_, name)
   extern THPCopyList THCpuStorage_(copy_functions);
   auto &b = THCpuStorage_(copy_functions);
-  #if defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZFLOAT)
+#if defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZFLOAT)
   THPInsertStorageCopyFunction(b, &THCpuStorage_(copyCudaZFloat));
 #elif defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZDOUBLE)
   THPInsertStorageCopyFunction(b, &THCpuStorage_(copyCudaZDouble));

@@ -112,8 +112,8 @@ void THTensor_(copy##TYPENAMESRC)(THTensor *tensor, TH##TYPENAMESRC##Tensor *src
 }
 
 #ifdef TH_REAL_IS_COMPLEX
-IMPLEMENT_THTensor_COPY(ZDouble,double _Complex)
-IMPLEMENT_THTensor_COPY(ZFloat,float _Complex)
+IMPLEMENT_THTensor_COPY(ZDouble,zx)
+IMPLEMENT_THTensor_COPY(ZFloat,cx)
 #endif
 
 #ifndef TH_REAL_IS_HALF

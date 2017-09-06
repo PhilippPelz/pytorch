@@ -220,10 +220,10 @@ static std::unique_ptr<Tensor> createTensor(void *tensor, Type type,
         new THTensor<double>((THDoubleTensor *)tensor));
   } else if (type == Type::ZFLOAT) {
     return std::unique_ptr<Tensor>(
-        new THTensor<float _Complex>((THZFloatTensor *)tensor));
+        new THTensor<cx>((THZFloatTensor *)tensor));
   } else if (type == Type::ZDOUBLE) {
     return std::unique_ptr<Tensor>(
-        new THTensor<double _Complex>((THZDoubleTensor *)tensor));
+        new THTensor<zx>((THZDoubleTensor *)tensor));
   }
   throw std::invalid_argument("Unsupported tensor type");
 }

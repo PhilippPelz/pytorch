@@ -2,10 +2,6 @@
 #error "You must define THS_GENERIC_FILE before including THSGenerateAllTypes.h"
 #endif
 
-#include <complex.h>
-#undef I
-#define J _Complex_I
-
 #define real unsigned char
 #define accreal long
 #define Real Byte
@@ -98,31 +94,28 @@
 #undef THSInf
 #undef THS_REAL_IS_DOUBLE
 
-typedef float _Complex cx;
-typedef double _Complex zx;
-
-#define CABS cabsf
-#define CACOS cacosf
-#define CACOSH cacoshf
-#define CARG cargf
-#define CASIN casinf
-#define CASINH casinhf
-#define CATAN catanf
-#define CATANH catanhf
-#define CCOS ccosf
-#define CCOSH ccoshf
-#define CEXP cexpf
-#define CIMAG cimagf
-#define CLOG clogf
-#define CONJ conjf
-#define CPOW cpowf
-#define CPROJ cprojf
-#define CREAL crealf
-#define CSIN csinf
-#define CSINH csinhf
-#define CSQRT csqrtf
-#define CTAN ctanf
-#define CTANH ctanhf
+#define CABS(x) cabsf((float _Complex)x)
+#define CACOS(x) cacosf((float _Complex)x)
+#define CACOSH(x) cacoshf((float _Complex)x)
+#define CARG(x) cargf((float _Complex)x)
+#define CASIN(x) casinf((float _Complex)x)
+#define CASINH(x) casinhf((float _Complex)x)
+#define CATAN(x) catanf((float _Complex)x)
+#define CATANH(x) catanhf((float _Complex)x)
+#define CCOS(x) ccosf((float _Complex)x)
+#define CCOSH(x) ccoshf((float _Complex)x)
+#define CEXP(x) cexpf((float _Complex)x)
+#define CIMAG(x) cimagf((float _Complex)x)
+#define CLOG(x) clogf((float _Complex)x)
+#define CONJ(x) conjf((float _Complex)x)
+#define CPOW(x) cpowf((float _Complex)x)
+#define CPROJ(x) cprojf((float _Complex)x)
+#define CREAL(x) crealf((float _Complex)x)
+#define CSIN(x) csinf((float _Complex)x)
+#define CSINH(x) csinhf((float _Complex)x)
+#define CSQRT(x) csqrtf((float _Complex)x)
+#define CTAN(x) ctanf((float _Complex)x)
+#define CTANH(x) ctanhf((float _Complex)x)
 
 #define SWAPS cswap_
 #define SCAL cscal_
@@ -222,28 +215,28 @@ typedef double _Complex zx;
 #undef ORMQR
 #undef PSTRF
 
-#define CABS cabs
-#define CACOS cacos
-#define CACOSH cacosh
-#define CARG carg
-#define CASIN casin
-#define CASINH casinh
-#define CATAN catan
-#define CATANH catanh
-#define CCOS ccos
-#define CCOSH ccosh
-#define CEXP cexp
-#define CIMAG cimag
-#define CLOG clog
-#define CONJ conj
-#define CPOW cpow
-#define CPROJ cproj
-#define CREAL creal
-#define CSIN csin
-#define CSINH csinh
-#define CSQRT csqrt
-#define CTAN ctan
-#define CTANH ctanh
+#define CABS(x) cabs((double _Complex)x)
+#define CACOS(x) cacos((double _Complex)x)
+#define CACOSH(x) cacosh((double _Complex)x)
+#define CARG(x) carg((double _Complex)x)
+#define CASIN(x) casin((double _Complex)x)
+#define CASINH(x) casinh((double _Complex)x)
+#define CATAN(x) catan((double _Complex)x)
+#define CATANH(x) catanh((double _Complex)x)
+#define CCOS(x) ccos((double _Complex)x)
+#define CCOSH(x) ccosh((double _Complex)x)
+#define CEXP(x) cexp((double _Complex)x)
+#define CIMAG(x) cimag((double _Complex)x)
+#define CLOG(x) clog((double _Complex)x)
+#define CONJ(x) conj((double _Complex)x)
+#define CPOW(x) cpow((double _Complex)x)
+#define CPROJ(x) cproj((double _Complex)x)
+#define CREAL(x) creal((double _Complex)x)
+#define CSIN(x) csin((double _Complex)x)
+#define CSINH(x) csinh((double _Complex)x)
+#define CSQRT(x) csqrt((double _Complex)x)
+#define CTAN(x) ctan((double _Complex)x)
+#define CTANH(x) ctanh((double _Complex)x)
 
 #define SWAPS zswap_
 #define SCAL zscal_

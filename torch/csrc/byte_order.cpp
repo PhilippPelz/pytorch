@@ -103,13 +103,13 @@ void THP_decodeDoubleBuffer(double *dst, const uint8_t *src, THPByteOrder order,
   }
 }
 
-void THP_decodeZFloatBuffer(float _Complex *dst, const uint8_t *src,
+void THP_decodeZFloatBuffer(cx *dst, const uint8_t *src,
                             THPByteOrder order, size_t len) {
   for (size_t i = 0; i < len; i++) {
     union {
       uint32_t x;
       uint32_t y;
-      float _Complex f;
+      cx f;
     };
     x = (order == THP_BIG_ENDIAN ? decodeUInt32BE(src) : decodeUInt32LE(src));
     src += sizeof(float);
@@ -119,13 +119,13 @@ void THP_decodeZFloatBuffer(float _Complex *dst, const uint8_t *src,
   }
 }
 
-void THP_decodeZDoubleBuffer(double _Complex *dst, const uint8_t *src,
+void THP_decodeZDoubleBuffer(zx *dst, const uint8_t *src,
                              THPByteOrder order, size_t len) {
   for (size_t i = 0; i < len; i++) {
     union {
       uint64_t x;
       uint64_t y;
-      double _Complex d;
+      zx d;
     };
     x = (order == THP_BIG_ENDIAN ? decodeUInt64BE(src) : decodeUInt64LE(src));
     src += sizeof(double);
@@ -199,24 +199,24 @@ void THP_encodeDoubleBuffer(uint8_t *dst, const double *src, THPByteOrder order,
   }
 }
 
-void THP_encodeZFloatBuffer(uint8_t *dst, const float _Complex *src,
+void THP_encodeZFloatBuffer(uint8_t *dst, const cx *src,
                             THPByteOrder order, size_t len) {
-  memcpy(dst, src, sizeof(float _Complex) * len);
+  memcpy(dst, src, sizeof(cx) * len);
   if (order != THP_nativeByteOrder()) {
     for (size_t i = 0; i < len; i++) {
-      swapBytes<sizeof(float _Complex)>(dst);
-      dst += sizeof(float _Complex);
+      swapBytes<sizeof(cx)>(dst);
+      dst += sizeof(cx);
     }
   }
 }
 
-void THP_encodeZDoubleBuffer(uint8_t *dst, const double _Complex *src,
+void THP_encodeZDoubleBuffer(uint8_t *dst, const zx *src,
                              THPByteOrder order, size_t len) {
-  memcpy(dst, src, sizeof(double _Complex) * len);
+  memcpy(dst, src, sizeof(zx) * len);
   if (order != THP_nativeByteOrder()) {
     for (size_t i = 0; i < len; i++) {
-      swapBytes<sizeof(double _Complex)>(dst);
-      dst += sizeof(double _Complex);
+      swapBytes<sizeof(zx)>(dst);
+      dst += sizeof(zx);
     }
   }
 }

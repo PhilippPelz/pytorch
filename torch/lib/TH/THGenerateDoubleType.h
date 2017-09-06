@@ -3,17 +3,21 @@
 #endif
 
 #define real double
+#define part double
 #define accreal double
 #define TH_CONVERT_REAL_TO_ACCREAL(_val) (accreal)(_val)
 #define TH_CONVERT_ACCREAL_TO_REAL(_val) (real)(_val)
 #define Real Double
+#define Part Double
 #define THInf DBL_MAX
 #define TH_REAL_IS_DOUBLE
 #line 1 TH_GENERIC_FILE
 #include TH_GENERIC_FILE
 #undef accreal
 #undef real
+#undef part
 #undef Real
+#undef Part
 #undef THInf
 #undef TH_REAL_IS_DOUBLE
 #undef TH_CONVERT_REAL_TO_ACCREAL

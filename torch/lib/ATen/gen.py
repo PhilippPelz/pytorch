@@ -71,8 +71,8 @@ scalar_types = [
     ('Char', 'int8_t', 'Long', 'char', 'Char','char'),
     ('Double', 'double', 'Double', 'double','Double', 'double'),
     ('Float', 'float', 'Double', 'float','Float', 'float'),
-    ('ZDouble', 'double _Complex', 'ZDouble', 'double _Complex','Double', 'double'),
-    ('ZFloat', 'float _Complex', 'ZDouble', 'float _Complex','Float', 'float'),
+    ('ZDouble', 'zx', 'ZDouble', 'zx','Double', 'double'),
+    ('ZFloat', 'cx', 'ZDouble', 'cx','Float', 'float'),
     ('Int', 'int', 'Long', 'int','Int', 'int'),
     ('Long', 'int64_t', 'Long', 'long','Long', 'long'),
     ('Short', 'int16_t', 'Long', 'short','Short', 'short'),
@@ -130,7 +130,7 @@ def generate_storage_type_and_tensor(backend, density, scalar_type, declarations
     # used for generating switch logic for external functions
     tag = density_tag + backend + scalar_name
     env['TypeID'] = 'TypeID::' + tag
-    top_env['type_ids'].append(tag + ',')
+    top_env['type_ids'].append(tag )
 
     if backend == 'CUDA':
         env['th_headers'] = ['#include <THC/THC.h>',
@@ -153,6 +153,10 @@ def generate_storage_type_and_tensor(backend, density, scalar_type, declarations
         env['isCUDA'] = 'true'
         env['storage_device'] = 'return storage->device;'
         env['Generator'] = 'CUDAGenerator'
+        if scalar_name == 'ZFloat':
+            env['THScalarType'] = 'ccx'
+        if  scalar_name == 'ZDouble':
+            env['THScalarType'] = 'zcx'
     else:
         env['th_headers'] = ['#include <TH/TH.h>',
                              '#include <THNN/THNN.h>',
@@ -183,9 +187,29 @@ def generate_storage_type_and_tensor(backend, density, scalar_type, declarations
     elif scalar_name == 'Long':
         env['to_th_type'] = 'long'
         env['to_at_type'] = 'int64_t'
+    elif scalar_name == 'ZFloat' :
+        env['AS_REAL'] = ''
+        if backend == "CUDA":
+            env['to_th_type'] = 'toCcx'
+            env['to_at_type'] = 'toCx'
+        else:
+            env['to_th_type'] = ''
+            env['to_at_type'] = ''
+    elif scalar_name == 'ZDouble':
+        env['AS_REAL'] = ''
+        if backend == "CUDA":
+            env['to_th_type'] = 'toZcx'
+            env['to_at_type'] = 'toZx'
+        else:
+            env['to_th_type'] = ''
+            env['to_at_type'] = ''
     else:
-        env['to_th_type'] = ''
-        env['to_at_type'] = ''
+        if backend == "CUDA":
+            env['to_th_type'] = ''
+            env['to_at_type'] = ''
+        else:
+            env['to_th_type'] = ''
+            env['to_at_type'] = ''
 
     declarations, definitions = function_wrapper.create_derived(
         env, declarations)
@@ -254,7 +278,7 @@ for backend in backends:
                 continue
             all_types.append(generate_storage_type_and_tensor(
                 backend, density, scalar_type, declarations))
-
+# top_env['type_ids'].append(',')
 write('Type.h', TYPE_H.substitute(top_env))
 write('Type.cpp', TYPE_CPP.substitute(top_env))
 

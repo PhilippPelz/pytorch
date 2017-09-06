@@ -3,7 +3,6 @@
     "You must define THC_GENERIC_FILE before including THGenerateZDoubleType.h"
 #endif
 
-
 #define real zcx
 #define cureal cufftDoubleComplex
 #define cufft cufftExecZ2Z

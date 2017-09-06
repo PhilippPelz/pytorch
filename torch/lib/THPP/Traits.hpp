@@ -21,10 +21,10 @@ struct type_traits {};
 
 template<typename real>
 struct interface_traits {
-  using one = typename std::conditional<type_traits<real>::is_cuda, thrust::complex<double>,  double _Complex>::type;
+  using one = typename std::conditional<type_traits<real>::is_cuda, thrust::complex<double>,  zx>::type;
 
   using three = typename std::conditional<type_traits<real>::is_cuda,
-    thrust::complex<float>, float _Complex>::type;
+    thrust::complex<float>, cx>::type;
 
   using four = typename std::conditional<type_traits<real>::is_floating_point,
     double, long long>::type;
@@ -71,7 +71,7 @@ struct type_traits<double> {
 };
 
 template<>
-struct type_traits<float _Complex> {
+struct type_traits<cx> {
   static constexpr Type type = Type::ZFLOAT;
   static constexpr bool is_floating_point = false;
   static constexpr bool is_complex_double = false;
@@ -80,7 +80,7 @@ struct type_traits<float _Complex> {
 };
 
 template<>
-struct type_traits<double _Complex> {
+struct type_traits<zx> {
   static constexpr Type type = Type::ZDOUBLE;
   static constexpr bool is_floating_point = false;
   static constexpr bool is_complex_float = false;

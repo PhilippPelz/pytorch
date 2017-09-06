@@ -21,9 +21,9 @@ void THP_decodeFloatBuffer(float *dst, const uint8_t *src, THPByteOrder order,
                            size_t len);
 void THP_decodeDoubleBuffer(double *dst, const uint8_t *src, THPByteOrder order,
                             size_t len);
-void THP_decodeZFloatBuffer(float _Complex *dst, const uint8_t *src,
+void THP_decodeZFloatBuffer(cx *dst, const uint8_t *src,
                             THPByteOrder order, size_t len);
-void THP_decodeZDoubleBuffer(double _Complex *dst, const uint8_t *src,
+void THP_decodeZDoubleBuffer(zx *dst, const uint8_t *src,
                              THPByteOrder order, size_t len);
 
 void THP_encodeInt16Buffer(uint8_t *dst, const int16_t *src, THPByteOrder order,
@@ -36,9 +36,9 @@ void THP_encodeFloatBuffer(uint8_t *dst, const float *src, THPByteOrder order,
                            size_t len);
 void THP_encodeDoubleBuffer(uint8_t *dst, const double *src, THPByteOrder order,
                             size_t len);
-void THP_encodeZFloatBuffer(uint8_t *dst, const float _Complex *src,
+void THP_encodeZFloatBuffer(uint8_t *dst, const cx *src,
                             THPByteOrder order, size_t len);
-void THP_encodeZDoubleBuffer(uint8_t *dst, const double _Complex *src,
+void THP_encodeZDoubleBuffer(uint8_t *dst, const zx *src,
                              THPByteOrder order, size_t len);
 
 #endif

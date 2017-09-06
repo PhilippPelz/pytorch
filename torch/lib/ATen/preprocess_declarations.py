@@ -7,7 +7,18 @@ type_map = {
     'floating_point': [
         'Float',
         'Double',
+        'ZFloat',
+        'ZDouble',
         'Half',
+    ],
+    'floating_point_real': [
+        'Float',
+        'Double',
+        'Half',
+    ],
+    'floating_point_complex': [
+        'ZFloat',
+        'ZDouble',
     ],
     'integral': [
         'Byte',
@@ -54,7 +65,10 @@ def process_types_and_backends(option):
     for arg in option.get('arguments', []):
         if arg['type'] == 'THSTensor*':
             pairs.discard(('CUDA', 'Half'))
-
+        if arg['type'] == 'THSTensor*':
+            pairs.discard(('CUDA', 'ZFloat'))
+        if arg['type'] == 'THSTensor*':
+            pairs.discard(('CUDA', 'ZDouble'))
     # special case remove Half for cpu unless it is explicitly enabled,
     if not option.get('cpu_half', False):
         pairs.discard(('CPU', 'Half'))

@@ -2,6 +2,14 @@
   name: lt
   variants:
     - method
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   return: argument 0
   options:
     - cname: ltValue
@@ -22,6 +30,14 @@
 [[
   name: lt_
   return: self
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   options:
     - cname: ltValueT
       arguments:
@@ -38,6 +54,14 @@
 
 [[
   name: lt
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   variants:
     - function
   return: argument 0
@@ -73,6 +97,14 @@
 
 [[
   name: gt
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   variants:
     - method
   return: argument 0
@@ -94,6 +126,14 @@
 
 [[
   name: gt_
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   return: self
   options:
     - cname: gtValueT
@@ -111,6 +151,14 @@
 
 [[
   name: gt
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   variants:
     - function
   return: argument 0
@@ -147,6 +195,14 @@
 
 [[
   name: le
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   variants:
     - method
   return: argument 0
@@ -168,6 +224,14 @@
 
 [[
   name: le_
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   return: self
   options:
     - cname: leValueT
@@ -185,6 +249,14 @@
 
 [[
   name: le
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   variants:
     - function
   return: argument 0
@@ -220,6 +292,14 @@
 
 [[
   name: ge
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   variants:
     - method
   return: argument 0
@@ -241,6 +321,14 @@
 
 [[
   name: ge_
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   return: self
   options:
     - cname: geValueT
@@ -258,6 +346,14 @@
 
 [[
   name: ge
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   variants:
     - function
   return: argument 0
@@ -293,6 +389,14 @@
 
 [[
   name: eq
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   variants:
     - method
   return: argument 0
@@ -314,6 +418,14 @@
 
 [[
   name: eq_
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   return: self
   options:
     - cname: eqValueT
@@ -331,6 +443,14 @@
 
 [[
   name: eq
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   variants:
     - function
   return: argument 0
@@ -366,6 +486,14 @@
 
 [[
   name: ne
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   variants:
     - method
   return: argument 0
@@ -387,6 +515,14 @@
 
 [[
   name: ne_
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   return: self
   options:
     - cname: neValueT
@@ -404,6 +540,14 @@
 
 [[
   name: ne
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   variants:
     - function
   return: argument 0
@@ -438,6 +582,14 @@
 
 [[
   name: min
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   variants:
     - method
     - function
@@ -481,6 +633,14 @@
 
 [[
   name: max
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   variants:
     - method
     - function
@@ -524,6 +684,14 @@
 
 [[
   name: kthvalue
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   backends:
     - CPU
   variants:
@@ -578,7 +746,14 @@
 
 [[
   name: mode
-  defined_if: "!defined(THC_REAL_IS_ZDOUBLE) && !defined(THC_REAL_IS_ZFLOAT)"
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   variants:
     - method
     - function
@@ -627,6 +802,14 @@
 
 [[
   name: median
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   variants:
     - method
     - function
@@ -669,7 +852,14 @@
 
 [[
   name: sort
-  defined_if: "!(defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT))"
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   variants:
     - method
     - function
@@ -700,7 +890,14 @@
 
 [[
   name: topk
-  defined_if: "CUDA_FLOAT || (!IS_CUDA && !(defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)))"
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   variants:
     - method
     - function

@@ -26,5 +26,7 @@ THC_API void THCTensor_(indexFill_long)(THCState *state, THCTensor *tensor,
 THC_API void THCTensor_(indexSelect_long)(THCState *state, THCTensor *tensor,
                                           THCTensor *src, int dim,
                                           THLongTensor *index);
-
+THC_API void THCTensor_(calculateAdvancedIndexingOffsets)(
+    THCState *state, THCudaLongTensor *output, THCTensor *indexed,
+    ptrdiff_t baseOffset, THCudaLongTensor **indexers);
 #endif

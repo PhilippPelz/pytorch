@@ -12,7 +12,6 @@
   variants:
     - method
     - function
-  defined_if: defined(TH_REAL_IS_FLOAT)||defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_LONG) || defined(TH_REAL_IS_INT) || CUDA_FLOAT || CUDA_HALF ||CUDA_DOUBLE || CUDA_INT || CUDA_LONG || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
   with_stateless: True
   options:
     - cname: abs
@@ -30,7 +29,11 @@
 [[
   name: arg
   return: argument 0
-  defined_if:  defined(TH_REAL_IS_ZFLOAT)||defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  types:
+    - floating_point_complex
+  backends:
+    - CPU
+    - CUDA
   with_stateless: True
   options:
     - cname: arg
@@ -49,7 +52,11 @@
   name: arg_
   cname: arg
   return: self
-  defined_if:  defined(TH_REAL_IS_ZFLOAT)||defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  types:
+    - floating_point_complex
+  backends:
+    - CPU
+    - CUDA
   arguments:
     - THTensor* self
     - THTensor* self
@@ -58,7 +65,26 @@
 [[
   name: re
   return: argument 0
-  defined_if:  defined(TH_REAL_IS_ZFLOAT)||defined(TH_REAL_IS_ZDOUBLE) || defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
+  types:
+    - floating_point_complex
+  backends:
+    - CPU
+    - CUDA
+  with_stateless: True
+  arguments:
+    - arg: THTensor* destination
+      output: True
+    - THTensor* self
+]]
+
+[[
+  name: im
+  return: argument 0
+  types:
+    - floating_point_complex
+  backends:
+    - CPU
+    - CUDA
   with_stateless: True
   arguments:
     - arg: THTensor* destination
@@ -87,7 +113,7 @@
 [[
   name: sigmoid_
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -101,7 +127,7 @@
 [[
   name: sigmoid
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -152,7 +178,7 @@
 [[
   name: log1p_
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -166,7 +192,7 @@
 [[
   name: log1p
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -183,7 +209,7 @@
 [[
   name: lgamma
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -200,7 +226,7 @@
 [[
   name: lgamma_
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -566,7 +592,7 @@
 [[
   name: rsqrt_
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -580,7 +606,7 @@
 [[
   name: rsqrt
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -598,7 +624,7 @@
 [[
   name: ceil_
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -612,7 +638,7 @@
 [[
   name: ceil
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -630,7 +656,7 @@
 [[
   name: floor_
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -644,7 +670,7 @@
 [[
   name: floor
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -662,7 +688,7 @@
 [[
   name: round_
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -676,7 +702,7 @@
 [[
   name: round
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -694,7 +720,7 @@
 [[
   name: trunc_
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -708,7 +734,7 @@
 [[
   name: trunc
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -726,7 +752,7 @@
 [[
   name: frac_
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -740,7 +766,7 @@
 [[
   name: frac
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -757,7 +783,7 @@
 [[
   name: mean
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -793,7 +819,7 @@
 [[
   name: var
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -841,7 +867,7 @@
 [[
   name: std
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -929,7 +955,7 @@
 [[
   name: renorm
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -952,7 +978,7 @@
 [[
   name: renorm_
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -971,7 +997,7 @@
 [[
   name: dist
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -992,7 +1018,7 @@
 [[
   name: reciprocal
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -1011,7 +1037,7 @@
 [[
   name: reciprocal_
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -1026,10 +1052,7 @@
 [[
   name: neg
   types:
-    - floating_point
-    - Long
-    - Int
-    - Short
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -1048,10 +1071,7 @@
 [[
   name: neg_
   types:
-    - floating_point
-    - Long
-    - Int
-    - Short
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -1160,7 +1180,7 @@
 [[
   name: lerp
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA
@@ -1181,7 +1201,7 @@
 [[
   name: lerp_
   types:
-    - floating_point
+    - floating_point_real
   backends:
     - CPU
     - CUDA

@@ -363,11 +363,11 @@ READ_WRITE_METHODS(double, Double,
                    int ret = fscanf(dfself->handle, "%lg", &data[i]); if(ret <= 0) break; else nread++,
                    int ret = fprintf(dfself->handle, "%.17g", data[i]); if(ret <= 0) break; else nwrite++)
 
-READ_WRITE_METHODS(float _Complex, ZFloat,
+READ_WRITE_METHODS(cx, ZFloat,
                    float re;float im;int ret = fscanf(dfself->handle, "%g,%g", &re, &im); data[i] = re + im * _Complex_I; if(ret <= 0) break; else nread++,
                    int ret = fprintf(dfself->handle, "%.9g,%.9g", crealf(data[i]), cimagf(data[i])); if(ret <= 0) break; else nwrite++)
 
-READ_WRITE_METHODS(double _Complex, ZDouble,
+READ_WRITE_METHODS(zx, ZDouble,
                    double re; double im; int ret = fscanf(dfself->handle, "%lg,%lg", &re, &im); data[i] = re + im * _Complex_I; if(ret <= 0) break; else nread++,
                    int ret = fprintf(dfself->handle, "%.17g,%.17g", creal(data[i]), cimag(data[i])); if(ret <= 0) break; else nwrite++)
 

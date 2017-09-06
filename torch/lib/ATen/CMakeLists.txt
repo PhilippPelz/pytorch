@@ -148,6 +148,10 @@ DEPENDS ${all_python} ${all_templates} ${cwrap_files})
 SET(all_cpp ${base_cpp} ${generated_cpp})
 filter_list(generated_h generated_cpp "\\.h$")
 
+foreach(file ${all_cpp})
+  set_source_files_properties(file PROPERTIES CUDA_SOURCE_PROPERTY_FORMAT OBJ )
+endforeach()
+
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/..)
 # so the build can find the generated header files
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})

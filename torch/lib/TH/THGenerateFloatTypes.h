@@ -61,13 +61,7 @@
 #define CARG
 #define CONJ
 
-#define part float
-#define Part Float
-
 #include "THGenerateFloatType.h"
-
-#undef part
-#undef Part
 
 #undef SWAPS
 #undef SCAL
@@ -121,13 +115,7 @@
 #define GER dger_
 #define GEMM dgemm_
 
-#define part double
-#define Part Double
-
 #include "THGenerateDoubleType.h"
-
-#undef part
-#undef Part
 
 #undef CABS
 #undef CACOS

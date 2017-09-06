@@ -698,6 +698,11 @@ PyObject * THPTensor_(stride)(PyObject *self, PyObject *args, PyObject *kwargs)
   name: range
   variants:
     - function
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
   backends:
     - CPU
     - CUDA
@@ -719,6 +724,11 @@ PyObject * THPTensor_(stride)(PyObject *self, PyObject *args, PyObject *kwargs)
   name: arange
   variants:
     - function
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
   backends:
     - CPU
     - CUDA
@@ -761,6 +771,14 @@ PyObject * THPTensor_(stride)(PyObject *self, PyObject *args, PyObject *kwargs)
 [[
   name: scatter_add_
   return: argument 0
+  types:
+    - floating_point_real
+    - Long
+    - Int
+    - Short
+  backends:
+    - CPU
+    - CUDA
   options:
     - cname: scatterAdd
       arguments:

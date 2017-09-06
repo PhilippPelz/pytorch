@@ -2,6 +2,10 @@
 #define TH_GENERIC_FILE "generic/THTensorMath.c"
 #else
 
+#ifndef NAN
+#define NAN (nan(NULL))
+#endif
+
 #ifdef _OPENMP
 #include <omp.h>
 #endif
@@ -441,6 +445,32 @@ void THTensor_(scatter)(THTensor *tensor, int dim, THLongTensor *index,
                        })
 }
 
+void THTensor_(scatterAdd)(THTensor *tensor, int dim, THLongTensor *index,
+                           THTensor *src) {
+  long elems_per_row, i, idx;
+
+  THArgCheck(dim < THTensor_(nDimension)(tensor), 2,
+             "Index dimension is out of bounds");
+  THArgCheck(THLongTensor_nDimension(index) == THTensor_(nDimension)(tensor), 3,
+             "Index tensor must have same dimensions as output tensor");
+  THArgCheck(THTensor_(nDimension)(src) == THTensor_(nDimension)(tensor), 4,
+             "Input tensor must have same dimensions as output tensor");
+
+  elems_per_row = THLongTensor_size(index, dim);
+
+  TH_TENSOR_DIM_APPLY3(real, tensor, real, src, long, index, dim,
+                       for (i = 0; i < elems_per_row; ++i) {
+                         idx = *(index_data + i * index_stride);
+                         if (idx < TH_INDEX_BASE ||
+                             idx >= tensor_size + TH_INDEX_BASE) {
+                           THFree(TH_TENSOR_DIM_APPLY_counter);
+                           THError("Invalid index in scatterAdd");
+                         }
+                         tensor_data[(idx - TH_INDEX_BASE) * tensor_stride] +=
+                             *(src_data + i * src_stride);
+                       })
+}
+
 void THTensor_(scatterFill)(THTensor *tensor, int dim, THLongTensor *index,
                             real val) {
   long elems_per_row, i, idx;
@@ -478,14 +508,14 @@ accreal THTensor_(dot)(THTensor *tensor, THTensor *src) {
 }
 
 #undef th_isnan
-#if defined(TH_REAL_IS_REAL)
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
 #define th_isnan(val) (isnan(val))
 #else
 #define th_isnan(val) (0)
 #endif
 
 #undef th_isnan_break
-#if defined(TH_REAL_IS_REAL)
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
 #define th_isnan_break(val)                                                    \
   if (isnan(val))                                                              \
     break;
@@ -556,6 +586,32 @@ real THTensor_(maxall)(THTensor *tensor) {
   return theMax;
 }
 #endif
+static void THTensor_(quickselectnoidx)(real *arr, long k, long elements,
+                                        long stride);
+
+real THTensor_(medianall)(THTensor *tensor) {
+  THArgCheck(tensor->nDimension > 0, 1, "tensor must have one dimension");
+
+  real theMedian;
+  ptrdiff_t numel;
+  long k;
+  THTensor *temp_;
+  real *temp__data;
+
+  numel = THTensor_(nElement)(tensor);
+  k = (numel - 1) >> 1;
+
+  temp_ = THTensor_(newClone)(tensor);
+  temp__data = THTensor_(data)(temp_);
+
+  THTensor_(quickselectnoidx)(temp__data, k, numel, 1);
+
+  theMedian = temp__data[k];
+
+  THTensor_(free)(temp_);
+
+  return theMedian;
+}
 
 accreal THTensor_(sumall)(THTensor *tensor) {
   accreal sum = 0;
@@ -612,9 +668,9 @@ void THTensor_(lshift)(THTensor *r_, THTensor *t, real value) {
 #elif defined(TH_REAL_IS_DOUBLE)
   return THTensor_(mul)(r_, t, pow(2, value));
 #elif defined(TH_REAL_IS_ZFLOAT)
-  return THTensor_(mul)(r_, t, CPOW(2, value));
+  return THError("lshift is not supported for torch.ZFloatTensor");
 #elif defined(TH_REAL_IS_ZDOUBLE)
-  return THTensor_(mul)(r_, t, CPOW(2, value));
+  return THError("lshift is not supported for torch.ZDoubleTensor");
 #elif defined(TH_REAL_IS_HALF)
   return THError("lshift is not supported for torch.HalfTensor");
 #else
@@ -650,9 +706,9 @@ void THTensor_(rshift)(THTensor *r_, THTensor *t, real value) {
 #elif defined(TH_REAL_IS_DOUBLE)
   return THTensor_(div)(r_, t, pow(2, value));
 #elif defined(TH_REAL_IS_ZFLOAT)
-  return THTensor_(mul)(r_, t, CPOW(2, value));
+  return THError("rshift is not supported for torch.ZFloatTensor");
 #elif defined(TH_REAL_IS_ZDOUBLE)
-  return THTensor_(mul)(r_, t, CPOW(2, value));
+  return THError("rshift is not supported for torch.ZDoubleTensor");
 #elif defined(TH_REAL_IS_HALF)
   return THError("rshift is not supported for torch.HalfTensor");
 #else
@@ -693,31 +749,27 @@ void THTensor_(fmod)(THTensor *r_, THTensor *t, real value) {
     ptrdiff_t i;
 #pragma omp parallel for if (sz > TH_OMP_OVERHEAD_THRESHOLD) private(i)
     for (i = 0; i < sz; i++) {
-#if defined(TH_REAL_IS_REAL)
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
       rp[i] = fmod(tp[i], value);
-#elif defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-      rp[i] = fmod(CREAL(tp[i]), value) + fmod(CIMAG(tp[i]), value) * J;
+#elif defined(TH_REAL_IS_ZFLOAT)
+#elif defined(TH_REAL_IS_ZDOUBLE)
 #else
       rp[i] = tp[i] % value;
 #endif
     }
   } else {
-#if defined(TH_REAL_IS_REAL)
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
     TH_TENSOR_APPLY2(real, r_, real, t, *r__data = fmod(*t_data, value););
-#elif defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-    TH_TENSOR_APPLY2(real, r_, real, t,
-                     *r__data = fmod(CREAL(*t_data), CREAL(value)) +
-                                fmod(CIMAG(*t_data), CIMAG(value)) * J;)
+#elif defined(TH_REAL_IS_ZFLOAT)
+    return THError("fmod is not supported for torch.ZFloatTensor");
+#elif defined(TH_REAL_IS_ZDOUBLE)
+    return THError("fmod is not supported for torch.ZDoubleTensor");
 #else
     TH_TENSOR_APPLY2(real, r_, real, t, *r__data = (*t_data % value););
 #endif
   }
 }
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-void THTensor_(remainder)(THTensor *r_, THTensor *t, real value) {
-  return THError("remainder is not supported for complex type tensors");
-}
-#else
+
 void THTensor_(remainder)(THTensor *r_, THTensor *t, real value) {
   THTensor_(resizeAs)(r_, t);
   if (THTensor_(isContiguous)(r_) && THTensor_(isContiguous)(t) &&
@@ -726,35 +778,45 @@ void THTensor_(remainder)(THTensor *r_, THTensor *t, real value) {
     real *rp = THTensor_(data)(r_);
     ptrdiff_t sz = THTensor_(nElement)(t);
     ptrdiff_t i;
-
 #pragma omp parallel for if (sz > TH_OMP_OVERHEAD_THRESHOLD) private(i)
     for (i = 0; i < sz; i++) {
-#if defined(TH_REAL_IS_REAL)
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
       rp[i] = (value == 0) ? NAN : tp[i] - value * floor(tp[i] / value);
+#elif defined(TH_REAL_IS_ZFLOAT)
+#elif defined(TH_REAL_IS_ZDOUBLE)
 #else
-      rp[i] = tp[i] - value * (tp[i] / value); // There is no NAN for integers
+      // There is no NAN for integers
+      rp[i] = tp[i] % value;
+      if (rp[i] * value < 0)
+        rp[i] += value;
 #endif
     }
   } else {
-#if defined(TH_REAL_IS_REAL)
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
     TH_TENSOR_APPLY2(
         real, r_, real, t,
         *r__data =
             (value == 0) ? NAN : *t_data - value * floor(*t_data / value););
+#elif defined(TH_REAL_IS_ZFLOAT)
+    return THError("remainder is not supported for torch.ZFloatTensor");
+#elif defined(TH_REAL_IS_ZDOUBLE)
+    return THError("remainder is not supported for torch.ZDoubleTensor");
 #else
     // There is no NAN for integers
-    TH_TENSOR_APPLY2(real, r_, real, t,
-                     *r__data = *t_data - value * (*t_data / value););
+    TH_TENSOR_APPLY2(real, r_, real, t, *r__data = *t_data % value;
+                     if (*r__data * value < 0) *r__data += value;);
 #endif
   }
 }
-#endif
 
 void THTensor_ (bitand)(THTensor *r_, THTensor *t, real value) {
-#if defined(TH_REAL_IS_REAL) || defined(TH_REAL_IS_HALF)
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) ||                 \
+    defined(TH_REAL_IS_HALF)
   return THError("bitand is only supported for integer type tensors");
-#elif defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("bitand is not supported for complex type tensors");
+#elif defined(TH_REAL_IS_ZFLOAT)
+  return THError("bitand is not supported for torch.ZFloatTensor");
+#elif defined(TH_REAL_IS_ZDOUBLE)
+  return THError("bitand is not supported for torch.ZDoubleTensor");
 #else
   THTensor_(resizeAs)(r_, t);
   if (THTensor_(isContiguous)(r_) && THTensor_(isContiguous)(t) &&
@@ -774,10 +836,13 @@ void THTensor_ (bitand)(THTensor *r_, THTensor *t, real value) {
 }
 
 void THTensor_(bitor)(THTensor *r_, THTensor *t, real value) {
-#if defined(TH_REAL_IS_REAL) || defined(TH_REAL_IS_HALF)
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) ||                 \
+    defined(TH_REAL_IS_HALF)
   return THError("bitor is only supported for integer type tensors");
-#elif defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("bitor is not supported for complex type tensors");
+#elif defined(TH_REAL_IS_ZFLOAT)
+  return THError("bitor is not supported for torch.ZFloatTensor");
+#elif defined(TH_REAL_IS_ZDOUBLE)
+  return THError("bitor is not supported for torch.ZDoubleTensor");
 #else
   THTensor_(resizeAs)(r_, t);
   if (THTensor_(isContiguous)(r_) && THTensor_(isContiguous)(t) &&
@@ -797,10 +862,13 @@ void THTensor_(bitor)(THTensor *r_, THTensor *t, real value) {
 }
 
 void THTensor_(bitxor)(THTensor *r_, THTensor *t, real value) {
-#if defined(TH_REAL_IS_REAL) || defined(TH_REAL_IS_HALF)
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) ||                 \
+    defined(TH_REAL_IS_HALF)
   return THError("bitxor is only supported for integer type tensors");
-#elif defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("bitxor is not supported for complex type tensors");
+#elif defined(TH_REAL_IS_ZFLOAT)
+  return THError("bitxor is not supported for torch.ZFloatTensor");
+#elif defined(TH_REAL_IS_ZDOUBLE)
+  return THError("bitxor is not supported for torch.ZDoubleTensor");
 #else
   THTensor_(resizeAs)(r_, t);
   if (THTensor_(isContiguous)(r_) && THTensor_(isContiguous)(t) &&
@@ -821,8 +889,10 @@ void THTensor_(bitxor)(THTensor *r_, THTensor *t, real value) {
 
 void THTensor_(clamp)(THTensor *r_, THTensor *t, real min_value,
                       real max_value) {
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("bitxor is not supported for complex type tensors");
+#if defined(TH_REAL_IS_ZFLOAT)
+  return THError("bitxor is not supported for torch.ZFloatTensor");
+#elif defined(TH_REAL_IS_ZDOUBLE)
+  return THError("bitxor is not supported for torch.ZDoubleTensor");
 #else
   THTensor_(resizeAs)(r_, t);
   if (THTensor_(isContiguous)(r_) && THTensor_(isContiguous)(t) &&
@@ -883,27 +953,6 @@ void THTensor_(cmul)(THTensor *r_, THTensor *t, THTensor *src) {
   }
 }
 
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) ||               \
-    defined(TH_REAL_IS_REAL)
-void THTensor_(cpow)(THTensor *r_, THTensor *t, THTensor *src) {
-  THTensor_(resizeAs)(r_, t);
-  if (THTensor_(isContiguous)(r_) && THTensor_(isContiguous)(t) &&
-      THTensor_(isContiguous)(src) &&
-      THTensor_(nElement)(r_) == THTensor_(nElement)(src)) {
-    real *tp = THTensor_(data)(t);
-    real *sp = THTensor_(data)(src);
-    real *rp = THTensor_(data)(r_);
-    ptrdiff_t sz = THTensor_(nElement)(t);
-    ptrdiff_t i;
-#pragma omp parallel for if (sz > TH_OMP_OVERHEAD_THRESHOLD) private(i)
-    for (i = 0; i < sz; i++)
-      rp[i] = CPOW(tp[i], sp[i]);
-  } else {
-    TH_TENSOR_APPLY3(real, r_, real, t, real, src,
-                     *r__data = CPOW(*t_data, *src_data););
-  }
-}
-#else
 void THTensor_(cpow)(THTensor *r_, THTensor *t, THTensor *src) {
   THTensor_(resizeAs)(r_, t);
   if (THTensor_(isContiguous)(r_) && THTensor_(isContiguous)(t) &&
@@ -922,7 +971,7 @@ void THTensor_(cpow)(THTensor *r_, THTensor *t, THTensor *src) {
                      *r__data = pow(*t_data, *src_data););
   }
 }
-#endif
+
 void THTensor_(cdiv)(THTensor *r_, THTensor *t, THTensor *src) {
   THTensor_(resizeAs)(r_, t);
   if (THTensor_(isContiguous)(r_) && THTensor_(isContiguous)(t) &&
@@ -940,10 +989,11 @@ void THTensor_(cdiv)(THTensor *r_, THTensor *t, THTensor *src) {
 void THTensor_(clshift)(THTensor *r_, THTensor *t, THTensor *src) {
 #if defined(TH_REAL_IS_HALF)
   return THError("clshift is not supported for torch.HalfTensor");
+#elif defined(TH_REAL_IS_ZFLOAT)
+  return THError("clshift is not supported for torch.ZFloatTensor");
+#elif defined(TH_REAL_IS_ZDOUBLE)
+  return THError("clshift is not supported for torch.ZDoubleTensor");
 #endif
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("clshift is not supported for complex type tensors");
-#else
   THTensor_(resizeAs)(r_, t);
   if (THTensor_(isContiguous)(r_) && THTensor_(isContiguous)(t) &&
       THTensor_(isContiguous)(src) &&
@@ -961,6 +1011,8 @@ void THTensor_(clshift)(THTensor *r_, THTensor *t, THTensor *src) {
       rp[i] = tp[i] * pow(2, sp[i]);
 #elif defined(TH_REAL_IS_BYTE)
       rp[i] = ((real)tp[i]) << sp[i];
+#elif defined(TH_REAL_IS_ZFLOAT)
+#elif defined(TH_REAL_IS_ZDOUBLE)
 #else
       rp[i] = ((unsigned real)tp[i]) << sp[i];
 #endif
@@ -975,21 +1027,25 @@ void THTensor_(clshift)(THTensor *r_, THTensor *t, THTensor *src) {
 #elif defined(TH_REAL_IS_BYTE)
     TH_TENSOR_APPLY3(real, r_, real, t, real, src, *r__data = ((real)*t_data)
                                                               << *src_data;);
+#elif defined(TH_REAL_IS_ZFLOAT)
+    return THError("crshift is not supported for torch.ZFloatTensor");
+#elif defined(TH_REAL_IS_ZDOUBLE)
+    return THError("crshift is not supported for torch.ZDoubleTensor");
 #else
     TH_TENSOR_APPLY3(real, r_, real, t, real, src,
                      *r__data = ((unsigned real) * t_data) << *src_data;);
 #endif
   }
-#endif
 }
 
 void THTensor_(crshift)(THTensor *r_, THTensor *t, THTensor *src) {
 #if defined(TH_REAL_IS_HALF)
   return THError("crshift is not supported for torch.HalfTensor");
+#elif defined(TH_REAL_IS_ZFLOAT)
+  return THError("crshift is not supported for torch.ZFloatTensor");
+#elif defined(TH_REAL_IS_ZDOUBLE)
+  return THError("crshift is not supported for torch.ZDoubleTensor");
 #endif
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("clshift is not supported for complex type tensors");
-#else
   THTensor_(resizeAs)(r_, t);
   if (THTensor_(isContiguous)(r_) && THTensor_(isContiguous)(t) &&
       THTensor_(isContiguous)(src) &&
@@ -1007,6 +1063,8 @@ void THTensor_(crshift)(THTensor *r_, THTensor *t, THTensor *src) {
       rp[i] = tp[i] / pow(2, sp[i]);
 #elif defined(TH_REAL_IS_BYTE)
       rp[i] = ((real)tp[i]) >> sp[i];
+#elif defined(TH_REAL_IS_ZFLOAT)
+#elif defined(TH_REAL_IS_ZDOUBLE)
 #else
       rp[i] = ((unsigned real)tp[i]) >> sp[i];
 #endif
@@ -1021,19 +1079,19 @@ void THTensor_(crshift)(THTensor *r_, THTensor *t, THTensor *src) {
 #elif defined(TH_REAL_IS_BYTE)
     TH_TENSOR_APPLY3(real, r_, real, t, real, src,
                      *r__data = ((real)*t_data) >> *src_data;);
+#elif defined(TH_REAL_IS_ZFLOAT)
+    return THError("crshift is not supported for torch.ZFloatTensor");
+#elif defined(TH_REAL_IS_ZDOUBLE)
+    return THError("crshift is not supported for torch.ZDoubleTensor");
 #else
     TH_TENSOR_APPLY3(real, r_, real, t, real, src,
                      *r__data = ((unsigned real) * t_data) >> *src_data;);
 #endif
   }
-#endif
 }
 
 void THTensor_(cfmod)(THTensor *r_, THTensor *t, THTensor *src) {
   THTensor_(resizeAs)(r_, t);
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("cfmod is not supported for complex type tensors");
-#else
   if (THTensor_(isContiguous)(r_) && THTensor_(isContiguous)(t) &&
       THTensor_(isContiguous)(src) &&
       THTensor_(nElement)(r_) == THTensor_(nElement)(src)) {
@@ -1044,22 +1102,27 @@ void THTensor_(cfmod)(THTensor *r_, THTensor *t, THTensor *src) {
     ptrdiff_t i;
 #pragma omp parallel for if (sz > TH_OMP_OVERHEAD_THRESHOLD) private(i)
     for (i = 0; i < sz; i++) {
-#if defined(TH_REAL_IS_REAL)
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
       rp[i] = fmod(tp[i], sp[i]);
+#elif defined(TH_REAL_IS_ZFLOAT)
+#elif defined(TH_REAL_IS_ZDOUBLE)
 #else
       rp[i] = tp[i] % sp[i];
 #endif
     }
   } else {
-#if defined(TH_REAL_IS_REAL)
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
     TH_TENSOR_APPLY3(real, r_, real, t, real, src,
                      *r__data = fmod(*t_data, *src_data););
+#elif defined(TH_REAL_IS_ZFLOAT)
+    return THError("crshift is not supported for torch.ZFloatTensor");
+#elif defined(TH_REAL_IS_ZDOUBLE)
+    return THError("crshift is not supported for torch.ZDoubleTensor");
 #else
     TH_TENSOR_APPLY3(real, r_, real, t, real, src,
                      *r__data = (*t_data % *src_data););
 #endif
   }
-#endif
 }
 
 void THTensor_(cremainder)(THTensor *r_, THTensor *t, THTensor *src) {
@@ -1074,32 +1137,45 @@ void THTensor_(cremainder)(THTensor *r_, THTensor *t, THTensor *src) {
     ptrdiff_t i;
 #pragma omp parallel for if (sz > TH_OMP_OVERHEAD_THRESHOLD) private(i)
     for (i = 0; i < sz; i++) {
-#if defined(TH_REAL_IS_REAL)
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
       rp[i] = (sp[i] == 0) ? NAN : tp[i] - sp[i] * floor(tp[i] / sp[i]);
+#elif defined(TH_REAL_IS_ZFLOAT)
+#elif defined(TH_REAL_IS_ZDOUBLE)
 #else
-      rp[i] = tp[i] - sp[i] * (tp[i] / sp[i]); // There is no NAN for integers
+      // There is no NAN for integers
+      rp[i] = tp[i] % sp[i];
+      if (rp[i] * sp[i] < 0)
+        rp[i] += sp[i];
 #endif
     }
   } else {
-#if defined(TH_REAL_IS_REAL)
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
     TH_TENSOR_APPLY3(
         real, r_, real, t, real, src,
         *r__data = (*src_data == 0)
                        ? NAN
                        : *t_data - *src_data * floor(*t_data / *src_data););
+#elif defined(TH_REAL_IS_ZFLOAT)
+    return THError("cremainder is not supported for torch.ZFloatTensor");
+#elif defined(TH_REAL_IS_ZDOUBLE)
+    return THError("cremainder is not supported for torch.ZDoubleTensor");
 #else
     // There is no NAN for integers
     TH_TENSOR_APPLY3(real, r_, real, t, real, src,
-                     *r__data = *t_data - *src_data * (*t_data / *src_data););
+                     *r__data = *t_data % *src_data;
+                     if (*r__data * *src_data < 0) *r__data += *src_data;);
 #endif
   }
 }
 
 void THTensor_(cbitand)(THTensor *r_, THTensor *t, THTensor *src) {
-#if defined(TH_REAL_IS_REAL) || defined(TH_REAL_IS_HALF)
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) ||                 \
+    defined(TH_REAL_IS_HALF)
   return THError("cbitand is only supported for integer type tensors");
-#elif defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("cbitand is not supported for complex type tensors");
+#elif defined(TH_REAL_IS_ZFLOAT)
+  return THError("cremainder is not supported for torch.ZFloatTensor");
+#elif defined(TH_REAL_IS_ZDOUBLE)
+  return THError("cremainder is not supported for torch.ZDoubleTensor");
 #else
   THTensor_(resizeAs)(r_, t);
   if (THTensor_(isContiguous)(r_) && THTensor_(isContiguous)(t) &&
@@ -1122,10 +1198,13 @@ void THTensor_(cbitand)(THTensor *r_, THTensor *t, THTensor *src) {
 }
 
 void THTensor_(cbitor)(THTensor *r_, THTensor *t, THTensor *src) {
-#if defined(TH_REAL_IS_REAL) || defined(TH_REAL_IS_HALF)
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) ||                 \
+    defined(TH_REAL_IS_HALF)
   return THError("cbitor is only supported for integer type tensors");
-#elif defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("cbitor is not supported for complex type tensors");
+#elif defined(TH_REAL_IS_ZFLOAT)
+  return THError("cbitor is not supported for torch.ZFloatTensor");
+#elif defined(TH_REAL_IS_ZDOUBLE)
+  return THError("cbitor is not supported for torch.ZDoubleTensor");
 #else
   THTensor_(resizeAs)(r_, t);
   if (THTensor_(isContiguous)(r_) && THTensor_(isContiguous)(t) &&
@@ -1148,10 +1227,13 @@ void THTensor_(cbitor)(THTensor *r_, THTensor *t, THTensor *src) {
 }
 
 void THTensor_(cbitxor)(THTensor *r_, THTensor *t, THTensor *src) {
-#if defined(TH_REAL_IS_REAL) || defined(TH_REAL_IS_HALF)
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) ||                 \
+    defined(TH_REAL_IS_HALF)
   return THError("cbitxor is only supported for integer type tensors");
-#elif defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("cbitxor is not supported for complex type tensors");
+#elif defined(TH_REAL_IS_ZFLOAT)
+  return THError("cbitxor is not supported for torch.ZFloatTensor");
+#elif defined(TH_REAL_IS_ZDOUBLE)
+  return THError("cbitxor is not supported for torch.ZDoubleTensor");
 #else
   THTensor_(resizeAs)(r_, t);
   if (THTensor_(isContiguous)(r_) && THTensor_(isContiguous)(t) &&
@@ -1325,7 +1407,9 @@ void THTensor_(addmm)(THTensor *r_, real beta, THTensor *t, real alpha,
 
   if (t != r_) {
     THTensor_(resizeAs)(r_, t);
-    THTensor_(copy)(r_, t);
+    if (beta != 0.0) {
+      THTensor_(copy)(r_, t);
+    }
   }
 
   /* r_ */
@@ -1375,6 +1459,7 @@ void THTensor_(addmm)(THTensor *r_, real beta, THTensor *t, real alpha,
     m2_ = THTensor_(newContiguous)(m2);
   }
 
+#pragma omp critical(blasgemm)
   /* do the operation */
   THBlas_(gemm)(
       transpose_m1, transpose_m2, r__->size[(transpose_r == 'n' ? 0 : 1)],
@@ -1420,7 +1505,9 @@ void THTensor_(addr)(THTensor *r_, real beta, THTensor *t, real alpha,
     THTensor_(copy)(r_, t);
   }
 
-  if (beta != 1)
+  if (beta == 0) {
+    THTensor_(zero)(r_);
+  } else if (beta != 1)
     THTensor_(mul)(r_, r_, beta);
 
   if (r_->stride[0] == 1) {
@@ -1465,7 +1552,9 @@ void THTensor_(addbmm)(THTensor *result, real beta, THTensor *t, real alpha,
 
   if (t != result) {
     THTensor_(resizeAs)(result, t);
-    THTensor_(copy)(result, t);
+    if (beta != 0.0) {
+      THTensor_(copy)(result, t);
+    }
   }
 
   THTensor *matrix1 = THTensor_(new)();
@@ -1510,7 +1599,9 @@ void THTensor_(baddbmm)(THTensor *result, real beta, THTensor *t, real alpha,
 
   if (t != result) {
     THTensor_(resizeAs)(result, t);
-    THTensor_(copy)(result, t);
+    if (beta != 0.0) {
+      THTensor_(copy)(result, t);
+    }
   }
 
   THTensor *matrix1 = THTensor_(new)();
@@ -1532,11 +1623,10 @@ void THTensor_(baddbmm)(THTensor *result, real beta, THTensor *t, real alpha,
 }
 
 ptrdiff_t THTensor_(numel)(THTensor *t) { return THTensor_(nElement)(t); }
+
 void THTensor_(max)(THTensor *values_, THLongTensor *indices_, THTensor *t,
                     int dimension, int keepdim) {
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("max is not supported for complex type tensors");
-#else
+#if !defined(TH_REAL_IS_COMPLEX)
   THLongStorage *dim;
 
   THArgCheck(dimension >= 0 && dimension < THTensor_(nDimension)(t), 2,
@@ -1719,6 +1809,7 @@ void THTensor_(sum)(THTensor *r_, THTensor *t, int dimension, int keepdim) {
                      *temp__data = *temp__data + *t_data;);
     THTensor_(free)(temp_);
   }
+
   if (!keepdim) {
     THTensor_(squeeze1d)(r_, r_, dimension);
   }
@@ -1752,6 +1843,7 @@ void THTensor_(prod)(THTensor *r_, THTensor *t, int dimension, int keepdim) {
                      *temp__data = *temp__data * *t_data;);
     THTensor_(free)(temp_);
   }
+
   if (!keepdim) {
     THTensor_(squeeze1d)(r_, r_, dimension);
   }
@@ -1785,15 +1877,14 @@ void THTensor_(cumprod)(THTensor *r_, THTensor *t, int dimension) {
 
 void THTensor_(sign)(THTensor *r_, THTensor *t) {
   THTensor_(resizeAs)(r_, t);
-
+#if !defined(TH_REAL_IS_COMPLEX)
 #if defined(TH_REAL_IS_BYTE)
   TH_TENSOR_APPLY2(real, r_, real, t, if (*t_data > 0) *r__data = 1;
                    else *r__data = 0;);
-#elif defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  TH_TENSOR_APPLY2(real, r_, real, t, *r__data = *t_data / CARG(*t_data););
 #else
   TH_TENSOR_APPLY2(real, r_, real, t, if (*t_data > 0) *r__data = 1;
                    else if (*t_data < 0) *r__data = -1; else *r__data = 0;);
+#endif
 #endif
 }
 
@@ -1862,9 +1953,7 @@ void THTensor_(cross)(THTensor *r_, THTensor *a, THTensor *b, int dimension) {
 }
 
 void THTensor_(cmax)(THTensor *r, THTensor *t, THTensor *src) {
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("cmax is not supported for complex type tensors");
-#else
+#if !defined(TH_REAL_IS_COMPLEX)
   THTensor_(resizeAs)(r, t);
   TH_TENSOR_APPLY3(real, r, real, t, real, src,
                    *r_data = *t_data > *src_data ? *t_data : *src_data;);
@@ -1872,9 +1961,7 @@ void THTensor_(cmax)(THTensor *r, THTensor *t, THTensor *src) {
 }
 
 void THTensor_(cmin)(THTensor *r, THTensor *t, THTensor *src) {
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("cmax is not supported for complex type tensors");
-#else
+#if !defined(TH_REAL_IS_COMPLEX)
   THTensor_(resizeAs)(r, t);
   TH_TENSOR_APPLY3(real, r, real, t, real, src,
                    *r_data = *t_data < *src_data ? *t_data : *src_data;);
@@ -1882,9 +1969,7 @@ void THTensor_(cmin)(THTensor *r, THTensor *t, THTensor *src) {
 }
 
 void THTensor_(cmaxValue)(THTensor *r, THTensor *t, real value) {
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("cmaxValue is not supported for complex type tensors");
-#else
+#if !defined(TH_REAL_IS_COMPLEX)
   THTensor_(resizeAs)(r, t);
   TH_TENSOR_APPLY2(real, r, real, t,
                    *r_data = *t_data > value ? *t_data : value;);
@@ -1892,9 +1977,7 @@ void THTensor_(cmaxValue)(THTensor *r, THTensor *t, real value) {
 }
 
 void THTensor_(cminValue)(THTensor *r, THTensor *t, real value) {
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("cminValue is not supported for complex type tensors");
-#else
+#if !defined(TH_REAL_IS_COMPLEX)
   THTensor_(resizeAs)(r, t);
   TH_TENSOR_APPLY2(real, r, real, t,
                    *r_data = *t_data < value ? *t_data : value;);
@@ -1904,6 +1987,16 @@ void THTensor_(cminValue)(THTensor *r, THTensor *t, real value) {
 void THTensor_(zeros)(THTensor *r_, THLongStorage *size) {
   THTensor_(resize)(r_, size, NULL);
   THTensor_(zero)(r_);
+}
+
+void THTensor_(zerosLike)(THTensor *r_, THTensor *input) {
+  THTensor_(resizeAs)(r_, input);
+  THTensor_(zero)(r_);
+}
+
+void THTensor_(onesLike)(THTensor *r_, THTensor *input) {
+  THTensor_(resizeAs)(r_, input);
+  THTensor_(fill)(r_, 1);
 }
 
 void THTensor_(ones)(THTensor *r_, THLongStorage *size) {
@@ -1977,9 +2070,7 @@ void THTensor_(eye)(THTensor *r_, long n, long m) {
 }
 
 void THTensor_(range)(THTensor *r_, accreal xmin, accreal xmax, accreal step) {
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("range is not supported for complex type tensors");
-#else
+#if !defined(TH_REAL_IS_COMPLEX)
   ptrdiff_t size;
   real i = 0;
 
@@ -1994,6 +2085,19 @@ void THTensor_(range)(THTensor *r_, accreal xmin, accreal xmax, accreal step) {
   }
 
   TH_TENSOR_APPLY(real, r_, *r__data = xmin + (i++) * step;);
+#endif
+}
+
+void THTensor_(arange)(THTensor *r_, accreal xmin, accreal xmax, accreal step) {
+#if !defined(TH_REAL_IS_COMPLEX)
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  int m = fmod(xmax - xmin, step) == 0;
+#else
+  int m = (xmax - xmin) % step == 0;
+#endif
+  if (m)
+    xmax -= step;
+  THTensor_(range)(r_, xmin, xmax, step);
 #endif
 }
 
@@ -2053,15 +2157,15 @@ void THTensor_(reshape)(THTensor *r_, THTensor *t, THLongStorage *size) {
   AAA = BBB;                                                                   \
   BBB = rswap
 
+#define ARR_SWAP(III, JJJ) REAL_SWAP(ARR(III), ARR(JJJ));
+
 #define BOTH_SWAP(III, JJJ)                                                    \
   REAL_SWAP(ARR(III), ARR(JJJ));                                               \
   LONG_SWAP(IDX(III), IDX(JJJ))
 
 static void THTensor_(quicksortascend)(real *arr, long *idx, long elements,
                                        long stride) {
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("quicksortascend is not supported for complex type tensors");
-#else
+#if !defined(TH_REAL_IS_COMPLEX)
   long beg[MAX_LEVELS], end[MAX_LEVELS], i, j, L, R, P, swap, pid,
       stack = 0, sz_right, sz_left;
   real rswap, piv;
@@ -2167,9 +2271,7 @@ static void THTensor_(quicksortascend)(real *arr, long *idx, long elements,
 
 static void THTensor_(quicksortdescend)(real *arr, long *idx, long elements,
                                         long stride) {
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("quicksortdescend is not supported for complex type tensors");
-#else
+#if !defined(TH_REAL_IS_COMPLEX)
   long beg[MAX_LEVELS], end[MAX_LEVELS], i, j, L, R, P, swap, pid,
       stack = 0, sz_right, sz_left;
   real rswap, piv;
@@ -2278,9 +2380,7 @@ static void THTensor_(quicksortdescend)(real *arr, long *idx, long elements,
 
 void THTensor_(sort)(THTensor *rt_, THLongTensor *ri_, THTensor *t,
                      int dimension, int descendingOrder) {
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("sort is not supported for complex type tensors");
-#else
+#if !defined(TH_REAL_IS_COMPLEX)
   THArgCheck(dimension >= 0 && dimension < THTensor_(nDimension)(t), 2,
              "invalid dimension %d", dimension + TH_INDEX_BASE);
 
@@ -2309,12 +2409,71 @@ void THTensor_(sort)(THTensor *rt_, THLongTensor *ri_, THTensor *t,
 
 /* Implementation of the Quickselect algorithm, based on Nicolas Devillard's
 public domain implementation at http://ndevilla.free.fr/median/median/
+Adapted similarly to the above Quicksort algorithm.
+This version does not produce indices along with values. */
+static void THTensor_(quickselectnoidx)(real *arr, long k, long elements,
+                                        long stride) {
+#if !defined(TH_REAL_IS_COMPLEX)
+  long P, L, R, i, j, swap;
+  real rswap, piv;
+  L = 0;
+  R = elements - 1;
+
+  do {
+    if (R <= L) /* One element only */
+      return;
+
+    if (R == L + 1) { /* Two elements only */
+      if (ARR(L) > ARR(R)) {
+        ARR_SWAP(L, R);
+      }
+      return;
+    }
+
+    /* Use median of three for pivot choice */
+    P = (L + R) >> 1;
+    ARR_SWAP(P, L + 1);
+    if (ARR(L + 1) > ARR(R)) {
+      ARR_SWAP(L + 1, R);
+    }
+    if (ARR(L) > ARR(R)) {
+      ARR_SWAP(L, R);
+    }
+    if (ARR(L + 1) > ARR(L)) {
+      ARR_SWAP(L + 1, L);
+    }
+
+    i = L + 1;
+    j = R;
+    piv = ARR(L);
+    do {
+      do
+        i++;
+      while (ARR(i) < piv);
+      do
+        j--;
+      while (ARR(j) > piv);
+      if (j < i)
+        break;
+      ARR_SWAP(i, j);
+    } while (1);
+    ARR_SWAP(L, j);
+
+    /* Re-set active partition */
+    if (j <= k)
+      L = i;
+    if (j >= k)
+      R = j - 1;
+  } while (1);
+#endif
+}
+
+/* Implementation of the Quickselect algorithm, based on Nicolas Devillard's
+public domain implementation at http://ndevilla.free.fr/median/median/
 Adapted similarly to the above Quicksort algorithm. */
 static void THTensor_(quickselect)(real *arr, long *idx, long k, long elements,
                                    long stride) {
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("quickselect is not supported for complex type tensors");
-#else
+#if !defined(TH_REAL_IS_COMPLEX)
   long P, L, R, i, j, swap, pid;
   real rswap, piv;
   L = 0;
@@ -2375,11 +2534,9 @@ static void THTensor_(quickselect)(real *arr, long *idx, long k, long elements,
 #undef LONG_SWAP
 #undef REAL_SWAP
 #undef BOTH_SWAP
+
 void THTensor_(mode)(THTensor *values_, THLongTensor *indices_, THTensor *t,
                      int dimension, int keepdim) {
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("mode is not supported for complex type tensors");
-#else
   THLongStorage *dim;
   THTensor *temp_;
   THLongTensor *tempi_;
@@ -2432,13 +2589,11 @@ void THTensor_(mode)(THTensor *values_, THLongTensor *indices_, THTensor *t,
     THTensor_(squeeze1d)(values_, values_, dimension);
     THLongTensor_squeeze1d(indices_, indices_, dimension);
   }
-#endif
 }
+
 void THTensor_(kthvalue)(THTensor *values_, THLongTensor *indices_, THTensor *t,
                          long k, int dimension, int keepdim) {
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("kthvalue is not supported for complex type tensors");
-#else
+#if !defined(TH_REAL_IS_COMPLEX)
   THLongStorage *dim;
   THTensor *temp_;
   THLongTensor *tempi_;
@@ -2485,9 +2640,6 @@ void THTensor_(kthvalue)(THTensor *values_, THLongTensor *indices_, THTensor *t,
 
 void THTensor_(median)(THTensor *values_, THLongTensor *indices_, THTensor *t,
                        int dimension, int keepdim) {
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("median is not supported for complex type tensors");
-#else
   long t_size_dim, k;
 
   THArgCheck(dimension >= 0 && dimension < THTensor_(nDimension)(t), 3,
@@ -2497,14 +2649,10 @@ void THTensor_(median)(THTensor *values_, THLongTensor *indices_, THTensor *t,
   k = (t_size_dim - 1) >> 1; /* take middle or one-before-middle element */
 
   THTensor_(kthvalue)(values_, indices_, t, k + 1, dimension, keepdim);
-#endif
 }
 
 void THTensor_(topk)(THTensor *rt_, THLongTensor *ri_, THTensor *t, long k,
                      int dim, int dir, int sorted) {
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("topk is not supported for complex type tensors");
-#else
   int numDims = THTensor_(nDimension)(t);
   THArgCheck(dim >= 0 && dim < numDims, 3, "dim not in range");
 
@@ -2558,7 +2706,6 @@ void THTensor_(topk)(THTensor *rt_, THLongTensor *ri_, THTensor *t, long k,
 
   THTensor_(free)(tmpResults);
   THLongTensor_free(tmpIndices);
-#endif
 }
 
 void THTensor_(tril)(THTensor *r_, THTensor *t, long k) {
@@ -2657,8 +2804,7 @@ void THTensor_(catArray)(THTensor *result, THTensor **inputs, int numInputs,
   size = THLongStorage_newWithSize(maxDim);
 
   for (i = 0; i < maxDim; i++) {
-    // dimSize is either the size of the dim if it exists, either 1 if #dim >
-    // 0,
+    // dimSize is either the size of the dim if it exists, either 1 if #dim > 0,
     // otherwise 0
     long dimSize = i < inputs[0]->nDimension ? inputs[0]->size[i]
                                              : THMin(inputs[0]->nDimension, 1);
@@ -2758,7 +2904,6 @@ int THTensor_(equal)(THTensor *ta, THTensor *tb) {
   return equal;
 }
 
-#if !(defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE))
 #define TENSOR_IMPLEMENT_LOGICAL(NAME, OP)                                     \
   void THTensor_(NAME##Value)(THByteTensor * r_, THTensor * t, real value) {   \
     THByteTensor_resizeNd(r_, t->nDimension, t->size, NULL);                   \
@@ -2781,60 +2926,15 @@ int THTensor_(equal)(THTensor *ta, THTensor *tb) {
     TH_TENSOR_APPLY3(real, r_, real, ta, real, tb,                             \
                      *r__data = (*ta_data OP * tb_data) ? 1 : 0;);             \
   }
-#else
-#define TENSOR_IMPLEMENT_LOGICAL(NAME, OP)                                     \
-  void THTensor_(NAME##Value)(THByteTensor * r_, THTensor * t, real value) {   \
-    THByteTensor_resizeNd(r_, t->nDimension, t->size, NULL);                   \
-    TH_TENSOR_APPLY2(unsigned char, r_, real, t,                               \
-                     *r__data = (CREAL(*t_data) OP CREAL(value)) ? 1 : 0;);    \
-  }                                                                            \
-  void THTensor_(NAME##ValueT)(THTensor * r_, THTensor * t, real value) {      \
-    THTensor_(resizeNd)(r_, t->nDimension, t->size, NULL);                     \
-    TH_TENSOR_APPLY2(real, r_, real, t,                                        \
-                     *r__data = (CREAL(*t_data) OP CREAL(value)) ? 1 : 0;);    \
-  }                                                                            \
-  void THTensor_(NAME##Tensor)(THByteTensor * r_, THTensor * ta,               \
-                               THTensor * tb) {                                \
-    THByteTensor_resizeNd(r_, ta->nDimension, ta->size, NULL);                 \
-    TH_TENSOR_APPLY3(unsigned char, r_, real, ta, real, tb,                    \
-                     *r__data =                                                \
-                         (CREAL(*ta_data) OP CREAL(*tb_data)) ? 1 : 0;);       \
-  }                                                                            \
-  void THTensor_(NAME##TensorT)(THTensor * r_, THTensor * ta, THTensor * tb) { \
-    THTensor_(resizeNd)(r_, ta->nDimension, ta->size, NULL);                   \
-    TH_TENSOR_APPLY3(real, r_, real, ta, real, tb,                             \
-                     *r__data =                                                \
-                         (CREAL(*ta_data) OP CREAL(*tb_data)) ? 1 : 0;);       \
-  }
-#endif
 
+#if !defined(TH_REAL_IS_COMPLEX)
 TENSOR_IMPLEMENT_LOGICAL(lt, <)
 TENSOR_IMPLEMENT_LOGICAL(gt, >)
 TENSOR_IMPLEMENT_LOGICAL(le, <=)
 TENSOR_IMPLEMENT_LOGICAL(ge, >=)
 TENSOR_IMPLEMENT_LOGICAL(eq, ==)
 TENSOR_IMPLEMENT_LOGICAL(ne, !=)
-
-#undef TENSOR_IMPLEMENT_LOGICAL
-
-#define LAB_IMPLEMENT_BASIC_ZFUNCTION(NAME, CFUNC)                             \
-  void THTensor_(z##NAME)(THPartTensor * r_, THTensor * t) {                   \
-    int d;                                                                     \
-    int isSameSizeAs = 1;                                                      \
-    if (r_->nDimension != t->nDimension) {                                     \
-      isSameSizeAs = 0;                                                        \
-    }                                                                          \
-    for (d = 0; d < r_->nDimension; ++d) {                                     \
-      if (r_->size[d] != t->size[d]) {                                         \
-        isSameSizeAs = 0;                                                      \
-        break;                                                                 \
-      }                                                                        \
-    }                                                                          \
-    if (!isSameSizeAs)                                                         \
-      THPartTensor_(resizeNd)(r_, t->nDimension, t->size, NULL);               \
-    TH_TENSOR_APPLY2(real, t, part, r_, *r__data = CFUNC(*t_data););           \
-  }
-
+#endif
 #define LAB_IMPLEMENT_BASIC_FUNCTION(NAME, CFUNC)                              \
   void THTensor_(NAME)(THTensor * r_, THTensor * t) {                          \
     THTensor_(resizeAs)(r_, t);                                                \
@@ -2849,10 +2949,12 @@ TENSOR_IMPLEMENT_LOGICAL(ne, !=)
 
 #if defined(TH_REAL_IS_LONG)
 LAB_IMPLEMENT_BASIC_FUNCTION(abs, labs)
+LAB_IMPLEMENT_BASIC_FUNCTION(neg, -)
 #endif /* long only part */
 
-#if defined(TH_REAL_IS_INT)
+#if defined(TH_REAL_IS_SHORT) || defined(TH_REAL_IS_INT)
 LAB_IMPLEMENT_BASIC_FUNCTION(abs, abs)
+LAB_IMPLEMENT_BASIC_FUNCTION(neg, -)
 #endif /* int only part */
 
 #if defined(TH_REAL_IS_BYTE)
@@ -2864,19 +2966,64 @@ LAB_IMPLEMENT_BASIC_FUNCTION(abs, abs)
     TH_TENSOR_APPLY(real, tensor, sum = sum OP * tensor_data;);                \
     return sum;                                                                \
   }
-#if !(defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE))
+
 TENSOR_IMPLEMENT_LOGICAL_SUM(logicalall, &&, 1)
 TENSOR_IMPLEMENT_LOGICAL_SUM(logicalany, ||, 0)
-#endif
+
 #endif /* Byte only part */
 
-#if defined(TH_REAL_IS_REAL)
-LAB_IMPLEMENT_BASIC_FUNCTION(log1p, log1p)
-LAB_IMPLEMENT_BASIC_FUNCTION(sigmoid, TH_sigmoid)
+/* floating point only now */
+#if defined(TH_REAL_IS_REAL) || defined(TH_REAL_IS_COMPLEX)
+
+#if defined(TH_REAL_IS_FLOAT)
+#define TH_MATH_NAME(fn) fn##f
+#else
+#define TH_MATH_NAME(fn) fn
+#endif
+
+LAB_IMPLEMENT_BASIC_FUNCTION(arg, CARG)
+LAB_IMPLEMENT_BASIC_FUNCTION(re, CREAL)
+LAB_IMPLEMENT_BASIC_FUNCTION(im, CIMAG)
+LAB_IMPLEMENT_BASIC_FUNCTION(conj, CONJ)
+
+LAB_IMPLEMENT_BASIC_FUNCTION(log, TH_MATH_NAME(log))
+LAB_IMPLEMENT_BASIC_FUNCTION(lgamma, TH_MATH_NAME(lgamma))
+LAB_IMPLEMENT_BASIC_FUNCTION(log1p, TH_MATH_NAME(log1p))
+LAB_IMPLEMENT_BASIC_FUNCTION(sigmoid, TH_MATH_NAME(TH_sigmoid))
+LAB_IMPLEMENT_BASIC_FUNCTION(exp, TH_MATH_NAME(exp))
+LAB_IMPLEMENT_BASIC_FUNCTION(cos, TH_MATH_NAME(cos))
+LAB_IMPLEMENT_BASIC_FUNCTION(acos, TH_MATH_NAME(acos))
+LAB_IMPLEMENT_BASIC_FUNCTION(cosh, TH_MATH_NAME(cosh))
+LAB_IMPLEMENT_BASIC_FUNCTION(sin, TH_MATH_NAME(sin))
+LAB_IMPLEMENT_BASIC_FUNCTION(asin, TH_MATH_NAME(asin))
+LAB_IMPLEMENT_BASIC_FUNCTION(sinh, TH_MATH_NAME(sinh))
+LAB_IMPLEMENT_BASIC_FUNCTION(tan, TH_MATH_NAME(tan))
+LAB_IMPLEMENT_BASIC_FUNCTION(atan, TH_MATH_NAME(atan))
+LAB_IMPLEMENT_BASIC_FUNCTION(tanh, TH_MATH_NAME(tanh))
+LAB_IMPLEMENT_BASIC_FUNCTION_VALUE(pow, TH_MATH_NAME(pow))
+LAB_IMPLEMENT_BASIC_FUNCTION(sqrt, TH_MATH_NAME(sqrt))
+LAB_IMPLEMENT_BASIC_FUNCTION(rsqrt, TH_MATH_NAME(TH_rsqrt))
+LAB_IMPLEMENT_BASIC_FUNCTION(ceil, TH_MATH_NAME(ceil))
+LAB_IMPLEMENT_BASIC_FUNCTION(floor, TH_MATH_NAME(floor))
+LAB_IMPLEMENT_BASIC_FUNCTION(round, TH_MATH_NAME(round))
+LAB_IMPLEMENT_BASIC_FUNCTION(abs, CABS)
+LAB_IMPLEMENT_BASIC_FUNCTION(trunc, TH_MATH_NAME(trunc))
+LAB_IMPLEMENT_BASIC_FUNCTION(frac, TH_MATH_NAME(TH_frac))
+LAB_IMPLEMENT_BASIC_FUNCTION(neg, -)
+LAB_IMPLEMENT_BASIC_FUNCTION(cinv, TH_MATH_NAME(1.0) /)
+
 void THTensor_(atan2)(THTensor *r_, THTensor *tx, THTensor *ty) {
   THTensor_(resizeAs)(r_, tx);
   TH_TENSOR_APPLY3(real, r_, real, tx, real, ty,
-                   *r__data = atan2(*tx_data, *ty_data););
+                   *r__data = TH_MATH_NAME(atan2)(*tx_data, *ty_data););
+}
+
+void THTensor_(lerp)(THTensor *r_, THTensor *a, THTensor *b, real weight) {
+  THArgCheck(THTensor_(nElement)(a) == THTensor_(nElement)(b), 2,
+             "sizes do not match");
+  THTensor_(resizeAs)(r_, a);
+  TH_TENSOR_APPLY3(real, r_, real, a, real, b,
+                   *r__data = TH_MATH_NAME(TH_lerp)(*a_data, *b_data, weight););
 }
 
 void THTensor_(mean)(THTensor *r_, THTensor *t, int dimension, int keepdim) {
@@ -2912,13 +3059,13 @@ void THTensor_(std)(THTensor *r_, THTensor *t, int dimension, int biased,
         sum2 /= t_size;
         sum2 -= sum * sum;
         sum2 = (sum2 < 0 ? 0 : sum2);
-        *r__data = (real)CSQRT(sum2);
+        *r__data = (real)TH_MATH_NAME(sqrt)(sum2);
       } else {
         sum /= t_size;
         sum2 /= t_size - 1;
         sum2 -= ((real)t_size) / ((real)(t_size - 1)) * sum * sum;
         sum2 = (sum2 < 0 ? 0 : sum2);
-        *r__data = (real)CSQRT(sum2);
+        *r__data = (real)TH_MATH_NAME(sqrt)(sum2);
       });
 
   if (!keepdim) {
@@ -2985,8 +3132,9 @@ void THTensor_(norm)(THTensor *r_, THTensor *t, real value, int dimension,
   } else {
     TH_TENSOR_DIM_APPLY2(real, t, real, r_, dimension, accreal sum = 0; long i;
                          for (i = 0; i < t_size; i++) {
-                           sum += CPOW(CABS(t_data[i * t_stride]), value);
-                         } *r__data = CPOW(sum, 1.0 / value);)
+                           sum += TH_MATH_NAME(pow)(
+                               TH_MATH_NAME(fabs)(t_data[i * t_stride]), value);
+                         } *r__data = TH_MATH_NAME(pow)(sum, 1.0 / value);)
   }
 
   if (!keepdim) {
@@ -3000,252 +3148,27 @@ accreal THTensor_(normall)(THTensor *tensor, real value) {
     TH_TENSOR_APPLY(real, tensor, sum += *tensor_data != 0.0;);
     return sum;
   } else if (value == 1) {
-    TH_TENSOR_APPLY(real, tensor, sum += fabs(*tensor_data););
+    TH_TENSOR_APPLY(real, tensor, sum += TH_MATH_NAME(fabs)(*tensor_data););
     return sum;
   } else if (value == 2) {
     TH_TENSOR_APPLY(real, tensor, accreal z = *tensor_data; sum += z * z;);
     return sqrt(sum);
   } else {
-    TH_TENSOR_APPLY(real, tensor, sum += pow(fabs(*tensor_data), value););
-    return pow(sum, 1.0 / value);
+    TH_TENSOR_APPLY(
+        real, tensor,
+        sum += TH_MATH_NAME(pow)(TH_MATH_NAME(fabs)(*tensor_data), value););
+    return TH_MATH_NAME(pow)(sum, 1.0 / value);
   }
-}
-
-real TH_CONCAT_2(Real, CEIL)(real z) { return ceil((z)); }
-real TH_CONCAT_2(Real, FLOOR)(real z) { return floor((z)); }
-real TH_CONCAT_2(Real, ROUND)(real z) { return round((z)); }
-#endif
-/* floating point only now */
-#if defined(TH_REAL_IS_COMPLEX)
-
-void THTensor_(mean)(THTensor *r_, THTensor *t, int dimension, int keepdim) {
-  THArgCheck(dimension >= 0 && dimension < THTensor_(nDimension)(t), 2,
-             "invalid dimension %d", dimension + TH_INDEX_BASE);
-
-  THTensor_(sum)(r_, t, dimension, keepdim);
-  THTensor_(div)(r_, r_, t->size[dimension]);
-}
-
-void THTensor_(std)(THTensor *r_, THTensor *t, int dimension, int flag,
-                    int keepdim) {
-  THLongStorage *dim;
-
-  THArgCheck(dimension >= 0 && dimension < THTensor_(nDimension)(t), 3,
-             "invalid dimension %d", dimension + TH_INDEX_BASE);
-
-  dim = THTensor_(newSizeOf)(t);
-  THLongStorage_set(dim, dimension, 1);
-  THTensor_(resize)(r_, dim, NULL);
-  THLongStorage_free(dim);
-
-  TH_TENSOR_DIM_APPLY2(
-      real, t, real, r_, dimension, accreal sum = 0; accreal sum2 = 0; long i;
-      for (i = 0; i < t_size; i++) {
-        real z = t_data[i * t_stride];
-        sum += z;
-        sum2 += CONJ(z) * z;
-      }
-
-      if (flag) {
-        sum /= t_size;
-        sum2 /= t_size;
-        // sum2 -= sum * sum;
-        sum2 = (CREAL(sum2) < 0 ? 0 : sum2);
-        *r__data = (real)sqrt(sum2);
-      } else {
-        sum /= t_size;
-        sum2 /= t_size - 1;
-        // sum2 -= ((real)t_size) / ((real)(t_size - 1)) * sum * sum;
-        sum2 = (CREAL(sum2) < 0 ? 0 : sum2);
-        *r__data = (real)sqrt(sum2);
-      });
-  if (!keepdim) {
-    THTensor_(squeeze1d)(r_, r_, dimension);
-  }
-}
-
-void THTensor_(var)(THTensor *r_, THTensor *t, int dimension, int flag,
-                    int keepdim) {
-  THLongStorage *dim;
-
-  THArgCheck(dimension >= 0 && dimension < THTensor_(nDimension)(t), 3,
-             "invalid dimension %d", dimension + TH_INDEX_BASE);
-
-  dim = THTensor_(newSizeOf)(t);
-  THLongStorage_set(dim, dimension, 1);
-  THTensor_(resize)(r_, dim, NULL);
-  THLongStorage_free(dim);
-
-  TH_TENSOR_DIM_APPLY2(
-      real, t, real, r_, dimension, accreal sum = 0; accreal sum2 = 0; long i;
-      for (i = 0; i < t_size; i++) {
-        real z = t_data[i * t_stride];
-        sum += z;
-        sum2 += CONJ(z) * z;
-      }
-
-      if (flag) {
-        sum /= t_size;
-        sum2 /= t_size;
-        // sum2 -= sum * sum;
-        sum2 = (CREAL(sum2) < 0 ? 0 : sum2);
-        *r__data = sum2;
-      } else {
-        sum /= t_size;
-        sum2 /= t_size - 1;
-        // sum2 -= ((real)t_size) / ((real)(t_size - 1)) * sum * sum;
-        sum2 = (CREAL(sum2) < 0 ? 0 : sum2);
-        *r__data = (real)sum2;
-      });
-  if (!keepdim) {
-    THTensor_(squeeze1d)(r_, r_, dimension);
-  }
-}
-
-void THTensor_(norm)(THTensor *r_, THTensor *t, real value, int dimension,
-                     int keepdim) {
-  THLongStorage *dim;
-
-  THArgCheck(dimension >= 0 && dimension < THTensor_(nDimension)(t), 3,
-             "invalid dimension %d", dimension + TH_INDEX_BASE);
-
-  dim = THTensor_(newSizeOf)(t);
-  THLongStorage_set(dim, dimension, 1);
-  THTensor_(resize)(r_, dim, NULL);
-  THLongStorage_free(dim);
-
-  if (value == 0) {
-    TH_TENSOR_DIM_APPLY2(real, t, real, r_, dimension, accreal sum = 0; long i;
-                         for (i = 0; i < t_size; i++) sum +=
-                         (CREAL(t_data[i * t_stride]) != 0.0 &&
-                          CIMAG(t_data[i * t_stride]) != 0.0);
-                         *r__data = sum;)
-  } else {
-    TH_TENSOR_DIM_APPLY2(real, t, real, r_, dimension, accreal sum = 0; long i;
-                         for (i = 0; i < t_size; i++) sum +=
-                         CPOW(CABS(t_data[i * t_stride]), value);
-                         *r__data = pow(sum, 1.0 / value);)
-  }
-  if (!keepdim) {
-    THTensor_(squeeze1d)(r_, r_, dimension);
-  }
-}
-
-accreal THTensor_(normall)(THTensor *tensor, real value) {
-  accreal sum = 0;
-  if (value == 0) {
-    TH_TENSOR_APPLY(real, tensor, sum += *tensor_data != 0.0;);
-    return sum;
-  } else if (value == 1) {
-    TH_TENSOR_APPLY(real, tensor, sum += CABS(*tensor_data););
-    return sum;
-  } else if (value == 2) {
-    TH_TENSOR_APPLY(real, tensor, accreal z = *tensor_data; sum += z * z;);
-    return sqrt(sum);
-  } else {
-    TH_TENSOR_APPLY(real, tensor, sum += pow(CABS(*tensor_data), value););
-    return pow(sum, 1.0 / value);
-  }
-}
-
-LAB_IMPLEMENT_BASIC_FUNCTION(arg, CARG)
-LAB_IMPLEMENT_BASIC_FUNCTION(re, CREAL)
-LAB_IMPLEMENT_BASIC_FUNCTION(im, CIMAG)
-LAB_IMPLEMENT_BASIC_FUNCTION(conj, CONJ)
-
-void THTensor_(hermitian)(THTensor *r_, THTensor *t, int dimension1_,
-                          int dimension2_) {
-  THTensor_(conj)(r_, t);
-  THTensor_(transpose)(r_, NULL, dimension1_, dimension2_);
-}
-
-real TH_CONCAT_2(Real, CEIL)(real z) {
-  return ceil(CREAL(z)) + ceil(CIMAG(z)) * J;
-}
-real TH_CONCAT_2(Real, FLOOR)(real z) {
-  return floor(CREAL(z)) + floor(CIMAG(z)) * J;
-}
-real TH_CONCAT_2(Real, ROUND)(real z) {
-  return round(CREAL(z)) + round(CIMAG(z)) * J;
-}
-
-// THC_API void THTensor_(zabs)(THPartTensor *self, THTensor *src);
-// THC_API void THTensor_(zarg)(THPartTensor *self, THTensor *src);
-// THC_API void THTensor_(zre)(THPartTensor *self, THTensor *src);
-// THC_API void THTensor_(zim)(THPartTensor *self, THTensor *src);
-// THC_API void THTensor_(zconj)(THPartTensor *self, THTensor *src);
-//
-// THC_API void THTensor_(arg)(THTensor *self, THTensor *src);
-// THC_API void THTensor_(re)(THTensor *self, THTensor *src);
-// THC_API void THTensor_(im)(THTensor *self, THTensor *src);
-// THC_API void THTensor_(conj)(THTensor *self, THTensor *src);
-#else
-#endif // complex floating point
-
-LAB_IMPLEMENT_BASIC_ZFUNCTION(abs, CABS)
-
-#if defined(TH_REAL_IS_REAL) || defined(TH_REAL_IS_COMPLEX)
-
-LAB_IMPLEMENT_BASIC_ZFUNCTION(arg, CARG)
-LAB_IMPLEMENT_BASIC_ZFUNCTION(re, CREAL)
-LAB_IMPLEMENT_BASIC_ZFUNCTION(im, CIMAG)
-LAB_IMPLEMENT_BASIC_ZFUNCTION(conj, CONJ)
-
-LAB_IMPLEMENT_BASIC_FUNCTION(ceil, TH_CONCAT_2(Real, CEIL))
-LAB_IMPLEMENT_BASIC_FUNCTION(floor, TH_CONCAT_2(Real, FLOOR))
-LAB_IMPLEMENT_BASIC_FUNCTION(round, TH_CONCAT_2(Real, ROUND))
-
-#ifdef CEIL
-#undef CEIL
-#endif
-
-#ifdef FLOOR
-#undef FLOOR
-#endif
-
-#ifdef ROUND
-#undef ROUND
-#endif
-
-LAB_IMPLEMENT_BASIC_FUNCTION(log, CLOG)
-LAB_IMPLEMENT_BASIC_FUNCTION(exp, CEXP)
-LAB_IMPLEMENT_BASIC_FUNCTION(cos, CCOS)
-LAB_IMPLEMENT_BASIC_FUNCTION(acos, CACOS)
-LAB_IMPLEMENT_BASIC_FUNCTION(cosh, CCOSH)
-LAB_IMPLEMENT_BASIC_FUNCTION(sin, CSIN)
-LAB_IMPLEMENT_BASIC_FUNCTION(asin, CASIN)
-LAB_IMPLEMENT_BASIC_FUNCTION(sinh, CSINH)
-LAB_IMPLEMENT_BASIC_FUNCTION(tan, CTAN)
-LAB_IMPLEMENT_BASIC_FUNCTION(atan, CATAN)
-LAB_IMPLEMENT_BASIC_FUNCTION(tanh, CTANH)
-LAB_IMPLEMENT_BASIC_FUNCTION_VALUE(pow, CPOW)
-LAB_IMPLEMENT_BASIC_FUNCTION(sqrt, CSQRT)
-LAB_IMPLEMENT_BASIC_FUNCTION(rsqrt, TH_rsqrt)
-LAB_IMPLEMENT_BASIC_FUNCTION(abs, CABS)
-LAB_IMPLEMENT_BASIC_FUNCTION(trunc, trunc)
-LAB_IMPLEMENT_BASIC_FUNCTION(frac, TH_frac)
-LAB_IMPLEMENT_BASIC_FUNCTION(neg, -)
-LAB_IMPLEMENT_BASIC_FUNCTION(cinv, 1.0 /)
-
-void THTensor_(lerp)(THTensor *r_, THTensor *a, THTensor *b, real weight) {
-  THArgCheck(THTensor_(nElement)(a) == THTensor_(nElement)(b), 2,
-             "sizes do not match");
-  THTensor_(resizeAs)(r_, a);
-  TH_TENSOR_APPLY3(real, r_, real, a, real, b,
-                   *r__data = TH_lerp(*a_data, *b_data, weight););
 }
 
 void THTensor_(renorm)(THTensor *res, THTensor *src, real value, int dimension,
                        real maxnorm) {
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("renorm is not supported for complex type tensors");
-#else
   int i;
   THTensor *rowR, *rowS;
 
   THArgCheck(dimension >= 0 && dimension < THTensor_(nDimension)(src), 3,
              "invalid dimension %d", dimension + TH_INDEX_BASE);
-  THArgCheck(CREAL(value) > 0, 2, "non-positive-norm not supported");
+  THArgCheck(value > 0, 2, "non-positive-norm not supported");
   THArgCheck(THTensor_(nDimension)(src) > 1, 1,
              "need at least 2 dimensions, got %d dimensions",
              THTensor_(nDimension)(src));
@@ -3262,11 +3185,12 @@ void THTensor_(renorm)(THTensor *res, THTensor *src, real value, int dimension,
     THTensor_(select)(rowS, src, dimension, i);
     THTensor_(select)(rowR, res, dimension, i);
     if (value == 1) {
-      TH_TENSOR_APPLY(real, rowS, norm += CABS(*rowS_data););
+      TH_TENSOR_APPLY(real, rowS, norm += fabs(*rowS_data););
     } else if (value == 2) {
       TH_TENSOR_APPLY(real, rowS, accreal z = *rowS_data; norm += z * z;);
     } else {
-      TH_TENSOR_APPLY(real, rowS, norm += CPOW(CABS(*rowS_data), value););
+      TH_TENSOR_APPLY(real, rowS, norm += TH_MATH_NAME(pow)(
+                                      TH_MATH_NAME(fabs)(*rowS_data), value););
     }
 
     norm = pow(norm, 1 / value);
@@ -3282,14 +3206,14 @@ void THTensor_(renorm)(THTensor *res, THTensor *src, real value, int dimension,
 
   THTensor_(free)(rowR);
   THTensor_(free)(rowS);
-#endif
 }
 
 accreal THTensor_(dist)(THTensor *tensor, THTensor *src, real value) {
   real sum = 0;
   TH_TENSOR_APPLY2(real, tensor, real, src,
-                   sum += CPOW(CABS(*tensor_data - *src_data), value);)
-  return pow(sum, 1.0 / value);
+                   sum += TH_MATH_NAME(pow)(
+                       TH_MATH_NAME(fabs)(*tensor_data - *src_data), value););
+  return TH_MATH_NAME(pow)(sum, 1.0 / value);
 }
 
 accreal THTensor_(meanall)(THTensor *tensor) {
@@ -3337,10 +3261,10 @@ void THTensor_(logspace)(THTensor *r_, real a, real b, long n) {
   }
 
   if (n == 1) {
-    TH_TENSOR_APPLY(real, r_, *r__data = pow(10.0, a); i++;);
+    TH_TENSOR_APPLY(real, r_, *r__data = TH_MATH_NAME(pow)(10.0, a); i++;);
   } else {
-    TH_TENSOR_APPLY(real, r_,
-                    *r__data = pow(10.0, a + i * (b - a) / ((real)(n - 1)));
+    TH_TENSOR_APPLY(real, r_, *r__data = TH_MATH_NAME(pow)(
+                                  10.0, a + i * (b - a) / ((real)(n - 1)));
                     i++;);
   }
 }
@@ -3359,9 +3283,6 @@ void THTensor_(randn)(THTensor *r_, THGenerator *_generator,
 
 void THTensor_(histc)(THTensor *hist, THTensor *tensor, long nbins,
                       real minvalue, real maxvalue) {
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("histc is not supported for complex type tensors");
-#else
   real minval;
   real maxval;
   real *h_data;
@@ -3386,14 +3307,10 @@ void THTensor_(histc)(THTensor *hist, THTensor *tensor, long nbins,
     const int bin = (int)((*tensor_data - minval) / (maxval - minval) * nbins);
     h_data[THMin(bin, nbins - 1)] += 1;
   });
-#endif
 }
 
 void THTensor_(bhistc)(THTensor *hist, THTensor *tensor, long nbins,
                        real minvalue, real maxvalue) {
-#if defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE)
-  return THError("histc is not supported for complex type tensors");
-#else
   THArgCheck(THTensor_(nDimension)(tensor) < 3, 2,
              "invalid dimension %d, the input must be a 2d tensor",
              THTensor_(nDimension)(tensor));
@@ -3430,10 +3347,9 @@ void THTensor_(bhistc)(THTensor *hist, THTensor *tensor, long nbins,
                            hist_data[THMin(bin, nbins - 1)] += 1;
                          }
                        });
-#endif
 }
 
+#undef TH_MATH_NAME
 #endif /* floating point only part */
-
 #undef IS_NONZERO
 #endif

@@ -1,5 +1,7 @@
 This is a fork of pytorch that enables complex tensor types on CPU and GPU, brought to you by [Philipp Pelz](http://philipp.pelz.site).
 
+Last merge with upstream/master: 
+
 It implements most methods known for float tensors. Not implemented:
 
 TODO

@@ -17,6 +17,9 @@
 typedef thrust::complex<float> ccx;
 typedef thrust::complex<double> zcx;
 
+static inline ccx toCcx(cx val) { return ccx(crealf(val), cimagf(val)); }
+static inline zcx toZcx(zx val) { return zcx(creal(val), cimag(val)); }
+
 #else
 
 #include "cuComplex.h"

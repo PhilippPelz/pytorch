@@ -376,8 +376,13 @@ def create_derived(backend_type_env, declarations):
     def bool_option_is_string(argument):
         return 'if_true' in argument and isinstance(argument['if_true'], string_type)
 
-    def get_argument(argument, option):
-        if requires_checked_cast(argument):
+    def get_argument(argument, option, env):
+        # print argument['type'],env['ScalarName']
+        if argument['type'] == 'real' and env['ScalarName'] == 'ZFloat' and 'CUDA' in backend_type_env['Backend']:
+            return 'toCcx(%s_)' % argument['name']
+        elif argument['type'] == 'real' and env['ScalarName'] == 'ZDouble' and 'CUDA' in backend_type_env['Backend']:
+            return 'toZcx(%s_)' % argument['name']
+        elif requires_checked_cast(argument):
             checked_use = CHECKED_USE.get(
                 argument['type'], '{}_').format(argument['name'])
             if nullable_argument(argument):
@@ -402,7 +407,7 @@ def create_derived(backend_type_env, declarations):
         # e.g. argument 0, i.e. repeat the 0th argument in this position...
         elif argument['type'] == 'argument':
             index = int(argument['name'])
-            return get_argument(option['arguments'][index], option)
+            return get_argument(option['arguments'][index], option, env)
         else:
             return argument['name']
 
@@ -411,8 +416,8 @@ def create_derived(backend_type_env, declarations):
             (option['mode'] == 'TH' and argument['type'] == 'THGenerator*') or
             argument['name'] == 'THPDefaultGenerator->cdata')
 
-    def get_arguments(option):
-        return [get_argument(argument, option)
+    def get_arguments(option,env):
+        return [get_argument(argument, option, env)
                 for argument in option['arguments'] if not drop_argument(argument, option)]
 
     def is_actual_return_long(ret):
@@ -522,7 +527,7 @@ def create_derived(backend_type_env, declarations):
                     scalar_check = (check if scalar_check is None
                                     else scalar_check + ' && ' + check)
 
-        option['derived_actuals'] = get_arguments(option)
+        option['derived_actuals'] = get_arguments(option,env)
         is_nn = option['mode'] == 'NN'
         if is_cuda or is_nn:
             option['derived_actuals'] = [
@@ -540,8 +545,9 @@ def create_derived(backend_type_env, declarations):
 
         call = prefix + \
             CodeTemplate("${cname}(${derived_actuals})").substitute(env)
+        # print call
         ret = option['return']
-
+        # print ret['kind']
         if ret['kind'] == 'arguments':
             if 'aten_custom_call' in option:
                 # all aten_custom_call bodies handle settings on their own.
@@ -571,7 +577,11 @@ def create_derived(backend_type_env, declarations):
                 body.append(CodeTemplate("return std::tuple<${types}>(${names});").substitute(
                     types=types, names=names))
         elif ret['kind'] == 'type':
-            if ret['type'] == 'THTensor*':
+            if ret['type'] == 'accreal' and env['ScalarName'] == 'ZDouble' and 'CUDA' in backend_type_env['Backend']:
+                body.append("return toZx({});".format(call))
+            elif ret['type'] == 'accreal' and env['ScalarName'] == 'ZFloat' and 'CUDA' in backend_type_env['Backend']:
+                body.append("return toCx({});".format(call))
+            elif ret['type'] == 'THTensor*':
                 maybe_scalar = "->maybeScalar({})".format(scalar_check) \
                                if scalar_check is not None \
                                else ""

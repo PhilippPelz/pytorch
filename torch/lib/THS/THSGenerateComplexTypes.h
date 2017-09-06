@@ -6,8 +6,8 @@
 #undef I
 #define J _Complex_I
 
-typedef float _Complex cx;
-typedef double _Complex zx;
+typedef cx cx;
+typedef zx zx;
 
 #define CABS cabsf
 #define CACOS cacosf
