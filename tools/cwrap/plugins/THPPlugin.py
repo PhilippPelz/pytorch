@@ -215,12 +215,26 @@ ${cpu}
         self.stateless_declarations = []
         self.docstrings = []
 
+    BACKEND_SUBSTITUTIONS = {
+        'CPU': 'TH',
+        'CUDA': 'THCuda',
+    }
+
+    def substitute_tensor_backend(self, arg, option):
+        if 'Backend' in arg['type']:
+            arg['type'] = arg['type'].replace('Backend',
+                                              self.BACKEND_SUBSTITUTIONS.get(option['backends'][0]))
+            # handle the fact that THCudaTensor isn't THCudaFloatTensor
+            if option['backends'][0] == 'CUDA' and 'Float' in arg['type']:
+                arg['type'] = arg['type'].replace('Float', '')
     def get_type_unpack(self, arg, option):
+        self.substitute_tensor_backend(arg, option)
         return self.TYPE_UNPACK.get(arg['type'], None)
 
     def get_type_check(self, arg, option):
         if arg['type'] == 'THSize*' and arg.get('long_args', False):
             return self.SIZE_VARARG_CHECK
+        self.substitute_tensor_backend(arg, option)
         return self.TYPE_CHECK.get(arg['type'], None)
 
     # TODO: argument descriptions shouldn't be part of THP, but rather a general cwrap thing
@@ -424,7 +438,7 @@ ${cpu}
 
             return " || ".join(defineds)
 
-        for declaration in declarations:            
+        for declaration in declarations:
         # Disable all methods for THHalfTensor, unless cpu_half is True
 
             dfstr = backends_types_to_defined_if_string(declaration)

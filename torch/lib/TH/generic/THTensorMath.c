@@ -3347,14 +3347,20 @@ void THTensor_(logspace)(THTensor *r_, real a, real b, long n) {
 
 void THTensor_(rand)(THTensor *r_, THGenerator *_generator,
                      THLongStorage *size) {
+#if defined(TH_REAL_IS_COMPLEX)
+#else
   THTensor_(resize)(r_, size, NULL);
   THTensor_(uniform)(r_, _generator, 0, 1);
+#endif
 }
 
 void THTensor_(randn)(THTensor *r_, THGenerator *_generator,
                       THLongStorage *size) {
+#if defined(TH_REAL_IS_COMPLEX)
+#else
   THTensor_(resize)(r_, size, NULL);
   THTensor_(normal)(r_, _generator, 0, 1);
+#endif
 }
 
 void THTensor_(histc)(THTensor *hist, THTensor *tensor, long nbins,
