@@ -133,6 +133,7 @@ void THTensor_(gesv)(THTensor *rb_, THTensor *ra_, THTensor *b, THTensor *a) {
   lda = n;
   ldb = n;
 
+<<<<<<< HEAD
   ipiv = THIntTensor_newWithSize1d((long)n);
   THLapack_(gesv)(n, nrhs, THTensor_(data)(ra__), lda, THIntTensor_data(ipiv),
                   THTensor_(data)(rb__), ldb, &info);
@@ -142,6 +143,20 @@ void THTensor_(gesv)(THTensor *rb_, THTensor *ra_, THTensor *b, THTensor *a) {
       THCleanup(THTensor_(free)(ra__); THTensor_(free)(rb__);
                 THIntTensor_free(ipiv); if (free_b) THTensor_(free)(b);),
       "gesv", info, info);
+=======
+  ipiv = THIntTensor_newWithSize1d((int64_t)n);
+  THLapack_(gesv)(n, nrhs,
+		  THTensor_(data)(ra__), lda, THIntTensor_data(ipiv),
+		  THTensor_(data)(rb__), ldb, &info);
+
+  THLapackCheckWithCleanup("Lapack Error in %s : U(%d,%d) is zero, singular U.",
+                           THCleanup(
+                               THTensor_(free)(ra__);
+                               THTensor_(free)(rb__);
+                               THIntTensor_free(ipiv);
+                               if (free_b) THTensor_(free)(b);),
+                           "gesv", info, info);
+>>>>>>> upstream/master
 
   THTensor_(freeCopyTo)(ra__, ra_);
   THTensor_(freeCopyTo)(rb__, rb_);
@@ -279,7 +294,7 @@ void THTensor_(geev)(THTensor *re_, THTensor *rv_, THTensor *a_,
   THTensor *work, *wi, *wr, *a;
   real wkopt;
   real *rv_data;
-  long i;
+  int64_t i;
 
   THTensor *re__ = NULL;
   THTensor *rv__ = NULL;
@@ -488,7 +503,7 @@ void THTensor_(getri)(THTensor *ra_, THTensor *a) {
   m = ra__->size[0];
   n = ra__->size[1];
   lda = m;
-  ipiv = THIntTensor_newWithSize1d((long)m);
+  ipiv = THIntTensor_newWithSize1d((int64_t)m);
 
   /* Run LU */
   THLapack_(getrf)(n, n, THTensor_(data)(ra__), lda, THIntTensor_data(ipiv),
@@ -524,7 +539,7 @@ void THTensor_(clearUpLoTriangle)(THTensor *a, const char *uplo) {
 
   /* Build full matrix */
   real *p = THTensor_(data)(a);
-  long i, j;
+  int64_t i, j;
 
   /* Upper Triangular Case */
   if (uplo[0] == 'U') {
@@ -554,7 +569,7 @@ void THTensor_(copyUpLoTriangle)(THTensor *a, const char *uplo) {
 
   /* Build full matrix */
   real *p = THTensor_(data)(a);
-  long i, j;
+  int64_t i, j;
 
   /* Upper Triangular Case */
   if (uplo[0] == 'U') {
@@ -924,20 +939,13 @@ void THTensor_(ormqr)(THTensor *ra_, THTensor *a, THTensor *tau, THTensor *c,
   THTensor_(freeCopyTo)(ra__, ra_);
   THTensor_(free)(work);
 }
-
-<<<<<<< HEAD
 void THTensor_(btrifact)(THTensor *ra_, THIntTensor *rpivots_,
-                         THIntTensor *rinfo_, THTensor *a) {
+                         THIntTensor *rinfo_, int pivot, THTensor *a) {
   THArgCheck(THTensor_(nDimension)(a) == 3, 1, "expected 3D tensor, got %dD",
              THTensor_(nDimension)(a));
-=======
-void THTensor_(btrifact)(THTensor *ra_, THIntTensor *rpivots_, THIntTensor *rinfo_, int pivot, THTensor *a)
-{
-  THArgCheck(THTensor_(nDimension)(a) == 3, 1, "expected 3D tensor, got %dD", THTensor_(nDimension)(a));
   if (!pivot) {
     THError("btrifact without pivoting is not implemented on the CPU");
   }
->>>>>>> upstream/master
 
   if (ra_ != a) {
     THTensor_(resizeAs)(ra_, a);
@@ -949,7 +957,7 @@ void THTensor_(btrifact)(THTensor *ra_, THIntTensor *rpivots_, THIntTensor *rinf
   if (m != n) {
     THError("btrifact is only implemented for square matrices");
   }
-  long num_batches = THTensor_(size)(a, 0);
+  int64_t num_batches = THTensor_(size)(a, 0);
   THTensor *ra__;
   int lda;
 
@@ -979,7 +987,7 @@ void THTensor_(btrifact)(THTensor *ra_, THIntTensor *rpivots_, THIntTensor *rinf
 
   THIntTensor_resize2d(rpivots_, num_batches, n);
 
-  long batch = 0;
+  int64_t batch = 0;
   for (; batch < num_batches; ++batch) {
     THTensor_(select)(ai, a, 0, batch);
     THTensor_(select)(rai, ra__, 0, batch);
@@ -1007,33 +1015,26 @@ void THTensor_(btrifact)(THTensor *ra_, THIntTensor *rpivots_, THIntTensor *rinf
   }
 }
 
-<<<<<<< HEAD
 void THTensor_(btrisolve)(THTensor *rb_, THTensor *b, THTensor *atf,
                           THIntTensor *pivots) {
   THArgCheck(THTensor_(nDimension)(atf) == 3, 1, "expected 3D tensor, got %dD",
              THTensor_(nDimension)(atf));
-=======
-void THTensor_(btrisolve)(THTensor *rb_, THTensor *b, THTensor *atf, THIntTensor *pivots)
-{
-  THArgCheck(THTensor_(nDimension)(atf) == 3, 1, "expected 3D tensor, got %dD",
-             THTensor_(nDimension)(atf));
-  THArgCheck(THTensor_(nDimension)(b) == 3 ||
-             THTensor_(nDimension)(b) == 2, 4, "expected 2D or 3D tensor");
-  THArgCheck(THTensor_(size)(atf, 0) ==
-             THTensor_(size)(b, 0), 3, "number of batches must be equal");
-  THArgCheck(THTensor_(size)(atf, 1) ==
-             THTensor_(size)(atf, 2), 3, "A matrices must be square");
-  THArgCheck(THTensor_(size)(atf, 1) ==
-             THTensor_(size)(b, 1), 3, "dimensions of A and b must be equal");
->>>>>>> upstream/master
+  THArgCheck(THTensor_(nDimension)(b) == 3 || THTensor_(nDimension)(b) == 2, 4,
+             "expected 2D or 3D tensor");
+  THArgCheck(THTensor_(size)(atf, 0) == THTensor_(size)(b, 0), 3,
+             "number of batches must be equal");
+  THArgCheck(THTensor_(size)(atf, 1) == THTensor_(size)(atf, 2), 3,
+             "A matrices must be square");
+  THArgCheck(THTensor_(size)(atf, 1) == THTensor_(size)(b, 1), 3,
+             "dimensions of A and b must be equal");
 
   if (rb_ != b) {
     THTensor_(resizeAs)(rb_, b);
     THTensor_(copy)(rb_, b);
   }
 
-  long num_batches = atf->size[0];
-  long n = atf->size[1];
+  int64_t num_batches = atf->size[0];
+  int64_t n = atf->size[1];
   int nrhs = rb_->nDimension > 2 ? rb_->size[2] : 1;
 
   int lda, ldb;
@@ -1088,21 +1089,16 @@ void THTensor_(btrisolve)(THTensor *rb_, THTensor *b, THTensor *atf, THIntTensor
     THError("Error: rpivots_ is not contiguous.");
   }
 
-  for (long batch = 0; batch < num_batches; ++batch) {
+  for (int64_t batch = 0; batch < num_batches; ++batch) {
     THTensor_(select)(ai, atf_, 0, batch);
     THTensor_(select)(rbi, rb__, 0, batch);
     THIntTensor_select(pivoti, pivots, 0, batch);
 
 #if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
     int info;
-<<<<<<< HEAD
-    THLapack_(getrs)('N', n, 1, THTensor_(data)(ai), lda,
-                     THIntTensor_data(pivoti), THTensor_(data)(rbi), n, &info);
-=======
     THLapack_(getrs)('N', n, nrhs, THTensor_(data)(ai), lda,
-                     THIntTensor_data(pivoti), THTensor_(data)(rbi),
-                     ldb, &info);
->>>>>>> upstream/master
+                     THIntTensor_data(pivoti), THTensor_(data)(rbi), ldb,
+                     &info);
     if (info != 0) {
       THError("Error: Nonzero info.");
     }
@@ -1119,12 +1115,8 @@ void THTensor_(btrisolve)(THTensor *rb_, THTensor *b, THTensor *atf, THIntTensor
     THTensor_(free)(atf_);
   }
 
-<<<<<<< HEAD
-=======
   if (rb__ != rb_) {
     THTensor_(freeCopyTo)(rb__, rb_);
   }
 }
-
->>>>>>> upstream/master
 #endif

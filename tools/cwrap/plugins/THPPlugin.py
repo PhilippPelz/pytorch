@@ -227,6 +227,7 @@ ${cpu}
             # handle the fact that THCudaTensor isn't THCudaFloatTensor
             if option['backends'][0] == 'CUDA' and 'Float' in arg['type']:
                 arg['type'] = arg['type'].replace('Float', '')
+
     def get_type_unpack(self, arg, option):
         self.substitute_tensor_backend(arg, option)
         return self.TYPE_UNPACK.get(arg['type'], None)
@@ -392,14 +393,19 @@ ${cpu}
                         return "!IS_CUDA"
                     else:
                         return 'defined(TH_REAL_IS_{0})'.format(real.upper())
-
             def expand_composite_type(p, t):
                 if t == 'floating_point':
-                    result = ['double', 'float']
+                    result = ['double', 'float','ZFloat', 'ZDouble']
                     if p == 'CUDA':
                         result.append('half')
                 elif t == 'integral':
                     result = ['byte', 'char', 'short', 'int', 'long']
+                elif t == 'floating_point_complex':
+                    result = ['ZFloat', 'ZDouble' ]
+                elif t == 'floating_point_real':
+                    result = ['double', 'float' ]
+                    if p == 'CUDA':
+                        result.append('half')
                 else:
                     result = [t]
                 return result

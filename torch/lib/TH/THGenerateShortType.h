@@ -2,9 +2,10 @@
 #error "You must define TH_GENERIC_FILE before including THGenerateShortType.h"
 #endif
 
-#define real short
+#define real int16_t
 #define part short
-#define accreal long
+#define ureal uint16_t
+#define accreal int64_t
 #define TH_CONVERT_REAL_TO_ACCREAL(_val) (accreal)(_val)
 #define TH_CONVERT_ACCREAL_TO_REAL(_val) (real)(_val)
 #define Real Short
@@ -14,6 +15,7 @@
 #line 1 TH_GENERIC_FILE
 #include TH_GENERIC_FILE
 #undef real
+#undef ureal
 #undef accreal
 #undef Real
 #undef Part

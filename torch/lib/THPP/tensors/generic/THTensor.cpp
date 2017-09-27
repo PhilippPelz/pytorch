@@ -5,14 +5,13 @@
 #define const_tensor_cast(tensor) dynamic_cast<const THTensor &>(tensor)
 #define const_storage_cast(storage)                                            \
   dynamic_cast<const THStorage<real> &>(storage)
-#define const_long_cast(tensor) dynamic_cast<const THTensor<long> &>(tensor)
-#define const_float_cast(tensor) dynamic_cast<const THTensor<float> &>(tensor)
+#define const_long_cast(tensor) dynamic_cast<const THTensor<int64_t> &>(tensor)
 #define const_double_cast(tensor) dynamic_cast<const THTensor<double> &>(tensor)
+#define const_float_cast(tensor) dynamic_cast<const THTensor<float> &>(tensor)
 #define const_zfloat_cast(tensor) dynamic_cast<const THTensor<ccx> &>(tensor)
 #define const_zdouble_cast(tensor) dynamic_cast<const THTensor<zcx> &>(tensor)
-#define const_int_cast(tensor) dynamic_cast<const THTensor<int> &>(tensor)
-#define const_byte_cast(tensor)                                                \
-  dynamic_cast<const THTensor<unsigned char> &>(tensor)
+#define const_int_cast(tensor) dynamic_cast<const THTensor<int32_t> &>(tensor)
+#define const_byte_cast(tensor) dynamic_cast<const THTensor<uint8_t> &>(tensor)
 #define const_generator_cast(generator)                                        \
   dynamic_cast<const THGenerator &>(generator)
 
@@ -84,14 +83,14 @@ template <> auto THTensor<real>::contiguous() const -> std::unique_ptr<Tensor> {
 }
 
 template <>
-auto THTensor<real>::newSelect(int dimension, long sliceIndex) const
+auto THTensor<real>::newSelect(int dimension, int64_t sliceIndex) const
     -> THTensor * {
   return new THTensor(THTensor_(newSelect)(tensor, dimension, sliceIndex));
 }
 
 template <>
-auto THTensor<real>::newNarrow(int dimension, long firstIndex, long size) const
-    -> THTensor * {
+auto THTensor<real>::newNarrow(int dimension, int64_t firstIndex,
+                               int64_t size) const -> THTensor * {
   return new THTensor(
       THTensor_(newNarrow)(tensor, dimension, firstIndex, size));
 }
@@ -103,7 +102,7 @@ auto THTensor<real>::newTranspose(int dimension1, int dimension2) const
 }
 
 template <>
-auto THTensor<real>::newUnfold(int dimension, long size, long step) const
+auto THTensor<real>::newUnfold(int dimension, int64_t size, int64_t step) const
     -> THTensor * {
   return new THTensor(THTensor_(newUnfold)(tensor, dimension, size, step));
 }
@@ -111,7 +110,7 @@ auto THTensor<real>::newUnfold(int dimension, long size, long step) const
 template <>
 auto THTensor<real>::newExpand(const long_range &size) const -> THTensor * {
   THLongStorage *size_storage = THLongStorage_newWithSize(size.size());
-  std::memcpy(size_storage->data, size.data(), sizeof(long) * size.size());
+  std::memcpy(size_storage->data, size.data(), sizeof(int64_t) * size.size());
   // TODO this might leak on error
   auto expanded = new THTensor(THTensor_(newExpand)(tensor, size_storage));
   THLongStorage_free(size_storage);
@@ -121,7 +120,7 @@ auto THTensor<real>::newExpand(const long_range &size) const -> THTensor * {
 template <>
 auto THTensor<real>::newView(const long_range &size) const -> THTensor * {
   THLongStorage *size_storage = THLongStorage_newWithSize(size.size());
-  std::memcpy(size_storage->data, size.data(), sizeof(long) * size.size());
+  std::memcpy(size_storage->data, size.data(), sizeof(int64_t) * size.size());
   // TODO this might leak on error
   auto viewed = new THTensor(THTensor_(newView)(tensor, size_storage));
   THLongStorage_free(size_storage);
@@ -131,10 +130,10 @@ auto THTensor<real>::newView(const long_range &size) const -> THTensor * {
 template <> int THTensor<real>::nDim() const { return tensor->nDimension; }
 
 template <> auto THTensor<real>::sizes() const -> long_range {
-  return std::vector<long>(tensor->size, tensor->size + tensor->nDimension);
+  return std::vector<int64_t>(tensor->size, tensor->size + tensor->nDimension);
 }
 
-template <> const long *THTensor<real>::rawSizes() const {
+template <> const int64_t *THTensor<real>::rawSizes() const {
   return tensor->size;
 }
 
@@ -142,7 +141,7 @@ template <> auto THTensor<real>::strides() const -> long_range {
   return long_range(tensor->stride, tensor->stride + tensor->nDimension);
 }
 
-template <> const long *THTensor<real>::rawStrides() const {
+template <> const int64_t *THTensor<real>::rawStrides() const {
   return tensor->stride;
 }
 
@@ -154,7 +153,7 @@ template <> std::size_t THTensor<real>::elementSize() const {
   return sizeof(real);
 }
 
-template <> long long THTensor<real>::numel() const {
+template <> int64_t THTensor<real>::numel() const {
   return THTensor_(numel)(tensor);
 }
 
@@ -173,13 +172,14 @@ template <> void *THTensor<real>::cdata() { return tensor; }
 template <> const void *THTensor<real>::cdata() const { return tensor; }
 
 template <>
-auto THTensor<real>::resize(const std::initializer_list<long> &new_size)
+auto THTensor<real>::resize(const std::initializer_list<int64_t> &new_size)
     -> THTensor & {
   return resize(new_size.begin(), new_size.end());
 }
 
 template <>
-auto THTensor<real>::resize(const std::vector<long> &new_size) -> THTensor & {
+auto THTensor<real>::resize(const std::vector<int64_t> &new_size)
+    -> THTensor & {
   return resize(new_size.begin(), new_size.end());
 }
 
@@ -200,7 +200,7 @@ template <typename iterator>
 auto THTensor<real>::resize(const iterator &begin, const iterator &end)
     -> THTensor & {
   THLongStorage *sizes = THLongStorage_newWithSize(std::distance(begin, end));
-  long *sizes_d = sizes->data;
+  int64_t *sizes_d = sizes->data;
   for (auto it = begin; it != end; ++it)
     *sizes_d++ = *it;
   // TODO this might leak on error
@@ -220,9 +220,10 @@ auto THTensor<real>::setStorage(const Storage &storage, ptrdiff_t storageOffset,
                                 const long_range &stride) -> THTensor & {
   auto raw_storage = dynamic_cast<const THStorage<real> &>(storage).getRaw();
   int nDimension = size.size();
-  auto raw_size = const_cast<long *>(size.data());
+  auto raw_size = const_cast<int64_t *>(size.data());
   auto raw_stride =
-      const_cast<long *>(stride.empty() ? nullptr : stride.data());
+      const_cast<int64_t *>(stride.empty() ? nullptr : stride.data());
+  const_cast<long *>(stride.empty() ? nullptr : stride.data());
   THTensor_(setStorageNd)(tensor, raw_storage, storageOffset, nDimension,
                           raw_size, raw_stride);
   return *this;
@@ -238,16 +239,16 @@ auto THTensor<real>::setStorage(const Storage &storage, ptrdiff_t storageOffset,
 }
 
 template <>
-auto THTensor<real>::narrow(const Tensor &src, int dimension, long firstIndex,
-                            long size) -> THTensor & {
+auto THTensor<real>::narrow(const Tensor &src, int dimension,
+                            int64_t firstIndex, int64_t size) -> THTensor & {
   THTensor_(narrow)(tensor, const_tensor_cast(src).tensor, dimension,
                     firstIndex, size);
   return *this;
 }
 
 template <>
-auto THTensor<real>::select(const Tensor &src, int dimension, long sliceIndex)
-    -> THTensor & {
+auto THTensor<real>::select(const Tensor &src, int dimension,
+                            int64_t sliceIndex) -> THTensor & {
   THTensor_(select)(tensor, const_tensor_cast(src).tensor, dimension,
                     sliceIndex);
   return *this;
@@ -264,8 +265,8 @@ auto THTensor<real>::transpose(const Tensor &src, int dimension1,
 }
 
 template <>
-auto THTensor<real>::unfold(const Tensor &src, int dimension, long size,
-                            long step) -> THTensor & {
+auto THTensor<real>::unfold(const Tensor &src, int dimension, int64_t size,
+                            int64_t step) -> THTensor & {
   auto src_raw = const_tensor_cast(src).tensor;
   if (tensor != src_raw)
     set(src);
@@ -578,7 +579,7 @@ template <> auto THTensor<real>::diag(const Tensor &src, int k) -> THTensor & {
   return *this;
 }
 
-template <> auto THTensor<real>::eye(long n, long m) -> THTensor & {
+template <> auto THTensor<real>::eye(int64_t n, int64_t m) -> THTensor & {
   THTensor_(eye)(tensor, n, m);
   return *this;
 }
@@ -591,7 +592,7 @@ auto THTensor<real>::range(scalar_type xmin, scalar_type xmax, scalar_type step)
 }
 
 template <>
-auto THTensor<real>::randperm(const Generator &_generator, long n)
+auto THTensor<real>::randperm(const Generator &_generator, int64_t n)
     -> THTensor & {
   THTensor_(randperm)(tensor, const_generator_cast(_generator).generator, n);
   return *this;
@@ -606,19 +607,21 @@ auto THTensor<real>::sort(const Tensor &ri, const Tensor &src, int dimension,
 }
 
 template <>
-auto THTensor<real>::topk(const Tensor &ri, const Tensor &src, long k, int dim,
-                          int dir, int sorted) -> THTensor & {
+auto THTensor<real>::topk(const Tensor &ri, const Tensor &src, int64_t k,
+                          int dim, int dir, int sorted) -> THTensor & {
   THTensor_(topk)(tensor, const_long_cast(ri).tensor,
                   const_tensor_cast(src).tensor, k, dim, dir, sorted);
   return *this;
 }
 
-template <> auto THTensor<real>::tril(const Tensor &src, long k) -> THTensor & {
+template <>
+auto THTensor<real>::tril(const Tensor &src, int64_t k) -> THTensor & {
   THTensor_(tril)(tensor, const_tensor_cast(src).tensor, k);
   return *this;
 }
 
-template <> auto THTensor<real>::triu(const Tensor &src, long k) -> THTensor & {
+template <>
+auto THTensor<real>::triu(const Tensor &src, int64_t k) -> THTensor & {
   THTensor_(triu)(tensor, const_tensor_cast(src).tensor, k);
   return *this;
 }
@@ -627,7 +630,9 @@ template <>
 auto THTensor<real>::catArray(const std::vector<Tensor *> &inputs_vec,
                               int dimension) -> THTensor & {
   int numInputs = inputs_vec.size();
-  tensor_type *inputs[numInputs];
+  // TOFIX: workaround for variable length arrays in MSVC
+  tensor_type **inputs =
+      (tensor_type **)alloca(numInputs * sizeof(tensor_type *));
   for (std::size_t i = 0; i < numInputs; i++)
     inputs[i] = const_tensor_cast(*inputs_vec[i]).tensor;
   THTensor_(catArray)(tensor, inputs, numInputs, dimension);
@@ -1055,8 +1060,9 @@ auto THTensor<real>::renorm(const Tensor &src, scalar_type value, int dimension,
 }
 
 template <>
-auto THTensor<real>::histc(const Tensor &src, long nbins, scalar_type minvalue,
-                           scalar_type maxvalue) -> THTensor & {
+auto THTensor<real>::histc(const Tensor &src, int64_t nbins,
+                           scalar_type minvalue, scalar_type maxvalue)
+    -> THTensor & {
 #if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
   const THTensor &src_t = const_tensor_cast(src);
   THTensor_(histc)(tensor, src_t.tensor, nbins, minvalue, maxvalue);
@@ -1068,8 +1074,9 @@ auto THTensor<real>::histc(const Tensor &src, long nbins, scalar_type minvalue,
 }
 
 template <>
-auto THTensor<real>::bhistc(const Tensor &src, long nbins, scalar_type minvalue,
-                            scalar_type maxvalue) -> THTensor & {
+auto THTensor<real>::bhistc(const Tensor &src, int64_t nbins,
+                            scalar_type minvalue, scalar_type maxvalue)
+    -> THTensor & {
 #if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
   const THTensor &src_t = const_tensor_cast(src);
   THTensor_(bhistc)(tensor, src_t.tensor, nbins, minvalue, maxvalue);
@@ -1127,7 +1134,7 @@ template <> auto THTensor<real>::normall(scalar_type value) -> scalar_type {
 }
 
 template <>
-auto THTensor<real>::linspace(scalar_type a, scalar_type b, long n)
+auto THTensor<real>::linspace(scalar_type a, scalar_type b, int64_t n)
     -> THTensor & {
 #if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
   THTensor_(linspace)(tensor, a, b, n);
@@ -1139,7 +1146,7 @@ auto THTensor<real>::linspace(scalar_type a, scalar_type b, long n)
 }
 
 template <>
-auto THTensor<real>::logspace(scalar_type a, scalar_type b, long n)
+auto THTensor<real>::logspace(scalar_type a, scalar_type b, int64_t n)
     -> THTensor & {
 #if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
   THTensor_(logspace)(tensor, a, b, n);
@@ -1178,8 +1185,9 @@ template <> int THTensor<real>::logicalall() {
 #if defined(TH_REAL_IS_BYTE)
   return THTensor_(logicalall)(tensor);
 #else
-  throw std::runtime_error(
-      "byte functions are available only for byte tensors");
+  throw std::runtime_error("byte functions are "
+                           "available only for byte "
+                           "tensors");
 #endif
 }
 
@@ -1187,8 +1195,9 @@ template <> int THTensor<real>::logicalany() {
 #if defined(TH_REAL_IS_BYTE)
   return THTensor_(logicalany)(tensor);
 #else
-  throw std::runtime_error(
-      "byte functions are available only for byte tensors");
+  throw std::runtime_error("byte functions are "
+                           "available only for byte "
+                           "tensors");
 #endif
 }
 
@@ -1294,14 +1303,19 @@ auto THTensor<real>::logNormal(const Generator &_generator, double mean,
 #endif
 }
 
-// Note: the order of *Tensor and *Prob_dist is reversed compared to
-// the declarations in TH/generic/THTensorMath.h, so for instance
+// Note: the order of *Tensor and *Prob_dist is reversed
+// compared to
+// the declarations in TH/generic/THTensorMath.h, so for
+// instance
 // the call:
-// THRealTensor_multinomial(r, _generator, prob_dist, n_sample,
+// THRealTensor_multinomial(r, _generator, prob_dist,
+// n_sample,
 // with_replacement)
-// is equivalent to `prob_dist->multinomial(r, _generator, n_sample,
+// is equivalent to `prob_dist->multinomial(r,
+// _generator, n_sample,
 // with_replacement)`.
-// It is done this way so that the first argument can be casted onto a float
+// It is done this way so that the first argument can be
+// casted onto a float
 // tensor type.
 template <>
 auto THTensor<real>::multinomial(const Tensor &r, const Generator &_generator,
@@ -1334,7 +1348,7 @@ template <>
 auto THTensor<real>::gather(const Tensor &src, int dimension,
                             const Tensor &index) -> THTensor & {
   const THTensor &src_t = const_tensor_cast(src);
-  const THTensor<long> &index_t = const_long_cast(index);
+  const THTensor<int64_t> &index_t = const_long_cast(index);
   THTensor_(gather)(tensor, src_t.tensor, dimension, index_t.tensor);
   return *this;
 }
@@ -1343,7 +1357,7 @@ template <>
 auto THTensor<real>::scatter(int dimension, const Tensor &index,
                              const Tensor &src) -> THTensor & {
   const THTensor &src_t = const_tensor_cast(src);
-  const THTensor<long> &index_t = const_long_cast(index);
+  const THTensor<int64_t> &index_t = const_long_cast(index);
   THTensor_(scatter)(tensor, dimension, index_t.tensor, src_t.tensor);
   return *this;
 }
@@ -1351,7 +1365,7 @@ auto THTensor<real>::scatter(int dimension, const Tensor &index,
 template <>
 auto THTensor<real>::scatterFill(int dimension, const Tensor &index,
                                  scalar_type value) -> THTensor & {
-  const THTensor<long> &index_t = const_long_cast(index);
+  const THTensor<int64_t> &index_t = const_long_cast(index);
   THTensor_(scatterFill)(tensor, dimension, index_t.tensor, value);
   return *this;
 }
@@ -1386,8 +1400,9 @@ template <> auto THTensor<real>::neg(const Tensor &src) -> THTensor & {
   const THTensor &src_t = const_tensor_cast(src);
   THTensor_(neg)(tensor, src_t.tensor);
 #else
-  throw std::runtime_error(
-      "neg is only available for `float` and `double` types");
+  throw std::runtime_error("neg is only available for "
+                           "`float` and `double` "
+                           "types");
 #endif // defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
   return *this;
 }
@@ -1397,8 +1412,9 @@ template <> auto THTensor<real>::cinv(const Tensor &src) -> THTensor & {
   const THTensor &src_t = const_tensor_cast(src);
   THTensor_(cinv)(tensor, src_t.tensor);
 #else
-  throw std::runtime_error(
-      "cinv is only available for `float` and `double` types");
+  throw std::runtime_error("cinv is only available for "
+                           "`float` and `double` "
+                           "types");
 #endif // defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
   return *this;
 }
@@ -1626,7 +1642,7 @@ template <>
 auto THTensor<real>::max(const Tensor &indices_, const Tensor &src,
                          int dimension, int keepdim) -> THTensor & {
   const THTensor &src_t = const_tensor_cast(src);
-  const THTensor<long> &indices__t = const_long_cast(indices_);
+  const THTensor<int64_t> &indices__t = const_long_cast(indices_);
   THTensor_(max)(tensor, indices__t.tensor, src_t.tensor, dimension, keepdim);
   return *this;
 }
@@ -1635,16 +1651,17 @@ template <>
 auto THTensor<real>::min(const Tensor &indices_, const Tensor &src,
                          int dimension, int keepdim) -> THTensor & {
   const THTensor &src_t = const_tensor_cast(src);
-  const THTensor<long> &indices__t = const_long_cast(indices_);
+  const THTensor<int64_t> &indices__t = const_long_cast(indices_);
   THTensor_(min)(tensor, indices__t.tensor, src_t.tensor, dimension, keepdim);
   return *this;
 }
 
 template <>
-auto THTensor<real>::kthvalue(const Tensor &indices_, const Tensor &src, long k,
-                              int dimension, int keepdim) -> THTensor & {
+auto THTensor<real>::kthvalue(const Tensor &indices_, const Tensor &src,
+                              int64_t k, int dimension, int keepdim)
+    -> THTensor & {
   const THTensor &src_t = const_tensor_cast(src);
-  const THTensor<long> &indices__t = const_long_cast(indices_);
+  const THTensor<int64_t> &indices__t = const_long_cast(indices_);
   THTensor_(kthvalue)(tensor, indices__t.tensor, src_t.tensor, k, dimension,
                       keepdim);
   return *this;
@@ -1654,7 +1671,7 @@ template <>
 auto THTensor<real>::mode(const Tensor &indices_, const Tensor &src,
                           int dimension, int keepdim) -> THTensor & {
   const THTensor &src_t = const_tensor_cast(src);
-  const THTensor<long> &indices__t = const_long_cast(indices_);
+  const THTensor<int64_t> &indices__t = const_long_cast(indices_);
   THTensor_(mode)(tensor, indices__t.tensor, src_t.tensor, dimension, keepdim);
   return *this;
 }
@@ -1663,7 +1680,7 @@ template <>
 auto THTensor<real>::median(const Tensor &indices_, const Tensor &src,
                             int dimension, int keepdim) -> THTensor & {
   const THTensor &src_t = const_tensor_cast(src);
-  const THTensor<long> &indices__t = const_long_cast(indices_);
+  const THTensor<int64_t> &indices__t = const_long_cast(indices_);
   THTensor_(median)(tensor, indices__t.tensor, src_t.tensor, dimension,
                     keepdim);
   return *this;

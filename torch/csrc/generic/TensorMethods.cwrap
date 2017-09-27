@@ -1,5 +1,7 @@
 #if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || \
     defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) || \
+    defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || \
+        defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) || \
     defined(THC_REAL_IS_HALF)
 #define RealStr "float"
 #else
@@ -70,14 +72,18 @@
 
 #if defined(THC_REAL_IS_ZFLOAT)
 #define CUDA_ZFLOAT 1
+#define CUDA_FLOATING_POINT_COMPLEX 1
 #else
 #define CUDA_ZFLOAT 0
+#define CUDA_FLOATING_POINT_COMPLEX 0
 #endif
 
 #if defined(THC_REAL_IS_ZDOUBLE)
 #define CUDA_ZDOUBLE 1
+#define CUDA_FLOATING_POINT_COMPLEX 1
 #else
 #define CUDA_ZDOUBLE 0
+#define CUDA_FLOATING_POINT_COMPLEX 0
 #endif
 
 #if defined(THC_REAL_IS_HALF)

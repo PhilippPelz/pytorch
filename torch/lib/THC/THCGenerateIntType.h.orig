@@ -1,0 +1,31 @@
+#ifndef THC_GENERIC_FILE
+#error "You must define THC_GENERIC_FILE before including THGenerateIntType.h"
+#endif
+
+<<<<<<< HEAD
+#define real int
+#define part int
+#define accreal long
+=======
+#define real int32_t
+#define accreal int64_t
+>>>>>>> upstream/master
+#define Real Int
+#define CReal CudaInt
+#define Part Int
+#define CPart CudaInt
+#define THC_REAL_IS_INT
+#line 1 THC_GENERIC_FILE
+#include THC_GENERIC_FILE
+#undef real
+#undef part
+#undef accreal
+#undef Real
+#undef CReal
+#undef Part
+#undef CPart
+#undef THC_REAL_IS_INT
+
+#ifndef THCGenerateAllTypes
+#undef THC_GENERIC_FILE
+#endif

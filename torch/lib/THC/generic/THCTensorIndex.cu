@@ -20,7 +20,7 @@ void THCTensor_(indexCopy)(THCState *state, THCTensor *dst, int dim,
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, dst, src));
   THCAssertSameGPU(THCudaLongTensor_checkGPU(state, 1, indices));
 
-  long dims = THCTensor_(nDimension)(state, dst);
+  int dims = THCTensor_(nDimension)(state, dst);
   THArgCheck(dims <= MAX_CUTORCH_DIMS, 2, CUTORCH_DIM_WARNING);
   dims = THCTensor_(nDimension)(state, src);
   THArgCheck(dims <= MAX_CUTORCH_DIMS, 5, CUTORCH_DIM_WARNING);
@@ -29,7 +29,7 @@ void THCTensor_(indexCopy)(THCState *state, THCTensor *dst, int dim,
 
   ptrdiff_t numIndices = THCudaLongTensor_nElement(state, indices);
 
-  long srcDims = THCTensor_(nDimension)(state, src);
+  int srcDims = THCTensor_(nDimension)(state, src);
   cudaStream_t stream = THCState_getCurrentStream(state);
 
   THArgCheck(THCudaLongTensor_nDimension(state, indices) == 1, 3,
@@ -47,7 +47,7 @@ void THCTensor_(indexCopy)(THCState *state, THCTensor *dst, int dim,
   // -the number of indices we are choosing, which is the total size
   // of the tensor `indices`.
   ptrdiff_t srcTotalSize = THCTensor_(nElement)(state, src);
-  long dstCopyDimSize = THCTensor_(size)(state, dst, dim);
+  int64_t dstCopyDimSize = THCTensor_(size)(state, dst, dim);
   ptrdiff_t sliceSize = srcTotalSize / numIndices;
 
   int mpc = THCState_getCurrentDeviceProperties(state)->multiProcessorCount;
@@ -87,7 +87,7 @@ void THCTensor_(indexCopy)(THCState *state, THCTensor *dst, int dim,
     int srcCopyDim = srcInfo.collapseDims(dim);
     srcInfo.reduceDim(srcCopyDim);
 
-    TensorInfo<long, unsigned int> indicesInfo =
+    TensorInfo<int64_t, unsigned int> indicesInfo =
         getTensorInfo<THCudaLongTensor, unsigned int>(state, indices);
     indicesInfo.collapseDims();
 
@@ -115,21 +115,21 @@ void THCTensor_(indexCopy)(THCState *state, THCTensor *dst, int dim,
       }
     }
   } else {
-    TensorInfo<real, unsigned long> dstInfo =
-        getTensorInfo<THCTensor, unsigned long>(state, dst);
+    TensorInfo<real, uint64_t> dstInfo =
+      getTensorInfo<THCTensor, uint64_t>(state, dst);
     int dstCopyDim = dstInfo.collapseDims(dim);
     dstInfo.reduceDim(dstCopyDim);
 
-    TensorInfo<real, unsigned long> srcInfo =
-        getTensorInfo<THCTensor, unsigned long>(state, src);
+    TensorInfo<real, uint64_t> srcInfo =
+      getTensorInfo<THCTensor, uint64_t>(state, src);
     int srcCopyDim = srcInfo.collapseDims(dim);
     srcInfo.reduceDim(srcCopyDim);
 
-    TensorInfo<long, unsigned long> indicesInfo =
-        getTensorInfo<THCudaLongTensor, unsigned long>(state, indices);
+    TensorInfo<int64_t, uint64_t> indicesInfo =
+      getTensorInfo<THCudaLongTensor, uint64_t>(state, indices);
     indicesInfo.collapseDims();
 
-    LARGE_INDEX(real, unsigned long, -1, -1, -1);
+    LARGE_INDEX(real, uint64_t, -1, -1, -1);
   }
 
 #undef SMALL_INDEX
@@ -157,7 +157,7 @@ void THCTensor_(indexAdd)(THCState *state, THCTensor *dst, int dim,
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, dst, src));
   THCAssertSameGPU(THCudaLongTensor_checkGPU(state, 1, indices));
 
-  long dims = THCTensor_(nDimension)(state, dst);
+  int dims = THCTensor_(nDimension)(state, dst);
   THArgCheck(dims <= MAX_CUTORCH_DIMS, 2, CUTORCH_DIM_WARNING);
   dims = THCTensor_(nDimension)(state, src);
   THArgCheck(dims <= MAX_CUTORCH_DIMS, 5, CUTORCH_DIM_WARNING);
@@ -166,7 +166,7 @@ void THCTensor_(indexAdd)(THCState *state, THCTensor *dst, int dim,
 
   ptrdiff_t numIndices = THCudaLongTensor_nElement(state, indices);
 
-  long srcDims = THCTensor_(nDimension)(state, src);
+  int srcDims = THCTensor_(nDimension)(state, src);
   cudaStream_t stream = THCState_getCurrentStream(state);
 
   THArgCheck(THCudaLongTensor_nDimension(state, indices) == 1, 3,
@@ -184,7 +184,7 @@ void THCTensor_(indexAdd)(THCState *state, THCTensor *dst, int dim,
   // -the number of indices we are choosing, which is the total size
   // of the tensor `indices`.
   ptrdiff_t srcTotalSize = THCTensor_(nElement)(state, src);
-  long dstAddDimSize = THCTensor_(size)(state, dst, dim);
+  int64_t dstAddDimSize = THCTensor_(size)(state, dst, dim);
   ptrdiff_t sliceSize = srcTotalSize / numIndices;
 
   int mpc = THCState_getCurrentDeviceProperties(state)->multiProcessorCount;
@@ -222,7 +222,7 @@ void THCTensor_(indexAdd)(THCState *state, THCTensor *dst, int dim,
     int srcAddDim = srcInfo.collapseDims(dim);
     srcInfo.reduceDim(srcAddDim);
 
-    TensorInfo<long, unsigned int> indicesInfo =
+    TensorInfo<int64_t, unsigned int> indicesInfo =
         getTensorInfo<THCudaLongTensor, unsigned int>(state, indices);
     indicesInfo.collapseDims();
 
@@ -250,21 +250,20 @@ void THCTensor_(indexAdd)(THCState *state, THCTensor *dst, int dim,
       }
     }
   } else {
-    TensorInfo<real, unsigned long> dstInfo =
-        getTensorInfo<THCTensor, unsigned long>(state, dst);
+    TensorInfo<real, uint64_t> dstInfo =
+      getTensorInfo<THCTensor, uint64_t>(state, dst);
     int dstAddDim = dstInfo.collapseDims(dim);
     dstInfo.reduceDim(dstAddDim);
 
-    TensorInfo<real, unsigned long> srcInfo =
-        getTensorInfo<THCTensor, unsigned long>(state, src);
+    TensorInfo<real, uint64_t> srcInfo = getTensorInfo<THCTensor, uint64_t>(state, src);
     int srcAddDim = srcInfo.collapseDims(dim);
     srcInfo.reduceDim(srcAddDim);
 
-    TensorInfo<long, unsigned long> indicesInfo =
-        getTensorInfo<THCudaLongTensor, unsigned long>(state, indices);
+    TensorInfo<int64_t, uint64_t> indicesInfo =
+      getTensorInfo<THCudaLongTensor, uint64_t>(state, indices);
     indicesInfo.collapseDims();
 
-    LARGE_INDEX(real, unsigned long, -1, -1, -1);
+    LARGE_INDEX(real, uint64_t, -1, -1, -1);
   }
 
 #undef SMALL_INDEX
@@ -288,14 +287,14 @@ void THCTensor_(indexFill)(THCState *state, THCTensor *dst, int dim,
                            THCudaLongTensor *indices, real val) {
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 1, dst));
   THCAssertSameGPU(THCudaLongTensor_checkGPU(state, 1, indices));
-  long dims = THCTensor_(nDimension)(state, dst);
+  int dims = THCTensor_(nDimension)(state, dst);
   THArgCheck(dims <= MAX_CUTORCH_DIMS, 2, CUTORCH_DIM_WARNING);
   dims = THCudaLongTensor_nDimension(state, indices);
   THArgCheck(dims <= MAX_CUTORCH_DIMS, 4, CUTORCH_DIM_WARNING);
 
   ptrdiff_t numIndices = THCudaLongTensor_nElement(state, indices);
 
-  long srcDims = THCTensor_(nDimension)(state, dst);
+  int srcDims = THCTensor_(nDimension)(state, dst);
   cudaStream_t stream = THCState_getCurrentStream(state);
 
   THArgCheck(THCudaLongTensor_nDimension(state, indices) == 1, 3,
@@ -311,7 +310,7 @@ void THCTensor_(indexFill)(THCState *state, THCTensor *dst, int dim,
   // -the number of indices we are choosing, which is the total size
   // of the tensor `indices`.
   ptrdiff_t dstTotalSize = THCTensor_(nElement)(state, dst);
-  long dstFillDimSize = THCTensor_(size)(state, dst, dim);
+  int64_t dstFillDimSize = THCTensor_(size)(state, dst, dim);
   ptrdiff_t sliceSize = dstTotalSize / dstFillDimSize;
 
   int mpc = THCState_getCurrentDeviceProperties(state)->multiProcessorCount;
@@ -343,7 +342,7 @@ void THCTensor_(indexFill)(THCState *state, THCTensor *dst, int dim,
     int dstFillDim = dstInfo.collapseDims(dim);
     dstInfo.reduceDim(dstFillDim);
 
-    TensorInfo<long, unsigned int> indicesInfo =
+    TensorInfo<int64_t, unsigned int> indicesInfo =
         getTensorInfo<THCudaLongTensor, unsigned int>(state, indices);
     indicesInfo.collapseDims();
 
@@ -371,16 +370,16 @@ void THCTensor_(indexFill)(THCState *state, THCTensor *dst, int dim,
       }
     }
   } else {
-    TensorInfo<real, unsigned long> dstInfo =
-        getTensorInfo<THCTensor, unsigned long>(state, dst);
+    TensorInfo<real, uint64_t> dstInfo =
+      getTensorInfo<THCTensor, uint64_t>(state, dst);
     int dstFillDim = dstInfo.collapseDims(dim);
     dstInfo.reduceDim(dstFillDim);
 
-    TensorInfo<long, unsigned long> indicesInfo =
-        getTensorInfo<THCudaLongTensor, unsigned long>(state, indices);
+    TensorInfo<int64_t, uint64_t> indicesInfo =
+      getTensorInfo<THCudaLongTensor, uint64_t>(state, indices);
     indicesInfo.collapseDims();
 
-    LARGE_INDEX(real, unsigned long, -1, -1);
+    LARGE_INDEX(real, uint64_t, -1, -1);
   }
 
 #undef SMALL_INDEX
@@ -406,7 +405,7 @@ void THCTensor_(indexSelect)(THCState *state, THCTensor *dst, THCTensor *src,
                              int dim, THCudaLongTensor *indices) {
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 3, dst, src, indices));
 
-  long dims = THCTensor_(nDimension)(state, dst);
+  int dims = THCTensor_(nDimension)(state, dst);
   THArgCheck(dims <= MAX_CUTORCH_DIMS, 2, CUTORCH_DIM_WARNING);
   dims = THCTensor_(nDimension)(state, src);
   THArgCheck(dims <= MAX_CUTORCH_DIMS, 3, CUTORCH_DIM_WARNING);
@@ -415,7 +414,7 @@ void THCTensor_(indexSelect)(THCState *state, THCTensor *dst, THCTensor *src,
 
   ptrdiff_t numIndices = THCudaLongTensor_nElement(state, indices);
 
-  long srcDims = THCTensor_(nDimension)(state, src);
+  int srcDims = THCTensor_(nDimension)(state, src);
   cudaStream_t stream = THCState_getCurrentStream(state);
 
   THArgCheck(THCudaLongTensor_nDimension(state, indices) == 1, 3,
@@ -436,7 +435,7 @@ void THCTensor_(indexSelect)(THCState *state, THCTensor *dst, THCTensor *src,
   // -the number of indices we are choosing, which is the total size
   // of the tensor `indices`.
   ptrdiff_t dstTotalSize = THCTensor_(nElement)(state, dst);
-  long srcSelectDimSize = THCTensor_(size)(state, src, dim);
+  int64_t srcSelectDimSize = THCTensor_(size)(state, src, dim);
   ptrdiff_t sliceSize = dstTotalSize / numIndices;
 
   int mpc = THCState_getCurrentDeviceProperties(state)->multiProcessorCount;
@@ -476,7 +475,7 @@ void THCTensor_(indexSelect)(THCState *state, THCTensor *dst, THCTensor *src,
     int srcSelectDim = srcInfo.collapseDims(dim);
     srcInfo.reduceDim(srcSelectDim);
 
-    TensorInfo<long, unsigned int> indicesInfo =
+    TensorInfo<int64_t, unsigned int> indicesInfo =
         getTensorInfo<THCudaLongTensor, unsigned int>(state, indices);
     indicesInfo.collapseDims();
 
@@ -504,21 +503,21 @@ void THCTensor_(indexSelect)(THCState *state, THCTensor *dst, THCTensor *src,
       }
     }
   } else {
-    TensorInfo<real, unsigned long> dstInfo =
-        getTensorInfo<THCTensor, unsigned long>(state, dst);
+    TensorInfo<real, uint64_t> dstInfo =
+      getTensorInfo<THCTensor, uint64_t>(state, dst);
     int dstSelectDim = dstInfo.collapseDims(dim);
     dstInfo.reduceDim(dstSelectDim);
 
-    TensorInfo<real, unsigned long> srcInfo =
-        getTensorInfo<THCTensor, unsigned long>(state, src);
+    TensorInfo<real, uint64_t> srcInfo =
+      getTensorInfo<THCTensor, uint64_t>(state, src);
     int srcSelectDim = srcInfo.collapseDims(dim);
     srcInfo.reduceDim(srcSelectDim);
 
-    TensorInfo<long, unsigned long> indicesInfo =
-        getTensorInfo<THCudaLongTensor, unsigned long>(state, indices);
+    TensorInfo<int64_t, uint64_t> indicesInfo =
+      getTensorInfo<THCudaLongTensor, uint64_t>(state, indices);
     indicesInfo.collapseDims();
 
-    LARGE_INDEX(real, unsigned long, -1, -1, -1);
+    LARGE_INDEX(real, uint64_t, -1, -1, -1);
   }
 
 #undef SMALL_INDEX
@@ -592,7 +591,7 @@ void THCTensor_(calculateAdvancedIndexingOffsets)(THCState *state,
   if (TensorUtils<THCTensor>::canUse32BitIndexMath(state, indexed)) {
     RUN_T(unsigned int);
   } else {
-    RUN_T(unsigned long);
+    RUN_T(uint64_t);
   }
 
 #undef HANDLE_CASE

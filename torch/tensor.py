@@ -200,7 +200,7 @@ class _TensorBase(object):
         """
         return self.view(tensor.size())
 
-    def fftshift(x, axes=None, out = None):
+    def fftshift(self, axes=None, out = None):
         """
         Shift the zero-frequency component to the center of the spectrum.
         This function swaps half-spaces for all axes listed (defaults to all).
@@ -236,6 +236,7 @@ class _TensorBase(object):
                [-4.,  3.,  4.],
                [-1., -3., -2.]])
         """
+        x = self
         if out is None:
             out = x.new().resize_as_(x)
         ndim = out.ndimension()
@@ -254,7 +255,7 @@ class _TensorBase(object):
             y.narrow(k,half2[0],half2[1]-half2[0]+1).copy_(tmp)
         return y
 
-    def ifftshift(x, axes=None):
+    def ifftshift(self, axes=None, out = None):
         """
         The inverse of `fftshift`. Although identical for even-length `x`, the
         functions differ by one sample for odd-length `x`.
@@ -283,6 +284,7 @@ class _TensorBase(object):
                [ 3.,  4., -4.],
                [-3., -2., -1.]])
         """
+        x = self
         if out is None:
             out = x.new().resize_as_(x)
         ndim = out.ndimension()
@@ -423,6 +425,9 @@ class _TensorBase(object):
 
     def __pow__(self, other):
         return self.pow(other)
+
+    def __rpow__(self, other):
+        return torch.pow(other, self)
 
     def __ipow__(self, other):
         return self.pow_(other)

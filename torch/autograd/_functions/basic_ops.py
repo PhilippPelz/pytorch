@@ -1,10 +1,16 @@
 import torch
-from ..function import Function, InplaceFunction
+from ..function import Function, InplaceFunction, traceable
 from .utils import maybe_unexpand, maybe_unexpand_or_view
 import math
 
 
+@traceable
 class Add(InplaceFunction):
+
+    @staticmethod
+    def symbolic(g, a, b, inplace=False):
+        # TODO: [Export inplace]
+        return g.appendNode(g.create("Add", [a, b]))
 
     @staticmethod
     def forward(ctx, a, b, inplace=False):
@@ -21,7 +27,13 @@ class Add(InplaceFunction):
         return maybe_unexpand(grad_output, ctx.a_size), maybe_unexpand_or_view(grad_output, ctx.b_size), None
 
 
+@traceable
 class Sub(InplaceFunction):
+
+    @staticmethod
+    def symbolic(g, a, b, inplace=False):
+        # TODO: [Export inplace]
+        return g.appendNode(g.create("Sub", [a, b]))
 
     @staticmethod
     def forward(ctx, a, b, inplace=False):
@@ -38,7 +50,13 @@ class Sub(InplaceFunction):
         return maybe_unexpand(grad_output, ctx.a_size), maybe_unexpand_or_view(grad_output.neg(), ctx.b_size), None
 
 
+@traceable
 class Mul(Function):
+
+    @staticmethod
+    def symbolic(g, a, b, inplace=False):
+        # TODO: [Export inplace]
+        return g.op("Mul", a, b)
 
     @staticmethod
     def forward(ctx, a, b):
@@ -53,6 +71,7 @@ class Mul(Function):
         return maybe_unexpand(grad_output.mul(b), ctx.a_size), maybe_unexpand_or_view(grad_output.mul(a), ctx.b_size)
 
 
+@traceable
 class Div(Function):
 
     @staticmethod
@@ -71,6 +90,7 @@ class Div(Function):
         return maybe_unexpand(grad_a, ctx.a_size), maybe_unexpand_or_view(grad_b, ctx.b_size)
 
 
+@traceable
 class Pow(Function):
 
     @staticmethod
@@ -92,6 +112,7 @@ def sort_args(a, b):
     return (a, b, True) if torch.is_tensor(a) else (b, a, False)
 
 
+@traceable
 class AddConstant(InplaceFunction):
 
     @staticmethod
@@ -111,7 +132,16 @@ class AddConstant(InplaceFunction):
             return None, grad_output, None
 
 
+@traceable
 class SubConstant(InplaceFunction):
+
+    @staticmethod
+    def symbolic(g, a, b, inplace=False):
+        tensor_first = isinstance(a, torch._C.Node)
+        if tensor_first:
+            return g.op("SubConstant", a, value_f=b)
+        else:
+            return g.op("AddConstant", g.op("Neg", b).typeAs(b), value_f=a)
 
     @staticmethod
     def forward(ctx, a, b, inplace=False):
@@ -137,6 +167,7 @@ class SubConstant(InplaceFunction):
             return None, grad_output.neg(), None
 
 
+@traceable
 class MulConstant(InplaceFunction):
 
     @staticmethod
@@ -157,6 +188,7 @@ class MulConstant(InplaceFunction):
             return None, grad_input, None
 
 
+@traceable
 class DivConstant(InplaceFunction):
 
     @staticmethod
@@ -190,6 +222,7 @@ class DivConstant(InplaceFunction):
                 return None, grad_output.mul(v_rep).mul(v_rep).mul_(-ctx.constant), None
 
 
+@traceable
 class PowConstant(Function):
 
     @staticmethod
@@ -213,7 +246,13 @@ class PowConstant(Function):
             return None, grad_output.mul(var_result).mul_(math.log(ctx.constant))
 
 
+@traceable
 class Negate(InplaceFunction):
+
+    @staticmethod
+    def symbolic(g, i, inplace=False):
+        # TODO: [Export inplace]
+        return g.appendNode(g.create("Scale", [i]).f_("scale", -1))
 
     @staticmethod
     def forward(ctx, i, inplace=False):

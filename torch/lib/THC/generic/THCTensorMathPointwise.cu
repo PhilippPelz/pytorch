@@ -1,6 +1,31 @@
 #ifndef THC_GENERIC_FILE
 #define THC_GENERIC_FILE "generic/THCTensorMathPointwise.cu"
 #else
+#define log10_Call(REAL)                                                       \
+  struct Tensor_log10_##REAL##_Op {                                            \
+    __device__ __forceinline__ void operator()(real *out, real *in) const {    \
+      *out = THCNumerics<real>::log(*in) / THCNumerics<real>::log(10);         \
+    }                                                                          \
+    __device__ __forceinline__ void operator()(real *v) const {                \
+      *v = THCNumerics<real>::log(*v) / THCNumerics<real>::log(10);            \
+    }                                                                          \
+  };                                                                           \
+  void THCTensor_(log10)(THCState * state, THCTensor * self_,                  \
+                         THCTensor * src) {                                    \
+    THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, self_, src));              \
+    if (self_ == src) {                                                        \
+      if (!THC_pointwiseApply1(state, self_, Tensor_log10_##REAL##_Op())) {    \
+        THArgCheck(false, 2, CUTORCH_DIM_WARNING);                             \
+      }                                                                        \
+    } else {                                                                   \
+      THCTensor_(resizeAs)(state, self_, src);                                 \
+      if (!THC_pointwiseApply2(state, self_, src,                              \
+                               Tensor_log10_##REAL##_Op())) {                  \
+        THArgCheck(false, 2, CUTORCH_DIM_WARNING);                             \
+      }                                                                        \
+    }                                                                          \
+    THCudaCheck(cudaGetLastError());                                           \
+  }
 
 #define IMPLEMENT_CUDA_TENSOR_BASIC_FUNC_(NAME, CFUNC, REAL)                   \
   struct Tensor_##NAME##_##REAL##_Op {                                         \
@@ -137,40 +162,79 @@ IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(abs, THCNumerics<real>::abs, Real)
     defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) ||             \
     defined(THC_REAL_IS_HALF)
 
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(log, THCNumerics<real>::log, Real)
+#if !defined(THC_REAL_IS_HALF)
+log10_Call(Real)
+#endif
+    IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(log, THCNumerics<real>::log, Real)
 
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(exp, THCNumerics<real>::exp, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(cos, THCNumerics<real>::cos, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(sin, THCNumerics<real>::sin, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(sqrt, THCNumerics<real>::sqrt, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(neg, THCNumerics<real>::neg, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(acos, THCNumerics<real>::acos, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(cosh, THCNumerics<real>::cosh, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(asin, THCNumerics<real>::asin, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(sinh, THCNumerics<real>::sinh, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(tan, THCNumerics<real>::tan, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(atan, THCNumerics<real>::atan, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(tanh, THCNumerics<real>::tanh, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(cinv, THCNumerics<real>::cinv, Real)
+        IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(
+            exp, THCNumerics<real>::exp,
+            Real) IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(cos, THCNumerics<real>::cos,
+                                                   Real)
+            IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(
+                sin, THCNumerics<real>::sin,
+                Real) IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(sqrt,
+                                                       THCNumerics<real>::sqrt,
+                                                       Real)
+                IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(neg, THCNumerics<real>::neg,
+                                                 Real)
+                    IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(
+                        acos, THCNumerics<real>::acos,
+                        Real) IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(cosh,
+                                                               THCNumerics<
+                                                                   real>::cosh,
+                                                               Real)
+                        IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(
+                            asin, THCNumerics<real>::asin, Real)
+                            IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(
+                                sinh, THCNumerics<real>::sinh, Real)
+                                IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(
+                                    tan, THCNumerics<real>::tan, Real)
+                                    IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(
+                                        atan, THCNumerics<real>::atan, Real)
+                                        IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(
+                                            tanh, THCNumerics<real>::tanh, Real)
+
+                                            IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(
+                                                cinv, THCNumerics<real>::cinv,
+                                                Real)
 
 #endif // defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) ||
-// defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) ||
-// defined(THC_REAL_IS_HALF)
+    // defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE) ||
+    // defined(THC_REAL_IS_HALF)
 
-IMPLEMENT_ZCUDA_TENSOR_BASIC_FUNC(abs, THCNumerics<real>::abs, Real)
+    IMPLEMENT_ZCUDA_TENSOR_BASIC_FUNC(abs, THCNumerics<real>::abs, Real)
 
 #if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) ||               \
     defined(THC_REAL_IS_HALF)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(lgamma, THCNumerics<real>::lgamma, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(log1p, THCNumerics<real>::log1p, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(rsqrt, THCNumerics<real>::rsqrt, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(ceil, THCNumerics<real>::ceil, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(floor, THCNumerics<real>::floor, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(trunc, THCNumerics<real>::trunc, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(round, THCNumerics<real>::round, Real)
-IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(frac, THCNumerics<real>::frac, Real)
 
-void THCTensor_(sigmoid)(THCState *state, THCTensor *self_, THCTensor *src) {
+        IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(
+            erf, THCNumerics<real>::erf,
+            Real) IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(erfinv,
+                                                   THCNumerics<real>::erfinv,
+                                                   Real)
+            IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(lgamma, THCNumerics<real>::lgamma,
+                                             Real)
+                IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(log1p,
+                                                 THCNumerics<real>::log1p, Real)
+                    IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(rsqrt,
+                                                     THCNumerics<real>::rsqrt,
+                                                     Real)
+                        IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(
+                            ceil, THCNumerics<real>::ceil, Real)
+                            IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(
+                                floor, THCNumerics<real>::floor, Real)
+                                IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(
+                                    trunc, THCNumerics<real>::trunc, Real)
+                                    IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(
+                                        round, THCNumerics<real>::round, Real)
+                                        IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(
+                                            frac, THCNumerics<real>::frac, Real)
+
+                                            void THCTensor_(sigmoid)(
+                                                THCState *state,
+                                                THCTensor *self_,
+                                                THCTensor *src) {
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, self_, src));
   if (self_ == src) {
     if (!THC_pointwiseApply1(state, self_, TensorSigmoidOp<real>())) {
@@ -253,7 +317,7 @@ THC_API void THCTensor_(cross)(THCState *state, THCTensor *self, THCTensor *x,
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 3, self, x, y));
 
   int i;
-  long nd = THCTensor_(nDimension)(state, x);
+  int nd = THCTensor_(nDimension)(state, x);
   ptrdiff_t nelem = THCTensor_(nElement)(state, x);
   THArgCheck(nd == THCTensor_(nDimension)(state, y), 1,
              "tensors must have same number of dimensions");
@@ -271,9 +335,9 @@ THC_API void THCTensor_(cross)(THCState *state, THCTensor *self, THCTensor *x,
              "dimension %d does not have size 3", dimension + 1);
   THCTensor_(resizeAs)(state, self, x);
 
-  long sx = THCTensor_(stride)(state, x, dimension);
-  long sy = THCTensor_(stride)(state, y, dimension);
-  long so = THCTensor_(stride)(state, self, dimension);
+  int64_t sx = THCTensor_(stride)(state, x, dimension);
+  int64_t sy = THCTensor_(stride)(state, y, dimension);
+  int64_t so = THCTensor_(stride)(state, self, dimension);
   THCTensor *nx = THCTensor_(newNarrow)(state, x, dimension, 0, 1);
   THCTensor *ny = THCTensor_(newNarrow)(state, y, dimension, 0, 1);
   THCTensor *nself = THCTensor_(newNarrow)(state, self, dimension, 0, 1);
@@ -294,14 +358,66 @@ void THCTensor_(pow)(THCState *state, THCTensor *self_, THCTensor *src,
                      real value) {
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, self_, src));
   if (self_ == src) {
-    if (!THC_pointwiseApply1(state, self_, TensorPowOp<real>(value))) {
-      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+    if (THCNumerics<real>::eq(value, ScalarConvert<int, real>::to(1))) {
+      if (!THC_pointwiseApply1(state, self_, TensorPowOp<real, 1>(value))) {
+        THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+      }
+    } else if (THCNumerics<real>::eq(value, ScalarConvert<int, real>::to(2))) {
+      if (!THC_pointwiseApply1(state, self_, TensorPowOp<real, 2>(value))) {
+        THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+      }
+    } else if (THCNumerics<real>::eq(value, ScalarConvert<int, real>::to(3))) {
+      if (!THC_pointwiseApply1(state, self_, TensorPowOp<real, 3>(value))) {
+        THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+      }
+    } else if (THCNumerics<real>::eq(value, ScalarConvert<int, real>::to(-1))) {
+      if (!THC_pointwiseApply1(state, self_, TensorPowOp<real, -1>(value))) {
+        THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+      }
+    } else if (THCNumerics<real>::eq(value, ScalarConvert<int, real>::to(-2))) {
+      if (!THC_pointwiseApply1(state, self_, TensorPowOp<real, -2>(value))) {
+        THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+      }
+    } else {
+      // fallback implementation using pow
+      if (!THC_pointwiseApply1(state, self_, TensorPowOp<real, -3>(value))) {
+        THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+      }
     }
   } else {
     THCTensor_(resizeAs)(state, self_, src);
 
-    if (!THC_pointwiseApply2(state, self_, src, TensorPowOp<real>(value))) {
-      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+    if (THCNumerics<real>::eq(value, ScalarConvert<int, real>::to(1))) {
+      if (!THC_pointwiseApply2(state, self_, src,
+                               TensorPowOp<real, 1>(value))) {
+        THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+      }
+    } else if (THCNumerics<real>::eq(value, ScalarConvert<int, real>::to(2))) {
+      if (!THC_pointwiseApply2(state, self_, src,
+                               TensorPowOp<real, 2>(value))) {
+        THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+      }
+    } else if (THCNumerics<real>::eq(value, ScalarConvert<int, real>::to(3))) {
+      if (!THC_pointwiseApply2(state, self_, src,
+                               TensorPowOp<real, 3>(value))) {
+        THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+      }
+    } else if (THCNumerics<real>::eq(value, ScalarConvert<int, real>::to(-1))) {
+      if (!THC_pointwiseApply2(state, self_, src,
+                               TensorPowOp<real, -1>(value))) {
+        THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+      }
+    } else if (THCNumerics<real>::eq(value, ScalarConvert<int, real>::to(-2))) {
+      if (!THC_pointwiseApply2(state, self_, src,
+                               TensorPowOp<real, -2>(value))) {
+        THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+      }
+    } else {
+      // fallback implementation using pow
+      if (!THC_pointwiseApply2(state, self_, src,
+                               TensorPowOp<real, -3>(value))) {
+        THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+      }
     }
   }
 

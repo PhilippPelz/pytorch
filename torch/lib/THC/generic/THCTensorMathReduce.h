@@ -6,13 +6,13 @@
     defined(THC_REAL_IS_HALF)
 
 THC_API void THCTensor_(renorm)(THCState *state, THCTensor *self,
-                                THCTensor *src, real value, long dimension,
+                                THCTensor *src, real value, int dimension,
                                 real max_norm);
 THC_API void THCTensor_(std)(THCState *state, THCTensor *self, THCTensor *src,
-                             long dim, int biased, int keepdim);
+                             int dim, int biased, int keepdim);
 
 THC_API void THCTensor_(var)(THCState *state, THCTensor *self, THCTensor *src,
-                             long dim, int biased, int keepdim);
+                             int dim, int biased, int keepdim);
 
 THC_API accreal THCTensor_(stdall)(THCState *state, THCTensor *self,
                                    int biased);
@@ -33,26 +33,26 @@ THC_API void THCTensor_(norm)(THCState *state, THCTensor *self, THCTensor *src,
                               real value, long dimension, int keepdim);
 #endif
 
-THC_API void THCTensor_(sum)(THCState *state, THCTensor *self, THCTensor *src,
-                             long dim, int keepdim);
-THC_API void THCTensor_(prod)(THCState *state, THCTensor *self, THCTensor *src,
-                              long dim, int keepdim);
-THC_API void THCTensor_(mean)(THCState *state, THCTensor *self, THCTensor *src,
-                              long dim, int keepdim);
-
-THC_API accreal THCTensor_(sumall)(THCState *state, THCTensor *self);
-THC_API accreal THCTensor_(prodall)(THCState *state, THCTensor *self);
-
 #if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
 THC_API accreal THCTensor_(meanall)(THCState *state, THCTensor *self);
 #endif
 
+THC_API void THCTensor_(sum)(THCState *state, THCTensor *self, THCTensor *src,
+                             int dim, int keepdim);
+THC_API void THCTensor_(prod)(THCState *state, THCTensor *self, THCTensor *src,
+                              int dim, int keepdim);
+THC_API void THCTensor_(mean)(THCState *state, THCTensor *self, THCTensor *src,
+                              int dim, int keepdim);
+
+THC_API accreal THCTensor_(sumall)(THCState *state, THCTensor *self);
+THC_API accreal THCTensor_(prodall)(THCState *state, THCTensor *self);
+
 THC_API void THCTensor_(min)(THCState *state, THCTensor *values,
-                             THCudaLongTensor *indices, THCTensor *src,
-                             long dim, int keepdim);
+                             THCudaLongTensor *indices, THCTensor *src, int dim,
+                             int keepdim);
 THC_API void THCTensor_(max)(THCState *state, THCTensor *values,
-                             THCudaLongTensor *indices, THCTensor *src,
-                             long dim, int keepdim);
+                             THCudaLongTensor *indices, THCTensor *src, int dim,
+                             int keepdim);
 
 THC_API real THCTensor_(minall)(THCState *state, THCTensor *self);
 THC_API real THCTensor_(maxall)(THCState *state, THCTensor *self);

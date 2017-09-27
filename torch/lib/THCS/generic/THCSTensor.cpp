@@ -18,7 +18,7 @@ int THCSTensor_(nDimensionV)(THCState *state, const THCSTensor *self) {
   return self->nDimensionV;
 }
 
-long THCSTensor_(size)(THCState *state, const THCSTensor *self, int dim) {
+int64_t THCSTensor_(size)(THCState *state, const THCSTensor *self, int dim) {
   THArgCheck((dim >= 0) && (dim < self->nDimensionI + self->nDimensionV), 1,
              "dimension %d out of range of %dD tensor", dim + 1,
              THCSTensor_(nDimension)(state, self));
@@ -73,11 +73,12 @@ static void THCSTensor_(rawInit)(THCState *state, THCSTensor *self) {
 }
 
 void THCSTensor_(rawResize)(THCState *state, THCSTensor *self, int nDimI,
-                            int nDimV, long *size) {
+                            int nDimV, int64_t *size) {
   // Only resize valid sizes into tensor.
-  self->size = (long *)THRealloc(self->size, sizeof(long) * (nDimI + nDimV));
+  self->size =
+      (int64_t *)THRealloc(self->size, sizeof(int64_t) * (nDimI + nDimV));
 
-  for (long d = 0; d < nDimI + nDimV; d++) {
+  for (int64_t d = 0; d < nDimI + nDimV; d++) {
     self->size[d] = size[d];
   }
   self->nDimensionI = nDimI;
@@ -143,7 +144,7 @@ THCSTensor *THCSTensor_(newWithTensorAndSize)(
     THCState *state, THCIndexTensor *indices, THCTensor *values,
     THLongStorage *sizes) { // If sizes are not given, it is inferred as max
                             // index of each dim.
-  long nDimI, nDimV;
+  int64_t nDimI, nDimV;
 
   THCSTensor *self = (THCSTensor *)THAlloc(sizeof(THCSTensor));
   THCSTensor_(rawInit)(state, self);
@@ -194,44 +195,42 @@ THCSTensor *THCSTensor_(newWithSize)(THCState *state, THLongStorage *size) {
   return self;
 }
 
-THCSTensor *THCSTensor_(newWithSize1d)(THCState *state, long size0) {
-  long size[1] = {size0};
+THCSTensor *THCSTensor_(newWithSize1d)(THCState *state, int64_t size0) {
+  int64_t size[1] = {size0};
 
-  THCSTensor *self =
-      reinterpret_cast<THCSTensor *>(THAlloc(sizeof(THCSTensor)));
+  THCSTensor *self = (THCSTensor *)THAlloc(sizeof(THCSTensor));
   THCSTensor_(rawInit)(state, self);
   THCSTensor_(rawResize)(state, self, 1, 0, size);
 
   return self;
 }
 
-THCSTensor *THCSTensor_(newWithSize2d)(THCState *state, long size0,
-                                       long size1) {
-  long size[2] = {size0, size1};
+THCSTensor *THCSTensor_(newWithSize2d)(THCState *state, int64_t size0,
+                                       int64_t size1) {
+  int64_t size[2] = {size0, size1};
 
-  THCSTensor *self =
-      reinterpret_cast<THCSTensor *>(THAlloc(sizeof(THCSTensor)));
+  THCSTensor *self = (THCSTensor *)THAlloc(sizeof(THCSTensor));
   THCSTensor_(rawInit)(state, self);
   THCSTensor_(rawResize)(state, self, 2, 0, size);
 
   return self;
 }
 
-THCSTensor *THCSTensor_(newWithSize3d)(THCState *state, long size0, long size1,
-                                       long size2) {
-  long size[3] = {size0, size1, size2};
+THCSTensor *THCSTensor_(newWithSize3d)(THCState *state, int64_t size0,
+                                       int64_t size1, int64_t size2) {
+  int64_t size[3] = {size0, size1, size2};
 
-  THCSTensor *self =
-      reinterpret_cast<THCSTensor *>(THAlloc(sizeof(THCSTensor)));
+  THCSTensor *self = (THCSTensor *)THAlloc(sizeof(THCSTensor));
   THCSTensor_(rawInit)(state, self);
   THCSTensor_(rawResize)(state, self, 3, 0, size);
 
   return self;
 }
 
-THCSTensor *THCSTensor_(newWithSize4d)(THCState *state, long size0, long size1,
-                                       long size2, long size3) {
-  long size[4] = {size0, size1, size2, size3};
+THCSTensor *THCSTensor_(newWithSize4d)(THCState *state, int64_t size0,
+                                       int64_t size1, int64_t size2,
+                                       int64_t size3) {
+  int64_t size[4] = {size0, size1, size2, size3};
 
   THCSTensor *self = (THCSTensor *)THAlloc(sizeof(THCSTensor));
   THCSTensor_(rawInit)(state, self);
@@ -241,7 +240,7 @@ THCSTensor *THCSTensor_(newWithSize4d)(THCState *state, long size0, long size1,
 }
 
 THCSTensor *THCSTensor_(newClone)(THCState *state, THCSTensor *self) {
-  THCSTensor *other = THCSTensor_(new)(state);
+  THCSTensor *other = (THCSTensor *)THCSTensor_(new)(state);
   THCSTensor_(rawResize)(state, other, self->nDimensionI, self->nDimensionV,
                          self->size);
 
@@ -254,13 +253,13 @@ THCSTensor *THCSTensor_(newClone)(THCState *state, THCSTensor *self) {
 
 THCSTensor *THCSTensor_(newTranspose)(THCState *state, THCSTensor *self, int d1,
                                       int d2) {
-  THCSTensor *other = THCSTensor_(newClone)(state, self);
+  THCSTensor *other = (THCSTensor *)THCSTensor_(newClone)(state, self);
   THCSTensor_(transpose)(state, other, d1, d2);
   return other;
 }
 
 THCTensor *THCSTensor_(newValuesWithSizeOf)(THCState *state, THCTensor *values,
-                                            long nnz) {
+                                            int64_t nnz) {
   THCTensor *new_values;
   if (THCTensor_(nDimension)(state, values) ==
       0) { // values tensor uninitialized
@@ -319,29 +318,30 @@ THCSTensor *THCSTensor_(resizeAs)(THCState *state, THCSTensor *self,
 }
 
 THCSTensor *THCSTensor_(resize1d)(THCState *state, THCSTensor *self,
-                                  long size0) {
-  long size[1] = {size0};
+                                  int64_t size0) {
+  int64_t size[1] = {size0};
   THCSTensor_(rawResize)(state, self, 1, 0, size);
   return self;
 }
 
-THCSTensor *THCSTensor_(resize2d)(THCState *state, THCSTensor *self, long size0,
-                                  long size1) {
-  long size[2] = {size0, size1};
+THCSTensor *THCSTensor_(resize2d)(THCState *state, THCSTensor *self,
+                                  int64_t size0, int64_t size1) {
+  int64_t size[2] = {size0, size1};
   THCSTensor_(rawResize)(state, self, 2, 0, size);
   return self;
 }
 
-THCSTensor *THCSTensor_(resize3d)(THCState *state, THCSTensor *self, long size0,
-                                  long size1, long size2) {
-  long size[3] = {size0, size1, size2};
+THCSTensor *THCSTensor_(resize3d)(THCState *state, THCSTensor *self,
+                                  int64_t size0, int64_t size1, int64_t size2) {
+  int64_t size[3] = {size0, size1, size2};
   THCSTensor_(rawResize)(state, self, 3, 0, size);
   return self;
 }
 
-THCSTensor *THCSTensor_(resize4d)(THCState *state, THCSTensor *self, long size0,
-                                  long size1, long size2, long size3) {
-  long size[4] = {size0, size1, size2, size3};
+THCSTensor *THCSTensor_(resize4d)(THCState *state, THCSTensor *self,
+                                  int64_t size0, int64_t size1, int64_t size2,
+                                  int64_t size3) {
+  int64_t size[4] = {size0, size1, size2, size3};
   THCSTensor_(rawResize)(state, self, 4, 0, size);
   return self;
 }
@@ -459,14 +459,14 @@ void THCTensor_(sparseMask)(THCState *state, THCSTensor *r_, THCTensor *t,
   THCudaLongTensor *indicesBuffer = THCudaLongTensor_new(state);
 
   THCudaLongTensor_zero(state, indices);
-  for (long d = 0; d < mask->nDimensionI; d++) {
+  for (int64_t d = 0; d < mask->nDimensionI; d++) {
     THCudaLongTensor_mul(state, indices, indices, mask->size[d]);
     THCudaLongTensor_select(state, indicesBuffer, maskIndices, 0, d);
     THCudaLongTensor_cadd(state, indices, indices, 1, indicesBuffer);
   }
   THLongStorage *viewSize = THLongStorage_newWithSize(1 + mask->nDimensionV);
   viewSize->data[0] = -1;
-  for (long d = 0; d < mask->nDimensionV; d++) {
+  for (int64_t d = 0; d < mask->nDimensionV; d++) {
     viewSize->data[1 + d] = mask->size[mask->nDimensionI + d];
   }
   THCTensor *t_view = THCTensor_(newView)(state, t, viewSize);

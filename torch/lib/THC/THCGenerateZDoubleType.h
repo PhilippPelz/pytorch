@@ -3,6 +3,19 @@
     "You must define THC_GENERIC_FILE before including THGenerateZDoubleType.h"
 #endif
 
+// #ifndef toZx_defined
+// #define toZx_defined
+// zx toZx(zcx val) {
+//   union {
+//     double x[2];
+//     zx y;
+//   } v;
+//   v.x[0] = val.real();
+//   v.x[1] = val.imag();
+//   return v.y;
+// }
+// #endif
+
 #define real zcx
 #define cureal cufftDoubleComplex
 #define cufft cufftExecZ2Z

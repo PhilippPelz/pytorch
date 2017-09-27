@@ -12,6 +12,7 @@ from functools import wraps, reduce
 from operator import mul
 
 import torch
+import torch.backends.cudnn as cudnn
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.nn.parallel as dp
@@ -627,6 +628,72 @@ class TestNN(NNTestCase):
                                                    ('0.block', block), ('0.block.linear1', l1),
                                                    ('0.block.linear2', l2)])
 
+    def test_register_buffer_raises_error_if_attr_exists(self):
+        m = nn.Module()
+        m.attribute_name = 5
+        with self.assertRaises(KeyError):
+            m.register_buffer('attribute_name', torch.rand(5))
+
+        del m.attribute_name
+        m.register_parameter('attribute_name', nn.Parameter())
+        with self.assertRaises(KeyError):
+            m.register_buffer('attribute_name', torch.rand(5))
+
+        del m.attribute_name
+        m.add_module('attribute_name', nn.Module())
+        with self.assertRaises(KeyError):
+            m.register_buffer('attribute_name', torch.rand(5))
+
+    def test_register_buffer_allows_overwriting_with_same_name(self):
+        m = nn.Module()
+        buffer1 = torch.rand(5)
+        buffer2 = buffer1 + 5
+        m.register_buffer('buffer_name', buffer1)
+        self.assertEqual(m.buffer_name, buffer1)
+        m.register_buffer('buffer_name', buffer2)
+        self.assertEqual(m.buffer_name, buffer2)
+
+    def test_register_parameter_raises_error_if_attr_exists(self):
+        m = nn.Module()
+        m.attribute_name = 5
+        with self.assertRaises(KeyError):
+            m.register_parameter('attribute_name', nn.Parameter())
+
+        del m.attribute_name
+        m.register_buffer('attribute_name', torch.rand(5))
+        with self.assertRaises(KeyError):
+            m.register_parameter('attribute_name', nn.Parameter())
+
+        del m.attribute_name
+        m.add_module('attribute_name', nn.Module())
+        with self.assertRaises(KeyError):
+            m.register_parameter('attribute_name', nn.Parameter())
+
+    def test_register_parameter_allows_overwriting_with_same_name(self):
+        m = nn.Module()
+        param1 = nn.Parameter(torch.rand(5))
+        param2 = nn.Parameter(param1.data + 5)
+        m.register_parameter('param_name', param1)
+        self.assertEqual(m.param_name, param1)
+        m.register_parameter('param_name', param2)
+        self.assertEqual(m.param_name, param2)
+
+    def test_add_module_raises_error_if_attr_exists(self):
+        m = nn.Module()
+        m.attribute_name = 5
+        with self.assertRaises(KeyError):
+            m.add_module('attribute_name', nn.Module())
+
+        del m.attribute_name
+        m.register_buffer('attribute_name', torch.rand(5))
+        with self.assertRaises(KeyError):
+            m.add_module('attribute_name', nn.Module())
+
+        del m.attribute_name
+        m.register_parameter('attribute_name', nn.Parameter())
+        with self.assertRaises(KeyError):
+            m.add_module('attribute_name', nn.Module())
+
     def test_Sequential_getitem(self):
         l1 = nn.Linear(10, 20)
         l2 = nn.Linear(20, 30)
@@ -717,7 +784,9 @@ class TestNN(NNTestCase):
         self.assertEqual(net.empty, None)
         net.add_module('l3', l)
         self.assertEqual(net.l3, l)
-        self.assertRaises(KeyError, lambda: net.add_module('l', l))
+        l3 = nn.Linear(20, 10)
+        net.add_module('l', l3)
+        self.assertEqual(net.l, l3)
         self.assertRaises(TypeError, lambda: net.add_module('x', 'non-module'))
 
     def test_type(self):
@@ -1358,13 +1427,27 @@ class TestNN(NNTestCase):
         l = nn.Linear(10, 5).float().cuda()
         i = Variable(torch.randn(20, 10).float().cuda(1))
         l.cuda(1)
-        expected_out = l(i).data
-        l.cuda(0)
-        out = dp.data_parallel(l, i, (0, 1))
-        self.assertEqual(out.get_device(), 0)
-        self.assertEqual(out.data, expected_out)
+        expected_out = l(i)
+        loss = expected_out.sum()
+        loss.backward()
+        expected_grads = []
+        for param in l.parameters():
+            expected_grads.append(param.grad.clone())
+        dev_ids_list = [(0, 1), (1, 0)]
+        for dev_id in dev_ids_list:
+            with torch.cuda.device(dev_id[0]):
+                l.cuda()
+                l.zero_grad()
+                out = dp.data_parallel(l, i, dev_id)
+                loss = out.sum()
+                loss.backward()
+                self.assertEqual(out.get_device(), dev_id[0])
+                self.assertEqual(out.data, expected_out.data)
+                for expected, param in zip(expected_grads, l.parameters()):
+                    self.assertEqual(param.grad.data, expected.data)
 
         # Check for None device_ids
+        l = l.cuda()
         out = dp.data_parallel(l, i)
 
     @unittest.skipIf(not TEST_MULTIGPU, "multi-GPU not supported")
@@ -2604,8 +2687,7 @@ class TestNN(NNTestCase):
         grid = Variable(torch.randn(N, H, W, 2), requires_grad=True)
         self.assertTrue(gradcheck(lambda inp, grid: F.grid_sample(inp, grid), (input, grid)))
 
-        # test CPU against CUDA
-        if TEST_CUDNN:
+        def test_cpu_against_cuda(N, C, H, W):
             def test_shape(N, C, IH, IW, H, W):
                 input_cpu = Variable(torch.randn(C, N, IH, IW).transpose(0, 1), requires_grad=True)
                 grid_cpu = Variable(torch.randn(H, N, W, 2).transpose(0, 1), requires_grad=True)
@@ -2654,6 +2736,20 @@ class TestNN(NNTestCase):
             H = random.randint(1, IH)
             W = random.randint(1, IW)
             test_shape(N, C, IH, IW, H, W)
+
+        # test CUDNN against CPU
+        if TEST_CUDNN:
+            test_cpu_against_cuda(N, C, H, W)
+
+        # test CUDA (without CUDNN) against CPU
+        if TEST_CUDA:
+
+            # GridSampler will automatically use CUDNN if it is available
+            # so we disable CUDNN temporarily
+            original_cudnn_enabled = cudnn.enabled
+            cudnn.enabled = False
+            test_cpu_against_cuda(N, C, H, W)
+            cudnn.enabled = original_cudnn_enabled
 
     def test_affine_grid(self):
         # test known input on CPU
@@ -3637,9 +3733,30 @@ new_module_tests = [
         desc='norm',
     ),
     dict(
+        module_name='LPPool1d',
+        constructor_args=(1.5, 2),
+        input=torch.rand(1, 3, 7),
+        desc='norm',
+    ),
+    dict(
+        module_name='LPPool1d',
+        constructor_args=(2, 2, 3),
+        input_size=(1, 3, 7),
+    ),
+    dict(
+        module_name='ReflectionPad1d',
+        constructor_args=((1, 2),),
+        input_size=(2, 3, 8),
+    ),
+    dict(
         module_name='ReflectionPad2d',
         constructor_args=((1, 2, 3, 4),),
         input_size=(2, 3, 8, 8),
+    ),
+    dict(
+        module_name='ReplicationPad1d',
+        constructor_args=((1, 2),),
+        input_size=(2, 3, 4),
     ),
     dict(
         module_name='ReplicationPad2d',
@@ -3658,9 +3775,19 @@ new_module_tests = [
         desc='negative_dims'
     ),
     dict(
+        module_name='ConstantPad1d',
+        constructor_args=((1, 2), 2),
+        input_size=(2, 3, 4)
+    ),
+    dict(
         module_name='ConstantPad2d',
         constructor_args=((1, 2, 3, 4), 2),
         input_size=(2, 3, 4, 4)
+    ),
+    dict(
+        module_name='ConstantPad3d',
+        constructor_args=((1, 2, 3, 4, 1, 0), 2),
+        input_size=(2, 3, 4, 4, 5)
     ),
     dict(
         module_name='Conv3d',
@@ -3908,21 +4035,18 @@ new_module_tests = [
         module_name='AdaptiveMaxPool1d',
         constructor_args=(3,),
         input=torch.rand(1, 3, 5),
-        check_gradgrad=False,
     ),
     dict(
         module_name='AdaptiveMaxPool2d',
         constructor_args=(3,),
         input=torch.rand(1, 3, 5, 6),
         desc='single',
-        check_gradgrad=False,
     ),
     dict(
         module_name='AdaptiveMaxPool2d',
         constructor_args=((3, 4),),
         input=torch.rand(1, 3, 5, 6),
         desc='tuple',
-        check_gradgrad=False,
     ),
     dict(
         module_name='AdaptiveAvgPool1d',

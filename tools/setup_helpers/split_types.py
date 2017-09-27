@@ -8,6 +8,8 @@ line_start = '//generic_include '
 types = [
     'Double',
     'Float',
+    'ZDouble',
+    'ZFloat',
     'Half',
     'Long',
     'Int',

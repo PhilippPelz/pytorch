@@ -1,13 +1,14 @@
-#include <Python.h>
 #include "batch_normalization.h"
 #include "convolution.h"
 #include "accumulate_grad.h"
 #include "basic_ops.h"
 #include "tensor.h"
-#include "torch/csrc/THP.h"
-#include "torch/csrc/autograd/python_cpp_function.h"
+#include "special.h"
+#include "jit_closure.h"
+#include "torch/csrc/autograd/functions/pybind.h"
+#include "torch/csrc/jit/python_tracer.h"
+#include "torch/csrc/utils/pybind.h"
 #include "torch/csrc/utils/tuple_parser.h"
-#include "torch/csrc/DynamicTypes.h"
 
 using namespace torch::autograd;
 using torch::TupleParser;
@@ -224,9 +225,7 @@ static PyObject* accumulateGradVar(PyObject *_self, void* _unused)
 {
   THPCppFunction* self = (THPCppFunction*)_self;
   auto grad_acc = (AccumulateGrad*)self->cdata.get();
-  auto var = grad_acc->variable.lock();
-  if (!var) Py_RETURN_NONE;
-  return THPVariable_Wrap(var);
+  return THPVariable_Wrap(grad_acc->variable);
 }
 
 static struct PyGetSetDef accumulate_grad_properties[] = {
@@ -280,8 +279,29 @@ bool THPAutograd_initFunctions(PyObject* _unused)
   static PyTypeObject CatClass;
   addClass<Cat, NoCtor>(module, CatClass, "Cat");
 
+  static PyTypeObject EvalClass;
+  addClass<Eval, NoCtor>(module, EvalClass, "Eval");
+
+  static PyTypeObject AutogradClosureClass;
+  addClass<AutogradClosure, NoCtor>(module, AutogradClosureClass, "AutogradClosure");
+
   THPObjectPtr parent(PyImport_ImportModule("torch._C"));
   if (!parent) return false;
   PyModule_AddObject(parent.get(), "_functions", module.release());
   return true;
 }
+
+namespace torch { namespace autograd {
+
+void initAutogradClosureBindings(PyObject* module) {
+  auto m = py::handle(module).cast<py::module>();
+  py::class_<AutogradClosureFactory,std::shared_ptr<AutogradClosureFactory>>(m, "AutogradClosureFactory")
+    .def("__call__", &AutogradClosureFactory::construct)
+    ;
+
+  m.def("_jit_createAutogradClosure", [](jit::tracer::TracingState* tracing_state) {
+    return std::make_shared<AutogradClosureFactory>(tracing_state);
+  });
+}
+
+}}

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ATen/ATenGeneral.h"
+#include "ATen/TypeMethods.h"
 #include "ATen/Context.h"
 #include "ATen/Formatting.h"
 #include "ATen/Functions.h"

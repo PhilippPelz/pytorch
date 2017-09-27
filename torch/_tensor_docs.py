@@ -7,6 +7,8 @@ from torch._C import _add_docstr as add_docstr
 tensor_classes = [
     'DoubleTensorBase',
     'FloatTensorBase',
+    'ZDoubleTensorBase',
+    'ZFloatTensorBase',
     'LongTensorBase',
     'IntTensorBase',
     'ShortTensorBase',
@@ -452,6 +454,20 @@ add_docstr_all('equal',
 equal(other) -> bool
 
 See :func:`torch.equal`
+""")
+
+add_docstr_all('erf',
+               """
+erf() -> Tensor
+
+See :func:`torch.erf`
+""")
+
+add_docstr_all('erfinv',
+               """
+erfinv() -> Tensor
+
+See :func:`torch.erfinv`
 """)
 
 add_docstr_all('exp',

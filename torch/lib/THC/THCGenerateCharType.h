@@ -2,9 +2,9 @@
 #error "You must define THC_GENERIC_FILE before including THGenerateCharType.h"
 #endif
 
-#define real char
-#define part char
-#define accreal long
+#define real int8_t
+#define accreal int64_t
+#define part int8_t
 #define Real Char
 #define CReal CudaChar
 #define Part Char

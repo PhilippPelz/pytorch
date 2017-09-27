@@ -32,6 +32,7 @@ STORAGE_DERIVED_H = CodeTemplate.from_file(TEMPLATE_PATH + "/StorageDerived.h")
 TYPE_DERIVED_CPP = CodeTemplate.from_file(TEMPLATE_PATH + "/TypeDerived.cpp")
 TYPE_DERIVED_H = CodeTemplate.from_file(TEMPLATE_PATH + "/TypeDerived.h")
 TYPE_H = CodeTemplate.from_file(TEMPLATE_PATH + "/Type.h")
+TYPE_METHODS_H = CodeTemplate.from_file(TEMPLATE_PATH + "/TypeMethods.h")
 TYPE_CPP = CodeTemplate.from_file(TEMPLATE_PATH + "/Type.cpp")
 
 TENSOR_DERIVED_CPP = CodeTemplate.from_file(
@@ -67,15 +68,15 @@ if not options.no_cuda:
 densities = ['Dense', 'Sparse']
 
 scalar_types = [
-    ('Byte', 'uint8_t', 'Long', 'unsigned char','Byte', 'unsigned char'),
-    ('Char', 'int8_t', 'Long', 'char', 'Char','char'),
+    ('Byte', 'uint8_t', 'Long', 'uint8_t','Byte', 'uint8_t'),
+    ('Char', 'int8_t', 'Long', 'int8_t', 'Char','int8_t'),
     ('Double', 'double', 'Double', 'double','Double', 'double'),
     ('Float', 'float', 'Double', 'float','Float', 'float'),
     ('ZDouble', 'zx', 'ZDouble', 'zx','Double', 'double'),
     ('ZFloat', 'cx', 'ZDouble', 'cx','Float', 'float'),
-    ('Int', 'int', 'Long', 'int','Int', 'int'),
-    ('Long', 'int64_t', 'Long', 'long','Long', 'long'),
-    ('Short', 'int16_t', 'Long', 'short','Short', 'short'),
+    ('Int', 'int', 'Long', 'int32_t','Int', 'int'),
+    ('Long', 'int64_t', 'Long', 'int64_t','Long', 'int64_t'),
+    ('Short', 'int16_t', 'Long', 'int16_t','Short', 'int16_t'),
     ('Half', 'Half', 'Double', 'THHalf','Half', 'Half'),
 ]
 
@@ -85,6 +86,7 @@ top_env = {
     'type_headers': [],
     'type_method_declarations': [],
     'type_method_definitions': [],
+    'type_method_inline_definitions': [],
     'tensor_method_declarations': [],
     'tensor_method_definitions': [],
     'function_declarations': [],
@@ -222,8 +224,10 @@ def generate_storage_type_and_tensor(backend, density, scalar_type, declarations
         write(env['Storage'] + ".cpp", STORAGE_DERIVED_CPP.substitute(env))
         write(env['Storage'] + ".h", STORAGE_DERIVED_H.substitute(env))
         env['TensorDenseOrSparse'] = TENSOR_DENSE_CPP.substitute(env)
+        env['THTensor_nDimension'] = 'tensor->nDimension'
     else:
         env['TensorDenseOrSparse'] = TENSOR_SPARSE_CPP.substitute(env)
+        env['THTensor_nDimension'] = 'tensor->nDimensionI + tensor->nDimensionV'
 
     write(env['Type'] + ".cpp", TYPE_DERIVED_CPP.substitute(env))
     write(env['Type'] + ".h", TYPE_DERIVED_H.substitute(env))
@@ -270,16 +274,17 @@ for backend in backends:
             if density == 'Sparse' and scalar_type[0] == 'Half':
                 # THS does not do half type yet.
                 continue
-            if density == 'Sparse' and scalar_type[0] == 'ZFloat':
-                # THS does not do half type yet.
-                continue
-            if density == 'Sparse' and scalar_type[0] == 'ZDouble':
-                # THS does not do half type yet.
-                continue
+            # if density == 'Sparse' and scalar_type[0] == 'ZFloat':
+            #     # THS does not do ZFloat type yet.
+            #     continue
+            # if density == 'Sparse' and scalar_type[0] == 'ZDouble':
+            #     # THS does not do ZDouble type yet.
+            #     continue
             all_types.append(generate_storage_type_and_tensor(
                 backend, density, scalar_type, declarations))
 # top_env['type_ids'].append(',')
 write('Type.h', TYPE_H.substitute(top_env))
+write('TypeMethods.h', TYPE_METHODS_H.substitute(top_env))
 write('Type.cpp', TYPE_CPP.substitute(top_env))
 
 write('Tensor.h', TENSOR_H.substitute(top_env))

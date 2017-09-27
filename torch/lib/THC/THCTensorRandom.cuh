@@ -39,12 +39,12 @@ __global__ void generateLogNormal<double>(curandStateMtgp32 *state, int size,
 }
 
 template <typename T>
-__global__ void multinomialAliasDrawKernel(int size, long *output, long *j,
-                                           T *q, long K, T *uniform,
-                                           T *bernoulli) {
-  long idx = blockIdx.x * BLOCK_SIZE + threadIdx.x;
+__global__ void multinomialAliasDrawKernel(int size, int64_t *output,
+                                           int64_t *j, T *q, int64_t K,
+                                           T *uniform, T *bernoulli) {
+  int64_t idx = blockIdx.x * BLOCK_SIZE + threadIdx.x;
   if (idx < size) {
-    long rand_ind = ScalarConvert<T, long>::to(uniform[idx]);
+    int64_t rand_ind = ScalarConvert<T, int64_t>::to(uniform[idx]);
     T bern_uniform = bernoulli[idx];
     int _mask = (int)THCNumerics<T>::lt(bern_uniform, q[rand_ind]);
     output[idx] = j[rand_ind] * (1 - _mask) + (rand_ind + 1L) * _mask;
@@ -53,16 +53,16 @@ __global__ void multinomialAliasDrawKernel(int size, long *output, long *j,
 
 template <typename T>
 __global__ void
-aliasMultinomialFilter(T *q, T *probs, long *smaller, long *larger,
-                       long *J_data, long *larger_short_data,
-                       long *smaller_short_data, T one, long inputsize) {
-  long idx = blockIdx.x * BLOCK_SIZE + threadIdx.x;
+aliasMultinomialFilter(T *q, T *probs, int64_t *smaller, int64_t *larger,
+                       int64_t *J_data, int64_t *larger_short_data,
+                       int64_t *smaller_short_data, T one, int64_t inputsize) {
+  int64_t idx = blockIdx.x * BLOCK_SIZE + threadIdx.x;
   if (idx < inputsize) {
     larger_short_data[idx] = 0;
     smaller_short_data[idx] = 0;
     J_data[idx] = 0;
-    T val =
-        THCNumerics<T>::mul(probs[idx], ScalarConvert<long, T>::to(inputsize));
+    T val = THCNumerics<T>::mul(probs[idx],
+                                ScalarConvert<int64_t, T>::to(inputsize));
     if (THCNumerics<T>::lt(val, one)) {
       smaller[idx] = idx + 1;
       larger[idx] = 0;
@@ -75,8 +75,8 @@ aliasMultinomialFilter(T *q, T *probs, long *smaller, long *larger,
 }
 
 template <typename T>
-__global__ void condDiv(T *q, long *j, long inputsize, T q_max) {
-  long idx = blockIdx.x * BLOCK_SIZE + threadIdx.x;
+__global__ void condDiv(T *q, int64_t *j, int64_t inputsize, T q_max) {
+  int64_t idx = blockIdx.x * BLOCK_SIZE + threadIdx.x;
   T one = ScalarConvert<int, T>::to(1);
   if (idx < inputsize) {
     if (j[idx] <= 0) {
@@ -95,12 +95,12 @@ __global__ void condDiv(T *q, long *j, long inputsize, T q_max) {
 // Normalizes the L1 norm of every row to 1; used by multinomial
 template <typename T>
 __global__ void renormRowsL1(T *dist, long rows, long cols) {
-  extern __shared__ __align__(sizeof(T)) unsigned char my_smem[];
+  extern __shared__ unsigned char my_smem[];
   T *smem = reinterpret_cast<T *>(my_smem);
 
-  for (long row = blockIdx.x; row < rows; row += gridDim.x) {
+  for (int64_t row = blockIdx.x; row < rows; row += gridDim.x) {
     T sum = ScalarConvert<int, T>::to(0);
-    for (long col = threadIdx.x; col < cols; col += blockDim.x) {
+    for (int64_t col = threadIdx.x; col < cols; col += blockDim.x) {
       sum = THCNumerics<T>::add(sum, dist[row * cols + col]);
     }
 
@@ -113,7 +113,7 @@ __global__ void renormRowsL1(T *dist, long rows, long cols) {
 
     sum = smem[0];
     if (THCNumerics<T>::gt(sum, ScalarConvert<int, T>::to(0))) {
-      for (long col = threadIdx.x; col < cols; col += blockDim.x) {
+      for (int64_t col = threadIdx.x; col < cols; col += blockDim.x) {
         dist[row * cols + col] =
             THCNumerics<T>::div(dist[row * cols + col], sum);
       }
@@ -151,9 +151,9 @@ __device__ int binarySearchForMultinomial(T *dist, int size, T val) {
 }
 
 template <typename T, typename AccT>
-__global__ void sampleMultinomialOnce(long *dest, long distributions,
+__global__ void sampleMultinomialOnce(int64_t *dest, int64_t distributions,
                                       int categories, T *sampled, T *dist) {
-  extern __shared__ __align__(sizeof(AccT)) unsigned char my_smem[];
+  extern __shared__ unsigned char my_smem[];
   __shared__ bool found;
 
   // Shared Memory hold blockdim.x T for holding the cumulative sum,
@@ -164,7 +164,7 @@ __global__ void sampleMultinomialOnce(long *dest, long distributions,
   AccT accZero = ScalarConvert<int, AccT>::to(0);
   T zero = ScalarConvert<int, T>::to(0);
 
-  for (long curDist = blockIdx.x; curDist < distributions;
+  for (int64_t curDist = blockIdx.x; curDist < distributions;
        curDist += gridDim.x) {
     // Each block handles one distribution
     // First pass, find the total sum of the distribution
@@ -284,8 +284,8 @@ __global__ void sampleMultinomialOnce(long *dest, long distributions,
 template <typename T>
 __global__ void
 sampleMultinomialWithReplacement(curandStateMtgp32 *state, int totalSamples,
-                                 long *dest, long distributions, int categories,
-                                 T *normDistPrefixSum) {
+                                 int64_t *dest, int64_t distributions,
+                                 int categories, T *normDistPrefixSum) {
   // At the moment, each warp computes one sample value in the binary
   // search due to divergence. It seems possible to compute multiple
   // values and limit divergence though later on. However, no matter
@@ -293,7 +293,7 @@ sampleMultinomialWithReplacement(curandStateMtgp32 *state, int totalSamples,
   // call to update the generator state.
 
   // The block determines the distribution for which we generate a point
-  for (long curDist = blockIdx.x; curDist < distributions;
+  for (int64_t curDist = blockIdx.x; curDist < distributions;
        curDist += gridDim.x) {
     for (int sampleBase = 0; sampleBase < totalSamples;
          sampleBase += blockDim.y) {
@@ -317,8 +317,8 @@ sampleMultinomialWithReplacement(curandStateMtgp32 *state, int totalSamples,
 
 template <typename T>
 __global__ void sampleMultinomialWithoutReplacement(
-    curandStateMtgp32 *state, int totalSamples, int sample, long *dest,
-    long distributions, int categories, T *origDist, T *normDistPrefixSum) {
+    curandStateMtgp32 *state, int totalSamples, int sample, int64_t *dest,
+    int64_t distributions, int categories, T *origDist, T *normDistPrefixSum) {
   // At the moment, each warp computes one sample value in the binary
   // search due to divergence. It seems possible to compute multiple
   // values and limit divergence though later on. However, no matter
@@ -327,10 +327,10 @@ __global__ void sampleMultinomialWithoutReplacement(
 
   // The block and warp determines the distribution for which we
   // generate a point
-  for (long curDistBase = blockIdx.x * blockDim.y; curDistBase < distributions;
-       curDistBase += gridDim.x * blockDim.y) {
+  for (int64_t curDistBase = blockIdx.x * blockDim.y;
+       curDistBase < distributions; curDistBase += gridDim.x * blockDim.y) {
     // The warp determines the distribution
-    long curDist = curDistBase + threadIdx.y;
+    int64_t curDist = curDistBase + threadIdx.y;
 
     // All threads must participate in this
     T r = ScalarConvert<float, T>::to(curand_uniform(&state[blockIdx.x]));
@@ -351,15 +351,15 @@ __global__ void sampleMultinomialWithoutReplacement(
 }
 
 template <typename T>
-__global__ void aliasMultinomialSetup(long *j, T *q, long inputsize,
-                                      long *smaller, long *larger, int small_c,
-                                      int large_c) {
-  T one = ScalarConvert<long, T>::to(1);
+__global__ void aliasMultinomialSetup(int64_t *j, T *q, int64_t inputsize,
+                                      int64_t *smaller, int64_t *larger,
+                                      int small_c, int large_c) {
+  T one = ScalarConvert<int64_t, T>::to(1);
   // Loop through and create little binary mixtures that
   // appropriately allocate the larger outcomes over the
   // overall uniform mixture.
-  long large = 0;
-  long small = 0;
+  int64_t large = 0;
+  int64_t small = 0;
   while (small_c > 0 && large_c > 0) {
     large = larger[large_c - 1] - 1;
     small = smaller[small_c - 1] - 1;

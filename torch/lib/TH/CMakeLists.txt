@@ -309,7 +309,7 @@ IF(BLAS_FOUND)
   ELSE ($ENV{TH_BINARY_BUILD})
     TARGET_LINK_LIBRARIES(TH ${BLAS_LIBRARIES})
   ENDIF ($ENV{TH_BINARY_BUILD})
-  
+
   IF(BLAS_INFO STREQUAL "mkl")
     ADD_DEFINITIONS(-DTH_BLAS_MKL)
   ENDIF()
@@ -395,6 +395,8 @@ INSTALL(FILES
   THGenerateAllTypes.h
   THGenerateDoubleType.h
   THGenerateFloatType.h
+  THGenerateZFloatType.h
+  THGenerateZDoubleType.h
   THGenerateHalfType.h
   THGenerateLongType.h
   THGenerateIntType.h

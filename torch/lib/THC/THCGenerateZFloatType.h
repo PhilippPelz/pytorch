@@ -3,6 +3,19 @@
     "You must define THC_GENERIC_FILE before including THGenerateZFloatType.h"
 #endif
 
+// #ifndef toCx_defined
+// #define toCx_defined
+// cx toCx(ccx val) {
+//   union {
+//     float x[2];
+//     cx y;
+//   } v;
+//   v.x[0] = val.real();
+//   v.x[1] = val.imag();
+//   return v.y;
+// }
+// #endif
+
 #define real ccx
 #define cureal cufftComplex
 #define cufft cufftExecC2C

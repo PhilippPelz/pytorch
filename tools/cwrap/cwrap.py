@@ -105,7 +105,26 @@ class cwrap(object):
 
         return '\n'.join(output)
 
+    def set_declaration_defaults(self, declaration):
+        declaration.setdefault('arguments', [])
+        declaration.setdefault('return', 'void')
+        if 'cname' not in declaration:
+            declaration['cname'] = declaration['name']
+        # Simulate multiple dispatch, even if it's not necessary
         print(declaration['name'])
+        if 'options' not in declaration:
+            declaration['options'] = [{'arguments': declaration['arguments']}]
+            del declaration['arguments']
+        # Parse arguments (some of them can be strings)
+        for option in declaration['options']:
+            option['arguments'] = self.parse_arguments(option['arguments'])
+        # Propagate defaults from declaration to options
+        for option in declaration['options']:
+            for k, v in declaration.items():
+                if k != 'name' and k != 'options':
+                    option.setdefault(k, v)
+        # print(declaration['name'])
+
     def parse_arguments(self, args):
         new_args = []
         for arg in args:

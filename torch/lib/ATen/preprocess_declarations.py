@@ -223,6 +223,8 @@ def run(declarations):
             set_mode(option)
             sanitize_return(option)
             process_types_and_backends(option)
+            if declaration['name'] == 'multinomial':
+                print(declaration['name'], option['types'], option['backend_type_pairs'])
             add_variants(option)
         declaration['options'] = handle_outputs_taken_as_arguments(
             declaration['options'])

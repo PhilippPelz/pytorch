@@ -2,9 +2,9 @@
 #error "You must define THC_GENERIC_FILE before including THGenerateShortType.h"
 #endif
 
-#define real short
-#define part short
-#define accreal long
+#define real int16_t
+#define part int16_t
+#define accreal int64_t
 #define Real Short
 #define CReal CudaShort
 #define Part Short

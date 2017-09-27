@@ -34,6 +34,28 @@ THC_API void THCTensor_(normal)(THCState* state, THCTensor *self_, double mean, 
   THCTensor_(freeCopyTo)(state, self, self_);
 };
 
+THC_API void THCTensor_(normal_means)(THCState *state, THCTensor *self, THCTensor *means, double stddev) {
+  THCTensor_(resizeAs)(state, self, means);
+  THCTensor_(normal)(state, self, 0, stddev);
+  THCTensor_(cadd)(state, self, self, ScalarConvert<int, real>::to(1), means);
+}
+
+THC_API void THCTensor_(normal_stddevs)(THCState *state, THCTensor *self, double mean, THCTensor *stddevs)
+{
+  THCTensor_(resizeAs)(state, self, stddevs);
+  THCTensor_(normal)(state, self, 0, 1);
+  THCTensor_(cmul)(state, self, self, stddevs);
+  THCTensor_(add)(state, self, self, ScalarConvert<double, real>::to(mean));
+}
+
+THC_API void THCTensor_(normal_means_stddevs)(THCState *state, THCTensor *self, THCTensor *means, THCTensor *stddevs)
+{
+  THCTensor_(resizeAs)(state, self, means);
+  THCTensor_(normal)(state, self, 0, 1);
+  THCTensor_(cmul)(state, self, self, stddevs);
+  THCTensor_(cadd)(state, self, self, ScalarConvert<int, real>::to(1), means);
+}
+
 THC_API void THCTensor_(logNormal)(THCState* state, THCTensor *self_, double mean, double stdv)
 {
 
@@ -83,8 +105,8 @@ THC_API void THCTensor_(cauchy)(THCState* state, THCTensor *self_, double median
 void THCTensor_(renormRows)(struct THCState* state,
                              THCTensor* t) {
   THAssert(THCTensor_(nDimension)(state, t) == 2);
-  long rows = THCTensor_(size)(state, t, 0);
-  long cols = THCTensor_(size)(state, t, 1);
+  int64_t rows = THCTensor_(size)(state, t, 0);
+  int64_t cols = THCTensor_(size)(state, t, 1);
 
   cudaDeviceProp* props = THCState_getCurrentDeviceProperties(state);
   THAssert(props != NULL);
@@ -115,9 +137,9 @@ THC_API void THCTensor_(multinomial)(struct THCState *state,
              "prob_dist must be 1 or 2 dim");
 
   // Categories are in the innermost dimension
-  long numDist =
+  int64_t numDist =
     inputSize == 1 ? 1 : THCTensor_(size)(state, prob_dist, 0);
-  long numCategoriesLong =
+  int64_t numCategoriesLong =
     inputSize == 1 ? THCTensor_(size)(state, prob_dist, 0) :
     THCTensor_(size)(state, prob_dist, 1);
 
@@ -146,22 +168,29 @@ THC_API void THCTensor_(multinomial)(struct THCState *state,
 
   THCudaLongTensor_resize2d(state, self, numDist, n_sample);
 
-  if (n_sample == 1) {
+  // get current device properties
+  cudaDeviceProp* props = THCState_getCurrentDeviceProperties(state);
+  THAssert(props != NULL);
+  int numSM = props->multiProcessorCount;
+  int maxThreads = props->maxThreadsPerBlock;
+  int maxShared = props->sharedMemPerBlock;
+  int requiredShared = (numCategories < maxThreads ? numCategories : maxThreads)
+                                * (sizeof(real) * sizeof(accreal));
+                                
+  if (n_sample == 1 && maxShared >= requiredShared) {
     // Optimized allocation-free implementation
     // To exploit greater parallelism for the sampling, generate the
     // Uniform random samples in a separate kernel launch, into
     // temporarily allocated memory. The device RNG is thread-limited
     THCTensor *sampled = THCTensor_(newWithSize2d)(state, numDist, n_sample);
     THCTensor_(uniform)(state, sampled, 0.0, 1.0);
-    cudaDeviceProp* props = THCState_getCurrentDeviceProperties(state);
-    THAssert(props != NULL);
-    int numSM = props->multiProcessorCount;
-    int maxThreads = props->maxThreadsPerBlock;
+
     dim3 block(numCategories < maxThreads ? numCategories : maxThreads);
     dim3 grid(numDist < numSM * 4 ? numDist : numSM * 4);
+
     sampleMultinomialOnce<real, accreal>
       <<<grid, block,
-         block.x * (sizeof(real) * sizeof(accreal)),
+         requiredShared,
          THCState_getCurrentStream(state)>>>(
       THCudaLongTensor_data(state, self),
       numDist,
@@ -219,7 +248,7 @@ THC_API void THCTensor_(multinomial)(struct THCState *state,
 
       // Each warp in a block will generate a sample from a different
       // distribution concurrently.
-      ptrdiff_t numBlocks = THCCeilDiv(numDist, 4L);
+      ptrdiff_t numBlocks = THCCeilDiv(numDist, (int64_t) 4);
       dim3 grid(numBlocks < MAX_NUM_BLOCKS ? numBlocks : MAX_NUM_BLOCKS);
 
       for (int sample = 0; sample < n_sample; ++sample) {
@@ -263,6 +292,87 @@ THC_API void THCTensor_(multinomial)(struct THCState *state,
   }
 
   THCTensor_(free)(state, probDistContig);
+}
+
+THC_API void THCTensor_(multinomialAliasSetup)(THCState *state, THCTensor *_probs, THCudaLongTensor *_J, THCTensor *_q){
+  THAssert(THCTensor_(isContiguous)(state, _q));
+  THAssert(THCudaLongTensor_isContiguous(state, _J));
+  THAssert(THCTensor_(isContiguous)(state, _probs));
+  int64_t inputsize = THCTensor_(nElement)(state, _probs);
+  THCudaLongTensor *smaller = THCudaLongTensor_newWithSize1d(state, inputsize);
+  THCudaLongTensor *larger = THCudaLongTensor_newWithSize1d(state, inputsize);
+  THCudaLongTensor *smaller_short = THCudaLongTensor_newWithSize1d(state, inputsize);
+  THCudaLongTensor *larger_short = THCudaLongTensor_newWithSize1d(state, inputsize);
+  
+  THCudaLongTensor_resize1d(state, _J, inputsize);
+  THCTensor_(resize1d)(state, _q, inputsize);
+  
+  real one = ScalarConvert<int64_t, real>::to(1);
+  int inputBlockDim = THCCeilDiv((int)inputsize + BLOCK_SIZE - 1, BLOCK_SIZE);
+  aliasMultinomialFilter
+    <<<inputBlockDim, BLOCK_SIZE, 0, THCState_getCurrentStream(state) >>>(
+								     THCTensor_(data)(state, _q),
+								     THCTensor_(data)(state, _probs),
+								     THCudaLongTensor_data(state, smaller),
+								     THCudaLongTensor_data(state, larger),
+								     THCudaLongTensor_data(state, _J),
+								     THCudaLongTensor_data(state, smaller_short),
+								     THCudaLongTensor_data(state, larger_short),
+								     one, inputsize
+								     );
+  
+  THCudaLongTensor_nonzero(state, smaller_short, smaller);
+  THCudaLongTensor_nonzero(state, larger_short, larger);
+  int h_large_c = THCudaLongTensor_nElement(state, larger_short);
+  THCudaLongTensor_resize1d(state, smaller_short, inputsize);
+  THCudaLongTensor_resize1d(state, larger_short, inputsize);
+  aliasMultinomialSetup
+    <<<1, 1, 0, THCState_getCurrentStream(state)>>>(
+						    THCudaLongTensor_data(state, _J),
+						    THCTensor_(data)(state, _q),
+						    inputsize,
+						    THCudaLongTensor_data(state, smaller_short),
+						    THCudaLongTensor_data(state, larger_short),
+						    inputsize - h_large_c, h_large_c
+						    );
+  real q_max = THCTensor_(maxall)(state, _q);
+  condDiv<<<
+    inputBlockDim, BLOCK_SIZE, 0, THCState_getCurrentStream(state)>>>(
+								      THCTensor_(data)(state, _q),
+								      THCudaLongTensor_data(state, _J),
+								      inputsize, q_max
+								      );
+  
+  THCudaLongTensor_free(state, smaller);
+  THCudaLongTensor_free(state, larger);
+  THCudaLongTensor_free(state, smaller_short);
+  THCudaLongTensor_free(state, larger_short);
+}
+
+THC_API void THCTensor_(multinomialAliasDraw)(THCState *state, THCudaLongTensor *self, THCudaLongTensor *_J, THCTensor *_q){
+  THAssert(THCTensor_(isContiguous)(state, _q));
+  THAssert(THCudaLongTensor_isContiguous(state, _J));
+  Generator* gen = THCRandom_getGenerator(state);
+  int64_t K = THCudaLongTensor_nElement(state, _J);
+  int64_t output_nelem = THCudaLongTensor_nElement(state, self);
+  ptrdiff_t size = THCudaLongTensor_nElement(state, self);
+
+  THCTensor *uniform = THCTensor_(newWithSize1d)(state, output_nelem);
+  THCTensor *bernoulli = THCTensor_(newWithSize1d)(state, output_nelem);
+
+  THCTensor_(uniform)(state, uniform, 0, K);
+  THCTensor_(uniform)(state, bernoulli, 0, 1);
+
+  multinomialAliasDrawKernel
+    <<<THCCeilDiv((int)output_nelem+BLOCK_SIZE-1, BLOCK_SIZE), BLOCK_SIZE, 0, THCState_getCurrentStream(state)>>>(
+				  size,
+				  THCudaLongTensor_data(state, self),
+				  THCudaLongTensor_data(state, _J),
+				  THCTensor_(data)(state, _q),
+				  K,
+				  THCTensor_(data)(state, uniform),
+				  THCTensor_(data)(state, bernoulli)
+				  );
 }
 
 THC_API void THCTensor_(rand)(THCState *state, THCTensor *r_, THLongStorage *size)

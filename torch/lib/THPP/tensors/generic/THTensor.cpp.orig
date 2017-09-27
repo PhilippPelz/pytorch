@@ -7,32 +7,58 @@
 #define const_storage_cast(storage)                                            \
   dynamic_cast<const THStorage<real> &>(storage)
 #define const_long_cast(tensor) dynamic_cast<const THTensor<long> &>(tensor)
+#define const_float_cast(tensor) dynamic_cast<const THTensor<float> &>(tensor)
+#define const_double_cast(tensor) dynamic_cast<const THTensor<double> &>(tensor)
+#define const_zfloat_cast(tensor) dynamic_cast<const THTensor<ccx> &>(tensor)
+#define const_zdouble_cast(tensor) dynamic_cast<const THTensor<zcx> &>(tensor)
+#define const_int_cast(tensor) dynamic_cast<const THTensor<int> &>(tensor)
 #define const_byte_cast(tensor)                                                \
   dynamic_cast<const THTensor<unsigned char> &>(tensor)
+#define const_generator_cast(generator)                                        \
+  dynamic_cast<const THGenerator &>(generator)
+
+template <> THTensor<real>::THTensor() : tensor(THTensor_(new)()){};
+
+template <>
+THTensor<real>::THTensor(const Tensor &other)
+    : tensor(THTensor_(newWithTensor)(const_tensor_cast(other).tensor)){};
+
+template <>
+THTensor<real>::THTensor(const Storage &storage, ptrdiff_t storageOffset,
+                         THLongStorage *size, THLongStorage *stride)
+    : tensor(THTensor_(newWithStorage)(const_storage_cast(storage).storage,
+                                       storageOffset, size, stride)){};
+
+template <>
+THTensor<real>::THTensor(THLongStorage *size, THLongStorage *stride)
+    : tensor(THTensor_(newWithSize)(size, stride)){};
+
+template <> THTensor<real>::THTensor(THRealTensor *wrapped) : tensor(wrapped){};
+
+template <> THTensor<real>::~THTensor() {
 =======
 #define const_tensor_cast(tensor) \
   dynamic_cast<const THTensor&>(tensor)
 #define const_storage_cast(storage) \
   dynamic_cast<const THStorage<real>&>(storage)
 #define const_long_cast(tensor) \
-  dynamic_cast<const THTensor<long>&>(tensor)
+  dynamic_cast<const THTensor<int64_t>&>(tensor)
 #define const_float_cast(tensor) \
   dynamic_cast<const THTensor<float>&>(tensor)
 #define const_double_cast(tensor) \
   dynamic_cast<const THTensor<double>&>(tensor)
 #define const_int_cast(tensor) \
-  dynamic_cast<const THTensor<int>&>(tensor)
+  dynamic_cast<const THTensor<int32_t>&>(tensor)
 #define const_byte_cast(tensor) \
-  dynamic_cast<const THTensor<unsigned char>&>(tensor)
+  dynamic_cast<const THTensor<uint8_t>&>(tensor)
 #define const_generator_cast(generator) \
   dynamic_cast<const THGenerator&>(generator)
->>>>>>> upstream/master
 
-template <> THTensor<real>::THTensor() : tensor(THTensor_(new)()){};
+template<>
+THTensor<real>::THTensor():
+  tensor(THTensor_(new)())
+  {};
 
-<<<<<<< HEAD
-template <> THTensor<real>::THTensor(THRealTensor *wrapped) : tensor(wrapped){};
-=======
 template<>
 THTensor<real>::THTensor(const Tensor& other):
   tensor(THTensor_(newWithTensor)(const_tensor_cast(other).tensor))
@@ -54,13 +80,44 @@ template<>
 THTensor<real>::THTensor(THRealTensor *wrapped):
   tensor(wrapped)
   {};
->>>>>>> upstream/master
 
-template <> THTensor<real>::~THTensor() {
+template<>
+THTensor<real>::~THTensor() {
+>>>>>>> upstream/master
   if (tensor)
     THTensor_(free)(tensor);
 }
+template <> auto THTensor<real>::fft(const Tensor &src) -> THTensor & {
+  throw std::runtime_error("THTensor::fft() not supported");
+}
 
+template <> auto THTensor<real>::fft2(const Tensor &src) -> THTensor & {
+  throw std::runtime_error("THTensor::fft2() not supported");
+}
+
+template <> auto THTensor<real>::fft3(const Tensor &src) -> THTensor & {
+  throw std::runtime_error("THTensor::fft3() not supported");
+}
+
+template <> auto THTensor<real>::fftn(const Tensor &src) -> THTensor & {
+  throw std::runtime_error("THTensor::fftn() not supported");
+}
+
+template <> auto THTensor<real>::ifft(const Tensor &src) -> THTensor & {
+  throw std::runtime_error("THTensor::ifft() not supported");
+}
+
+template <> auto THTensor<real>::ifft2(const Tensor &src) -> THTensor & {
+  throw std::runtime_error("THTensor::ifft2() not supported");
+}
+
+template <> auto THTensor<real>::ifft3(const Tensor &src) -> THTensor & {
+  throw std::runtime_error("THTensor::ifft3() not supported");
+}
+
+template <> auto THTensor<real>::ifftn(const Tensor &src) -> THTensor & {
+  throw std::runtime_error("THTensor::ifftn() not supported");
+}
 template <> auto THTensor<real>::clone() const -> THTensor * {
   return new THTensor(THTensor_(newClone)(tensor));
 }
@@ -76,59 +133,83 @@ template <> auto THTensor<real>::contiguous() const -> std::unique_ptr<Tensor> {
 }
 
 <<<<<<< HEAD
-template <> int THTensor<real>::nDim() const { return tensor->nDimension; }
+template <>
+auto THTensor<real>::newSelect(int dimension, long sliceIndex) const
+    -> THTensor * {
+  return new THTensor(THTensor_(newSelect)(tensor, dimension, sliceIndex));
+}
+
+template <>
+auto THTensor<real>::newNarrow(int dimension, long firstIndex, long size) const
+    -> THTensor * {
+  return new THTensor(
+      THTensor_(newNarrow)(tensor, dimension, firstIndex, size));
 =======
 template<>
-auto THTensor<real>::newSelect(int dimension, long sliceIndex) const -> THTensor* {
+auto THTensor<real>::newSelect(int dimension, int64_t sliceIndex) const -> THTensor* {
   return new THTensor(THTensor_(newSelect)(tensor, dimension, sliceIndex));
 }
 
 template<>
-auto THTensor<real>::newNarrow(int dimension, long firstIndex, long size) const -> THTensor* {
+auto THTensor<real>::newNarrow(int dimension, int64_t firstIndex, int64_t size) const -> THTensor* {
   return new THTensor(THTensor_(newNarrow)(tensor, dimension, firstIndex, size));
+>>>>>>> upstream/master
 }
 
-template<>
-auto THTensor<real>::newTranspose(int dimension1, int dimension2) const -> THTensor* {
+template <>
+auto THTensor<real>::newTranspose(int dimension1, int dimension2) const
+    -> THTensor * {
   return new THTensor(THTensor_(newTranspose)(tensor, dimension1, dimension2));
 }
 
+<<<<<<< HEAD
+template <>
+auto THTensor<real>::newUnfold(int dimension, long size, long step) const
+    -> THTensor * {
+=======
 template<>
-auto THTensor<real>::newUnfold(int dimension, long size, long step) const -> THTensor* {
+auto THTensor<real>::newUnfold(int dimension, int64_t size, int64_t step) const -> THTensor* {
+>>>>>>> upstream/master
   return new THTensor(THTensor_(newUnfold)(tensor, dimension, size, step));
 }
 
-template<>
-auto THTensor<real>::newExpand(const long_range& size) const -> THTensor* {
+template <>
+auto THTensor<real>::newExpand(const long_range &size) const -> THTensor * {
   THLongStorage *size_storage = THLongStorage_newWithSize(size.size());
-  std::memcpy(size_storage->data, size.data(), sizeof(long) * size.size());
+  std::memcpy(size_storage->data, size.data(), sizeof(int64_t) * size.size());
   // TODO this might leak on error
   auto expanded = new THTensor(THTensor_(newExpand)(tensor, size_storage));
   THLongStorage_free(size_storage);
   return expanded;
 }
 
-template<>
-auto THTensor<real>::newView(const long_range& size) const -> THTensor* {
+template <>
+auto THTensor<real>::newView(const long_range &size) const -> THTensor * {
   THLongStorage *size_storage = THLongStorage_newWithSize(size.size());
-  std::memcpy(size_storage->data, size.data(), sizeof(long) * size.size());
+  std::memcpy(size_storage->data, size.data(), sizeof(int64_t) * size.size());
   // TODO this might leak on error
   auto viewed = new THTensor(THTensor_(newView)(tensor, size_storage));
   THLongStorage_free(size_storage);
   return viewed;
 }
 
-template<>
-int THTensor<real>::nDim() const {
-  return tensor->nDimension;
-}
->>>>>>> upstream/master
+template <> int THTensor<real>::nDim() const { return tensor->nDimension; }
 
+<<<<<<< HEAD
 template <> auto THTensor<real>::sizes() const -> long_range {
   return std::vector<long>(tensor->size, tensor->size + tensor->nDimension);
 }
 
 template <> const long *THTensor<real>::rawSizes() const {
+=======
+template<>
+auto THTensor<real>::sizes() const -> long_range {
+  return std::vector<int64_t>(tensor->size, tensor->size + tensor->nDimension);
+}
+
+template<>
+const int64_t* THTensor<real>::rawSizes() const {
+>>>>>>> upstream/master
   return tensor->size;
 }
 
@@ -136,7 +217,12 @@ template <> auto THTensor<real>::strides() const -> long_range {
   return long_range(tensor->stride, tensor->stride + tensor->nDimension);
 }
 
+<<<<<<< HEAD
 template <> const long *THTensor<real>::rawStrides() const {
+=======
+template<>
+const int64_t* THTensor<real>::rawStrides() const {
+>>>>>>> upstream/master
   return tensor->stride;
 }
 
@@ -148,7 +234,12 @@ template <> std::size_t THTensor<real>::elementSize() const {
   return sizeof(real);
 }
 
+<<<<<<< HEAD
 template <> long long THTensor<real>::numel() const {
+=======
+template<>
+int64_t THTensor<real>::numel() const {
+>>>>>>> upstream/master
   return THTensor_(numel)(tensor);
 }
 
@@ -166,6 +257,7 @@ template <> void *THTensor<real>::cdata() { return tensor; }
 
 template <> const void *THTensor<real>::cdata() const { return tensor; }
 
+<<<<<<< HEAD
 template <>
 auto THTensor<real>::resize(const std::initializer_list<long> &new_size)
     -> THTensor & {
@@ -174,6 +266,16 @@ auto THTensor<real>::resize(const std::initializer_list<long> &new_size)
 
 template <>
 auto THTensor<real>::resize(const std::vector<long> &new_size) -> THTensor & {
+=======
+template<>
+auto THTensor<real>::resize(const std::initializer_list<int64_t> &new_size)
+    -> THTensor& {
+  return resize(new_size.begin(), new_size.end());
+}
+
+template<>
+auto THTensor<real>::resize(const std::vector<int64_t> &new_size) -> THTensor& {
+>>>>>>> upstream/master
   return resize(new_size.begin(), new_size.end());
 }
 
@@ -194,7 +296,7 @@ template <typename iterator>
 auto THTensor<real>::resize(const iterator &begin, const iterator &end)
     -> THTensor & {
   THLongStorage *sizes = THLongStorage_newWithSize(std::distance(begin, end));
-  long *sizes_d = sizes->data;
+  int64_t *sizes_d = sizes->data;
   for (auto it = begin; it != end; ++it)
     *sizes_d++ = *it;
   // TODO this might leak on error
@@ -214,6 +316,7 @@ auto THTensor<real>::setStorage(const Storage &storage, ptrdiff_t storageOffset,
                                 const long_range &stride) -> THTensor & {
   auto raw_storage = dynamic_cast<const THStorage<real> &>(storage).getRaw();
   int nDimension = size.size();
+<<<<<<< HEAD
   auto raw_size = const_cast<long *>(size.data());
   auto raw_stride =
       const_cast<long *>(stride.empty() ? nullptr : stride.data());
@@ -250,6 +353,60 @@ auto THTensor<real>::select(const Tensor &src, int dimension, long sliceIndex)
 template <>
 auto THTensor<real>::transpose(const Tensor &src, int dimension1,
                                int dimension2) -> THTensor & {
+=======
+  auto raw_size = const_cast<int64_t*>(size.data());
+  auto raw_stride = const_cast<int64_t*>(stride.empty() ? nullptr : stride.data());
+  THTensor_(setStorageNd)(
+      tensor, raw_storage, storageOffset, nDimension, raw_size, raw_stride);
+  return *this;
+}
+
+template<>
+auto THTensor<real>::setStorage(const Storage& storage,
+                                ptrdiff_t storageOffset,
+                                THLongStorage *size,
+                                THLongStorage *stride) -> THTensor& {
+  THTensor_(setStorage)(
+    tensor,
+    const_storage_cast(storage).storage,
+    storageOffset,
+    size,
+    stride
+  );
+  return *this;
+}
+
+template<>
+auto THTensor<real>::narrow(const Tensor& src,
+                            int dimension,
+                            int64_t firstIndex,
+                            int64_t size) -> THTensor& {
+  THTensor_(narrow)(
+    tensor,
+    const_tensor_cast(src).tensor,
+    dimension,
+    firstIndex,
+    size
+  );
+  return *this;
+}
+
+template<>
+auto THTensor<real>::select(const Tensor& src, int dimension,
+                            int64_t sliceIndex) -> THTensor& {
+  THTensor_(select)(
+    tensor,
+    const_tensor_cast(src).tensor,
+    dimension,
+    sliceIndex
+  );
+  return *this;
+}
+
+template<>
+auto THTensor<real>::transpose(const Tensor& src, int dimension1,
+                               int dimension2) -> THTensor& {
+>>>>>>> upstream/master
   auto src_raw = const_tensor_cast(src).tensor;
   if (tensor != src_raw)
     set(src);
@@ -257,9 +414,15 @@ auto THTensor<real>::transpose(const Tensor &src, int dimension1,
   return *this;
 }
 
+<<<<<<< HEAD
 template <>
 auto THTensor<real>::unfold(const Tensor &src, int dimension, long size,
                             long step) -> THTensor & {
+=======
+template<>
+auto THTensor<real>::unfold(const Tensor& src, int dimension,
+                            int64_t size, int64_t step) -> THTensor& {
+>>>>>>> upstream/master
   auto src_raw = const_tensor_cast(src).tensor;
   if (tensor != src_raw)
     set(src);
@@ -267,22 +430,15 @@ auto THTensor<real>::unfold(const Tensor &src, int dimension, long size,
   return *this;
 }
 
-<<<<<<< HEAD
-template <>
-auto THTensor<real>::squeeze(const Tensor &src, int dimension) -> THTensor & {
+template <> auto THTensor<real>::squeeze(const Tensor &src) -> THTensor & {
   auto src_raw = (dynamic_cast<const THTensor<real> &>(src)).tensor;
-=======
-template<>
-auto THTensor<real>::squeeze(const Tensor& src) -> THTensor& {
-  auto src_raw = (dynamic_cast<const THTensor<real>&>(src)).tensor;
   THTensor_(squeeze)(tensor, src_raw);
   return *this;
 }
 
-template<>
-auto THTensor<real>::squeeze(const Tensor& src, int dimension) -> THTensor& {
-  auto src_raw = (dynamic_cast<const THTensor<real>&>(src)).tensor;
->>>>>>> upstream/master
+template <>
+auto THTensor<real>::squeeze(const Tensor &src, int dimension) -> THTensor & {
+  auto src_raw = (dynamic_cast<const THTensor<real> &>(src)).tensor;
   THTensor_(squeeze1d)(tensor, src_raw, dimension);
   return *this;
 }
@@ -294,246 +450,277 @@ auto THTensor<real>::unsqueeze(const Tensor &src, int dimension) -> THTensor & {
   return *this;
 }
 
-<<<<<<< HEAD
-template <> auto THTensor<real>::fill(scalar_type value) -> THTensor & {
-=======
-template<>
-auto THTensor<real>::gesv(const Tensor& ra, const Tensor& b, const Tensor& a) -> THTensor& {
+template <>
+auto THTensor<real>::gesv(const Tensor &ra, const Tensor &b, const Tensor &a)
+    -> THTensor & {
 #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
-  THTensor_(gesv)(tensor, const_tensor_cast(ra).tensor, const_tensor_cast(b).tensor,
-                  const_tensor_cast(a).tensor);
+  THTensor_(gesv)(tensor, const_tensor_cast(ra).tensor,
+                  const_tensor_cast(b).tensor, const_tensor_cast(a).tensor);
   return *this;
 #else
-  throw std::runtime_error("Lapack operations are available only for floating point tensors");
+  throw std::runtime_error(
+      "Lapack operations are available only for floating point tensors");
 #endif
 }
 
-template<>
-auto THTensor<real>::trtrs(const Tensor& ra, const Tensor& b, const Tensor& a,
-                           const char *uplo, const char *trans, const char *diag) -> THTensor& {
+template <>
+auto THTensor<real>::trtrs(const Tensor &ra, const Tensor &b, const Tensor &a,
+                           const char *uplo, const char *trans,
+                           const char *diag) -> THTensor & {
 
 #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
-  THTensor_(trtrs)(tensor, const_tensor_cast(ra).tensor, const_tensor_cast(b).tensor,
-                   const_tensor_cast(a).tensor, uplo, trans, diag);
+  THTensor_(trtrs)(tensor, const_tensor_cast(ra).tensor,
+                   const_tensor_cast(b).tensor, const_tensor_cast(a).tensor,
+                   uplo, trans, diag);
   return *this;
 #else
-  throw std::runtime_error("Lapack operations are available only for floating point tensors");
+  throw std::runtime_error(
+      "Lapack operations are available only for floating point tensors");
 #endif
 }
 
-template<>
-auto THTensor<real>::gels(const Tensor& ra, const Tensor& b, const Tensor& a) -> THTensor& {
+template <>
+auto THTensor<real>::gels(const Tensor &ra, const Tensor &b, const Tensor &a)
+    -> THTensor & {
 #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
-  THTensor_(gels)(tensor, const_tensor_cast(ra).tensor, const_tensor_cast(b).tensor,
-                  const_tensor_cast(a).tensor);
+  THTensor_(gels)(tensor, const_tensor_cast(ra).tensor,
+                  const_tensor_cast(b).tensor, const_tensor_cast(a).tensor);
   return *this;
 #else
-  throw std::runtime_error("Lapack operations are available only for floating point tensors");
+  throw std::runtime_error(
+      "Lapack operations are available only for floating point tensors");
 #endif
 }
 
-template<>
-auto THTensor<real>::syev(const Tensor& rv, const Tensor& a,
-                          const char *jobz, const char *uplo) -> THTensor& {
+template <>
+auto THTensor<real>::syev(const Tensor &rv, const Tensor &a, const char *jobz,
+                          const char *uplo) -> THTensor & {
 #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
-  THTensor_(syev)(tensor, const_tensor_cast(rv).tensor, const_tensor_cast(a).tensor, jobz, uplo);
+  THTensor_(syev)(tensor, const_tensor_cast(rv).tensor,
+                  const_tensor_cast(a).tensor, jobz, uplo);
   return *this;
 #else
-  throw std::runtime_error("Lapack operations are available only for floating point tensors");
+  throw std::runtime_error(
+      "Lapack operations are available only for floating point tensors");
 #endif
 }
 
-template<>
-auto THTensor<real>::geev(const Tensor& rv, const Tensor& a, const char *jobvr) -> THTensor& {
+template <>
+auto THTensor<real>::geev(const Tensor &rv, const Tensor &a, const char *jobvr)
+    -> THTensor & {
 #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
-  THTensor_(geev)(tensor, const_tensor_cast(rv).tensor, const_tensor_cast(a).tensor, jobvr);
+  THTensor_(geev)(tensor, const_tensor_cast(rv).tensor,
+                  const_tensor_cast(a).tensor, jobvr);
   return *this;
 #else
-  throw std::runtime_error("Lapack operations are available only for floating point tensors");
+  throw std::runtime_error(
+      "Lapack operations are available only for floating point tensors");
 #endif
 }
 
-template<>
-auto THTensor<real>::gesvd(const Tensor& rs, const Tensor& rv,
-                           const Tensor& a, const char *jobu) -> THTensor& {
+template <>
+auto THTensor<real>::gesvd(const Tensor &rs, const Tensor &rv, const Tensor &a,
+                           const char *jobu) -> THTensor & {
 #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
-  THTensor_(gesvd)(tensor, const_tensor_cast(rs).tensor, const_tensor_cast(rv).tensor,
-                   const_tensor_cast(a).tensor, jobu);
+  THTensor_(gesvd)(tensor, const_tensor_cast(rs).tensor,
+                   const_tensor_cast(rv).tensor, const_tensor_cast(a).tensor,
+                   jobu);
   return *this;
 #else
-  throw std::runtime_error("Lapack operations are available only for floating point tensors");
+  throw std::runtime_error(
+      "Lapack operations are available only for floating point tensors");
 #endif
 }
 
-template<>
-auto THTensor<real>::gesvd2(const Tensor& rs, const Tensor& rv, const Tensor& ra,
-                            const Tensor& a, const char *jobu) -> THTensor& {
+template <>
+auto THTensor<real>::gesvd2(const Tensor &rs, const Tensor &rv,
+                            const Tensor &ra, const Tensor &a, const char *jobu)
+    -> THTensor & {
 #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
-  THTensor_(gesvd2)(tensor, const_tensor_cast(rs).tensor, const_tensor_cast(rv).tensor,
-                    const_tensor_cast(ra).tensor, const_tensor_cast(a).tensor, jobu);
+  THTensor_(gesvd2)(tensor, const_tensor_cast(rs).tensor,
+                    const_tensor_cast(rv).tensor, const_tensor_cast(ra).tensor,
+                    const_tensor_cast(a).tensor, jobu);
   return *this;
 #else
-  throw std::runtime_error("Lapack operations are available only for floating point tensors");
+  throw std::runtime_error(
+      "Lapack operations are available only for floating point tensors");
 #endif
 }
 
-template<>
-auto THTensor<real>::getri(const Tensor& a) -> THTensor& {
+template <> auto THTensor<real>::getri(const Tensor &a) -> THTensor & {
 #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
   THTensor_(getri)(tensor, const_tensor_cast(a).tensor);
   return *this;
 #else
-  throw std::runtime_error("Lapack operations are available only for floating point tensors");
+  throw std::runtime_error(
+      "Lapack operations are available only for floating point tensors");
 #endif
 }
 
-template<>
-auto THTensor<real>::potrf(const Tensor& a, const char *uplo) -> THTensor& {
+template <>
+auto THTensor<real>::potrf(const Tensor &a, const char *uplo) -> THTensor & {
 #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
   THTensor_(potrf)(tensor, const_tensor_cast(a).tensor, uplo);
   return *this;
 #else
-  throw std::runtime_error("Lapack operations are available only for floating point tensors");
+  throw std::runtime_error(
+      "Lapack operations are available only for floating point tensors");
 #endif
 }
 
-template<>
-auto THTensor<real>::potrs(const Tensor& b, const Tensor& a, const char *uplo) -> THTensor& {
+template <>
+auto THTensor<real>::potrs(const Tensor &b, const Tensor &a, const char *uplo)
+    -> THTensor & {
 #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
-  THTensor_(potrs)(tensor, const_tensor_cast(b).tensor, const_tensor_cast(a).tensor, uplo);
+  THTensor_(potrs)(tensor, const_tensor_cast(b).tensor,
+                   const_tensor_cast(a).tensor, uplo);
   return *this;
 #else
-  throw std::runtime_error("Lapack operations are available only for floating point tensors");
+  throw std::runtime_error(
+      "Lapack operations are available only for floating point tensors");
 #endif
 }
 
-template<>
-auto THTensor<real>::potri(const Tensor& a, const char *uplo) -> THTensor& {
+template <>
+auto THTensor<real>::potri(const Tensor &a, const char *uplo) -> THTensor & {
 #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
   THTensor_(potri)(tensor, const_tensor_cast(a).tensor, uplo);
   return *this;
 #else
-  throw std::runtime_error("Lapack operations are available only for floating point tensors");
+  throw std::runtime_error(
+      "Lapack operations are available only for floating point tensors");
 #endif
 }
 
-template<>
-auto THTensor<real>::qr(const Tensor& rr, const Tensor& a) -> THTensor& {
+template <>
+auto THTensor<real>::qr(const Tensor &rr, const Tensor &a) -> THTensor & {
 #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
-  THTensor_(qr)(tensor, const_tensor_cast(rr).tensor, const_tensor_cast(a).tensor);
+  THTensor_(qr)(tensor, const_tensor_cast(rr).tensor,
+                const_tensor_cast(a).tensor);
   return *this;
 #else
-  throw std::runtime_error("Lapack operations are available only for floating point tensors");
+  throw std::runtime_error(
+      "Lapack operations are available only for floating point tensors");
 #endif
 }
 
-template<>
-auto THTensor<real>::geqrf(const Tensor& rtau, const Tensor& a) -> THTensor& {
+template <>
+auto THTensor<real>::geqrf(const Tensor &rtau, const Tensor &a) -> THTensor & {
 #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
-  THTensor_(geqrf)(tensor, const_tensor_cast(rtau).tensor, const_tensor_cast(a).tensor);
+  THTensor_(geqrf)(tensor, const_tensor_cast(rtau).tensor,
+                   const_tensor_cast(a).tensor);
   return *this;
 #else
-  throw std::runtime_error("Lapack operations are available only for floating point tensors");
+  throw std::runtime_error(
+      "Lapack operations are available only for floating point tensors");
 #endif
 }
 
-template<>
-auto THTensor<real>::orgqr(const Tensor& a, const Tensor& tau) -> THTensor& {
+template <>
+auto THTensor<real>::orgqr(const Tensor &a, const Tensor &tau) -> THTensor & {
 #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
-  THTensor_(orgqr)(tensor, const_tensor_cast(a).tensor, const_tensor_cast(tau).tensor);
+  THTensor_(orgqr)(tensor, const_tensor_cast(a).tensor,
+                   const_tensor_cast(tau).tensor);
   return *this;
 #else
-  throw std::runtime_error("Lapack operations are available only for floating point tensors");
+  throw std::runtime_error(
+      "Lapack operations are available only for floating point tensors");
 #endif
 }
 
-template<>
-auto THTensor<real>::ormqr(const Tensor& a, const Tensor& tau, const Tensor& c,
-                           const char *side, const char *trans) -> THTensor& {
+template <>
+auto THTensor<real>::ormqr(const Tensor &a, const Tensor &tau, const Tensor &c,
+                           const char *side, const char *trans) -> THTensor & {
 #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
-  THTensor_(ormqr)(tensor, const_tensor_cast(a).tensor, const_tensor_cast(tau).tensor,
-                   const_tensor_cast(c).tensor, side, trans);
+  THTensor_(ormqr)(tensor, const_tensor_cast(a).tensor,
+                   const_tensor_cast(tau).tensor, const_tensor_cast(c).tensor,
+                   side, trans);
   return *this;
 #else
-  throw std::runtime_error("Lapack operations are available only for floating point tensors");
+  throw std::runtime_error(
+      "Lapack operations are available only for floating point tensors");
 #endif
 }
 
-template<>
-auto THTensor<real>::pstrf(const Tensor& rpiv, const Tensor& a,
-                           const char *uplo, scalar_type tol) -> THTensor& {
+template <>
+auto THTensor<real>::pstrf(const Tensor &rpiv, const Tensor &a,
+                           const char *uplo, scalar_type tol) -> THTensor & {
 #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
-  THTensor_(pstrf)(tensor, const_int_cast(rpiv).tensor, const_tensor_cast(a).tensor, uplo, tol);
+  THTensor_(pstrf)(tensor, const_int_cast(rpiv).tensor,
+                   const_tensor_cast(a).tensor, uplo, tol);
   return *this;
 #else
-  throw std::runtime_error("Lapack operations are available only for floating point tensors");
+  throw std::runtime_error(
+      "Lapack operations are available only for floating point tensors");
 #endif
 }
 
-template<>
-auto THTensor<real>::fill(scalar_type value) -> THTensor& {
->>>>>>> upstream/master
+template <> auto THTensor<real>::fill(scalar_type value) -> THTensor & {
   THTensor_(fill)(tensor, value);
   return *this;
 }
 
-<<<<<<< HEAD
-template <> auto THTensor<real>::retain() -> THTensor & {
-=======
-template<>
-auto THTensor<real>::maskedFill(const Tensor& mask, scalar_type value) -> THTensor& {
+template <>
+auto THTensor<real>::maskedFill(const Tensor &mask, scalar_type value)
+    -> THTensor & {
   THTensor_(maskedFill)(tensor, const_byte_cast(mask).tensor, value);
   return *this;
 }
 
-template<>
-auto THTensor<real>::maskedCopy(const Tensor& mask, const Tensor& src) -> THTensor& {
-  THTensor_(maskedCopy)(tensor, const_byte_cast(mask).tensor, const_tensor_cast(src).tensor);
+template <>
+auto THTensor<real>::maskedCopy(const Tensor &mask, const Tensor &src)
+    -> THTensor & {
+  THTensor_(maskedCopy)(tensor, const_byte_cast(mask).tensor,
+                        const_tensor_cast(src).tensor);
   return *this;
 }
 
-template<>
-auto THTensor<real>::maskedSelect(const Tensor& src, const Tensor& mask) -> THTensor& {
-  THTensor_(maskedSelect)(tensor, const_tensor_cast(src).tensor, const_byte_cast(mask).tensor);
+template <>
+auto THTensor<real>::maskedSelect(const Tensor &src, const Tensor &mask)
+    -> THTensor & {
+  THTensor_(maskedSelect)(tensor, const_tensor_cast(src).tensor,
+                          const_byte_cast(mask).tensor);
   return *this;
 }
 
-template<>
-auto THTensor<real>::nonzero(const Tensor& subscript) -> THTensor& {
+template <>
+auto THTensor<real>::nonzero(const Tensor &subscript) -> THTensor & {
   THTensor_(nonzero)(const_long_cast(subscript).tensor, tensor);
   return *this;
 }
 
-template<>
-auto THTensor<real>::indexSelect(const Tensor& src, int dim, const Tensor& index) -> THTensor& {
+template <>
+auto THTensor<real>::indexSelect(const Tensor &src, int dim,
+                                 const Tensor &index) -> THTensor & {
   THTensor_(indexSelect)(tensor, const_tensor_cast(src).tensor, dim,
                          const_long_cast(index).tensor);
   return *this;
 }
 
-template<>
-auto THTensor<real>::indexCopy(int dim, const Tensor& index, const Tensor& src) -> THTensor& {
+template <>
+auto THTensor<real>::indexCopy(int dim, const Tensor &index, const Tensor &src)
+    -> THTensor & {
   THTensor_(indexCopy)(tensor, dim, const_long_cast(index).tensor,
                        const_tensor_cast(src).tensor);
   return *this;
 }
 
-template<>
-auto THTensor<real>::indexAdd(int dim, const Tensor& index, const Tensor& src) -> THTensor& {
+template <>
+auto THTensor<real>::indexAdd(int dim, const Tensor &index, const Tensor &src)
+    -> THTensor & {
   THTensor_(indexAdd)(tensor, dim, const_long_cast(index).tensor,
                       const_tensor_cast(src).tensor);
   return *this;
 }
 
-template<>
-auto THTensor<real>::indexFill(int dim, const Tensor& index, scalar_type value) -> THTensor& {
+template <>
+auto THTensor<real>::indexFill(int dim, const Tensor &index, scalar_type value)
+    -> THTensor & {
   THTensor_(indexFill)(tensor, dim, const_long_cast(index).tensor, value);
   return *this;
 }
 
-template<>
-auto THTensor<real>::retain() -> THTensor& {
->>>>>>> upstream/master
+template <> auto THTensor<real>::retain() -> THTensor & {
   THTensor_(retain)(tensor);
   return *this;
 }
@@ -548,7 +735,12 @@ template <> auto THTensor<real>::diag(const Tensor &src, int k) -> THTensor & {
   return *this;
 }
 
+<<<<<<< HEAD
 template <> auto THTensor<real>::eye(long n, long m) -> THTensor & {
+=======
+template<>
+auto THTensor<real>::eye(int64_t n, int64_t m) -> THTensor& {
+>>>>>>> upstream/master
   THTensor_(eye)(tensor, n, m);
   return *this;
 }
@@ -562,30 +754,25 @@ auto THTensor<real>::range(scalar_type xmin, scalar_type xmax, scalar_type step)
 
 <<<<<<< HEAD
 template <>
-auto THTensor<real>::sort(const Tensor &ri, const Tensor &src, int dimension,
-                          int desc) -> THTensor & {
-  THTensor_(sort)(tensor, const_long_cast(ri).tensor,
-                  const_tensor_cast(src).tensor, dimension, desc);
+auto THTensor<real>::randperm(const Generator &_generator, long n)
+    -> THTensor & {
 =======
 template<>
-auto THTensor<real>::randperm(const Generator& _generator, long n) -> THTensor& {
+auto THTensor<real>::randperm(const Generator& _generator, int64_t n) -> THTensor& {
+>>>>>>> upstream/master
   THTensor_(randperm)(tensor, const_generator_cast(_generator).generator, n);
   return *this;
 }
 
-template<>
-auto THTensor<real>::sort(const Tensor& ri, const Tensor& src,
-                          int dimension, int desc) -> THTensor& {
-  THTensor_(sort)(
-    tensor,
-    const_long_cast(ri).tensor,
-    const_tensor_cast(src).tensor,
-    dimension,
-    desc
-  );
->>>>>>> upstream/master
+template <>
+auto THTensor<real>::sort(const Tensor &ri, const Tensor &src, int dimension,
+                          int desc) -> THTensor & {
+  THTensor_(sort)(tensor, const_long_cast(ri).tensor,
+                  const_tensor_cast(src).tensor, dimension, desc);
   return *this;
 }
+
+<<<<<<< HEAD
 template <>
 auto THTensor<real>::topk(const Tensor &ri, const Tensor &src, long k, int dim,
                           int dir, int sorted) -> THTensor & {
@@ -593,12 +780,37 @@ auto THTensor<real>::topk(const Tensor &ri, const Tensor &src, long k, int dim,
                   const_tensor_cast(src).tensor, k, dim, dir, sorted);
   return *this;
 }
+
 template <> auto THTensor<real>::tril(const Tensor &src, long k) -> THTensor & {
+=======
+template<>
+auto THTensor<real>::topk(const Tensor& ri, const Tensor& src,
+                          int64_t k, int dim, int dir, int sorted) -> THTensor& {
+  THTensor_(topk)(
+    tensor,
+    const_long_cast(ri).tensor,
+    const_tensor_cast(src).tensor,
+    k,
+    dim,
+    dir,
+    sorted
+  );
+  return *this;
+}
+
+template<>
+auto THTensor<real>::tril(const Tensor& src, int64_t k) -> THTensor& {
+>>>>>>> upstream/master
   THTensor_(tril)(tensor, const_tensor_cast(src).tensor, k);
   return *this;
 }
 
+<<<<<<< HEAD
 template <> auto THTensor<real>::triu(const Tensor &src, long k) -> THTensor & {
+=======
+template<>
+auto THTensor<real>::triu(const Tensor& src, int64_t k) -> THTensor& {
+>>>>>>> upstream/master
   THTensor_(triu)(tensor, const_tensor_cast(src).tensor, k);
   return *this;
 }
@@ -607,7 +819,8 @@ template <>
 auto THTensor<real>::catArray(const std::vector<Tensor *> &inputs_vec,
                               int dimension) -> THTensor & {
   int numInputs = inputs_vec.size();
-  tensor_type *inputs[numInputs];
+  // TOFIX: workaround for variable length arrays in MSVC
+  tensor_type **inputs = (tensor_type **) alloca(numInputs * sizeof(tensor_type*));
   for (std::size_t i = 0; i < numInputs; i++)
     inputs[i] = const_tensor_cast(*inputs_vec[i]).tensor;
   THTensor_(catArray)(tensor, inputs, numInputs, dimension);
@@ -660,15 +873,49 @@ template <> int THTensor<real>::equal(const Tensor &other) const {
                              const_tensor_cast(tb).tensor);                    \
     return *this;                                                              \
   }
-
+#define TENSOR_IMPLEMENT_LOGICALDUMMIES(NAME)                                  \
+  template <>                                                                  \
+  auto THTensor<real>::NAME##Value(const Tensor &r, scalar_type value)         \
+      ->THTensor & {                                                           \
+    throw std::invalid_argument("logical operator called on non-byte tensor"); \
+    return *this;                                                              \
+  }                                                                            \
+                                                                               \
+  template <>                                                                  \
+  auto THTensor<real>::NAME##ValueT(const Tensor &t, scalar_type value)        \
+      ->THTensor & {                                                           \
+    return *this;                                                              \
+  }                                                                            \
+                                                                               \
+  template <>                                                                  \
+  auto THTensor<real>::NAME##Tensor(const Tensor &r, const Tensor &tb)         \
+      ->THTensor & {                                                           \
+    throw std::invalid_argument("logical operator called on non-byte tensor"); \
+    return *this;                                                              \
+  }                                                                            \
+                                                                               \
+  template <>                                                                  \
+  auto THTensor<real>::NAME##TensorT(const Tensor &ta, const Tensor &tb)       \
+      ->THTensor & {                                                           \
+    return *this;                                                              \
+  }
+#if !(defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE))
 TENSOR_IMPLEMENT_LOGICAL(lt)
 TENSOR_IMPLEMENT_LOGICAL(gt)
 TENSOR_IMPLEMENT_LOGICAL(le)
 TENSOR_IMPLEMENT_LOGICAL(ge)
 TENSOR_IMPLEMENT_LOGICAL(eq)
 TENSOR_IMPLEMENT_LOGICAL(ne)
-
+#else
+TENSOR_IMPLEMENT_LOGICALDUMMIES(lt)
+TENSOR_IMPLEMENT_LOGICALDUMMIES(gt)
+TENSOR_IMPLEMENT_LOGICALDUMMIES(le)
+TENSOR_IMPLEMENT_LOGICALDUMMIES(ge)
+TENSOR_IMPLEMENT_LOGICALDUMMIES(eq)
+TENSOR_IMPLEMENT_LOGICALDUMMIES(ne)
+#endif
 #undef TENSOR_IMPLEMENT_LOGICAL
+#undef TENSOR_IMPLEMENT_LOGICALDUMMIES
 
 template <> auto THTensor<real>::abs(const Tensor &src) -> THTensor & {
 #if defined(TH_REAL_IS_LONG) || defined(TH_REAL_IS_INT) ||                     \
@@ -679,46 +926,6 @@ template <> auto THTensor<real>::abs(const Tensor &src) -> THTensor & {
   throw std::runtime_error("absolute value is only available for\
       signed type tensors");
 #endif
-}
-
-template<>
-auto THTensor<real>::fft(const Tensor& src) -> THTensor& {
-  throw std::runtime_error("THTensor::fft() not supported");
-}
-
-template<>
-auto THTensor<real>::fft2(const Tensor& src) -> THTensor& {
-  throw std::runtime_error("THTensor::fft2() not supported");
-}
-
-template<>
-auto THTensor<real>::fft3(const Tensor& src) -> THTensor& {
-  throw std::runtime_error("THTensor::fft3() not supported");
-}
-
-template<>
-auto THTensor<real>::fftn(const Tensor& src) -> THTensor& {
-  throw std::runtime_error("THTensor::fftn() not supported");
-}
-
-template<>
-auto THTensor<real>::ifft(const Tensor& src) -> THTensor& {
-  throw std::runtime_error("THTensor::ifft() not supported");
-}
-
-template<>
-auto THTensor<real>::ifft2(const Tensor& src) -> THTensor& {
-  throw std::runtime_error("THTensor::ifft2() not supported");
-}
-
-template<>
-auto THTensor<real>::ifft3(const Tensor& src) -> THTensor& {
-  throw std::runtime_error("THTensor::ifft3() not supported");
-}
-
-template<>
-auto THTensor<real>::ifftn(const Tensor& src) -> THTensor& {
-  throw std::runtime_error("THTensor::ifftn() not supported");
 }
 
 template <> auto THTensor<real>::sigmoid(const Tensor &src) -> THTensor & {
@@ -828,7 +1035,508 @@ template <> auto THTensor<real>::copy(const Tensor &src) -> THTensor & {
   return *this;
 }
 
+template <> auto THTensor<real>::tan(const Tensor &src) -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(tan)(tensor, const_tensor_cast(src).tensor);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <> auto THTensor<real>::atan(const Tensor &src) -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(atan)(tensor, const_tensor_cast(src).tensor);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <>
+auto THTensor<real>::atan2(const Tensor &src1, const Tensor &src2)
+    -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(atan2)(tensor, const_tensor_cast(src1).tensor,
+                   const_tensor_cast(src2).tensor);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <> auto THTensor<real>::tanh(const Tensor &src) -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(tanh)(tensor, const_tensor_cast(src).tensor);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <>
+auto THTensor<real>::pow(const Tensor &src, scalar_type value) -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(pow)(tensor, const_tensor_cast(src).tensor, value);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <>
+auto THTensor<real>::tpow(scalar_type value, const Tensor &src) -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(tpow)(tensor, value, const_tensor_cast(src).tensor);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <> auto THTensor<real>::sqrt(const Tensor &src) -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(sqrt)(tensor, const_tensor_cast(src).tensor);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <> auto THTensor<real>::rsqrt(const Tensor &src) -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(rsqrt)(tensor, const_tensor_cast(src).tensor);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <> auto THTensor<real>::ceil(const Tensor &src) -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(ceil)(tensor, const_tensor_cast(src).tensor);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <> auto THTensor<real>::floor(const Tensor &src) -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(floor)(tensor, const_tensor_cast(src).tensor);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <> auto THTensor<real>::round(const Tensor &src) -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(round)(tensor, const_tensor_cast(src).tensor);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <> auto THTensor<real>::trunc(const Tensor &src) -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(trunc)(tensor, const_tensor_cast(src).tensor);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <> auto THTensor<real>::frac(const Tensor &src) -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(frac)(tensor, const_tensor_cast(src).tensor);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <>
+auto THTensor<real>::lerp(const Tensor &a, const Tensor &b, scalar_type weight)
+    -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(lerp)(tensor, const_tensor_cast(a).tensor,
+                  const_tensor_cast(b).tensor, weight);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <>
+auto THTensor<real>::mean(const Tensor &src, int dimension, int keepdim)
+    -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(mean)(tensor, const_tensor_cast(src).tensor, dimension, keepdim);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <>
+auto THTensor<real>::std(const Tensor &src, int dimension, int biased,
+                         int keepdim) -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(std)(tensor, const_tensor_cast(src).tensor, dimension, biased,
+                 keepdim);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <>
+auto THTensor<real>::var(const Tensor &src, int dimension, int biased,
+                         int keepdim) -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(var)(tensor, const_tensor_cast(src).tensor, dimension, biased,
+                 keepdim);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <>
+auto THTensor<real>::norm(const Tensor &src, scalar_type value, int dimension,
+                          int keepdim) -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(norm)(tensor, const_tensor_cast(src).tensor, value, dimension,
+                  keepdim);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <>
+auto THTensor<real>::renorm(const Tensor &src, scalar_type value, int dimension,
+                            scalar_type maxnorm) -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(renorm)(tensor, const_tensor_cast(src).tensor, value, dimension,
+                    maxnorm);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
 <<<<<<< HEAD
+template <>
+auto THTensor<real>::histc(const Tensor &src, long nbins, scalar_type minvalue,
+                           scalar_type maxvalue) -> THTensor & {
+=======
+template<>
+auto THTensor<real>::histc(const Tensor& src,
+                           int64_t nbins,
+                           scalar_type minvalue,
+                           scalar_type maxvalue) -> THTensor& {
+>>>>>>> upstream/master
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  const THTensor &src_t = const_tensor_cast(src);
+  THTensor_(histc)(tensor, src_t.tensor, nbins, minvalue, maxvalue);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+<<<<<<< HEAD
+template <>
+auto THTensor<real>::bhistc(const Tensor &src, long nbins, scalar_type minvalue,
+                            scalar_type maxvalue) -> THTensor & {
+=======
+template<>
+auto THTensor<real>::bhistc(const Tensor& src,
+                            int64_t nbins,
+                            scalar_type minvalue,
+                            scalar_type maxvalue) -> THTensor& {
+>>>>>>> upstream/master
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  const THTensor &src_t = const_tensor_cast(src);
+  THTensor_(bhistc)(tensor, src_t.tensor, nbins, minvalue, maxvalue);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <>
+auto THTensor<real>::dist(const Tensor &src, scalar_type value) -> scalar_type {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  return THTensor_(dist)(tensor, const_tensor_cast(src).tensor, value);
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <> auto THTensor<real>::meanall() -> scalar_type {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  return THTensor_(meanall)(tensor);
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <> auto THTensor<real>::varall(int biased) -> scalar_type {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  return THTensor_(varall)(tensor, biased);
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <> auto THTensor<real>::stdall(int biased) -> scalar_type {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  return THTensor_(stdall)(tensor, biased);
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <> auto THTensor<real>::normall(scalar_type value) -> scalar_type {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  return THTensor_(normall)(tensor, value);
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+<<<<<<< HEAD
+template <>
+auto THTensor<real>::linspace(scalar_type a, scalar_type b, long n)
+    -> THTensor & {
+=======
+template<>
+auto THTensor<real>::linspace(scalar_type a, scalar_type b, int64_t n) -> THTensor& {
+>>>>>>> upstream/master
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(linspace)(tensor, a, b, n);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+<<<<<<< HEAD
+template <>
+auto THTensor<real>::logspace(scalar_type a, scalar_type b, long n)
+    -> THTensor & {
+=======
+template<>
+auto THTensor<real>::logspace(scalar_type a, scalar_type b, int64_t n) -> THTensor& {
+>>>>>>> upstream/master
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(logspace)(tensor, a, b, n);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <>
+auto THTensor<real>::rand(const Generator &_generator, THLongStorage *size)
+    -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(rand)(tensor, const_generator_cast(_generator).generator, size);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <>
+auto THTensor<real>::randn(const Generator &_generator, THLongStorage *size)
+    -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(randn)(tensor, const_generator_cast(_generator).generator, size);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <> int THTensor<real>::logicalall() {
+#if defined(TH_REAL_IS_BYTE)
+  return THTensor_(logicalall)(tensor);
+#else
+  throw std::runtime_error(
+      "byte functions are available only for byte tensors");
+#endif
+}
+
+template <> int THTensor<real>::logicalany() {
+#if defined(TH_REAL_IS_BYTE)
+  return THTensor_(logicalany)(tensor);
+#else
+  throw std::runtime_error(
+      "byte functions are available only for byte tensors");
+#endif
+}
+
+template <>
+auto THTensor<real>::random(const Generator &_generator) -> THTensor & {
+  THTensor_(random)(tensor, const_generator_cast(_generator).generator);
+  return *this;
+}
+
+template <>
+auto THTensor<real>::geometric(const Generator &_generator, double p)
+    -> THTensor & {
+  THTensor_(geometric)(tensor, const_generator_cast(_generator).generator, p);
+  return *this;
+}
+
+template <>
+auto THTensor<real>::bernoulli(const Generator &_generator, double p)
+    -> THTensor & {
+  THTensor_(bernoulli)(tensor, const_generator_cast(_generator).generator, p);
+  return *this;
+}
+
+template <>
+auto THTensor<real>::bernoulli_FloatTensor(const Generator &_generator,
+                                           const Tensor &p) -> THTensor & {
+  THTensor_(bernoulli_FloatTensor)(tensor,
+                                   const_generator_cast(_generator).generator,
+                                   const_float_cast(p).tensor);
+  return *this;
+}
+
+template <>
+auto THTensor<real>::bernoulli_DoubleTensor(const Generator &_generator,
+                                            const Tensor &p) -> THTensor & {
+  THTensor_(bernoulli_DoubleTensor)(tensor,
+                                    const_generator_cast(_generator).generator,
+                                    const_double_cast(p).tensor);
+  return *this;
+}
+
+template <>
+auto THTensor<real>::uniform(const Generator &_generator, double a, double b)
+    -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(uniform)(tensor, const_generator_cast(_generator).generator, a, b);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <>
+auto THTensor<real>::normal(const Generator &_generator, double mean,
+                            double stdv) -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(normal)(tensor, const_generator_cast(_generator).generator, mean,
+                    stdv);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <>
+auto THTensor<real>::exponential(const Generator &_generator, double lambda)
+    -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(exponential)(tensor, const_generator_cast(_generator).generator,
+                         lambda);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <>
+auto THTensor<real>::cauchy(const Generator &_generator, double median,
+                            double sigma) -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(cauchy)(tensor, const_generator_cast(_generator).generator, median,
+                    sigma);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+template <>
+auto THTensor<real>::logNormal(const Generator &_generator, double mean,
+                               double stdv) -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(logNormal)(tensor, const_generator_cast(_generator).generator, mean,
+                       stdv);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
+// Note: the order of *Tensor and *Prob_dist is reversed compared to
+// the declarations in TH/generic/THTensorMath.h, so for instance
+// the call:
+// THRealTensor_multinomial(r, _generator, prob_dist, n_sample,
+// with_replacement)
+// is equivalent to `prob_dist->multinomial(r, _generator, n_sample,
+// with_replacement)`.
+// It is done this way so that the first argument can be casted onto a float
+// tensor type.
+template <>
+auto THTensor<real>::multinomial(const Tensor &r, const Generator &_generator,
+                                 int n_sample, int with_replacement)
+    -> THTensor & {
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+  THTensor_(multinomial)(const_long_cast(r).tensor,
+                         const_generator_cast(_generator).generator, tensor,
+                         n_sample, with_replacement);
+  return *this;
+#else
+  throw std::runtime_error("floating point functions are available only for\
+      floating point tensors");
+#endif
+}
+
 template <>
 auto THTensor<real>::cat(const std::vector<Tensor *> &src, int dimension)
     -> THTensor & {
@@ -838,61 +1546,25 @@ auto THTensor<real>::cat(const std::vector<Tensor *> &src, int dimension)
     inputs[i] = const_tensor_cast(*src[i]).tensor;
   }
   THTensor_(catArray)(tensor, inputs.data(), num_inputs, dimension);
-=======
-template<>
-auto THTensor<real>::tan(const Tensor& src) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(tan)(tensor, const_tensor_cast(src).tensor);
->>>>>>> upstream/master
   return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
 }
 
-<<<<<<< HEAD
 template <>
 auto THTensor<real>::gather(const Tensor &src, int dimension,
                             const Tensor &index) -> THTensor & {
   const THTensor &src_t = const_tensor_cast(src);
-  const THTensor<long> &index_t = const_long_cast(index);
+  const THTensor<int64_t> &index_t = const_long_cast(index);
   THTensor_(gather)(tensor, src_t.tensor, dimension, index_t.tensor);
-=======
-template<>
-auto THTensor<real>::atan(const Tensor& src) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(atan)(tensor, const_tensor_cast(src).tensor);
->>>>>>> upstream/master
   return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
 }
 
-<<<<<<< HEAD
 template <>
 auto THTensor<real>::scatter(int dimension, const Tensor &index,
                              const Tensor &src) -> THTensor & {
   const THTensor &src_t = const_tensor_cast(src);
-  const THTensor<long> &index_t = const_long_cast(index);
+  const THTensor<int64_t> &index_t = const_long_cast(index);
   THTensor_(scatter)(tensor, dimension, index_t.tensor, src_t.tensor);
-=======
-template<>
-auto THTensor<real>::atan2(const Tensor& src1, const Tensor& src2) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(atan2)(
-    tensor,
-    const_tensor_cast(src1).tensor,
-    const_tensor_cast(src2).tensor
-  );
->>>>>>> upstream/master
   return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
 }
 
 <<<<<<< HEAD
@@ -900,21 +1572,16 @@ template <>
 auto THTensor<real>::scatterFill(int dimension, const Tensor &index,
                                  scalar_type value) -> THTensor & {
   const THTensor<long> &index_t = const_long_cast(index);
-  THTensor_(scatterFill)(tensor, dimension, index_t.tensor, value);
 =======
 template<>
-auto THTensor<real>::tanh(const Tensor& src) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(tanh)(tensor, const_tensor_cast(src).tensor);
+auto THTensor<real>::scatterFill(int dimension, const Tensor& index,
+                                 scalar_type value) -> THTensor& {
+  const THTensor<int64_t> &index_t = const_long_cast(index);
 >>>>>>> upstream/master
+  THTensor_(scatterFill)(tensor, dimension, index_t.tensor, value);
   return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
 }
 
-<<<<<<< HEAD
 template <> auto THTensor<real>::dot(const Tensor &src) -> scalar_type {
   const THTensor &src_t = const_tensor_cast(src);
   return THTensor_(dot)(tensor, src_t.tensor);
@@ -926,505 +1593,10 @@ template <> auto THTensor<real>::minall() -> scalar_type {
 
 template <> auto THTensor<real>::maxall() -> scalar_type {
   return THTensor_(maxall)(tensor);
-=======
-template<>
-auto THTensor<real>::pow(const Tensor& src, scalar_type value) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(pow)(tensor, const_tensor_cast(src).tensor, value);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
 }
 
-template<>
-auto THTensor<real>::tpow(scalar_type value, const Tensor& src) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(tpow)(tensor, value, const_tensor_cast(src).tensor);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::sqrt(const Tensor& src) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(sqrt)(tensor, const_tensor_cast(src).tensor);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::rsqrt(const Tensor& src) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(rsqrt)(tensor, const_tensor_cast(src).tensor);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::ceil(const Tensor& src) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(ceil)(tensor, const_tensor_cast(src).tensor);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::floor(const Tensor& src) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(floor)(tensor, const_tensor_cast(src).tensor);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::round(const Tensor& src) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(round)(tensor, const_tensor_cast(src).tensor);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::trunc(const Tensor& src) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(trunc)(tensor, const_tensor_cast(src).tensor);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::frac(const Tensor& src) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(frac)(tensor, const_tensor_cast(src).tensor);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::lerp(const Tensor& a, const Tensor& b, scalar_type weight) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(lerp)(
-    tensor,
-    const_tensor_cast(a).tensor,
-    const_tensor_cast(b).tensor,
-    weight
-  );
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::mean(const Tensor& src, int dimension, int keepdim) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(mean)(tensor, const_tensor_cast(src).tensor, dimension, keepdim);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::std(const Tensor& src, int dimension, int biased, int keepdim) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(std)(tensor, const_tensor_cast(src).tensor, dimension, biased, keepdim);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::var(const Tensor& src, int dimension, int biased, int keepdim) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(var)(tensor, const_tensor_cast(src).tensor, dimension, biased, keepdim);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::norm(const Tensor& src,
-                          scalar_type value,
-                          int dimension,
-                          int keepdim) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(norm)(tensor, const_tensor_cast(src).tensor, value, dimension, keepdim);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::renorm(const Tensor& src,
-                            scalar_type value,
-                            int dimension,
-                            scalar_type maxnorm) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(renorm)(tensor, const_tensor_cast(src).tensor, value, dimension, maxnorm);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::histc(const Tensor& src,
-                           long nbins,
-                           scalar_type minvalue,
-                           scalar_type maxvalue) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  const THTensor& src_t = const_tensor_cast(src);
-  THTensor_(histc)(tensor, src_t.tensor, nbins, minvalue, maxvalue);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::bhistc(const Tensor& src,
-                            long nbins,
-                            scalar_type minvalue,
-                            scalar_type maxvalue) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  const THTensor& src_t = const_tensor_cast(src);
-  THTensor_(bhistc)(tensor, src_t.tensor, nbins, minvalue, maxvalue);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::dist(const Tensor& src, scalar_type value) -> scalar_type {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  return THTensor_(dist)(tensor, const_tensor_cast(src).tensor, value);
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::meanall() -> scalar_type {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  return THTensor_(meanall)(tensor);
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::varall(int biased) -> scalar_type{
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  return THTensor_(varall)(tensor, biased);
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::stdall(int biased) -> scalar_type {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  return THTensor_(stdall)(tensor, biased);
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::normall(scalar_type value) -> scalar_type {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  return THTensor_(normall)(tensor, value);
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::linspace(scalar_type a, scalar_type b, long n) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(linspace)(tensor, a, b, n);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::logspace(scalar_type a, scalar_type b, long n) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(logspace)(tensor, a, b, n);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::rand(const Generator& _generator, THLongStorage *size) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(rand)(tensor, const_generator_cast(_generator).generator, size);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::randn(const Generator& _generator, THLongStorage *size) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(randn)(tensor, const_generator_cast(_generator).generator, size);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-int THTensor<real>::logicalall() {
-#if defined(TH_REAL_IS_BYTE)
-  return THTensor_(logicalall)(tensor);
-#else
-  throw std::runtime_error("byte functions are available only for byte tensors");
-#endif
-}
-
-template<>
-int THTensor<real>::logicalany() {
-#if defined(TH_REAL_IS_BYTE)
-  return THTensor_(logicalany)(tensor);
-#else
-  throw std::runtime_error("byte functions are available only for byte tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::random(const Generator& _generator) -> THTensor& {
-  THTensor_(random)(tensor, const_generator_cast(_generator).generator);
-  return *this;
-}
-
-template<>
-auto THTensor<real>::geometric(const Generator& _generator, double p) -> THTensor& {
-  THTensor_(geometric)(tensor, const_generator_cast(_generator).generator, p);
-  return *this;
-}
-
-template<>
-auto THTensor<real>::bernoulli(const Generator& _generator, double p) -> THTensor& {
-  THTensor_(bernoulli)(tensor, const_generator_cast(_generator).generator, p);
-  return *this;
-}
-
-template<>
-auto THTensor<real>::bernoulli_FloatTensor(const Generator& _generator,
-                                           const Tensor& p) -> THTensor& {
-  THTensor_(bernoulli_FloatTensor)(
-    tensor,
-    const_generator_cast(_generator).generator,
-    const_float_cast(p).tensor
-  );
-  return *this;
-}
-
-template<>
-auto THTensor<real>::bernoulli_DoubleTensor(const Generator& _generator,
-                                            const Tensor& p) -> THTensor& {
-  THTensor_(bernoulli_DoubleTensor)(
-    tensor,
-    const_generator_cast(_generator).generator,
-    const_double_cast(p).tensor
-  );
-  return *this;
-}
-
-template<>
-auto THTensor<real>::uniform(const Generator& _generator, double a, double b) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(uniform)(tensor, const_generator_cast(_generator).generator, a, b);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::normal(const Generator& _generator, double mean, double stdv) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(normal)(tensor, const_generator_cast(_generator).generator, mean, stdv);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::exponential(const Generator& _generator, double lambda) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(exponential)(tensor, const_generator_cast(_generator).generator, lambda);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::cauchy(const Generator& _generator,
-                            double median,
-                            double sigma) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(cauchy)(tensor, const_generator_cast(_generator).generator, median, sigma);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::logNormal(const Generator& _generator,
-                               double mean,
-                               double stdv) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(logNormal)(tensor, const_generator_cast(_generator).generator, mean, stdv);
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-// Note: the order of *Tensor and *Prob_dist is reversed compared to
-// the declarations in TH/generic/THTensorMath.h, so for instance
-// the call:
-// THRealTensor_multinomial(r, _generator, prob_dist, n_sample, with_replacement)
-// is equivalent to `prob_dist->multinomial(r, _generator, n_sample, with_replacement)`.
-// It is done this way so that the first argument can be casted onto a float tensor type.
-template<>
-auto THTensor<real>::multinomial(const Tensor& r, const Generator& _generator,
-                                 int n_sample, int with_replacement) -> THTensor& {
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-  THTensor_(multinomial)(
-    const_long_cast(r).tensor,
-    const_generator_cast(_generator).generator,
-    tensor,
-    n_sample,
-    with_replacement
-  );
-  return *this;
-#else
-  throw std::runtime_error("floating point functions are available only for\
-      floating point tensors");
-#endif
-}
-
-template<>
-auto THTensor<real>::cat(const std::vector<Tensor*>& src, int dimension) -> THTensor& {
-  int num_inputs = src.size();
-  std::vector<tensor_type*> inputs(num_inputs);
-  for (int i = 0; i < num_inputs; ++i) {
-    inputs[i] = const_tensor_cast(*src[i]).tensor;
-  }
-  THTensor_(catArray)(tensor, inputs.data(), num_inputs, dimension);
-  return *this;
-}
-
-template<>
-auto THTensor<real>::gather(const Tensor& src, int dimension,
-                            const Tensor& index) -> THTensor& {
-  const THTensor &src_t = const_tensor_cast(src);
-  const THTensor<long> &index_t = const_long_cast(index);
-  THTensor_(gather)(tensor, src_t.tensor, dimension, index_t.tensor);
-  return *this;
-}
-
-template<>
-auto THTensor<real>::scatter(int dimension, const Tensor& index,
-                             const Tensor& src) -> THTensor& {
-  const THTensor &src_t = const_tensor_cast(src);
-  const THTensor<long> &index_t = const_long_cast(index);
-  THTensor_(scatter)(tensor, dimension, index_t.tensor, src_t.tensor);
-  return *this;
-}
-
-template<>
-auto THTensor<real>::scatterFill(int dimension, const Tensor& index,
-                                 scalar_type value) -> THTensor& {
-  const THTensor<long> &index_t = const_long_cast(index);
-  THTensor_(scatterFill)(tensor, dimension, index_t.tensor, value);
-  return *this;
-}
-
-template<>
-auto THTensor<real>::dot(const Tensor &src) -> scalar_type {
-  const THTensor &src_t = const_tensor_cast(src);
-  return THTensor_(dot)(tensor, src_t.tensor);
-}
-
-template<>
-auto THTensor<real>::minall() -> scalar_type {
-  return THTensor_(minall)(tensor);
-}
-
-template<>
-auto THTensor<real>::maxall() -> scalar_type {
-  return THTensor_(maxall)(tensor);
-}
-
-template<>
-auto THTensor<real>::medianall() -> scalar_type {
+template <> auto THTensor<real>::medianall() -> scalar_type {
   return THTensor_(medianall)(tensor);
->>>>>>> upstream/master
 }
 
 template <> auto THTensor<real>::sumall() -> scalar_type {
@@ -1512,7 +1684,7 @@ template <>
 auto THTensor<real>::cadd(const Tensor &src1, scalar_type value,
                           const Tensor &src2) -> THTensor & {
   const THTensor &src1_t = const_tensor_cast(src1);
-#if !(defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE))
+
   const THSTensor<real> *src2_sparse;
   if ((src2_sparse = dynamic_cast<const THSTensor<real> *>(&src2))) {
     THSTensor_(spcadd)(tensor, src1_t.tensor, value, src2_sparse->tensor);
@@ -1520,10 +1692,6 @@ auto THTensor<real>::cadd(const Tensor &src1, scalar_type value,
     const THTensor &src2_t = const_tensor_cast(src2);
     THTensor_(cadd)(tensor, src1_t.tensor, value, src2_t.tensor);
   }
-#else
-  const THTensor &src2_t = const_tensor_cast(src2);
-  THTensor_(cadd)(tensor, src1_t.tensor, value, src2_t.tensor);
-#endif
   return *this;
 }
 
@@ -1680,32 +1848,20 @@ auto THTensor<real>::match(const Tensor &m1, const Tensor &m2, scalar_type gain)
   return *this;
 }
 
-<<<<<<< HEAD
 template <>
 auto THTensor<real>::max(const Tensor &indices_, const Tensor &src,
-                         int dimension) -> THTensor & {
-=======
-template<>
-auto THTensor<real>::max(const Tensor& indices_, const Tensor& src,
-                         int dimension, int keepdim) -> THTensor& {
->>>>>>> upstream/master
+                         int dimension, int keepdim) -> THTensor & {
   const THTensor &src_t = const_tensor_cast(src);
-  const THTensor<long> &indices__t = const_long_cast(indices_);
+  const THTensor<int64_t> &indices__t = const_long_cast(indices_);
   THTensor_(max)(tensor, indices__t.tensor, src_t.tensor, dimension, keepdim);
   return *this;
 }
 
-<<<<<<< HEAD
 template <>
 auto THTensor<real>::min(const Tensor &indices_, const Tensor &src,
-                         int dimension) -> THTensor & {
-=======
-template<>
-auto THTensor<real>::min(const Tensor& indices_, const Tensor& src,
-                         int dimension, int keepdim) -> THTensor& {
->>>>>>> upstream/master
+                         int dimension, int keepdim) -> THTensor & {
   const THTensor &src_t = const_tensor_cast(src);
-  const THTensor<long> &indices__t = const_long_cast(indices_);
+  const THTensor<int64_t> &indices__t = const_long_cast(indices_);
   THTensor_(min)(tensor, indices__t.tensor, src_t.tensor, dimension, keepdim);
   return *this;
 }
@@ -1713,67 +1869,57 @@ auto THTensor<real>::min(const Tensor& indices_, const Tensor& src,
 <<<<<<< HEAD
 template <>
 auto THTensor<real>::kthvalue(const Tensor &indices_, const Tensor &src, long k,
-                              int dimension) -> THTensor & {
+                              int dimension, int keepdim) -> THTensor & {
+  const THTensor &src_t = const_tensor_cast(src);
+  const THTensor<long> &indices__t = const_long_cast(indices_);
+  THTensor_(kthvalue)(tensor, indices__t.tensor, src_t.tensor, k, dimension,
+                      keepdim);
 =======
 template<>
 auto THTensor<real>::kthvalue(const Tensor& indices_, const Tensor& src,
-                              long k, int dimension, int keepdim) -> THTensor& {
->>>>>>> upstream/master
+                              int64_t k, int dimension, int keepdim) -> THTensor& {
   const THTensor &src_t = const_tensor_cast(src);
-  const THTensor<long> &indices__t = const_long_cast(indices_);
+  const THTensor<int64_t> &indices__t = const_long_cast(indices_);
   THTensor_(kthvalue)(tensor, indices__t.tensor, src_t.tensor, k, dimension, keepdim);
+>>>>>>> upstream/master
   return *this;
 }
 
-<<<<<<< HEAD
 template <>
 auto THTensor<real>::mode(const Tensor &indices_, const Tensor &src,
-                          int dimension) -> THTensor & {
-=======
-template<>
-auto THTensor<real>::mode(const Tensor& indices_, const Tensor& src,
-                          int dimension, int keepdim) -> THTensor& {
->>>>>>> upstream/master
+                          int dimension, int keepdim) -> THTensor & {
   const THTensor &src_t = const_tensor_cast(src);
-  const THTensor<long> &indices__t = const_long_cast(indices_);
+  const THTensor<int64_t> &indices__t = const_long_cast(indices_);
   THTensor_(mode)(tensor, indices__t.tensor, src_t.tensor, dimension, keepdim);
   return *this;
 }
 
-<<<<<<< HEAD
 template <>
 auto THTensor<real>::median(const Tensor &indices_, const Tensor &src,
-                            int dimension) -> THTensor & {
-=======
-template<>
-auto THTensor<real>::median(const Tensor& indices_, const Tensor& src,
-                            int dimension, int keepdim) -> THTensor& {
->>>>>>> upstream/master
+                            int dimension, int keepdim) -> THTensor & {
   const THTensor &src_t = const_tensor_cast(src);
+<<<<<<< HEAD
   const THTensor<long> &indices__t = const_long_cast(indices_);
+  THTensor_(median)(tensor, indices__t.tensor, src_t.tensor, dimension,
+                    keepdim);
+=======
+  const THTensor<int64_t> &indices__t = const_long_cast(indices_);
   THTensor_(median)(tensor, indices__t.tensor, src_t.tensor, dimension, keepdim);
+>>>>>>> upstream/master
   return *this;
 }
 
-<<<<<<< HEAD
 template <>
-auto THTensor<real>::sum(const Tensor &src, int dimension) -> THTensor & {
-=======
-template<>
-auto THTensor<real>::sum(const Tensor& src, int dimension, int keepdim) -> THTensor& {
->>>>>>> upstream/master
+auto THTensor<real>::sum(const Tensor &src, int dimension, int keepdim)
+    -> THTensor & {
   const THTensor &src_t = const_tensor_cast(src);
   THTensor_(sum)(tensor, src_t.tensor, dimension, keepdim);
   return *this;
 }
 
-<<<<<<< HEAD
 template <>
-auto THTensor<real>::prod(const Tensor &src, int dimension) -> THTensor & {
-=======
-template<>
-auto THTensor<real>::prod(const Tensor& src, int dimension, int keepdim) -> THTensor& {
->>>>>>> upstream/master
+auto THTensor<real>::prod(const Tensor &src, int dimension, int keepdim)
+    -> THTensor & {
   const THTensor &src_t = const_tensor_cast(src);
   THTensor_(prod)(tensor, src_t.tensor, dimension, keepdim);
   return *this;

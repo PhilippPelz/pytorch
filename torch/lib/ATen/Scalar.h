@@ -1,12 +1,16 @@
 #pragma once
 
+#include "ATen/Context.h"
 #include "ATen/Half.h"
 #include "ATen/Tensor.h"
 #include "ATen/Type.h"
 #include "ATen/Utils.h"
 #include <complex.h>
 #include <stdexcept>
+#include <stdexcept>
 #include <stdint.h>
+#include <stdint.h>
+#include <string>
 #include <string>
 typedef float _Complex cx;
 typedef double _Complex zx;
@@ -18,6 +22,7 @@ cx toCx(ccx val);
 zx toZx(zcx val);
 class Scalar {
 public:
+  Scalar() : Scalar(int64_t(0)) {}
   explicit Scalar(const Tensor &t) : tag(Tag::HAS_t), t(t) {
     AT_ASSERT(t.dim() == 0,
               "Attempting to create a Scalar from a %d dim tensor", t.dim());
@@ -43,7 +48,7 @@ public:
 #undef DEFINE_IMPLICIT_CTOR
 
   // return a new scalar that is guarenteed to be not backed by a tensor.
-  Scalar local() {
+  Scalar local() const {
     if (Tag::HAS_t != tag) {
       return *this;
     }
@@ -86,6 +91,17 @@ public:
       }                                                                        \
       return casted;                                                           \
     }                                                                          \
+  }
+
+  Tensor toTensor() const {
+    if (Tag::HAS_t == tag) {
+      return t;
+    } else if (Tag::HAS_d == tag) {
+      return CPU(kDouble).scalarTensor(*this);
+    } else {
+      assert(Tag::HAS_i == tag);
+      return CPU(kLong).scalarTensor(*this);
+    }
   }
 
   AT_FORALL_SCALAR_TYPES(DEFINE_ACCESSOR)

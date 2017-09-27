@@ -60,10 +60,8 @@ TH_EXTERNC void zcopy_(int *n, double complex *x, int *incx, double complex *y,
                        int *incy);
 TH_EXTERNC void ccopy_(int *n, float complex *x, int *incx, float complex *y,
                        int *incy);
-TH_EXTERNC cx cdotc_(int *n, cx *x, int *incx,
-                                 cx *y, int *incy);
-TH_EXTERNC zx zdotc_(int *n, zx *x, int *incx,
-                                  zx *y, int *incy);
+TH_EXTERNC cx cdotc_(int *n, cx *x, int *incx, cx *y, int *incy);
+TH_EXTERNC zx zdotc_(int *n, zx *x, int *incx, zx *y, int *incy);
 TH_EXTERNC void zaxpy_(int *n, double complex *a, double complex *x, int *incx,
                        double complex *y, int *incy);
 TH_EXTERNC void caxpy_(int *n, float complex *a, float complex *x, int *incx,
@@ -96,7 +94,7 @@ TH_EXTERNC void cgemm_(char *transa, char *transb, int *m, int *n, int *k,
                        float complex *b, int *ldb, float complex *beta,
                        float complex *c, int *ldc);
 
-void THBlas_(swap)(long n, real *x, long incx, real *y, long incy) {
+void THBlas_(swap)(int64_t n, real *x, int64_t incx, real *y, int64_t incy) {
   if (n == 1) {
     incx = 1;
     incy = 1;
@@ -113,7 +111,7 @@ void THBlas_(swap)(long n, real *x, long incx, real *y, long incy) {
   }
 #endif
   {
-    long i;
+    int64_t i;
     for (i = 0; i < n; i++) {
       real z = x[i * incx];
       x[i * incx] = y[i * incy];
@@ -122,10 +120,10 @@ void THBlas_(swap)(long n, real *x, long incx, real *y, long incy) {
   }
 }
 
-void THBlas_(scal)(long n, real a, real *x, long incx) {
-  if (n == 1)
+void THBlas_(scal)(int64_t n, real a, real *x, int64_t incx) {
+  if (n == 1) {
     incx = 1;
-
+  }
 #if defined(USE_BLAS) && defined(TH_REAL_IS_REAL)
   if ((n <= INT_MAX) && (incx <= INT_MAX)) {
     int i_n = (int)n;
@@ -136,7 +134,7 @@ void THBlas_(scal)(long n, real a, real *x, long incx) {
   }
 #endif
   {
-    long i;
+    int64_t i;
     for (i = 0; i < n; i++) {
       if (a == 0) {
         x[i * incx] = 0;
@@ -147,7 +145,7 @@ void THBlas_(scal)(long n, real a, real *x, long incx) {
   }
 }
 
-void THBlas_(copy)(long n, real *x, long incx, real *y, long incy) {
+void THBlas_(copy)(int64_t n, real *x, int64_t incx, real *y, int64_t incy) {
   if (n == 1) {
     incx = 1;
     incy = 1;
@@ -164,13 +162,14 @@ void THBlas_(copy)(long n, real *x, long incx, real *y, long incy) {
   }
 #endif
   {
-    long i;
+    int64_t i;
     for (i = 0; i < n; i++)
       y[i * incy] = x[i * incx];
   }
 }
 
-void THBlas_(axpy)(long n, real a, real *x, long incx, real *y, long incy) {
+void THBlas_(axpy)(int64_t n, real a, real *x, int64_t incx, real *y,
+                   int64_t incy) {
   if (n == 1) {
     incx = 1;
     incy = 1;
@@ -187,13 +186,13 @@ void THBlas_(axpy)(long n, real a, real *x, long incx, real *y, long incy) {
   }
 #endif
   {
-    long i;
+    int64_t i;
     for (i = 0; i < n; i++)
       y[i * incy] += a * x[i * incx];
   }
 }
 
-real THBlas_(dot)(long n, real *x, long incx, real *y, long incy) {
+real THBlas_(dot)(int64_t n, real *x, int64_t incx, real *y, int64_t incy) {
   if (n == 1) {
     incx = 1;
     incy = 1;
@@ -209,7 +208,7 @@ real THBlas_(dot)(long n, real *x, long incx, real *y, long incy) {
   }
 #endif
   {
-    long i;
+    int64_t i;
     real sum = 0;
     for (i = 0; i < n; i++)
       sum += x[i * incx] * y[i * incy];
@@ -217,8 +216,9 @@ real THBlas_(dot)(long n, real *x, long incx, real *y, long incy) {
   }
 }
 
-void THBlas_(gemv)(char trans, long m, long n, real alpha, real *a, long lda,
-                   real *x, long incx, real beta, real *y, long incy) {
+void THBlas_(gemv)(char trans, int64_t m, int64_t n, real alpha, real *a,
+                   int64_t lda, real *x, int64_t incx, real beta, real *y,
+                   int64_t incy) {
   if (n == 1)
     lda = m;
 
@@ -236,7 +236,7 @@ void THBlas_(gemv)(char trans, long m, long n, real alpha, real *a, long lda,
   }
 #endif
   {
-    long i, j;
+    int64_t i, j;
 
     if ((trans == 'T') || (trans == 't')) {
       for (i = 0; i < n; i++) {
@@ -263,8 +263,8 @@ void THBlas_(gemv)(char trans, long m, long n, real alpha, real *a, long lda,
   }
 }
 
-void THBlas_(ger)(long m, long n, real alpha, real *x, long incx, real *y,
-                  long incy, real *a, long lda) {
+void THBlas_(ger)(int64_t m, int64_t n, real alpha, real *x, int64_t incx,
+                  real *y, int64_t incy, real *a, int64_t lda) {
   if (n == 1)
     lda = m;
 
@@ -282,7 +282,7 @@ void THBlas_(ger)(long m, long n, real alpha, real *x, long incx, real *y,
   }
 #endif
   {
-    long i, j;
+    int64_t i, j;
     for (j = 0; j < n; j++) {
       real *column_ = a + j * lda;
       real z = alpha * y[j * incy];
@@ -292,9 +292,9 @@ void THBlas_(ger)(long m, long n, real alpha, real *x, long incx, real *y,
   }
 }
 
-void THBlas_(gemm)(char transa, char transb, long m, long n, long k, real alpha,
-                   real *a, long lda, real *b, long ldb, real beta, real *c,
-                   long ldc) {
+void THBlas_(gemm)(char transa, char transb, int64_t m, int64_t n, int64_t k,
+                   real alpha, real *a, int64_t lda, real *b, int64_t ldb,
+                   real beta, real *c, int64_t ldc) {
   int transa_ = ((transa == 't') || (transa == 'T'));
   int transb_ = ((transb == 't') || (transb == 'T'));
 
@@ -333,7 +333,7 @@ void THBlas_(gemm)(char transa, char transb, long m, long n, long k, real alpha,
   }
 #endif
   {
-    long i, j, l;
+    int64_t i, j, l;
     if (!transa_ && !transb_) {
       real *a_ = a;
       for (i = 0; i < m; i++) {

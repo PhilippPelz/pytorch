@@ -2,9 +2,9 @@
 #error "You must define THC_GENERIC_FILE before including THGenerateIntType.h"
 #endif
 
-#define real int
-#define part int
-#define accreal long
+#define real int32_t
+#define part int32_t
+#define accreal int64_t
 #define Real Int
 #define CReal CudaInt
 #define Part Int

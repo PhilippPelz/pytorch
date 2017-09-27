@@ -39,6 +39,11 @@ GLOO_FLAGS=""
 if [[ $WITH_CUDA -eq 1 ]]; then
     GLOO_FLAGS="-DUSE_CUDA=1 -DNCCL_ROOT_DIR=$INSTALL_DIR"
 fi
+CWRAP_FILES="\
+$BASE_DIR/torch/csrc/Declarations.cwrap;\
+$BASE_DIR/torch/lib/ATen/Local.cwrap;\
+$BASE_DIR/torch/lib/THNN/generic/THNN.h;\
+$BASE_DIR/torch/lib/THCUNN/generic/THCUNN.h"
 
 # Used to build an individual library, e.g. build TH
 function build() {
@@ -49,6 +54,7 @@ function build() {
   BUILD_C_FLAGS=''
   case $1 in
       THCS | THCUNN ) BUILD_C_FLAGS=$C_FLAGS;;
+      nanopb ) BUILD_C_FLAGS=$C_FLAGS" -fPIC -fexceptions";;
       *) BUILD_C_FLAGS=$C_FLAGS" -fexceptions";;
   esac
   cmake ../../$1 -DCMAKE_MODULE_PATH="$BASE_DIR/cmake/FindCUDA" \
@@ -58,7 +64,9 @@ function build() {
               -DCMAKE_CXX_FLAGS="$BUILD_C_FLAGS $CPP_FLAGS" \
               -DCMAKE_EXE_LINKER_FLAGS="$LDFLAGS" \
               -DCMAKE_SHARED_LINKER_FLAGS="$LDFLAGS" \
+              -DCMAKE_INSTALL_LIBDIR="$INSTALL_DIR/lib" \
               -DCUDA_NVCC_FLAGS="$C_FLAGS" \
+              -Dcwrap_files="$CWRAP_FILES" \
               -DTH_INCLUDE_PATH="$INSTALL_DIR/include" \
               -DTH_LIB_PATH="$INSTALL_DIR/lib" \
               -DTH_LIBRARIES="$INSTALL_DIR/lib/libTH$LD_POSTFIX" \
@@ -76,6 +84,8 @@ function build() {
               -DTHD_SO_VERSION=1 \
               -DNO_CUDA=$((1-$WITH_CUDA)) \
               -DNCCL_EXTERNAL=1 \
+              -Dnanopb_BUILD_GENERATOR=0 \
+              -DCMAKE_DEBUG_POSTFIX="" \
               -DCMAKE_BUILD_TYPE=$([ $DEBUG ] && echo Debug || echo Release) \
               $2
   make install -j$(getconf _NPROCESSORS_ONLN)
@@ -130,7 +140,12 @@ done
 
 # If all the builds succeed we copy the libraries, headers,
 # binaries to torch/lib
+rm -rf $INSTALL_DIR/lib/cmake
+rm -rf $INSTALL_DIR/lib/python
 cp $INSTALL_DIR/lib/* .
+if [ -d "$INSTALL_DIR/lib64/" ]; then
+    cp $INSTALL_DIR/lib64/* .
+fi
 cp THNN/generic/THNN.h .
 cp THCUNN/generic/THCUNN.h .
 cp -r $INSTALL_DIR/include .

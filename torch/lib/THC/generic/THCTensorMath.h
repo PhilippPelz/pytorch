@@ -3,10 +3,6 @@
 #else
 
 THC_API void THCTensor_(fill)(THCState *state, THCTensor *self, real value);
-#if defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)
-THC_API void THCTensor_(fillIm)(THCState *state, THCTensor *self, part value);
-THC_API void THCTensor_(fillRe)(THCState *state, THCTensor *self, part value);
-#endif
 THC_API void THCTensor_(zero)(THCState *state, THCTensor *self);
 
 THC_API void THCTensor_(zeros)(THCState *state, THCTensor *r_,
@@ -29,26 +25,29 @@ THC_API void THCTensor_(nonzero)(THCState *state, THCudaLongTensor *tensor,
                                  THCTensor *self);
 
 THC_API void THCTensor_(tril)(THCState *state, THCTensor *self, THCTensor *src,
-                              long k);
+                              int64_t k);
 THC_API void THCTensor_(triu)(THCState *state, THCTensor *self, THCTensor *src,
-                              long k);
+                              int64_t k);
 THC_API void THCTensor_(diag)(THCState *state, THCTensor *self, THCTensor *src,
-                              long k);
-THC_API void THCTensor_(eye)(THCState *state, THCTensor *self, long n, long m);
+                              int64_t k);
+THC_API void THCTensor_(eye)(THCState *state, THCTensor *self, int64_t n,
+                             int64_t k);
+
 THC_API accreal THCTensor_(trace)(THCState *state, THCTensor *self);
 
 #if defined(THC_REAL_IS_FLOAT) || defined(THC_REAL_IS_DOUBLE) ||               \
     defined(THC_REAL_IS_HALF)
 
 THC_API void THCTensor_(linspace)(THCState *state, THCTensor *r_, real a,
-                                  real b, long n);
+                                  real b, int64_t n);
 THC_API void THCTensor_(logspace)(THCState *state, THCTensor *r_, real a,
-                                  real b, long n);
+                                  real b, int64_t n);
+
 #endif
-#if !(defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE))
+
 THC_API void THCTensor_(range)(THCState *state, THCTensor *r_, accreal xmin,
                                accreal xmax, accreal step);
 THC_API void THCTensor_(arange)(THCState *state, THCTensor *r_, accreal xmin,
                                 accreal xmax, accreal step);
-#endif
+
 #endif

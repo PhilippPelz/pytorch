@@ -2,9 +2,9 @@
 #error "You must define THC_GENERIC_FILE before including THGenerateLongType.h"
 #endif
 
-#define real long
-#define part long
-#define accreal long
+#define real int64_t
+#define part int64_t
+#define accreal int64_t
 #define Real Long
 #define CReal CudaLong
 #define Part Long

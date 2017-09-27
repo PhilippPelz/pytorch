@@ -93,6 +93,21 @@ class TestTorch(TestCase):
     def test_sqrt(self):
         self._testMath(torch.sqrt, lambda x: math.sqrt(x) if x > 0 else float('nan'))
 
+    def test_erf(self):
+        self._testMathByName('erf')
+
+    def test_erfinv(self):
+        def checkType(tensor):
+            inputValues = torch.randn(4, 4, out=tensor()).clamp(-2., 2.)
+            self.assertEqual(tensor(inputValues).erf().erfinv(), tensor(inputValues))
+            # test inf
+            self.assertTrue(torch.equal(tensor([-1, 1]).erfinv(), tensor([float('-inf'), float('inf')])))
+            # test nan
+            self.assertEqual(tensor([-2, 2]).erfinv(), tensor([float('nan'), float('nan')]))
+
+        checkType(torch.FloatTensor)
+        checkType(torch.DoubleTensor)
+
     def test_exp(self):
         self._testMathByName('exp')
 
@@ -400,10 +415,10 @@ class TestTorch(TestCase):
         a = torch.randn(100, 89)
         zeros = torch.Tensor().resize_as_(a).zero_()
 
-        res_pow = torch.pow(a, -1)
+        res_div = 1 / a
         res_reciprocal = a.clone()
         res_reciprocal.reciprocal_()
-        self.assertEqual(res_reciprocal, res_pow)
+        self.assertEqual(res_reciprocal, res_div)
 
     def test_mul(self):
         m1 = torch.randn(10, 10)
@@ -668,22 +683,24 @@ class TestTorch(TestCase):
     def test_pow(self):
         # [res] torch.pow([res,] x)
 
-        # base - tensor, exponent - number
-        # contiguous
-        m1 = torch.randn(100, 100)
-        res1 = torch.pow(m1[4], 3)
-        res2 = res1.clone().zero_()
-        for i in range(res2.size(0)):
-            res2[i] = math.pow(m1[4][i], 3)
-        self.assertEqual(res1, res2)
+        # pow has dedicated implementation for different exponents
+        for exponent in [-2, -1, -0.5, 0.5, 1, 2, 3, 4]:
+            # base - tensor, exponent - number
+            # contiguous
+            m1 = torch.rand(100, 100) + 0.5
+            res1 = torch.pow(m1[4], exponent)
+            res2 = res1.clone().zero_()
+            for i in range(res2.size(0)):
+                res2[i] = math.pow(m1[4][i], exponent)
+            self.assertEqual(res1, res2)
 
-        # non-contiguous
-        m1 = torch.randn(100, 100)
-        res1 = torch.pow(m1[:, 4], 3)
-        res2 = res1.clone().zero_()
-        for i in range(res2.size(0)):
-            res2[i] = math.pow(m1[i, 4], 3)
-        self.assertEqual(res1, res2)
+            # non-contiguous
+            m1 = torch.rand(100, 100) + 0.5
+            res1 = torch.pow(m1[:, 4], exponent)
+            res2 = res1.clone().zero_()
+            for i in range(res2.size(0)):
+                res2[i] = math.pow(m1[i, 4], exponent)
+            self.assertEqual(res1, res2)
 
         # base - number, exponent - tensor
         # contiguous
@@ -701,6 +718,10 @@ class TestTorch(TestCase):
         for i in range(res2.size(0)):
             res2[i] = math.pow(3, m1[i][4])
         self.assertEqual(res1, res2)
+
+    def test_rpow(self):
+        m = torch.randn(10, 10)
+        self.assertEqual(torch.pow(2, m), 2**m)
 
     def _test_cop(self, torchfn, mathfn):
         def reference_implementation(res2):
@@ -2884,6 +2905,10 @@ class TestTorch(TestCase):
         self.assertEqual(reference[ri([1]), ...], torch.Tensor([[3, 4]]))
         self.assertEqual(reference[..., ri([1])], torch.Tensor([[2], [4], [6]]))
 
+        # verify too many indices fails
+        with self.assertRaises(IndexError):
+            reference[ri([1]), ri([0, 2]), ri([3])]
+
         if TEST_NUMPY:
             # we use numpy to compare against, to verify that our advanced
             # indexing semantics are the same, and also for ease of test
@@ -2999,6 +3024,15 @@ class TestTorch(TestCase):
                 [Ellipsis, [2, 3, 4]],
                 [Ellipsis, slice(None), [2, 3, 4]],
                 [slice(None), Ellipsis, [2, 3, 4]],
+
+                # ellipsis counts for nothing
+                [Ellipsis, slice(None), slice(None), [0, 3, 4]],
+                [slice(None), Ellipsis, slice(None), [0, 3, 4]],
+                [slice(None), slice(None), Ellipsis, [0, 3, 4]],
+                [slice(None), slice(None), [0, 3, 4], Ellipsis],
+                [Ellipsis, [[0, 1], [1, 0]], [[2, 1], [3, 5]], slice(None)],
+                [[[0, 1], [1, 0]], [[2, 1], [3, 5]], Ellipsis, slice(None)],
+                [[[0, 1], [1, 0]], [[2, 1], [3, 5]], slice(None), Ellipsis],
             ]
 
             for indexer in indices_to_test:
@@ -3099,6 +3133,63 @@ class TestTorch(TestCase):
 
     def test_advancedindex_big(self):
         self._test_advancedindex_big(self, lambda x: x)
+
+    @unittest.skipIf(not TEST_NUMPY, "Numpy not found")
+    def test_newaxis_numpy_comparison(self):
+        def run_test(tensor, *idx):
+            npt = tensor.numpy()
+            self.assertEqual(tensor[idx], npt[idx])
+
+        # 1D Tensor Tests
+        x = torch.arange(0, 10)
+        cases = [
+            [None],
+            [None, None],
+            [Ellipsis, None],
+            [None, Ellipsis],
+            [2, None],
+            [None, 2],
+            [Ellipsis, None, 2],
+            [Ellipsis, 2, None],
+            [2, Ellipsis, None],
+            [2, None, Ellipsis],
+            [None, 2, Ellipsis],
+            [None, Ellipsis, 2],
+        ]
+
+        for case in cases:
+            run_test(x, *case)
+
+        # 2D Tensor Tests
+        x = torch.arange(0, 12).view(3, 4)
+        cases = [
+            [None],
+            [None, None],
+            [None, None, None],
+            [Ellipsis, None],
+            [Ellipsis, None, None],
+            [None, Ellipsis],
+            [None, Ellipsis, None],
+            [None, None, Ellipsis],
+            [2, None],
+            [2, None, Ellipsis],
+            [2, Ellipsis, None],
+            [None, 2, Ellipsis],
+            [Ellipsis, 2, None],
+            [Ellipsis, None, 2],
+            [None, Ellipsis, 2],
+            [1, 2, None],
+            [1, 2, Ellipsis, None],
+            [1, Ellipsis, 2, None],
+            [Ellipsis, 1, None, 2],
+            [Ellipsis, 1, 2, None],
+            [1, None, 2, Ellipsis],
+            [None, 1, Ellipsis, 2],
+            [None, 1, 2, Ellipsis],
+        ]
+
+        for case in cases:
+            run_test(x, *case)
 
     def test_newindex(self):
         reference = self._consecutive((3, 3, 3))
