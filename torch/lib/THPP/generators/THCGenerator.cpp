@@ -13,7 +13,7 @@ THCGenerator::THCGenerator(THCState* state)
   int num_devices, current_device;
   cudaGetDeviceCount(&num_devices);
   cudaGetDevice(&current_device);
-  THCRandom_init(state, num_devices, current_device);
+  // THCRandom_init(state, num_devices, current_device);
 }
 
 THCGenerator::~THCGenerator() {

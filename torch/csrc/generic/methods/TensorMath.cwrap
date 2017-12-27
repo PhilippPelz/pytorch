@@ -26,6 +26,30 @@
 ]]
 
 [[
+  name: expect
+  return: argument 0
+  types:
+    - floating_point_complex
+  backends:
+    - CUDA
+  variants:
+    - method
+    - function
+  with_stateless: True
+  options:
+    - cname: expect
+      arguments:
+      - arg: THTensor* destination
+        output: True
+      - THTensor* self
+    - cname: zexpect
+      arguments:
+      - arg: THPartTensor* destination
+        output: True
+      - THTensor* self
+]]
+
+[[
   name: arg
   return: argument 0
   types:

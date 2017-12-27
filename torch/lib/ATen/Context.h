@@ -2,9 +2,9 @@
 
 #include <memory>
 #include <mutex>
+#include "ATen/Type.h"
 #include "ATen/ATenGeneral.h"
 #include "ATen/Generator.h"
-#include "ATen/Type.h"
 #include "ATen/Utils.h"
 
 struct THCState;

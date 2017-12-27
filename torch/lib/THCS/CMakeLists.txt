@@ -164,6 +164,7 @@ INSTALL(FILES
           THCSGenerateZFloatType.h
           THCSGenerateFloatTypes.h
           THCSGenerateDoubleType.h
+          THCSGenerateZDoubleType.h
           THCSparse.h
           DESTINATION "${THCS_INSTALL_INCLUDE_SUBDIR}/THCS")
 

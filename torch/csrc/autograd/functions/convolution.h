@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Python.h>
-#include <ATen/ATen.h>
+
 #include <memory>
 #include <vector>
 #include <iostream>
@@ -10,6 +10,8 @@
 #include "torch/csrc/autograd/variable.h"
 #include "torch/csrc/autograd/symbolic.h"
 #include "torch/csrc/autograd/saved_variable.h"
+
+#include <ATen/ATen.h>
 
 #ifdef WITH_CUDNN
 #include "torch/csrc/cudnn/Conv.h"

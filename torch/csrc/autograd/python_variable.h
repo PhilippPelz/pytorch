@@ -2,10 +2,10 @@
 
 #include <Python.h>
 #include <memory>
-#include <ATen/ATen.h>
 
 #include "torch/csrc/autograd/variable.h"
 
+#include <ATen/ATen.h>
 // Python object that backs torch.autograd.Variable
 struct THPVariable {
     PyObject_HEAD

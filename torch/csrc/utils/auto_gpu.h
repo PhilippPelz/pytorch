@@ -5,12 +5,12 @@
 #include <string>
 #include <stdexcept>
 
-#include <ATen/ATen.h>
-
 #ifdef WITH_CUDA
 #include <cuda.h>
 #include <cuda_runtime.h>
 #endif
+
+#include <ATen/ATen.h>
 
 struct AutoGPU {
   explicit AutoGPU(int device=-1) {

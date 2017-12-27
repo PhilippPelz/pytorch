@@ -5,18 +5,19 @@
 #include "ATen/Tensor.h"
 #include "ATen/Type.h"
 #include "ATen/Utils.h"
+
 #include <complex.h>
 #include <stdexcept>
-#include <stdexcept>
-#include <stdint.h>
 #include <stdint.h>
 #include <string>
-#include <string>
+
 typedef float _Complex cx;
 typedef double _Complex zx;
+
 #include <thrust/complex.h>
 typedef thrust::complex<float> ccx;
 typedef thrust::complex<double> zcx;
+
 namespace at {
 cx toCx(ccx val);
 zx toZx(zcx val);

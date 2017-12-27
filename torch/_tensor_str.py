@@ -72,11 +72,11 @@ def _number_format(tensor, min_sz=-1):
     pos_inf_mask = tensor.eq(float('inf'))
     neg_inf_mask = tensor.eq(float('-inf'))
     nan_mask = tensor.ne(tensor)
-    invalid_value_mask = pos_inf_mask + neg_inf_mask + nan_mask
+    invalid_value_mask = (pos_inf_mask + neg_inf_mask + nan_mask) 
     if invalid_value_mask.all():
         example_value = 0
     else:
-        example_value = tensor[invalid_value_mask.eq(0)][0]
+        example_value = tensor[invalid_value_mask.float().eq(0)][0]
     tensor[invalid_value_mask] = example_value
     if invalid_value_mask.any():
         min_sz = max(min_sz, 3)

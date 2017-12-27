@@ -1,6 +1,6 @@
+#include "THP.h"
 #include "DynamicTypes.h"
 
-#include "THP.h"
 #include <unordered_map>
 #include <vector>
 

@@ -8,7 +8,6 @@
 #include <memory>
 #include <vector>
 #include <functional>
-#include <ATen/ATen.h>
 
 #include "torch/csrc/jit/ir.h"
 #include "torch/csrc/jit/tracer_state.h"
@@ -17,6 +16,7 @@
 #include "torch/csrc/autograd/variable_version.h"
 #include "torch/csrc/Types.h"
 
+#include <ATen/ATen.h>
 namespace torch { namespace autograd {
 
 using at::Tensor;

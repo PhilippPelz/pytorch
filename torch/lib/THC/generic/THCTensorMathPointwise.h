@@ -70,11 +70,14 @@ THC_API void THCTensor_(zre)(THCState *state, THCPartTensor *self,
                              THCTensor *src);
 THC_API void THCTensor_(zim)(THCState *state, THCPartTensor *self,
                              THCTensor *src);
+THC_API void THCTensor_(zexpect)(THCState *state, THCPartTensor *self, THCTensor *src);
 
 THC_API void THCTensor_(arg)(THCState *state, THCTensor *self, THCTensor *src);
 THC_API void THCTensor_(re)(THCState *state, THCTensor *self, THCTensor *src);
 THC_API void THCTensor_(im)(THCState *state, THCTensor *self, THCTensor *src);
 THC_API void THCTensor_(conj)(THCState *state, THCTensor *self, THCTensor *src);
+THC_API void THCTensor_(expect)(THCState *state, THCTensor *self, THCTensor *src);
+
 #else
 THC_API void THCTensor_(zabs)(THCState *state, THCTensor *self, THCTensor *src);
 #endif

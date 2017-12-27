@@ -1,11 +1,11 @@
-#include "VariableType.h"
-
 // ${generated_comment}
 
 #include "torch/csrc/autograd/variable.h"
 #include "torch/csrc/autograd/function.h"
 #include "torch/csrc/autograd/saved_variable.h"
 #include "torch/csrc/autograd/generated/Functions.h"
+
+#include "VariableType.h"
 
 #include <iostream>
 

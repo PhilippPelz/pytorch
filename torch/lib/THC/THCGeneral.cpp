@@ -89,7 +89,7 @@ void THCudaInit(THCState* state)
     (struct cudaDeviceProp*)malloc(numDevices * sizeof(struct cudaDeviceProp));
 
   state->rngState = (THCRNGState*)malloc(sizeof(THCRNGState));
-  THCRandom_init(state, numDevices, device);
+  // THCRandom_init(state, numDevices, device);
 
   // By default, all direct p2p kernel access (besides copy) is disallowed,
   // since direct access without knowing whether or not a certain operation
@@ -907,7 +907,7 @@ cudaError_t THCudaMemGetInfoCached(THCState *state,  size_t* freeBytes, size_t* 
 
   if (allocator->cacheInfo != NULL)
     allocator->cacheInfo(allocator->state, device, &cachedBytes, largestBlock);
-  
+
   /* Adjust resulting free bytes number. largesBlock unused for now */
   *freeBytes += cachedBytes;
   return cudaSuccess;

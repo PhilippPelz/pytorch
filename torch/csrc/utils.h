@@ -2,12 +2,9 @@
 #define THP_UTILS_H
 
 #include <string>
-#include <thrust/complex.h>
 #include <type_traits>
 #include <vector>
 
-typedef thrust::complex<float> ccx;
-typedef thrust::complex<double> zcx;
 #include "torch/csrc/utils/object_ptr.h"
 #include "torch/csrc/utils/python_numbers.h"
 

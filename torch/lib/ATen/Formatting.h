@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ATen/Scalar.h"
-#include "ATen/Type.h"
 #include <iostream>
+#include "ATen/Type.h"
+#include "ATen/Scalar.h"
 
 namespace at {
 

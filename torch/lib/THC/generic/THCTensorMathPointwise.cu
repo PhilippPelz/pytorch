@@ -133,6 +133,7 @@
   }
 
 IMPLEMENT_ZCUDA_TENSOR_BASIC_FUNC(arg, thrust::arg, Real)
+IMPLEMENT_ZCUDA_TENSOR_BASIC_FUNC(expect, THCNumerics<real>::expect, Real)
 #undef real
 #if defined(THC_REAL_IS_ZFLOAT)
 #define num ccx
@@ -154,6 +155,7 @@ IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(im, THCNumerics<real>::zim, Real)
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(conj, THCNumerics<real>::conj, Real)
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(arg, THCNumerics<real>::zarg, Real)
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(abs, THCNumerics<real>::zabs, Real)
+IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(expect, THCNumerics<real>::zexpect, Real)
 #else
 IMPLEMENT_CUDA_TENSOR_BASIC_FUNC(abs, THCNumerics<real>::abs, Real)
 #endif // defined(THC_REAL_IS_ZFLOAT) || defined(THC_REAL_IS_ZDOUBLE)

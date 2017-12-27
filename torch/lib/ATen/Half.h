@@ -3,15 +3,12 @@
 typedef float _Complex cx;
 typedef double _Complex zx;
 #include <stdint.h>
+
 #ifdef AT_CUDA_ENABLED
 #include <cuda.h>
-#include <cuda_fp16.h>
 #include <cuda_runtime.h>
+#include <cuda_fp16.h>
 #endif
-
-#include <thrust/complex.h>
-typedef thrust::complex<float> ccx;
-typedef thrust::complex<double> zcx;
 
 namespace at {
 

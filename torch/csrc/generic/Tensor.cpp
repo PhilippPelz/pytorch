@@ -2077,8 +2077,8 @@ bool THPTensor_(postInit)(PyObject *module) {
   is_cuda = true;
 #endif
   const char *type_name = TH_CONCAT_STRING_2(Real, );
-  PyErr_WarnEx(PyExc_Warning, "postInit", 1);
-  PyErr_WarnEx(PyExc_Warning, type_name, 1);
+  // PyErr_WarnEx(PyExc_Warning, "postInit", 1);
+  // PyErr_WarnEx(PyExc_Warning, type_name, 1);
   torch::registerPyTypeObject((PyTypeObject *)THPTensorClass, type_name,
                               is_cuda, false);
   return true;

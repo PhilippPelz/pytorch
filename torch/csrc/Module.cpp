@@ -2,7 +2,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
-#include <ATen/ATen.h>
+
 #include <TH/TH.h>
 #include <libshm.h>
 #include <stdbool.h>
@@ -12,6 +12,8 @@
 #include "torch/csrc/jit/python_ir.h"
 #include "torch/csrc/jit/python_tracer.h"
 #include "torch/csrc/utils/python_strings.h"
+
+#include <ATen/ATen.h>
 
 #ifdef WITH_CUDNN
 #include "cudnn/Module.h"
@@ -42,7 +44,7 @@ static bool THPModule_loadClasses(PyObject *self) {
     THPUtils_setError("class loader couldn't access torch module");
     return false;
   }
-  PyErr_WarnEx(PyExc_Warning, "after PyImport_ImportModule()", 1);
+  // PyErr_WarnEx(PyExc_Warning, "after PyImport_ImportModule()", 1);
   ASSERT_NOT_NULL(tensor_classes =
                       PyObject_GetAttrString(torch_module, "_tensor_classes"));
   if (!THPDoubleTensor_postInit(torch_module))
@@ -65,7 +67,7 @@ static bool THPModule_loadClasses(PyObject *self) {
     return false;
   if (!THPByteTensor_postInit(torch_module))
     return false;
-  PyErr_WarnEx(PyExc_Warning, "after THPZFloatTensor_postInit()", 1);
+  // PyErr_WarnEx(PyExc_Warning, "after THPZFloatTensor_postInit()", 1);
   ASSERT_NOT_NULL(THPDoubleStorageClass = PyObject_GetAttrString(
                       torch_module, (char *)"DoubleStorage"));
   ASSERT_NOT_NULL(THPFloatStorageClass = PyObject_GetAttrString(
@@ -86,8 +88,8 @@ static bool THPModule_loadClasses(PyObject *self) {
                       torch_module, (char *)"CharStorage"));
   ASSERT_NOT_NULL(THPByteStorageClass = PyObject_GetAttrString(
                       torch_module, (char *)"ByteStorage"));
-  PyErr_WarnEx(PyExc_Warning, "after PyObject_GetAttrString( ZFloatStorage )",
-               1);
+  // PyErr_WarnEx(PyExc_Warning, "after PyObject_GetAttrString( ZFloatStorage )",
+               // 1);
   return true;
 #undef ASSERT_NOT_NULL
 }
@@ -156,16 +158,16 @@ static PyObject *THPModule_initExtension(PyObject *self,
   }
   std::string path = THPUtils_unpackString(shm_manager_path);
   libshm_init(path.c_str());
-  PyErr_WarnEx(PyExc_Warning, "after libshm_init()", 1);
+  // PyErr_WarnEx(PyExc_Warning, "after libshm_init()", 1);
   if (!THPModule_loadClasses(self))
     return NULL;
-  PyErr_WarnEx(PyExc_Warning, "after THPModule_loadClasses()", 1);
+  // PyErr_WarnEx(PyExc_Warning, "after THPModule_loadClasses()", 1);
   if (!THPModule_assignStateless(self))
     return NULL;
-  PyErr_WarnEx(PyExc_Warning, "after THPModule_assignStateless()", 1);
+  // PyErr_WarnEx(PyExc_Warning, "after THPModule_assignStateless()", 1);
   if (!THPAutograd_initFunctions(self))
     return NULL;
-  PyErr_WarnEx(PyExc_Warning, "after THPAutograd_initFunctions()", 1);
+  // PyErr_WarnEx(PyExc_Warning, "after THPAutograd_initFunctions()", 1);
   Py_RETURN_NONE;
   END_HANDLE_TH_ERRORS
 }

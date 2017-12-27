@@ -9,10 +9,10 @@
 #include <vector>
 #include <utility>
 #include <memory>
-#include <ATen/ATen.h>
 
 #include "torch/csrc/autograd/variable.h"
 
+#include <ATen/ATen.h>
 namespace torch { namespace autograd {
 
 struct InputBuffer {

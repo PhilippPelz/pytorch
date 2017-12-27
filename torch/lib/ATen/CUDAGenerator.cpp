@@ -15,7 +15,7 @@ CUDAGenerator::CUDAGenerator(Context * context_)
   int num_devices, current_device;
   cudaGetDeviceCount(&num_devices);
   cudaGetDevice(&current_device);
-  THCRandom_init(context->thc_state, num_devices, current_device);
+  // THCRandom_init(context->thc_state, num_devices, current_device);
 }
 
 CUDAGenerator::~CUDAGenerator() {

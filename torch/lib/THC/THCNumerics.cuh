@@ -842,6 +842,7 @@ template <> struct THCNumerics<ccx> {
   static inline __host__ __device__ float im(ccx a) { return a.imag(); }
   static inline __host__ __device__ float arg(ccx a) { return thrust::arg(a); }
   static inline __host__ __device__ float abs(ccx a) { return thrust::abs(a); }
+  static inline __host__ __device__ float expect(ccx a) { float ab =  thrust::abs(a); return ab*ab;}
 
   static inline __host__ __device__ ccx zre(ccx a) { return ccx(a.real(), 0); }
   static inline __host__ __device__ ccx zim(ccx a) { return ccx(0, a.imag()); }
@@ -851,7 +852,10 @@ template <> struct THCNumerics<ccx> {
   static inline __host__ __device__ ccx zabs(ccx a) {
     return ccx(thrust::abs(a), 0);
   }
-
+  static inline __host__ __device__ zcx zexpect(ccx a) {
+    float ab = thrust::abs(a);
+    return ccx(ab*ab, 0);
+  }
   static inline __host__ __device__ ccx conj(ccx a) { return thrust::conj(a); }
   static inline __host__ __device__ ccx exp(ccx a) { return thrust::exp(a); }
   static inline __host__ __device__ ccx exp10(ccx a) { return thrust::exp(a); }
@@ -916,6 +920,7 @@ template <> struct THCNumerics<zcx> {
   static inline __host__ __device__ double im(zcx a) { return a.imag(); }
   static inline __host__ __device__ double arg(zcx a) { return thrust::arg(a); }
   static inline __host__ __device__ double abs(zcx a) { return thrust::abs(a); }
+  static inline __host__ __device__ double expect(zcx a) { double ab =  thrust::abs(a); return ab*ab;}
 
   static inline __host__ __device__ zcx zre(zcx a) { return zcx(a.real(), 0); }
   static inline __host__ __device__ zcx zim(zcx a) { return zcx(0, a.imag()); }
@@ -924,6 +929,10 @@ template <> struct THCNumerics<zcx> {
   }
   static inline __host__ __device__ zcx zabs(zcx a) {
     return zcx(thrust::abs(a), 0);
+  }
+  static inline __host__ __device__ zcx zexpect(zcx a) {
+    double ab = thrust::abs(a);
+    return zcx(ab*ab, 0);
   }
 
   static inline __host__ __device__ zcx conj(zcx a) { return thrust::conj(a); }

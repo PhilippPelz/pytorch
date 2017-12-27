@@ -13,11 +13,11 @@
 #include <functional>
 #include <cstdint>
 
-#include <ATen/ATen.h>
-
 #include "torch/csrc/utils/object_ptr.h"
 #include "torch/csrc/utils/auto_gpu.h"
 #include "torch/csrc/utils/disallow_copy.h"
+
+#include <ATen/ATen.h>
 
 #include "ATen/ArrayRef.h"
 #include "torch/csrc/jit/generic_if.h"
