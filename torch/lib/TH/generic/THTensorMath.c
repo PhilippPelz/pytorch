@@ -899,6 +899,28 @@ void THTensor_(clamp)(THTensor *r_, THTensor *t, real min_value,
                              : (*t_data > max_value ? max_value : *t_data););
   }
 #endif
+
+}
+void THTensor_(zcadd)(THTensor *r_, THTensor *t, real value, THPartTensor *src) {
+  THTensor_(resizeAs)(r_, t);
+    TH_TENSOR_APPLY3(real, r_, real, t, real, src,
+                     *r__data = *t_data + value * *src_data;);
+}
+
+void THTensor_(zcsub)(THTensor *r_, THTensor *t, real value, THPartTensor *src) {
+  THTensor_(zcadd)(r_, t, -value, src);
+}
+
+void THTensor_(zcmul)(THTensor *r_, THTensor *t, THPartTensor *src) {
+  THTensor_(resizeAs)(r_, t);
+    TH_TENSOR_APPLY3(real, r_, real, t, real, src,
+                     *r__data = *t_data * *src_data;);
+}
+
+void THTensor_(zcdiv)(THTensor *r_, THTensor *t, THPartTensor *src) {
+  THTensor_(resizeAs)(r_, t);
+    TH_TENSOR_APPLY3(real, r_, real, t, real, src,
+                     *r__data = *t_data / *src_data;);
 }
 
 void THTensor_(cadd)(THTensor *r_, THTensor *t, real value, THTensor *src) {

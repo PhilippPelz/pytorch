@@ -57,9 +57,16 @@ TH_API void THTensor_(fmod)(THTensor *r_, THTensor *t, real value);
 TH_API void THTensor_(remainder)(THTensor *r_, THTensor *t, real value);
 TH_API void THTensor_(clamp)(THTensor *r_, THTensor *t, real min_value,
                              real max_value);
-TH_API void THTensor_ (bitand)(THTensor *r_, THTensor *t, real value);
+TH_API void THTensor_(bitand)(THTensor *r_, THTensor *t, real value);
 TH_API void THTensor_(bitor)(THTensor *r_, THTensor *t, real value);
 TH_API void THTensor_(bitxor)(THTensor *r_, THTensor *t, real value);
+
+TH_API void THTensor_(zcadd)(THTensor *r_, THTensor *t, real value,
+                            THPartTensor *src);
+TH_API void THTensor_(zcsub)(THTensor *self, THTensor *src1, real value,
+                            THPartTensor *src2);
+TH_API void THTensor_(zcmul)(THTensor *r_, THTensor *t, THPartTensor *src);
+TH_API void THTensor_(zcdiv)(THTensor *r_, THTensor *t, THPartTensor *src);
 
 TH_API void THTensor_(cadd)(THTensor *r_, THTensor *t, real value,
                             THTensor *src);

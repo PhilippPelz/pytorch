@@ -99,6 +99,14 @@ THC_API void THCTensor_(cpow)(THCState *state, THCTensor *self, THCTensor *src1,
                               THCTensor *src2);
 THC_API void THCTensor_(cdiv)(THCState *state, THCTensor *self, THCTensor *src1,
                               THCTensor *src2);
+THC_API void THCTensor_(zcadd)(THCState *state, THCTensor *self, THCTensor *src1,
+                              real value, THCPartTensor *src2);
+THC_API void THCTensor_(zcsub)(THCState *state, THCTensor *self, THCTensor *src1,
+                              real value, THCPartTensor *src2);
+THC_API void THCTensor_(zcmul)(THCState *state, THCTensor *self, THCTensor *src1,
+                              THCPartTensor *src2);
+THC_API void THCTensor_(zcdiv)(THCState *state, THCTensor *self, THCTensor *src1,
+                              THCPartTensor *src2);
 
 THC_API void THCTensor_(cmax)(THCState *state, THCTensor *self, THCTensor *src1,
                               THCTensor *src2);

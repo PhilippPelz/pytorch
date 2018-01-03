@@ -50,6 +50,35 @@
 ]]
 
 [[
+  name: conj
+  return: argument 0
+  types:
+    - floating_point_complex
+  backends:
+    - CUDA
+  with_stateless: True
+  options:
+    - cname: conj
+      arguments:
+      - arg: THTensor* destination
+        output: True
+      - THTensor* self
+]]
+
+[[
+  name: conj_
+  cname: conj
+  return: self
+  types:
+    - floating_point_complex
+  backends:
+    - CUDA
+  arguments:
+    - THTensor* self
+    - THTensor* self
+]]
+
+[[
   name: arg
   return: argument 0
   types:
@@ -1741,6 +1770,14 @@
         - arg: real value
           default: AS_REAL(1)
         - THTensor* other
+    - cname: zcadd
+      arguments:
+        - arg: THTensor* result
+          output: True
+        - arg: THTensor* self
+        - arg: real value
+          default: AS_REAL(1)
+        - THPartTensor* other
     - sparse: True
       cname: spcadd
       aten_dense_sparse: True
@@ -1771,6 +1808,13 @@
         - arg: real value
           default: AS_REAL(1)
         - THTensor* other
+    - cname: zcadd
+      arguments:
+        - THTensor* self
+        - arg: THTensor* self
+        - arg: real value
+          default: AS_REAL(1)
+        - THPartTensor* other
     - sparse: True
       cname: spcadd
       aten_dense_sparse: True
@@ -1805,6 +1849,14 @@
         - arg: real value
           default: AS_REAL(1)
         - THTensor* other
+    - cname: zcsub
+      arguments:
+        - arg: THTensor* result
+          output: True
+        - arg: THTensor* self
+        - arg: real value
+          default: AS_REAL(1)
+        - THPartTensor* other
 ]]
 
 [[
@@ -1824,6 +1876,13 @@
         - arg: real value
           default: AS_REAL(1)
         - THTensor* other
+    - cname: zcsub
+      arguments:
+        - THTensor* self
+        - arg: THTensor* self
+        - arg: real value
+          default: AS_REAL(1)
+        - THPartTensor* other
 ]]
 
 
@@ -1847,6 +1906,12 @@
         - arg: THTensor* self
           broadcast: other fallback
         - arg: THTensor* other
+    - cname: zcmul
+      arguments:
+        - arg: THTensor* result
+          output: True
+        - arg: THTensor* self
+        - arg: THPartTensor* other
 ]]
 
 [[
@@ -1864,6 +1929,11 @@
         - arg: THTensor* self
           broadcast: other inplace fallback
         - THTensor* other
+    - cname: zcmul
+      arguments:
+        - THTensor* self
+        - arg: THTensor* self
+        - THPartTensor* other
 ]]
 
 
@@ -1887,6 +1957,12 @@
         - arg: THTensor* self
           broadcast: other fallback
         - THTensor* other
+    - cname: zcdiv
+      arguments:
+        - arg: THTensor* result
+          output: True
+        - arg: THTensor* self
+        - THPartTensor* other
 ]]
 
 [[
@@ -1904,6 +1980,11 @@
         - arg: THTensor* self
           broadcast: other inplace fallback
         - THTensor* other
+    - cname: zcdiv
+      arguments:
+        - THTensor* self
+        - arg: THTensor* self
+        - THPartTensor* other
 ]]
 
 

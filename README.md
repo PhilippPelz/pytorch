@@ -2,6 +2,9 @@ This is a fork of pytorch that enables complex tensor types on CPU and GPU, brou
 
 Last merge with upstream/master: 27 Sep 2017
 
+- Cuda TOolkit 8 GA 1
+
+
 - im, re, arg, conj
 
 Todo List of nice to have features:

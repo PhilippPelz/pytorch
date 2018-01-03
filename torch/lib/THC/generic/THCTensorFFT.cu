@@ -27,26 +27,24 @@ void THCTensor_(fftnBatchedbase)(THCState *state, THCTensor *self, THCTensor *re
 	int batch = THCTensor_(size)(state, self, 0);
 	int *fft_dims = (int*)malloc(ndim*sizeof(int));
 	// FILE *f;
-	printf("ndim = %d\n",ndim);
-	printf("batch = %d\n",batch);
-	printf("in fftnBatchedbase\n");
+	// printf("ndim = %d\n",ndim);
+	// printf("batch = %d\n",batch);
+	// printf("in fftnBatchedbase\n");
 	//f = fopen("/home/philipp/fftnBatchedbase.log", "a+");
 	//fprintf(f,"fftnBatchedbase start" );
 	int dist =1;
 	for (int i = 1; i <= ndim ; i++) {
 		fft_dims[i - 1] = (int) THCTensor_(size)(state, self, i);
 		dist *= fft_dims[i - 1];
-		printf("fft_dims[i - 1] = %d\n",fft_dims[i - 1]);
 	}
 	cufftHandle handle;
-	printf("before cufftPlanMany\n");
 	cufftSafeCall(cufftPlanMany(&handle, ndim, fft_dims, NULL, 1, dist, NULL, 1, dist, cufftname, batch));
 	//fprintf(f,"cufftPlanMany\n");
-	printf("cufftPlanMany\n");
+	// printf("cufftPlanMany\n");
 	cufftSafeCall(cufftSetStream(handle, THCState_getCurrentStream(state)));
-	printf("cufftSetStream\n");
+	// printf("cufftSetStream\n");
 	cufftSafeCall(cufft(handle, (cureal *)THCTensor_(data)(state, self), (cureal *)THCTensor_(data)(state, result), direction));
-	printf("cufft\n");
+	// printf("cufft\n");
 	cufftDestroy(handle);
 
 	free(fft_dims);
@@ -93,7 +91,7 @@ void THCTensor_(fft)(THCState *state, THCTensor *result, THCTensor *self) {
 	THCTensor_(free)(state,new_self);
 }
 void THCTensor_(fft2)(THCState *state, THCTensor *result, THCTensor *self) {
-	printf("in fft2\n");
+	// printf("in fft2\n");
 	THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, result, self));
 	if (self != result)
 		THCTensor_(resizeAs)(state, result, self);
@@ -108,18 +106,18 @@ void THCTensor_(fft2)(THCState *state, THCTensor *result, THCTensor *self) {
 	for(int i = 0; i< self_ndim-2; i++){
 		self_batch_dim *= THCTensor_(size)(state, self, i);
 	}
-	printf("self_batch_dim = %d\n",self_batch_dim);
-  printf("dim1 = %d\n",THCTensor_(size)(state, self, self_ndim-2));
-	printf("dim2 = %d\n",THCTensor_(size)(state, self, self_ndim-1));
+	// printf("self_batch_dim = %d\n",self_batch_dim);
+  // printf("dim1 = %d\n",THCTensor_(size)(state, self, self_ndim-2));
+	// printf("dim2 = %d\n",THCTensor_(size)(state, self, self_ndim-1));
 	THLongStorage *new_self_size = THLongStorage_newWithSize3( self_batch_dim, THCTensor_(size)(state, self, self_ndim-2),THCTensor_(size)(state, self, self_ndim-1));
-	printf("after THLongStorage_newWithSize3\n");
+	// printf("after THLongStorage_newWithSize3\n");
 	THCTensor *new_self = THCTensor_(newView)(state, self, new_self_size);
-	printf("after newView\n");
+	// printf("after newView\n");
 
 	THLongStorage *new_result_size = THLongStorage_newWithSize3( self_batch_dim, THCTensor_(size)(state, self, self_ndim-2),THCTensor_(size)(state, self, self_ndim-1));
-	printf("after THLongStorage_newWithSize3\n");
+	// printf("after THLongStorage_newWithSize3\n");
 	THCTensor *new_result = THCTensor_(newView)(state, result, new_result_size);
-	printf("after newView\n");
+	// printf("after newView\n");
 	THCTensor_(fftnBatched)(state,new_self,new_result);
 	THLongStorage_free(new_self_size);
 	THLongStorage_free(new_result_size);
