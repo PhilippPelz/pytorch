@@ -122,6 +122,11 @@ static zx py_complex_to_c_zcomplex(Py_complex val) {
   (double)THPUtils_unpackReal_FLOAT(object)
 #define THPDoubleUtils_newAccreal(value) THPUtils_newReal_FLOAT(value)
 
+#define THPDoubleUtils_checkPart(object) THPUtils_checkReal_FLOAT(object)
+#define THPDoubleUtils_unpackPart(object)                                      \
+  (double)THPUtils_unpackReal_FLOAT(object)
+#define THPDoubleUtils_newPart(value) THPUtils_newReal_FLOAT(value)
+
 #define THPFloatUtils_checkReal(object) THPUtils_checkReal_FLOAT(object)
 #define THPFloatUtils_unpackReal(object)                                       \
   (float)THPUtils_unpackReal_FLOAT(object)
@@ -131,6 +136,11 @@ static zx py_complex_to_c_zcomplex(Py_complex val) {
   (double)THPUtils_unpackReal_FLOAT(object)
 #define THPFloatUtils_newAccreal(value) THPUtils_newReal_FLOAT(value)
 
+#define THPFloatUtils_checkPart(object) THPUtils_checkReal_FLOAT(object)
+#define THPFloatUtils_unpackPart(object)                                       \
+  (float)THPUtils_unpackReal_FLOAT(object)
+#define THPFloatUtils_newPart(value) THPUtils_newReal_FLOAT(value)
+
 #define THPZDoubleUtils_checkReal(object) THPUtils_checkReal_COMPLEX(object)
 #define THPZDoubleUtils_unpackReal(object) THPUtils_unpackReal_ZCOMPLEX(object)
 #define THPZDoubleUtils_newReal(value) THPUtils_newReal_ZCOMPLEX(value)
@@ -138,6 +148,10 @@ static zx py_complex_to_c_zcomplex(Py_complex val) {
 #define THPZDoubleUtils_unpackAccreal(object)                                  \
   THPUtils_unpackReal_ZCOMPLEX(object)
 #define THPZDoubleUtils_newAccreal(value) THPUtils_newReal_ZCOMPLEX(value)
+
+#define THPZDoubleUtils_checkPart(object) THPUtils_checkReal_FLOAT(object)
+#define THPZDoubleUtils_unpackPart(object) (double)THPUtils_unpackReal_FLOAT(object)
+#define THPZDoubleUtils_newPart(value) THPUtils_newReal_FLOAT(value)
 
 #define THPZFloatUtils_checkReal(object) THPUtils_checkReal_COMPLEX(object)
 #define THPZFloatUtils_unpackReal(object) THPUtils_unpackReal_CCOMPLEX(object)
@@ -147,16 +161,30 @@ static zx py_complex_to_c_zcomplex(Py_complex val) {
   THPUtils_unpackReal_ZCOMPLEX(object)
 #define THPZFloatUtils_newAccreal(value) THPUtils_newReal_CCOMPLEX(value)
 
+#define THPZFloatUtils_checkPart(object) THPUtils_checkReal_FLOAT(object)
+#define THPZFloatUtils_unpackPart(object) THPUtils_unpackReal_FLOAT(object)
+#define THPZFloatUtils_newPart(value) THPUtils_newReal_FLOAT(value)
+
 #define THPHalfUtils_checkReal(object) THPUtils_checkReal_FLOAT(object)
+#define THPHalfUtils_checkPart(object) THPUtils_checkReal_FLOAT(object)
 #ifndef THP_HOST_HALF
 #define THPHalfUtils_unpackReal(object)                                        \
   (half) THC_float2half(THPUtils_unpackReal_FLOAT(object))
 #define THPHalfUtils_newReal(value) PyFloat_FromDouble(THC_half2float(value))
+
+#define THPHalfUtils_unpackPart(object)                                        \
+  (half) THC_float2half(THPUtils_unpackReal_FLOAT(object))
+#define THPHalfUtils_newPart(value) PyFloat_FromDouble(THC_half2float(value))
 #else
 #define THPHalfUtils_unpackReal(object)                                        \
   TH_float2half(THPUtils_unpackReal_FLOAT(object))
 #define THPHalfUtils_newReal(value) PyFloat_FromDouble(TH_half2float(value))
+
+#define THPHalfUtils_unpackPart(object)                                        \
+  TH_float2half(THPUtils_unpackReal_FLOAT(object))
+#define THPHalfUtils_newPart(value) PyFloat_FromDouble(TH_half2float(value))
 #endif
+
 #define THPHalfUtils_checkAccreal(object) THPUtils_checkReal_FLOAT(object)
 #define THPHalfUtils_unpackAccreal(object)                                     \
   (double)THPUtils_unpackReal_FLOAT(object)
@@ -168,12 +196,22 @@ static zx py_complex_to_c_zcomplex(Py_complex val) {
 #define THPLongUtils_checkAccreal(object) THPUtils_checkReal_INT(object)
 #define THPLongUtils_unpackAccreal(object) (long)THPUtils_unpackReal_INT(object)
 #define THPLongUtils_newAccreal(value) THPUtils_newReal_INT(value)
+
+#define THPLongUtils_checkPart(object) THPUtils_checkReal_INT(object)
+#define THPLongUtils_unpackPart(object) (long)THPUtils_unpackReal_INT(object)
+#define THPLongUtils_newPart(value) THPUtils_newReal_INT(value)
+
 #define THPIntUtils_checkReal(object) THPUtils_checkReal_INT(object)
 #define THPIntUtils_unpackReal(object) (int)THPUtils_unpackReal_INT(object)
 #define THPIntUtils_newReal(value) THPUtils_newReal_INT(value)
 #define THPIntUtils_checkAccreal(object) THPUtils_checkReal_INT(object)
 #define THPIntUtils_unpackAccreal(object) (long)THPUtils_unpackReal_INT(object)
 #define THPIntUtils_newAccreal(value) THPUtils_newReal_INT(value)
+
+#define THPIntUtils_checkPart(object) THPUtils_checkReal_INT(object)
+#define THPIntUtils_unpackPart(object) (int)THPUtils_unpackReal_INT(object)
+#define THPIntUtils_newPart(value) THPUtils_newReal_INT(value)
+
 #define THPShortUtils_checkReal(object) THPUtils_checkReal_INT(object)
 #define THPShortUtils_unpackReal(object) (short)THPUtils_unpackReal_INT(object)
 #define THPShortUtils_newReal(value) THPUtils_newReal_INT(value)
@@ -181,12 +219,22 @@ static zx py_complex_to_c_zcomplex(Py_complex val) {
 #define THPShortUtils_unpackAccreal(object)                                    \
   (long)THPUtils_unpackReal_INT(object)
 #define THPShortUtils_newAccreal(value) THPUtils_newReal_INT(value)
+
+#define THPShortUtils_checkPart(object) THPUtils_checkReal_INT(object)
+#define THPShortUtils_unpackPart(object) (short)THPUtils_unpackReal_INT(object)
+#define THPShortUtils_newPart(value) THPUtils_newReal_INT(value)
+
 #define THPCharUtils_checkReal(object) THPUtils_checkReal_INT(object)
 #define THPCharUtils_unpackReal(object) (char)THPUtils_unpackReal_INT(object)
 #define THPCharUtils_newReal(value) THPUtils_newReal_INT(value)
 #define THPCharUtils_checkAccreal(object) THPUtils_checkReal_INT(object)
 #define THPCharUtils_unpackAccreal(object) (long)THPUtils_unpackReal_INT(object)
 #define THPCharUtils_newAccreal(value) THPUtils_newReal_INT(value)
+
+#define THPCharUtils_checkPart(object) THPUtils_checkReal_INT(object)
+#define THPCharUtils_unpackPart(object) (char)THPUtils_unpackReal_INT(object)
+#define THPCharUtils_newPart(value) THPUtils_newReal_INT(value)
+
 #define THPByteUtils_checkReal(object) THPUtils_checkReal_INT(object)
 #define THPByteUtils_unpackReal(object)                                        \
   (unsigned char)THPUtils_unpackReal_INT(object)
@@ -194,6 +242,11 @@ static zx py_complex_to_c_zcomplex(Py_complex val) {
 #define THPByteUtils_checkAccreal(object) THPUtils_checkReal_INT(object)
 #define THPByteUtils_unpackAccreal(object) (long)THPUtils_unpackReal_INT(object)
 #define THPByteUtils_newAccreal(value) THPUtils_newReal_INT(value)
+
+#define THPByteUtils_checkPart(object) THPUtils_checkReal_INT(object)
+#define THPByteUtils_unpackPart(object)                                        \
+  (unsigned char)THPUtils_unpackReal_INT(object)
+#define THPByteUtils_newPart(value) THPUtils_newReal_INT(value)
 
 #define THPUtils_assert(cond, ...) THPUtils_assertRet(NULL, cond, __VA_ARGS__)
 #define THPUtils_assertRet(value, cond, ...)                                   \

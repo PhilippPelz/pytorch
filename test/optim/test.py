@@ -14,23 +14,25 @@ def drosenbrock(tensor):
     return torch.DoubleTensor((-400 * x * (y - x ** 2) - 2 * (1 - x), 200 * x * (y - x ** 2)))
 
 algorithms = {
-    'adadelta': optim.adadelta,
-    'adagrad': optim.adagrad,
-    'adam': optim.adam,
-    'adamax': optim.adamax,
-    'asgd': optim.asgd,
-    'cg': optim.cg,
-    'nag': optim.nag,
-    'rmsprop': optim.rmsprop,
-    'rprop': optim.rprop,
-    'sgd': optim.sgd,
-    'lbfgs': optim.lbfgs,
+    # 'adadelta': optim.adadelta,
+    # 'adagrad': optim.adagrad,
+    # 'adam': optim.adam,
+    # 'adamax': optim.adamax,
+    # 'asgd': optim.asgd,
+    'cg': optim.cg
+    # 'nag': optim.nag,
+    # 'rmsprop': optim.rmsprop,
+    # 'rprop': optim.rprop,
+    # 'sgd': optim.sgd
+    # 'lbfgs': optim.lbfgs
 }
 
 with open('tests.json', 'r') as f:
     tests = json.loads(f.read())
 
 for test in tests:
+    if test['algorithm'] != 'cg':
+        continue
     print(test['algorithm'] + '\t')
     algorithm = algorithms[test['algorithm']]
     for config in test['config']:

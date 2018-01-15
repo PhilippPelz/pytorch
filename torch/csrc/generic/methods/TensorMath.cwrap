@@ -1760,6 +1760,12 @@
           output: True
         - THTensor* self
         - real value
+    - cname: add
+      arguments:
+        - arg: THTensor* result
+          output: True
+        - THTensor* self
+        - part value
     - cname: cadd
       aten_sparse: True
       arguments:
@@ -1768,6 +1774,16 @@
         - arg: THTensor* self
           broadcast: other fallback
         - arg: real value
+          default: AS_REAL(1)
+        - THTensor* other
+    - cname: cadd
+      aten_sparse: True
+      arguments:
+        - arg: THTensor* result
+          output: True
+        - arg: THTensor* self
+          broadcast: other fallback
+        - arg: part value
           default: AS_REAL(1)
         - THTensor* other
     - cname: zcadd
@@ -1799,6 +1815,11 @@
         - THTensor* self
         - THTensor* self
         - real value
+    - cname: add
+      arguments:
+        - THTensor* self
+        - THTensor* self
+        - part value
     - cname: cadd
       aten_sparse: True
       arguments:
@@ -1806,6 +1827,15 @@
         - arg: THTensor* self
           broadcast: other inplace fallback
         - arg: real value
+          default: AS_REAL(1)
+        - THTensor* other
+    - cname: cadd
+      aten_sparse: True
+      arguments:
+        - THTensor* self
+        - arg: THTensor* self
+          broadcast: other inplace fallback
+        - arg: part value
           default: AS_REAL(1)
         - THTensor* other
     - cname: zcadd
@@ -1840,6 +1870,12 @@
           output: True
         - THTensor* self
         - real value
+    - cname: sub
+      arguments:
+        - arg: THTensor* result
+          output: True
+        - THTensor* self
+        - part value
     - cname: csub
       arguments:
         - arg: THTensor* result
@@ -1847,6 +1883,15 @@
         - arg: THTensor* self
           broadcast: other fallback
         - arg: real value
+          default: AS_REAL(1)
+        - THTensor* other
+    - cname: csub
+      arguments:
+        - arg: THTensor* result
+          output: True
+        - arg: THTensor* self
+          broadcast: other fallback
+        - arg: part value
           default: AS_REAL(1)
         - THTensor* other
     - cname: zcsub
@@ -1868,12 +1913,25 @@
         - THTensor* self
         - THTensor* self
         - real value
+    - cname: sub
+      arguments:
+        - THTensor* self
+        - THTensor* self
+        - part value
     - cname: csub
       arguments:
         - THTensor* self
         - arg: THTensor* self
           broadcast: other inplace fallback
         - arg: real value
+          default: AS_REAL(1)
+        - THTensor* other
+    - cname: csub
+      arguments:
+        - THTensor* self
+        - arg: THTensor* self
+          broadcast: other inplace fallback
+        - arg: part value
           default: AS_REAL(1)
         - THTensor* other
     - cname: zcsub
@@ -1899,6 +1957,12 @@
           output: True
         - THTensor* self
         - real value
+    - cname: mul
+      arguments:
+        - arg: THTensor* result
+          output: True
+        - THTensor* self
+        - part value
     - cname: cmul
       arguments:
         - arg: THTensor* result
@@ -1923,6 +1987,11 @@
         - THTensor* self
         - THTensor* self
         - real value
+    - cname: mul
+      arguments:
+        - THTensor* self
+        - THTensor* self
+        - part value
     - cname: cmul
       arguments:
         - THTensor* self
@@ -1950,6 +2019,12 @@
           output: True
         - THTensor* self
         - real value
+    - cname: div
+      arguments:
+        - arg: THTensor* result
+          output: True
+        - THTensor* self
+        - part value
     - cname: cdiv
       arguments:
         - arg: THTensor* result
@@ -1974,6 +2049,11 @@
         - THTensor* self
         - THTensor* self
         - real value
+    - cname: div
+      arguments:
+        - THTensor* self
+        - THTensor* self
+        - part value
     - cname: cdiv
       arguments:
         - THTensor* self
@@ -2617,7 +2697,7 @@
     - THTensor* tensor2
 ]]
 
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || CUDA_FLOAT || CUDA_DOUBLE
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_ZFLOAT) || defined(TH_REAL_IS_ZDOUBLE) || CUDA_FLOAT || CUDA_DOUBLE || CUDA_ZFLOAT
 // We need to pass pointers to chars to tensor lapack functions...
 static const char __U = 'U';
 static const char __L = 'L';
@@ -2721,6 +2801,8 @@ static const char *R = &__R;
   types:
     - Float
     - Double
+    - ZFloat
+    - ZDouble
   backends:
     - CPU
     - CUDA
@@ -2750,6 +2832,8 @@ static const char *R = &__R;
   types:
     - Float
     - Double
+    - ZFloat
+    - ZDouble
   backends:
     - CPU
     - CUDA
@@ -2775,6 +2859,8 @@ static const char *R = &__R;
   types:
     - Float
     - Double
+    - ZFloat
+    - ZDouble
   backends:
     - CPU
     - CUDA
@@ -2802,6 +2888,8 @@ static const char *R = &__R;
   types:
     - Float
     - Double
+    - ZFloat
+    - ZDouble
   backends:
     - CPU
     - CUDA

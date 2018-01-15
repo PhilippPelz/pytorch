@@ -47,6 +47,7 @@ class THPPlugin(CWrapPlugin):
         'float': Template('THPFloatUtils_unpackReal($arg)'),
         'double': Template('THPDoubleUtils_unpackReal($arg)'),
         'real': Template('THPUtils_(unpackReal)($arg)'),
+        'part': Template('THPUtils_(unpackPart)($arg)'),
         'accreal': Template('THPUtils_(unpackAccreal)($arg)'),
     }
 
@@ -90,6 +91,7 @@ class THPPlugin(CWrapPlugin):
         'float': Template('THPFloatUtils_checkReal($arg)'),
         'double': Template('THPDoubleUtils_checkReal($arg)'),
         'real': Template('THPUtils_(checkReal)($arg)'),
+        'part': Template('THPUtils_(checkPart)($arg)'),
         'accreal': Template('THPUtils_(checkAccreal)($arg)'),
     }
 
@@ -109,6 +111,7 @@ class THPPlugin(CWrapPlugin):
         'accreal': Template('return THPUtils_(newAccreal)($result);'),
         'self': Template('Py_INCREF(self);\nreturn (PyObject*)self;'),
         'real': Template('return THPUtils_(newReal)($result);'),
+        'part': Template('return THPUtils_(newReal)($result);')
     }
 
     TENSOR_METHODS_DECLARATION = Template("""
@@ -199,6 +202,7 @@ ${cpu}
         'THStride*': 'tuple',
         'long': 'int',
         'real': '" RealStr "',
+        'part': '" PartStr "',
         'double': 'float',
         'accreal': '" RealStr "',
         'bool': 'bool',

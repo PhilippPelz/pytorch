@@ -3933,6 +3933,8 @@
   types:
     - Float
     - Double
+    - ZFloat
+    - ZDouble
   backends:
     - CPU
     - CUDA
@@ -3961,6 +3963,8 @@
   types:
     - Float
     - Double
+    - ZFloat
+    - ZDouble
   backends:
     - CPU
     - CUDA
@@ -3985,6 +3989,8 @@
   types:
     - Float
     - Double
+    - ZFloat
+    - ZDouble
   backends:
     - CPU
     - CUDA
@@ -4011,6 +4017,8 @@
   types:
     - Float
     - Double
+    - ZFloat
+    - ZDouble
   backends:
     - CPU
     - CUDA
