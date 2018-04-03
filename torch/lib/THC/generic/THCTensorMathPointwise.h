@@ -78,6 +78,14 @@ THC_API void THCTensor_(im)(THCState *state, THCTensor *self, THCTensor *src);
 THC_API void THCTensor_(conj)(THCState *state, THCTensor *self, THCTensor *src);
 THC_API void THCTensor_(expect)(THCState *state, THCTensor *self, THCTensor *src);
 
+THC_API void THCTensor_(polar)(THCState *state, THCTensor *self, THCPartTensor *abs, THCPartTensor *arg);
+THC_API void THCTensor_(polar1)(THCState *state, THCTensor *self, part abs, THCPartTensor *arg);
+THC_API void THCTensor_(polar2)(THCState *state, THCTensor *self, THCPartTensor *abs, part arg);
+
+THC_API void THCTensor_(setReIm)(THCState *state, THCTensor *self, THCPartTensor *abs, THCPartTensor *arg);
+THC_API void THCTensor_(setReIm1)(THCState *state, THCTensor *self, part abs, THCPartTensor *arg);
+THC_API void THCTensor_(setReIm2)(THCState *state, THCTensor *self, THCPartTensor *abs, part arg);
+
 #else
 THC_API void THCTensor_(zabs)(THCState *state, THCTensor *self, THCTensor *src);
 #endif

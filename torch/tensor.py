@@ -238,21 +238,29 @@ class _TensorBase(object):
         """
         x = self
         if out is None:
-            out = x.new().resize_as_(x)
+            out = x.clone()
         ndim = out.ndimension()
         if axes is None:
             axes = list(range(ndim))
         elif isinstance(axes, integer_types):
             axes = (axes,)
         y = out
+#        f,a = plt.subplots()
+#        a.imshow(np.log10(np.abs(y.cpu().numpy())))
+#        plt.title('y before')
+#        plt.plot()
+#        print axes
         for k in axes:
             n = y.size()[k]
             p2 = (n+1)//2
             half1 = (p2,n-1)
             half2 = (0,p2-1)
+
             tmp = y.narrow(k,half1[0],half1[1]-half1[0]+1).clone()
-            y.narrow(k,half1[0],half1[1]-half1[0]+1).copy_(y.narrow(k,half2[0],half2[1]-half2[0]+1))
+            yn = y.narrow(k,half2[0],half2[1]-half2[0]+1)
+            y.narrow(k,half1[0],half1[1]-half1[0]+1).copy_(yn)
             y.narrow(k,half2[0],half2[1]-half2[0]+1).copy_(tmp)
+
         return y
 
     def ifftshift(self, axes=None, out = None):
@@ -286,7 +294,7 @@ class _TensorBase(object):
         """
         x = self
         if out is None:
-            out = x.new().resize_as_(x)
+            out = x.clone()
         ndim = out.ndimension()
         if axes is None:
             axes = list(range(ndim))
@@ -298,9 +306,12 @@ class _TensorBase(object):
             p2 = n-(n+1)//2
             half1 = (p2,n-1)
             half2 = (0,p2-1)
+
             tmp = y.narrow(k,half1[0],half1[1]-half1[0]+1).clone()
-            y.narrow(k,half1[0],half1[1]-half1[0]+1).copy_(y.narrow(k,half2[0],half2[1]-half2[0]+1))
+            yn = y.narrow(k,half2[0],half2[1]-half2[0]+1)
+            y.narrow(k,half1[0],half1[1]-half1[0]+1).copy_(yn)
             y.narrow(k,half2[0],half2[1]-half2[0]+1).copy_(tmp)
+
         return y
 
     def permute(self, *dims):

@@ -50,6 +50,56 @@
 ]]
 
 [[
+  name: setReIm_
+  return: self
+  types:
+    - floating_point_complex
+  backends:
+    - CUDA
+  options:
+    - cname: setReIm
+      arguments:
+      - arg: THTensor* self
+      - THPartTensor* re
+      - THPartTensor* im
+    - cname: setReIm1
+      arguments:
+      - arg: THTensor* self
+      - part re
+      - THPartTensor* im
+    - cname: setReIm2
+      arguments:
+      - arg: THTensor* self
+      - THPartTensor* re
+      - part im
+]]
+
+[[
+  name: polar_
+  return: self
+  types:
+    - floating_point_complex
+  backends:
+    - CUDA
+  options:
+    - cname: polar
+      arguments:
+      - arg: THTensor* self
+      - THPartTensor* abs
+      - THPartTensor* arg
+    - cname: polar1
+      arguments:
+      - arg: THTensor* self
+      - part abs
+      - THPartTensor* arg
+    - cname: polar2
+      arguments:
+      - arg: THTensor* self
+      - THPartTensor* abs
+      - part arg
+]]
+
+[[
   name: conj
   return: argument 0
   types:
@@ -123,10 +173,17 @@
     - CPU
     - CUDA
   with_stateless: True
-  arguments:
-    - arg: THTensor* destination
-      output: True
-    - THTensor* self
+  options:
+    - cname: re
+      arguments:
+      - arg: THTensor* destination
+        output: True
+      - THTensor* self
+    - cname: zre
+      arguments:
+      - arg: THPartTensor* destination
+        output: True
+      - THTensor* self
 ]]
 
 [[
@@ -138,10 +195,17 @@
     - CPU
     - CUDA
   with_stateless: True
-  arguments:
-    - arg: THTensor* destination
-      output: True
-    - THTensor* self
+  options:
+    - cname: im
+      arguments:
+      - arg: THTensor* destination
+        output: True
+      - THTensor* self
+    - cname: zim
+      arguments:
+      - arg: THPartTensor* destination
+        output: True
+      - THTensor* self
 ]]
 
 [[

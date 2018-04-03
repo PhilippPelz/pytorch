@@ -19,5 +19,4 @@ THC_API void THCTensor_(bitor)(THCState *state, THCTensor *self, THCTensor *src,
 THC_API void THCTensor_(bitxor)(THCState *state, THCTensor *self, THCTensor *src, real value);
 
 
-
 #endif

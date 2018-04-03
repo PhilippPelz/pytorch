@@ -26,6 +26,7 @@
 #define CReal CudaZDouble
 #define Part Double
 #define CPart CudaDouble
+#define SINCOS sincos
 #define THC_REAL_IS_ZDOUBLE
 #line 1 THC_GENERIC_FILE
 #include THC_GENERIC_FILE
@@ -39,6 +40,7 @@
 #undef CReal
 #undef Part
 #undef CPart
+#undef SINCOS
 #undef THC_REAL_IS_ZDOUBLE
 
 #if !(defined(THCGenerateAllTypes) || defined(THCGenerateComplexTypes))

@@ -132,6 +132,122 @@
     THCudaCheck(cudaGetLastError());                                           \
   }
 
+  struct THCTensor_(PolarOp) {
+    __device__ __forceinline__ void operator()(real* out, part* abs1, part* phase) {
+      part sinr, cosr;
+      SINCOS(*phase,&sinr,&cosr);
+      *out = real(*abs1*cosr,*abs1*sinr);
+    }
+  };
+  struct THCTensor_(Polar1Op) {
+    THCTensor_(Polar1Op)(part v) : val(v) {}
+    __device__ __forceinline__ void operator()(real* out, part* phase) {
+      part sinr, cosr;
+      SINCOS(*phase,&sinr,&cosr);
+      *out = real(val*cosr,val*sinr);
+    }
+    part val;
+  };
+  struct THCTensor_(Polar2Op) {
+      THCTensor_(Polar2Op)(part v) : val(v) {}
+    __device__ __forceinline__ void operator()(real* out, part* abs1) {
+      part sinr, cosr;
+      SINCOS(val,&sinr,&cosr);
+      *out = real(*abs1*cosr,*abs1*sinr);
+    }
+    part val;
+  };
+
+  struct THCTensor_(SetReImOp) {
+    __device__ __forceinline__ void operator()(real* out, part* re, part* im) {
+      *out = real(*re,*im);
+    }
+  };
+  struct THCTensor_(SetReIm1Op) {
+    THCTensor_(SetReIm1Op)(part v) : re(v) {}
+    __device__ __forceinline__ void operator()(real* out, part* im) {
+      *out = real(re,*im);
+    }
+    part re;
+  };
+  struct THCTensor_(SetReIm2Op) {
+      THCTensor_(SetReIm2Op)(part v) : im(v) {}
+    __device__ __forceinline__ void operator()(real* out, part* re) {
+      *out = real(*re,im);
+    }
+    part im;
+  };
+   void THCTensor_(setReIm)(THCState *state, THCTensor *self_, THCPartTensor *tx, THCPartTensor *ty)
+    {
+      THCAssertSameGPU(THCPartTensor_(checkGPU)(state, 2, tx, ty));
+      THArgCheck(THCPartTensor_(nElement)(state, tx) ==
+                 THCPartTensor_(nElement)(state, ty), 3, "sizes do not match");
+      THArgCheck(THCTensor_(nElement)(state, self_) ==
+                            THCPartTensor_(nElement)(state, ty), 3, "sizes do not match");
+      if (!THC_pointwiseApply3(state, self_, tx, ty, THCTensor_(SetReImOp)())) {
+        THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+      }
+
+      THCudaCheck(cudaGetLastError());
+    }
+    void THCTensor_(setReIm1)(THCState *state, THCTensor *self_, part tx, THCPartTensor *ty)
+    {
+      // printf("%d %d\n",THCTensor_(nElement)(state, self_),THCPartTensor_(nElement)(state, ty));
+      THArgCheck(THCTensor_(nElement)(state, self_) ==
+                 THCPartTensor_(nElement)(state, ty), 3, "sizes do not match");
+      if (!THC_pointwiseApply2(state, self_, ty, THCTensor_(SetReIm1Op)(tx))) {
+        THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+      }
+
+      THCudaCheck(cudaGetLastError());
+    }
+    void THCTensor_(setReIm2)(THCState *state, THCTensor *self_, THCPartTensor *tx, part ty)
+    {
+      THArgCheck(THCTensor_(nElement)(state, self_) ==
+                 THCPartTensor_(nElement)(state, tx), 3, "sizes do not match");
+      // printf("%d %d\n",THCTensor_(nElement)(state, self_),THCPartTensor_(nElement)(state, tx));
+      if (!THC_pointwiseApply2(state, self_, tx, THCTensor_(SetReIm2Op)(ty))) {
+        THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+      }
+
+      THCudaCheck(cudaGetLastError());
+    }
+
+  void THCTensor_(polar)(THCState *state, THCTensor *self_, THCPartTensor *tx, THCPartTensor *ty)
+  {
+    THCAssertSameGPU(THCPartTensor_(checkGPU)(state, 2, tx, ty));
+    THArgCheck(THCPartTensor_(nElement)(state, tx) ==
+               THCPartTensor_(nElement)(state, ty), 3, "sizes do not match");
+    THArgCheck(THCTensor_(nElement)(state, self_) ==
+                          THCPartTensor_(nElement)(state, ty), 3, "sizes do not match");
+    if (!THC_pointwiseApply3(state, self_, tx, ty, THCTensor_(PolarOp)())) {
+      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+    }
+
+    THCudaCheck(cudaGetLastError());
+  }
+  void THCTensor_(polar1)(THCState *state, THCTensor *self_, part tx, THCPartTensor *ty)
+  {
+    // printf("%d %d\n",THCTensor_(nElement)(state, self_),THCPartTensor_(nElement)(state, ty));
+    THArgCheck(THCTensor_(nElement)(state, self_) ==
+               THCPartTensor_(nElement)(state, ty), 3, "sizes do not match");
+    if (!THC_pointwiseApply2(state, self_, ty, THCTensor_(Polar1Op)(tx))) {
+      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+    }
+
+    THCudaCheck(cudaGetLastError());
+  }
+  void THCTensor_(polar2)(THCState *state, THCTensor *self_, THCPartTensor *tx, part ty)
+  {
+    THArgCheck(THCTensor_(nElement)(state, self_) ==
+               THCPartTensor_(nElement)(state, tx), 3, "sizes do not match");
+    // printf("%d %d\n",THCTensor_(nElement)(state, self_),THCPartTensor_(nElement)(state, tx));
+    if (!THC_pointwiseApply2(state, self_, tx, THCTensor_(Polar2Op)(ty))) {
+      THArgCheck(false, 2, CUTORCH_DIM_WARNING);
+    }
+
+    THCudaCheck(cudaGetLastError());
+  }
 IMPLEMENT_ZCUDA_TENSOR_BASIC_FUNC(arg, thrust::arg, Real)
 IMPLEMENT_ZCUDA_TENSOR_BASIC_FUNC(expect, THCNumerics<real>::expect, Real)
 #undef real

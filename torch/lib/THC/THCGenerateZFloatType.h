@@ -26,6 +26,7 @@
 #define CReal CudaZFloat
 #define Part Float
 #define CPart Cuda
+#define SINCOS sincosf
 #define THC_REAL_IS_ZFLOAT
 #line 1 THC_GENERIC_FILE
 #include THC_GENERIC_FILE
@@ -39,6 +40,7 @@
 #undef CReal
 #undef Part
 #undef CPart
+#undef SINCOS
 #undef THC_REAL_IS_ZFLOAT
 
 #if !(defined(THCGenerateAllTypes) || defined(THCGenerateComplexTypes))
